@@ -2,7 +2,7 @@
 # install.sh - ContextKit Global Installation Script
 # 
 # ContextKit Context Engineering System Installation
-# Installs global templates, constitutional framework, and Claude Code integration
+# Installs global templates, development guidelines, and Claude Code integration
 # 
 # Usage: curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | sh
 # Usage: git clone https://github.com/FlineDev/ContextKit.git && ./ContextKit/install.sh

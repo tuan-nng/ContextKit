@@ -71,10 +71,11 @@ ContextKit is built on proven context engineering principles:
 - **Universal methodology**: Works with any technology stack through workspace/project overrides
 
 ### Constitutional Quality Gates
-- **Accessibility-first**: Templates enforce VoiceOver labels, color contrast, keyboard navigation
-- **Localizability**: Built-in localization readiness checks and TranslateKit integration
-- **Privacy by design**: Privacy impact assessment embedded in all feature specifications
-- **Code maintainability**: Technical debt cleanup and modern code patterns enforced
+- **Accessibility-first**: Templates enforce VoiceOver labels, color contrast, keyboard navigation, and inclusive design patterns
+- **Privacy by design**: Privacy impact assessment, minimal data collection, and user consent patterns embedded throughout
+- **Localizability**: Built-in localization readiness, cultural adaptation, and TranslateKit integration from day one
+- **Platform-appropriate UX**: iOS/macOS Human Interface Guidelines, native patterns, and platform conventions enforced
+- **Code maintainability**: Modern Swift practices (Date.now, Duration, typed throws), technical debt cleanup, and clean architecture patterns
 
 ### Systematic Development Workflows  
 - **Spec-kit integration**: Enhanced `/specify`, `/plan`, `/tasks` commands with iOS/macOS optimizations
@@ -94,7 +95,7 @@ ContextKit is built on proven context engineering principles:
 - **[Installation Guide](docs/installation.md)** - Detailed setup and configuration
 - **[Template System](docs/templates.md)** - Understanding the hierarchical template architecture
 - **[Configuration](docs/configuration.md)** - Customizing ContextKit for your workflow
-- **[Constitutional Principles](docs/constitution.md)** - Understanding the quality framework
+- **[Quality Framework](docs/quality.md)** - Understanding the embedded quality principles
 
 ## 🎯 How it works
 
@@ -103,7 +104,7 @@ ContextKit installs templates to `~/.ContextKit/` containing:
 - Command templates for structured development workflows
 - Hook templates for automation (auto-formatting, version management)
 - Subagent templates for quality assurance (accessibility, localization, error handling)
-- Constitutional framework with universal development principles
+- Quality framework embedded throughout templates and workflows
 
 ### 2. Intelligent Project Setup
 When you run `/setup` in your project:

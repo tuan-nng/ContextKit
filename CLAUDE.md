@@ -26,7 +26,6 @@ ContextKit/
 ├── 📖 CLAUDE.md                     # This file - development guidance for AI assistants
 ├── 📖 LICENSE                       # MIT license
 ├── 🏛️  Meta/                         # GLOBAL FRAMEWORK FILES
-│   ├── Constitution.md              # Constitutional principles (copied by install.sh to ~/.ContextKit/)
 │   └── Changelog.md                 # Version history (copied by install.sh to ~/.ContextKit/)
 ├── 📐 Guidelines/                    # GLOBAL CODING STANDARDS
 │   ├── Swift.md                     # Swift patterns (copied by install.sh to ~/.ContextKit/)  
