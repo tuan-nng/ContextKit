@@ -32,12 +32,51 @@ ContextKit/
 │   └── SwiftUI.md                   # SwiftUI patterns (copied by install.sh to ~/.ContextKit/)
 └── 🎯 Templates/                     # TEMPLATE DISTRIBUTION CENTER
     ├── Commands/                    # → CLAUDE CODE COMMANDS (get copied during /setup)
+    │   ├── Global/                  # Global ContextKit management commands
+    │   │   ├── setup.md             # Project initialization
+    │   │   ├── setup-workspace.md   # Workspace configuration
+    │   │   ├── migrate.md           # Version updates
+    │   │   └── verify.md            # Health checks
+    │   ├── Plan/                    # Feature planning workflow
+    │   │   ├── create-spec.md       # Business requirements
+    │   │   ├── define-tech.md       # Technical architecture
+    │   │   └── plan-steps.md        # Implementation breakdown
+    │   ├── Implement/               # Development workflow
+    │   │   ├── start-working.md     # Context-aware development start
+    │   │   ├── commit-changes.md    # Smart commit message generation
+    │   │   ├── release-app.md       # iOS/macOS App Store releases
+    │   │   └── release-package.md   # Swift Package releases
+    │   └── Backlog/                 # Idea and issue management
+    │       ├── add-idea.md          # Capture new ideas with evaluation
+    │       ├── add-bug.md           # Bug report with impact assessment
+    │       ├── prioritize-ideas.md  # Organize ideas backlog
+    │       └── prioritize-bugs.md   # Triage bugs backlog
     ├── Scripts/                     # → ALL SCRIPTS (hooks & standalone, get copied during /setup)
+    │   ├── auto-format.sh           # Auto-format edited Swift files (PostToolUse hook)
+    │   ├── version-status.sh        # Version checking and status display (SessionStart hook)
+    │   └── custom-statusline.sh     # Complete statusline script with 5h-usage tracking and colored progress bars
     ├── Subagents/                   # → AI ASSISTANTS (get copied during /setup)
+    │   ├── build-project.md         # Execute builds with constitutional compliance checking
+    │   ├── check-accessibility.md   # Accessibility compliance validation (VoiceOver, contrast, etc.)
+    │   ├── check-localization.md    # Localization readiness audit (String Catalog, cultural adaptation)
+    │   ├── check-error-handling.md  # ErrorKit pattern validation and typed throws
+    │   ├── check-modern-code.md     # API modernization (Date.now, Duration, async/await)
+    │   └── check-code-debt.md       # Technical debt cleanup and code consolidation
     ├── Features/                    # → FEATURE TEMPLATES (used by /Plan/* commands)
+    │   ├── Spec.md                  # Business requirements and user stories (spec-kit methodology)
+    │   ├── Tech.md                  # Technical architecture and constitutional compliance
+    │   └── Steps.md                 # Implementation task breakdown with parallel markers [P]
     ├── Contexts/                    # → CONTEXT TEMPLATES (used by /setup and /setup-workspace)
+    │   ├── Project.md               # Project-level Context.md with ContextKit configuration
+    │   └── Workspace.md             # Workspace-level Context.md with client/company overrides
     ├── Backlog/                     # → BACKLOG TEMPLATES (used by /add-idea and /add-bug)
+    │   ├── Ideas-Inbox.md           # New idea capture template with evaluation framework
+    │   ├── Ideas-Backlog.md         # Prioritized idea backlog template with strategic organization
+    │   ├── Bugs-Inbox.md            # Bug report intake template with impact assessment
+    │   └── Bugs-Backlog.md          # Triaged bug backlog template with severity-based organization
     ├── Formatters/                  # → CODE STYLE CONFIGS (get copied during /setup)
+    │   ├── .swift-format            # Apple swift-format configuration
+    │   └── .swiftformat             # SwiftFormat (Nick Lockwood) configuration
     └── settings.json                # → CLAUDE CODE SETTINGS TEMPLATE
 ```
 
@@ -298,7 +337,7 @@ code  # Start Claude Code
 - **Feature Templates** (`Templates/Features/`): Use variables for one-time creation
 - **Context Templates** (`Templates/Contexts/`): Use variables for setup-time customization  
 - **Subagents** (`Templates/Subagents/`): Must have YAML frontmatter, no variables
-- **Hook Scripts** (`Templates/Hooks/`): Simple focused scripts, no complex logic
+- **Scripts** (`Templates/Scripts/`): Simple focused scripts, no complex logic
 
 ---
 

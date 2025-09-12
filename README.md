@@ -87,8 +87,8 @@ ContextKit is built on proven context engineering principles:
 
 - **macOS, Linux, or WSL2** (anywhere Claude Code runs)
 - **Claude Code** - Primary AI coding assistant integration
-- **Git** - For repository management and team collaboration
-- **Standard Unix tools** - bash, curl, cp, mkdir, find (pre-installed on most systems)
+- **Git** - Required for installation and updates (clones repository directly)
+- **Standard Unix tools** - bash (pre-installed on most systems)
 
 ## 📖 Learn more
 
