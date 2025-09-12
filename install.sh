@@ -82,7 +82,7 @@ clone_or_update_repository() {
       if [[ "$CONTEXTKIT_DIR" == *"ContextKit"* ]]; then
          rm -rf "$CONTEXTKIT_DIR"  # Safe: only removes ContextKit directories
       fi
-      if ! git clone --depth 1 "$GITHUB_REPO" "$CONTEXTKIT_DIR"; then
+      if ! git clone --depth 1 --quiet "$GITHUB_REPO" "$CONTEXTKIT_DIR"; then
          print_error "Failed to clone ContextKit repository"
          print_info "Repository: $GITHUB_REPO"
          exit 1
@@ -91,7 +91,7 @@ clone_or_update_repository() {
    else
       # Fresh installation
       print_info "Installing ContextKit for the first time..."
-      if ! git clone --depth 1 "$GITHUB_REPO" "$CONTEXTKIT_DIR"; then
+      if ! git clone --depth 1 --quiet "$GITHUB_REPO" "$CONTEXTKIT_DIR"; then
          print_error "Failed to clone ContextKit repository"
          print_info "Repository: $GITHUB_REPO"
          exit 1
