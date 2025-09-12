@@ -1,4 +1,4 @@
-# Command: /ContextKit/setup
+# Setup Project Context
 
 ## Description
 Intelligent project setup within existing git repositories with auto-detection and workspace inheritance.

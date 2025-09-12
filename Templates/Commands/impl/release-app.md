@@ -1,4 +1,4 @@
-# Command: /Implement/release-app
+# Release to AppStore
 
 ## Description
 Execute comprehensive iOS/macOS app release workflow with constitutional compliance, App Store Connect integration, and automatic localization

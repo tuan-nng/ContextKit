@@ -1,4 +1,4 @@
-# Command: /Backlog/prioritize-ideas
+# Prioritize Ideas
 
 ## Description
 Review and reprioritize idea backlog with smart promotion suggestions, constitutional compliance validation, and strategic planning alignment

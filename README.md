@@ -40,7 +40,7 @@ curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh
 Navigate to your project directory and run:
 
 1. Start Claude Code: `code` 
-2. Run the setup command: `/setup`
+2. Run the setup command: `/ctxk:proj:init`
 
 ContextKit will intelligently detect your project type, workspace context, and create appropriate templates and configurations.
 
@@ -48,9 +48,9 @@ ContextKit will intelligently detect your project type, workspace context, and c
 
 Use the installed commands for structured development:
 
-- `/Plan/create-spec` - Create feature specifications
-- `/Implement/start-working` - Begin development with context  
-- `/Backlog/add-idea` - Capture and organize ideas
+- `/ctxk:plan:1-spec` - Create feature specifications
+- `/ctxk:impl:start-working` - Begin development with context  
+- `/ctxk:bckl:add-idea` - Capture and organize ideas
 
 ## 📚 Core philosophy
 
@@ -107,7 +107,7 @@ ContextKit installs templates to `~/.ContextKit/` containing:
 - Quality framework embedded throughout templates and workflows
 
 ### 2. Intelligent Project Setup
-When you run `/setup` in your project:
+When you run `/ctxk:proj:init` in your project:
 - **Auto-detects project type** from Package.swift, *.xcodeproj, package.json, etc.
 - **Inherits workspace context** by traversing parent directories for Context.md files
 - **Analyzes existing configurations** and merges intelligently with CLAUDE.md files
@@ -126,11 +126,11 @@ Project (.claude/ + Context.md)
 ```
 
 ### 4. Enhanced Development Workflow
-- **Feature planning**: `/Plan/create-spec` creates specifications with constitutional compliance
-- **Technical design**: `/Plan/define-tech` applies architectural patterns and platform conventions
-- **Implementation**: `/Implement/start-working` begins development with context-aware guidance
+- **Feature planning**: `/ctxk:plan:1-spec` creates specifications with constitutional compliance
+- **Technical design**: `/ctxk:plan:2-tech` applies architectural patterns and platform conventions
+- **Implementation**: `/ctxk:impl:start-working` begins development with context-aware guidance
 - **Quality assurance**: Automated subagents validate accessibility, localization, error handling
-- **Release management**: `/Implement/release-app` handles App Store submissions with automation
+- **Release management**: `/ctxk:impl:release-app` handles App Store submissions with automation
 
 ## 🔍 Template system
 

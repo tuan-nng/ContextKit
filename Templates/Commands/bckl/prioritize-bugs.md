@@ -1,4 +1,4 @@
-# Command: /Backlog/prioritize-bugs
+# Triage Bugs
 
 ## Description
 Review and reprioritize bug backlog with impact assessment, constitutional compliance validation, and severity-based triage

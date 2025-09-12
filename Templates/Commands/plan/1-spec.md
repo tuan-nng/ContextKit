@@ -1,4 +1,4 @@
-# Command: /Plan/create-spec
+# Define Requirements
 
 ## Description  
 Create structured feature specification following spec-kit patterns with iOS/macOS constitutional principles

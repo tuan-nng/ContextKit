@@ -1,4 +1,4 @@
-# Command: /ContextKit/setup-workspace
+# Configure Team Standards
 
 ## Description
 Create workspace-specific configuration for client/company contexts with multi-project analysis and constitutional principle customization.

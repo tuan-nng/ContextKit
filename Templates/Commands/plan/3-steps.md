@@ -1,4 +1,4 @@
-# Command: /Plan/plan-steps
+# Create Task List
 
 ## Description
 Break down technical implementation plan into executable tasks following spec-kit methodology

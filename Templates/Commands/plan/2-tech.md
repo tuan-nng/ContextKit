@@ -1,4 +1,4 @@
-# Command: /Plan/define-tech
+# Design Architecture
 
 ## Description
 Create technical implementation plan based on existing feature specification with platform-appropriate architecture

@@ -1,4 +1,4 @@
-# Command: /Implement/release-package
+# Publish Package
 
 ## Description
 Handle Swift Package release workflow with GitHub integration, cross-platform validation, and constitutional compliance

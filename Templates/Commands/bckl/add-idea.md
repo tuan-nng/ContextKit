@@ -1,4 +1,4 @@
-# Command: /Backlog/add-idea
+# Add Feature Idea
 
 ## Description
 Capture new app ideas with structured evaluation framework, constitutional principle assessment, and priority context following spec-kit methodology

@@ -1,4 +1,4 @@
-# /Backlog/add-bug Command Template
+# Report Bug
 
 **Purpose**: Capture bug reports with impact assessment and reproduction steps following ContextKit's spec-kit methodology with constitutional principles and effort estimation.
 

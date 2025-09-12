@@ -37,11 +37,11 @@ print_success() {
 }
 
 print_warning() {
-   print_status "$YELLOW" "⚠️  WARNING: $*"
+   print_status "$YELLOW" "⚠️ WARNING: $*"
 }
 
 print_info() {
-   print_status "$CYAN" "ℹ️  $*"
+   print_status "$CYAN" "ℹ️ $*"
 }
 
 print_step() {
@@ -51,7 +51,7 @@ print_step() {
 print_header() {
    echo
    print_status "$MAGENTA" "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-   print_status "$WHITE" "$*"
+   print_status "$WHITE" "                      $*"
    print_status "$MAGENTA" "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
    echo
 }
@@ -118,7 +118,7 @@ install_global_commands() {
       fi
    fi
    
-   # Remove existing ContextKit commands directory if it exists
+   # Remove existing ContextKit commands directory if it exists (legacy cleanup)
    local contextkit_commands_dir="$claude_commands_dir/ContextKit"
    if [[ -d "$contextkit_commands_dir" ]]; then
       if [[ "$contextkit_commands_dir" == *"ContextKit"* ]]; then
@@ -126,16 +126,30 @@ install_global_commands() {
       fi
    fi
    
-   # Copy entire Global commands directory
-   local global_commands_dir="$CONTEXTKIT_DIR/Templates/Commands/Global"
+   # Create ctxk commands directory and copy Commands contents
+   local commands_dir="$CONTEXTKIT_DIR/Templates/Commands"
+   local ctxk_commands_dir="$claude_commands_dir/ctxk"
    
-   if [[ ! -d "$global_commands_dir" ]]; then
-      print_error "Global commands directory not found: $global_commands_dir"
+   if [[ ! -d "$commands_dir" ]]; then
+      print_error "Commands directory not found: $commands_dir"
       exit 1
    fi
    
-   if ! cp -R "$global_commands_dir" "$contextkit_commands_dir"; then
-      print_error "Failed to copy global commands directory"
+   # Remove existing ctxk commands directory if it exists
+   if [[ -d "$ctxk_commands_dir" ]]; then
+      if [[ "$ctxk_commands_dir" == *"ctxk"* ]]; then
+         rm -rf "$ctxk_commands_dir"  # Safe: only removes ctxk directories
+      fi
+   fi
+   
+   # Create ctxk directory and copy contents
+   if ! mkdir -p "$ctxk_commands_dir"; then
+      print_error "Failed to create ctxk commands directory"
+      exit 1
+   fi
+   
+   if ! cp -R "$commands_dir"/* "$ctxk_commands_dir"/; then
+      print_error "Failed to copy commands contents"
       exit 1
    fi
    
@@ -149,18 +163,19 @@ display_completion() {
    
    if [[ "$INSTALL_TYPE" == "update" ]]; then
       print_header "🧠 ContextKit Update Successful!"
-      print_success "ContextKit updated successfully!"
    else
       print_header "🧠 ContextKit Installation Successful!"
-      print_success "ContextKit installed successfully!"
    fi
+   
+   print_success "ContextKit ${INSTALL_TYPE}d successfully!"
    echo
    print_status "$WHITE" "Next steps:"
    print_info "1. Navigate to your project directory"
-   print_info "2. Start Claude Code with 'claude' command"  
-   print_info "3. Run '/setup' to initialize ContextKit in your project"
+   print_info "2. Run 'claude' to start Claude Code "
+   print_info "3. Run '/ctxk:proj:init' to initialize ContextKit in your project"
    echo
    print_status "$GREEN" "🚀 Ready for intelligent development workflows!"
+   echo
 }
 
 ###########################################
@@ -193,6 +208,7 @@ trap cleanup_on_error ERR
 
 main() {
    print_header "🧠 ContextKit Global Installation"
+   echo
    print_info "Installing ContextKit - Context Engineering System"
    print_info "Repository: https://github.com/FlineDev/ContextKit"
    echo

@@ -1,4 +1,4 @@
-# Command: /Implement/commit-changes
+# Commit Changes
 
 ## Description
 Commit development changes with proper formatting, validation, and constitutional compliance checks

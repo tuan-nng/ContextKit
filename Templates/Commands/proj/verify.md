@@ -1,4 +1,4 @@
-# Command: /ContextKit/verify
+# Health Check
 
 ## Description
 Health check project structure, validate context loading, and suggest fixes or improvements for ContextKit configuration.

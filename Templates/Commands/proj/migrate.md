@@ -1,4 +1,4 @@
-# Command: /ContextKit/migrate
+# Upgrade to Latest
 
 ## Description
 Migrate existing project from old structure to current ContextKit version with safe backup and customization preservation.

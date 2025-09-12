@@ -62,7 +62,7 @@ ContextKit/
     │   ├── check-error-handling.md  # ErrorKit pattern validation and typed throws
     │   ├── check-modern-code.md     # API modernization (Date.now, Duration, async/await)
     │   └── check-code-debt.md       # Technical debt cleanup and code consolidation
-    ├── Features/                    # → FEATURE TEMPLATES (used by /Plan/* commands)
+    ├── Features/                    # → FEATURE TEMPLATES (used by /ctxk:plan:* commands)
     │   ├── Spec.md                  # Business requirements and user stories (spec-kit methodology)
     │   ├── Tech.md                  # Technical architecture and constitutional compliance
     │   └── Steps.md                 # Implementation task breakdown with parallel markers [P]
@@ -98,23 +98,35 @@ cp Meta/* ~/.ContextKit/Meta/
 cp Guidelines/* ~/.ContextKit/Guidelines/  
 cp Templates/* ~/.ContextKit/Templates/ -R
 
-# 3. Install ONLY global commands to user's Claude Code
-cp Templates/Commands/Global/* ~/.claude/commands/ContextKit/
+# 3. Install ALL commands to user's Claude Code as ctxk shorthand
+mkdir -p ~/.claude/commands/ctxk/
+cp Templates/Commands/* ~/.claude/commands/ctxk/ -R
 
-# 4. Result: User now has global ContextKit installation + /ContextKit/* commands
+# 4. Result: User now has global ContextKit installation + /ctxk:* commands
 ```
 
-**Global Commands Available After Install**:
-- `/ContextKit/setup` - Initialize project with ContextKit  
-- `/ContextKit/setup-workspace` - Configure workspace-level settings
-- `/ContextKit/migrate` - Update existing project to newer ContextKit version
-- `/ContextKit/verify` - Validate project ContextKit configuration
+**All Commands Available After Install**:
+- `/ctxk:proj:init` - Initialize project with ContextKit  
+- `/ctxk:proj:init-workspce` - Configure workspace-level settings
+- `/ctxk:proj:migrate` - Update existing project to newer ContextKit version
+- `/ctxk:proj:verify` - Validate project ContextKit configuration
+- `/ctxk:plan:1-spec` - Create feature specification
+- `/ctxk:plan:2-tech` - Create technical architecture plan
+- `/ctxk:plan:3-steps` - Break down implementation steps
+- `/ctxk:impl:start-working` - Begin development with context
+- `/ctxk:impl:commit-changes` - Commit with proper message formatting
+- `/ctxk:impl:release-app` - iOS/macOS app release workflow
+- `/ctxk:impl:release-package` - Swift package release workflow
+- `/ctxk:bckl:add-idea` - Capture new ideas
+- `/ctxk:bckl:add-bug` - Report bugs  
+- `/ctxk:bckl:prioritize-ideas` - Organize ideas backlog
+- `/ctxk:bckl:prioritize-bugs` - Triage bugs backlog
 
-### Phase 2: Project Setup (`/ContextKit/setup`)
+### Phase 2: Project Setup (`/ctxk:proj:init`)
 
-**When users run**: `/setup` (in their project directory)
+**When users run**: `/ctxk:proj:init` (in their project directory)
 
-**What `/ContextKit/setup` does**:
+**What `/ctxk:proj:init` does**:
 ```bash
 # 1. Detect project type (Swift, JS, Python, etc.)
 # 2. Create project Context.md (using Templates/Contexts/Project.md)  
@@ -124,11 +136,9 @@ touch Context/Features/.keep Context/Backlog/Ideas/.keep Context/Backlog/Bugs/.k
 
 # 5. Copy project-specific files:
 
-# Commands → .claude/commands/
-mkdir -p .claude/commands/Plan .claude/commands/Implement .claude/commands/Backlog  
-cp ~/.ContextKit/Templates/Commands/Plan/* .claude/commands/Plan/
-cp ~/.ContextKit/Templates/Commands/Implement/* .claude/commands/Implement/  
-cp ~/.ContextKit/Templates/Commands/Backlog/* .claude/commands/Backlog/
+# Commands → .claude/commands/ctxk/ (all commands globally available)
+mkdir -p .claude/commands/ctxk/
+cp ~/.ContextKit/Templates/Commands/* .claude/commands/ctxk/ -R
 
 # Scripts → Context/Scripts/ (hooks) + ~/.claude/ (statusline) + .claude/settings.json
 cp ~/.ContextKit/Templates/Scripts/auto-format.sh Context/Scripts/
@@ -146,22 +156,22 @@ cp ~/.ContextKit/Templates/Formatters/.swift* ./
 # Result: Project now has full ContextKit development environment + proper directory structure
 ```
 
-**Project Commands Available After Setup**:
-- `/Plan/create-spec` - Create feature specification
-- `/Plan/define-tech` - Create technical architecture plan
-- `/Plan/plan-steps` - Break down implementation steps
-- `/Implement/start-working` - Begin development with context
-- `/Implement/commit-changes` - Commit with proper message formatting
-- `/Implement/release-app` - iOS/macOS app release workflow
-- `/Implement/release-package` - Swift package release workflow
-- `/Backlog/add-idea` - Capture new ideas
-- `/Backlog/add-bug` - Report bugs  
-- `/Backlog/prioritize-ideas` - Organize ideas backlog
-- `/Backlog/prioritize-bugs` - Triage bugs backlog
+**Project Commands Available Globally (No Setup Required)**:
+- `/ctxk:plan:1-spec` - Create feature specification
+- `/ctxk:plan:2-tech` - Create technical architecture plan
+- `/ctxk:plan:3-steps` - Break down implementation steps
+- `/ctxk:impl:start-working` - Begin development with context
+- `/ctxk:impl:commit-changes` - Commit with proper message formatting
+- `/ctxk:impl:release-app` - iOS/macOS app release workflow
+- `/ctxk:impl:release-package` - Swift package release workflow
+- `/ctxk:bckl:add-idea` - Capture new ideas
+- `/ctxk:bckl:add-bug` - Report bugs  
+- `/ctxk:bckl:prioritize-ideas` - Organize ideas backlog
+- `/ctxk:bckl:prioritize-bugs` - Triage bugs backlog
 
 ### Phase 3: Feature Development (Commands Use Templates)
 
-**When users run**: `/Plan/create-spec "Add user authentication"`
+**When users run**: `/ctxk:plan:1-spec "Add user authentication"`
 
 **What the command does**:
 ```bash
@@ -191,24 +201,25 @@ cp ~/.ContextKit/Templates/Features/Steps.md Context/Features/UserAuthentication
 **Structure**:
 ```
 Templates/Commands/
-├── Global/             # Global management commands
-│   ├── setup.md         # Project initialization  
-│   ├── setup-workspace.md # Workspace configuration
+├── proj/               # Project management commands
+│   ├── init.md          # Project initialization  
+│   ├── init-workspce.md # Workspace configuration
 │   ├── migrate.md       # Version updates
 │   └── verify.md        # Health checks
-├── Plan/               # Feature planning workflow  
-│   ├── create-spec.md   # Business requirements
-│   ├── define-tech.md   # Technical architecture
-│   └── plan-steps.md    # Implementation breakdown
-├── Implement/          # Development workflow
+├── plan/               # Feature planning workflow  
+│   ├── 1-spec.md       # Business requirements
+│   ├── 2-tech.md       # Technical architecture
+│   └── 3-steps.md      # Implementation breakdown
+├── impl/               # Development workflow
 │   ├── start-working.md # Context-aware development start
 │   ├── commit-changes.md # Smart commit message generation  
-│   ├── release-app.md   # iOS/macOS App Store releases
+│   ├── release-app.md  # iOS/macOS App Store releases
 │   └── release-package.md # Swift Package releases
-└── Backlog/            # Idea and issue management
-    ├── add-idea.md      # Capture new ideas with evaluation
-    ├── add-bug.md       # Bug report with impact assessment
-    └── prioritize-backlog.md # Backlog organization
+└── bckl/               # Idea and issue management
+    ├── add-idea.md     # Capture new ideas with evaluation
+    ├── add-bug.md      # Bug report with impact assessment
+    ├── prioritize-ideas.md # Organize ideas backlog
+    └── prioritize-bugs.md # Triage bugs backlog
 ```
 
 ### 📜 **Templates/Scripts/** - All Scripts (Hooks & Standalone)
@@ -243,7 +254,7 @@ Templates/Commands/
 
 ### 📝 **Templates/Features/** - Feature Development Templates
 **Purpose**: Templates for feature specification, technical planning, and task breakdown  
-**Used By**: `/Plan/create-spec`, `/Plan/define-tech`, `/Plan/plan-steps` commands  
+**Used By**: `/ctxk:plan:1-spec`, `/ctxk:plan:2-tech`, `/ctxk:plan:3-steps` commands  
 **Format**: Markdown with variable substitution  
 **Variables**: `${FEATURE_NAME}`, `${SETUP_DATE}`, `${USER_DESCRIPTION}`
 
@@ -254,7 +265,7 @@ Templates/Commands/
 
 ### 🏗️ **Templates/Contexts/** - Configuration Templates
 **Purpose**: Context.md templates for project and workspace setup  
-**Used By**: `/ContextKit/setup`, `/ContextKit/setup-workspace`  
+**Used By**: `/ctxk:proj:init`, `/ctxk:proj:init-workspce`  
 **Format**: Markdown with variable substitution  
 **Variables**: `${PROJECT_NAME}`, `${PROJECT_TYPE}`, `${WORKSPACE_NAME}`, `${SETUP_DATE}`
 
@@ -264,7 +275,7 @@ Templates/Commands/
 
 ### 📋 **Templates/Backlog/** - Backlog Management Templates
 **Purpose**: Idea and bug backlog templates with evaluation frameworks  
-**Used By**: `/Backlog/add-idea`, `/Backlog/add-bug` → copy and customize for project backlog management  
+**Used By**: `/ctxk:bckl:add-idea`, `/ctxk:bckl:add-bug` → copy and customize for project backlog management  
 **Format**: Markdown with variable substitution  
 **Variables**: `${PROJECT_NAME}`, `${SETUP_DATE}`
 
@@ -276,7 +287,7 @@ Templates/Commands/
 
 ### 📐 **Templates/Formatters/** - Code Style Configuration
 **Purpose**: Formatter configuration files  
-**Used By**: `/ContextKit/setup` → copies to project root (Swift projects only)  
+**Used By**: `/ctxk:proj:init` → copies to project root (Swift projects only)  
 **Format**: Configuration files
 
 **Files**:
@@ -285,9 +296,9 @@ Templates/Commands/
 
 ### 🚨 **IMPORTANT: Directory Structure Creation**
 
-**❌ NOT STORED in ContextKit Repository**: The directory structure is created dynamically by the `/ContextKit/setup` command, not stored as templates.
+**❌ NOT STORED in ContextKit Repository**: The directory structure is created dynamically by the `/ctxk:proj:init` command, not stored as templates.
 
-**✅ What `/ContextKit/setup` Creates in User Projects**:
+**✅ What `/ctxk:proj:init` Creates in User Projects**:
 ```bash
 # The setup command creates these directories + .keep files in user projects:
 mkdir -p Context/Features Context/Backlog/Ideas Context/Backlog/Bugs Context/Scripts
@@ -327,8 +338,8 @@ code  # Start Claude Code
 /setup  # Run ContextKit setup
 
 # 4. Test commands work  
-/Plan/create-spec "test feature"
-/Implement/start-working
+/ctxk:plan:1-spec "test feature"
+/ctxk:impl:start-working
 ```
 
 ### File Modification Guidelines:
