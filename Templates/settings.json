@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash",
+      "Edit", 
+      "ExitPlanMode",
+      "Glob",
+      "Grep",
+      "LS", 
+      "MultiEdit",
+      "Read",
+      "Task",
+      "TodoWrite",
+      "WebFetch",
+      "WebSearch",
+      "Write"
+    ],
+    "deny": [
+      "Bash(base64 -d | sh:*)",
+      "Bash(cat /etc/passwd:*)",
+      "Bash(cat ~/.ssh:*)",
+      "Bash(chmod -R 777:*)",
+      "Bash(chmod 777:*)",
+      "Bash(crontab -r:*)",
+      "Bash(curl :* | sh::*)",
+      "Bash(dd if=:*)",
+      "Bash(defaults write:*)",
+      "Bash(find :* -name ':*.key'::*)",
+      "Bash(format:*)",
+      "Bash(git force:*)",
+      "Bash(git push:*)",
+      "Bash(git rebase:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(grep -r password:*)",
+      "Bash(halt:*)",
+      "Bash(history | sh:*)",
+      "Bash(kill -9:*)",
+      "Bash(killall -9:*)",
+      "Bash(launchctl load:*)",
+      "Bash(logkeys:*)",
+      "Bash(mkfs:*)",
+      "Bash(nc -l:*)",
+      "Bash(netcat -l:*)",
+      "Bash(npm install -g:*)",
+      "Bash(openssl:*)",
+      "Bash(osascript:*)",
+      "Bash(pfctl:*)",
+      "Bash(pip install --trusted-host:*)",
+      "Bash(python -m http.server:*)",
+      "Bash(python3 -m http.server:*)",
+      "Bash(reboot:*)",
+      "Bash(rm -rf /*)",
+      "Bash(rm -rf .:*)",
+      "Bash(rm -rf ~/*)",
+      "Bash(rsync:*)",
+      "Bash(scp:*)",
+      "Bash(security dump-keychain:*)",
+      "Bash(security export:*)",
+      "Bash(security unlock-keychain:*)",
+      "Bash(shutdown:*)",
+      "Bash(ssh:*)",
+      "Bash(su -:*)",
+      "Bash(sudo -i:*)",
+      "Bash(sudo chown -R:*)",
+      "Bash(sudo launchctl:*)",
+      "Bash(sudo passwd:*)",
+      "Bash(sudo rm:*)",
+      "Bash(sudo service:*)",
+      "Bash(sudo systemctl:*)",
+      "Bash(wget :* -O - | sh::*)",
+      "Read(*.mobileprovision)",
+      "Read(*.p12)",
+      "Read(.env*)",
+      "Read(.netrc)",
+      "Read(AuthKey_*.p8)",
+      "Read(fastlane/.env*)",
+      "Read(~/.aws/*)",
+      "Read(~/.docker/config.json)",
+      "Read(~/.ssh/*)",
+      "Read(~/Library/Keychains/*)"
+    ]
+  },
+  "model": "sonnet",
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/custom-statusline.sh",
+    "padding": 5
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./Context/Scripts/auto-format.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command", 
+            "command": "./Context/Scripts/version-status.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

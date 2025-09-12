@@ -32,12 +32,13 @@ ContextKit/
 │   └── SwiftUI.md                   # SwiftUI patterns (copied by install.sh to ~/.ContextKit/)
 └── 🎯 Templates/                     # TEMPLATE DISTRIBUTION CENTER
     ├── Commands/                    # → CLAUDE CODE COMMANDS (get copied during /setup)
-    ├── Hooks/                       # → AUTOMATION SCRIPTS (get copied during /setup)  
+    ├── Scripts/                     # → ALL SCRIPTS (hooks & standalone, get copied during /setup)
     ├── Subagents/                   # → AI ASSISTANTS (get copied during /setup)
     ├── Features/                    # → FEATURE TEMPLATES (used by /Plan/* commands)
     ├── Contexts/                    # → CONTEXT TEMPLATES (used by /setup and /setup-workspace)
     ├── Backlog/                     # → BACKLOG TEMPLATES (used by /add-idea and /add-bug)
-    └── Formatters/                  # → CODE STYLE CONFIGS (get copied during /setup)
+    ├── Formatters/                  # → CODE STYLE CONFIGS (get copied during /setup)
+    └── settings.json                # → CLAUDE CODE SETTINGS TEMPLATE
 ```
 
 ---
@@ -59,7 +60,7 @@ cp Guidelines/* ~/.ContextKit/Guidelines/
 cp Templates/* ~/.ContextKit/Templates/ -R
 
 # 3. Install ONLY global commands to user's Claude Code
-cp Templates/Commands/ContextKit/* ~/.claude/commands/ContextKit/
+cp Templates/Commands/Global/* ~/.claude/commands/ContextKit/
 
 # 4. Result: User now has global ContextKit installation + /ContextKit/* commands
 ```
@@ -90,9 +91,11 @@ cp ~/.ContextKit/Templates/Commands/Plan/* .claude/commands/Plan/
 cp ~/.ContextKit/Templates/Commands/Implement/* .claude/commands/Implement/  
 cp ~/.ContextKit/Templates/Commands/Backlog/* .claude/commands/Backlog/
 
-# Hooks → Context/Scripts/ + .claude/settings.json
-cp ~/.ContextKit/Templates/Hooks/*.sh Context/Scripts/
-merge ~/.ContextKit/Templates/Hooks/settings.json → .claude/settings.json
+# Scripts → Context/Scripts/ (hooks) + ~/.claude/ (statusline) + .claude/settings.json
+cp ~/.ContextKit/Templates/Scripts/auto-format.sh Context/Scripts/
+cp ~/.ContextKit/Templates/Scripts/version-status.sh Context/Scripts/  
+cp ~/.ContextKit/Templates/Scripts/custom-statusline.sh ~/.claude/
+merge ~/.ContextKit/Templates/settings.json → .claude/settings.json (with user prompts for permissions/model/statusline)
 
 # Subagents → .claude/subagents/
 mkdir -p .claude/subagents
@@ -149,7 +152,7 @@ cp ~/.ContextKit/Templates/Features/Steps.md Context/Features/UserAuthentication
 **Structure**:
 ```
 Templates/Commands/
-├── ContextKit/          # Global management commands
+├── Global/             # Global management commands
 │   ├── setup.md         # Project initialization  
 │   ├── setup-workspace.md # Workspace configuration
 │   ├── migrate.md       # Version updates
@@ -169,15 +172,22 @@ Templates/Commands/
     └── prioritize-backlog.md # Backlog organization
 ```
 
-### 🔧 **Templates/Hooks/** - Automation Scripts
-**Purpose**: Hook scripts and configuration templates  
-**Used By**: `/ContextKit/setup` → copies scripts to `Context/Scripts/`, merges JSON to `.claude/settings.json`  
-**Format**: Shell scripts + JSON configuration
+### 📜 **Templates/Scripts/** - All Scripts (Hooks & Standalone)
+**Purpose**: All shell scripts - both automation hooks and standalone utility scripts  
+**Used By**: `/ContextKit/setup` → copies hook scripts to `Context/Scripts/`, statusline to `~/.claude/`  
+**Format**: Shell scripts for hook execution and external calls
 
 **Files**:
 - `auto-format.sh` - Auto-format edited Swift files (PostToolUse hook)
 - `version-status.sh` - Version checking and status display (SessionStart hook)  
-- `settings.json` - Claude Code hook configuration template
+- `custom-statusline.sh` - Complete statusline script with 5h-usage tracking and colored progress bars
+
+### ⚙️ **Templates/settings.json** - Claude Code Configuration
+**Purpose**: Complete Claude Code settings template with all ContextKit defaults  
+**Used By**: `/ContextKit/setup` → merges into `.claude/settings.json` with user preference prompts  
+**Format**: JSON configuration file
+
+**Contains**: Permissions, model defaults ("sonnet"), statusline configuration, and hook execution setup
 
 ### 🤖 **Templates/Subagents/** - AI Quality Assistants  
 **Purpose**: Specialized AI assistants for quality assurance  

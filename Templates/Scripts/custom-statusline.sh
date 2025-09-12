@@ -1,0 +1,110 @@
+#!/bin/bash
+
+# Custom Claude Code statusline:
+# Format: 5h-Usage: 61% (92m left) | Chat: ████░░░░░░ 44% (87k/200k)
+# With colored progress bar for chat context
+
+# Color definitions
+YELLOW='\033[33m'       # Normal yellow  
+RED='\033[31m'          # Bright red
+LIGHT_GRAY='\033[37m'   # Light gray text
+RESET='\033[0m'
+
+# Function to create colored progress bar and return color
+create_progress_bar() {
+    local percent=$1
+    local width=10
+    local filled=$((percent * width / 100))
+    local empty=$((width - filled))
+    
+    # Choose color based on percentage
+    local color
+    if [[ $percent -lt 50 ]]; then
+        color="$LIGHT_GRAY"
+    elif [[ $percent -lt 80 ]]; then
+        color="$YELLOW"
+    else
+        color="$RED"
+    fi
+    
+    local bar=""
+    
+    # Add filled and empty portions
+    for ((i=0; i<filled; i++)); do
+        bar+="▓"
+    done
+    for ((i=0; i<empty; i++)); do
+        bar+="░"
+    done
+    
+    # Return both bar and color (separated by |)
+    echo "${color}${bar}|${color}"
+}
+
+# Get ccusage data
+ccusage_data=$(ccusage statusline 2>/dev/null)
+
+if [[ $? -ne 0 ]] || [[ -z "$ccusage_data" ]]; then
+    # Fallback if ccusage fails
+    echo -e "${LIGHT_GRAY}5h-Usage: loading... | Chat: ░░░░░░░░░░ loading...${RESET}"
+    exit 0
+fi
+
+# Extract block time remaining (format: "block (13m left)" or "block (1h 13m left)")
+block_time=$(echo "$ccusage_data" | grep -o 'block ([^)]*left)' | sed 's/block (\|)//g')
+
+# Extract context tokens and percentage  
+context_tokens=$(echo "$ccusage_data" | grep -o '🧠[[:space:]]*[0-9,]\+' | grep -o '[0-9,]\+')
+context_percent=$(echo "$ccusage_data" | grep -o '([0-9]\+%)' | grep -o '[0-9]\+')
+
+# Calculate 5h window usage from remaining time
+if [[ "$block_time" =~ ([0-9]+)h[[:space:]]+([0-9]+)m[[:space:]]+left ]]; then
+    # Format: "1h 13m left"
+    hours_left=${BASH_REMATCH[1]}
+    minutes_left=${BASH_REMATCH[2]}
+    total_minutes_left=$((hours_left * 60 + minutes_left))
+elif [[ "$block_time" =~ ([0-9]+)m[[:space:]]+left ]]; then
+    # Format: "13m left"
+    hours_left=0
+    minutes_left=${BASH_REMATCH[1]}
+    total_minutes_left=$minutes_left
+else
+    window_info="5h-Usage: parsing..."
+fi
+
+# Calculate percentage if we got valid time data
+if [[ -n "$total_minutes_left" ]]; then
+    # Calculate percentage (ceiling rounding)
+    minutes_used=$((300 - total_minutes_left))  # 300 = 5h total
+    window_percent=$(((minutes_used * 100 + 299) / 300))
+    
+    # Format time display: minutes if < 60, decimal hours if >= 60
+    if [[ $total_minutes_left -lt 60 ]]; then
+        time_display="${total_minutes_left}m left"
+    else
+        # Convert to decimal hours with 1 decimal place
+        hours_decimal=$(echo "scale=1; $total_minutes_left / 60" | bc)
+        time_display="${hours_decimal}h left"
+    fi
+    
+    window_info="5h-Usage: ${window_percent}% (${time_display})"
+fi
+
+# Format chat context with progress bar
+if [[ -n "$context_tokens" && -n "$context_percent" ]]; then
+    # Convert to k format (round up)
+    tokens_clean=$(echo "$context_tokens" | tr -d ',')
+    tokens_k=$(((tokens_clean + 999) / 1000))
+    
+    # Create colored progress bar
+    progress_result=$(create_progress_bar $context_percent)
+    progress_bar=$(echo "$progress_result" | cut -d'|' -f1)
+    text_color=$(echo "$progress_result" | cut -d'|' -f2)
+    
+    context_info="Chat: ${progress_bar} ${text_color}${context_percent}% (${tokens_k}k/200k)${LIGHT_GRAY}"
+else
+    context_info="Chat: ░░░░░░░░░░ parsing..."
+fi
+
+# Output statusline
+echo -e "${LIGHT_GRAY}$window_info | $context_info${RESET}"

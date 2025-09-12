@@ -241,7 +241,6 @@ setup_constitutional_framework() {
    
    # Copy constitutional documents
    local framework_files=(
-      "ContextKit/Constitution.md"
       "ContextKit/Changelog.md"
    )
    
@@ -270,8 +269,8 @@ setup_constitutional_framework() {
       print_info "✓ Installed development guidelines"
    fi
    
-   print_success "Constitutional framework installed"
-   print_info "Constitution, Changelog, and Guidelines available"
+   print_success "Global framework installed"
+   print_info "Changelog and Guidelines available"
 }
 
 ## Step 6: Verify installation integrity
@@ -280,7 +279,6 @@ verify_installation() {
    
    # Check core structure exists
    local expected_files=(
-      "ContextKit/Constitution.md"
       "ContextKit/Changelog.md"
       "Guidelines/Swift.md"
       "Guidelines/SwiftUI.md"
@@ -309,8 +307,8 @@ verify_installation() {
    fi
    
    # Validate file permissions
-   if [[ ! -r "$CONTEXTKIT_DIR/ContextKit/Constitution.md" ]]; then
-      print_error "Constitutional framework not readable"
+   if [[ ! -r "$CONTEXTKIT_DIR/Meta/Changelog.md" ]]; then
+      print_error "Global framework not readable"
       exit 1
    fi
    
@@ -345,7 +343,7 @@ display_completion() {
    echo
    print_info "For help and validation: /ContextKit/verify"
    echo
-   print_status "$CYAN" "Constitutional Principles Enabled:"
+   print_status "$CYAN" "ContextKit Features Enabled:"
    print_info "✓ Accessibility-first design"
    print_info "✓ Privacy by design"
    print_info "✓ Localizability from day one" 
