@@ -1,3 +1,9 @@
+---
+name: check-error-handling
+description: Review error handling implementation with ErrorKit patterns, typed throws, and user-friendly error messages
+tools: Read, Grep, Glob
+---
+
 # Subagent: check-error-handling
 
 ## Purpose

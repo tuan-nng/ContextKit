@@ -1,3 +1,9 @@
+---
+name: check-accessibility
+description: Comprehensive accessibility compliance validation for iOS/macOS applications with VoiceOver, accessibility traits, and inclusive design patterns
+tools: Read, Grep, Glob
+---
+
 # Subagent: check-accessibility
 
 **Purpose**: Analyze iOS/macOS UI code for accessibility compliance following constitutional accessibility-first principles and suggest specific improvements with validation gates.

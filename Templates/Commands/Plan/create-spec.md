@@ -9,15 +9,12 @@ Create structured feature specification following spec-kit patterns with iOS/mac
 ## Execution Flow (main)
 1. Parse description from user input
    → If empty: ERROR "Feature description required"
-2. Detect project type from current directory
-   → Package.swift = swift-package
-   → *.xcodeproj = ios-app  
-   → package.json = javascript-project
-   → requirements.txt = python-project
-   → If unclear: ASK user to specify
-3. Load workspace context (if present)
-   → Search parent directories for Context.md
-   → If found: inherit coding standards and preferences
+2. Read project Context.md to understand project type and settings
+   → If Context.md missing: ERROR "Run /setup first to initialize ContextKit"
+   → Extract project type, workspace inheritance, constitutional principles
+3. Load workspace context from Context.md hierarchy
+   → Use workspace reference from project Context.md
+   → Inherit coding standards and constitutional principles
 4. Generate feature name from description
    → Convert to PascalCase (e.g., "user auth" → "UserAuthentication")  
    → If ambiguous: ASK user to confirm
@@ -36,11 +33,11 @@ Create structured feature specification following spec-kit patterns with iOS/mac
    → If validation fails: ERROR with specific guidance
 9. Return: SUCCESS (spec ready for review)
 
-## Template Variables
-${PROJECT_TYPE} - Detected project type (ios-app, swift-package, javascript-project, etc.)
-${WORKSPACE_CONTEXT} - Inherited workspace settings from parent Context.md
-${FEATURE_NAME} - Generated PascalCase feature name
-${CONSTITUTIONAL_PRINCIPLES} - Applied constitutional principles based on project type
+## Context Sources
+Read these files to understand project configuration dynamically:
+- `Context.md` - Project type, workspace inheritance, constitutional principles
+- Parent directory `Context.md` files - Workspace-specific overrides and standards
+- `~/.ContextKit/ContextKit/Constitution.md` - Universal constitutional principles
 
 ## Validation Gates
 - [ ] Feature description provided and clear?

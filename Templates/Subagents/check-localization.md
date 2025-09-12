@@ -1,3 +1,9 @@
+---
+name: check-localization
+description: Comprehensive localization audit with String Catalog validation, cultural adaptation, and TranslateKit integration
+tools: Read, Bash, Grep, Glob
+---
+
 # Subagent: check-localization
 
 ## Purpose

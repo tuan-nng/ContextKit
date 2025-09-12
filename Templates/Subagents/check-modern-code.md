@@ -1,3 +1,9 @@
+---
+name: check-modern-code
+description: Modernize code by detecting and replacing outdated APIs and patterns with contemporary Swift equivalents
+tools: Read, Edit, Grep, Glob
+---
+
 # Subagent: check-modern-code
 
 ## Purpose

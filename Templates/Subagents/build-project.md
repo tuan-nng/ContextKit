@@ -1,3 +1,9 @@
+---
+name: build-project
+description: Execute project build operations with comprehensive error reporting, constitutional compliance validation, and development workflow integration
+tools: Bash, Read, Grep, Glob
+---
+
 # Subagent: build-project
 
 ## Purpose

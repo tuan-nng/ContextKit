@@ -1,3 +1,9 @@
+---
+name: check-code-debt
+description: Refactor and clean up code generated across multiple AI iterations, removing artifacts and improving maintainability
+tools: Read, Edit, Grep, Glob
+---
+
 # Subagent: check-code-debt
 
 ## Purpose
