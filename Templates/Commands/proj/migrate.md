@@ -49,10 +49,11 @@ None (fully automatic)
 ### Phase 2: Scan Project Templates
 ```
 1. Define file mappings for all template types:
-   - Guidelines/*.md → .claude/guidelines/
+   - Templates/Guidelines/*.md → Context/Guidelines/
    - Templates/Commands/**/*.md → .claude/commands/ctxk/
-   - Templates/Subagents/*.md → .claude/subagents/
-   - Templates/Scripts/*.sh → .claude/hooks/ (and ~/.claude/ for statusline)
+   - Templates/Agents/*.md → .claude/agents/ctxk/
+   - Templates/Scripts/*.sh → Context/Scripts/ (team sharing, hooks via settings.json)
+   - Templates/Backlog/*.md → Context/Backlog/ (preserving user content via customization sections)
 
 2. For each mapping:
    → Check template version using `sed -n '2p' file | grep "Template Version"`

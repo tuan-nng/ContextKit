@@ -12,7 +12,7 @@ tools: Read, Edit, Grep, Glob
 >
 > Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
-# Subagent: check-code-debt
+# Agent: check-code-debt
 
 ## Purpose
 Refactor and clean up code generated across multiple AI iterations with constitutional compliance integration, removing leftover artifacts, consolidating patterns, and extracting reusable components.
@@ -23,7 +23,7 @@ Refactor and clean up code generated across multiple AI iterations with constitu
 - Constitutional compliance requirements for project type
 - Previous AI-generated code across multiple sessions and iterations
 
-## Execution Flow (subagent)
+## Execution Flow (agent)
 1. Analyze codebase for AI-generated code debt patterns
    → Detect project type from Package.swift, *.xcodeproj, package.json, requirements.txt, etc.
    → Scan for temporary AI communication comments and iteration artifacts

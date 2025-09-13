@@ -12,7 +12,7 @@ tools: Read, Grep, Glob
 >
 > Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
-# Subagent: check-error-handling
+# Agent: check-error-handling
 
 ## Purpose
 Review and validate error handling implementation following ErrorKit patterns with typed throws, user-friendly messages, and proper error propagation.
@@ -23,7 +23,7 @@ Review and validate error handling implementation following ErrorKit patterns wi
 - ErrorKit compliance expectations and constitutional principles
 - Project type (ios-app, swift-package, vapor-server)
 
-## Execution Flow (subagent)
+## Execution Flow (agent)
 ```
 1. Analyze provided Swift files for error handling patterns
    → Scan for error type definitions, throw statements, and error propagation
@@ -232,7 +232,7 @@ Constitutional Requirements: ${CONSTITUTIONAL_PRINCIPLES}
 **If all gates pass**: SUCCESS (comprehensive error handling review complete)
 
 ## Error Conditions
-- "No Swift files provided" → Subagent requires Swift source files for analysis
+- "No Swift files provided" → Agent requires Swift source files for analysis
 - "ErrorKit import not detected" → Project must import FlineDevKit or ErrorKit for compliance checking
 - "No error handling patterns found" → Files must contain error types, throw statements, or catch blocks
 - "Constitutional requirements missing" → Must specify constitutional principles for compliance validation
@@ -240,7 +240,7 @@ Constitutional Requirements: ${CONSTITUTIONAL_PRINCIPLES}
 
 ## Integration Notes
 ### Constitutional Principles Enforcement
-This subagent specifically validates error handling against constitutional maintainability principles:
+This agent specifically validates error handling against constitutional maintainability principles:
 - Error types placed near usage (not in global directories)
 - Preference for built-in ErrorKit types over custom implementations
 - Proper separation of logging from user-facing error messages
@@ -262,7 +262,7 @@ Evaluates error handling performance implications:
 
 ---
 
-*This subagent template integrates ContextKit constitutional principles with ErrorKit best practices for comprehensive error handling validation in Swift projects.*
+*This agent template integrates ContextKit constitutional principles with ErrorKit best practices for comprehensive error handling validation in Swift projects.*
 
 ════════════════════════════════════════════════════════════════════════════════
 👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION

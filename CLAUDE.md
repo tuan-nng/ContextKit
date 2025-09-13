@@ -26,10 +26,10 @@ ContextKit/
 ├── 📖 CLAUDE.md                     # This file - development guidance for AI assistants
 ├── 📖 LICENSE                       # MIT license
 ├── 📄 CHANGELOG.md                  # Version tracking and migration support
-├── 📐 Guidelines/                    # GLOBAL CODING STANDARDS
-│   ├── Swift.md                     # Swift patterns (copied by install.sh to ~/.ContextKit/)  
-│   └── SwiftUI.md                   # SwiftUI patterns (copied by install.sh to ~/.ContextKit/)
 └── 🎯 Templates/                     # TEMPLATE DISTRIBUTION CENTER
+    ├── Guidelines/                  # → GLOBAL CODING STANDARDS (copied by install.sh)
+    │   ├── Swift.md                 # Swift patterns
+    │   └── SwiftUI.md               # SwiftUI patterns
     ├── Commands/                    # → CLAUDE CODE COMMANDS (get copied during /ContextKit/setup)
     │   ├── Global/                  # Global ContextKit management commands
     │   │   ├── setup.md             # Project initialization
@@ -50,10 +50,10 @@ ContextKit/
     │       ├── prioritize-ideas.md  # Organize ideas backlog
     │       └── prioritize-bugs.md   # Triage bugs backlog
     ├── Scripts/                     # → ALL SCRIPTS (hooks & standalone, get copied during /ContextKit/setup)
-    │   ├── auto-format.sh           # Auto-format edited Swift files (PostToolUse hook)
-    │   ├── version-status.sh        # Version checking and status display (SessionStart hook)
-    │   └── custom-statusline.sh     # Complete statusline script with 5h-usage tracking and colored progress bars
-    ├── Subagents/                   # → AI ASSISTANTS (get copied during /ContextKit/setup)
+    │   ├── AutoFormat.sh           # Auto-format edited Swift files (PostToolUse hook)
+    │   ├── VersionStatus.sh        # Version checking and status display (SessionStart hook)
+    │   └── CustomStatusline.sh     # Complete statusline script with 5h-usage tracking and colored progress bars
+    ├── Agents/                      # → AI ASSISTANTS (get copied during /ContextKit/setup)
     │   ├── build-project.md         # Execute builds with constitutional compliance checking
     │   ├── check-accessibility.md   # Accessibility compliance validation (VoiceOver, contrast, etc.)
     │   ├── check-localization.md    # Localization readiness audit (String Catalog, cultural adaptation)
@@ -128,13 +128,13 @@ mkdir -p Context/Features Context/Backlog Context/Scripts
 
 # 4. Copy project-specific files:
 # Scripts → Context/Scripts/ (for team sharing) + ~/.claude/ (statusline)
-cp ~/.ContextKit/Templates/Scripts/auto-format.sh Context/Scripts/
-cp ~/.ContextKit/Templates/Scripts/version-status.sh Context/Scripts/  
-cp ~/.ContextKit/Templates/Scripts/custom-statusline.sh ~/.claude/
+cp ~/.ContextKit/Templates/Scripts/AutoFormat.sh Context/Scripts/
+cp ~/.ContextKit/Templates/Scripts/VersionStatus.sh Context/Scripts/  
+cp ~/.ContextKit/Templates/Scripts/CustomStatusline.sh ~/.claude/
 
-# Subagents → .claude/subagents/
-mkdir -p .claude/subagents
-cp ~/.ContextKit/Templates/Subagents/* .claude/subagents/
+# Agents → .claude/agents/ctxk/
+mkdir -p .claude/agents/ctxk
+cp ~/.ContextKit/Templates/Agents/* .claude/agents/ctxk/
 
 # Settings → .claude/settings.json (merge with user prompts)
 # merge ~/.ContextKit/Templates/settings.json → .claude/settings.json
@@ -193,16 +193,16 @@ cp ~/.ContextKit/Templates/Features/Steps.md Context/Features/UserAuthentication
 [File content starts here...]
 ```
 
-#### For Subagents (.md files with YAML frontmatter)
+#### For Agents (.md files with YAML frontmatter)
 ```yaml
 ---
 meta: "Template Version: X | ContextKit: Y.Y.Y | Updated: YYYY-MM-DD"
-name: subagent-name
-description: Subagent description
+name: agent-name
+description: Agent description
 tools: Read, Edit, Grep
 ---
 
-# Subagent: subagent-name
+# Agent: agent-name
 ```
 
 ### Parsing Requirements
@@ -212,16 +212,16 @@ tools: Read, Edit, Grep
 - **Implementation**:
   - Regular .md files: HTML comment on line 2
   - .sh files: Shell comment on line 2
-  - Subagents: YAML `meta:` field on line 2
+  - Agents: YAML `meta:` field on line 2
 - **Parsing Command**: `sed -n '2p' file | grep "Template Version"`
 - **Migration Usage**: `/ctxk:proj:migrate` command uses this for version detection
 
 ### Files Requiring Versioning (36 files)
 
 **All .md template files**:
-- `Guidelines/*.md` (2 files)
+- `Templates/Guidelines/*.md` (2 files)
 - `Templates/Commands/**/*.md` (16 files)
-- `Templates/Subagents/*.md` (6 files)
+- `Templates/Agents/*.md` (6 files)
 - `Templates/Features/*.md` (3 files)
 - `Templates/Backlog/*.md` (4 files)
 
@@ -270,9 +270,9 @@ if [ "$USER_VERSION" -lt "$LATEST_VERSION" ]; then
     echo "⚠️ Template outdated: plan/1-spec.md v$USER_VERSION → v$LATEST_VERSION"
 fi
 
-# Works for subagents too since they use meta: field on line 2
-SUBAGENT_USER_VERSION=$(sed -n '2p' .claude/subagents/check-modern-code.md | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*")
-SUBAGENT_LATEST_VERSION=$(sed -n '2p' ~/.ContextKit/Templates/Subagents/check-modern-code.md | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*")
+# Works for agents too since they use meta: field on line 2
+AGENT_USER_VERSION=$(sed -n '2p' .claude/agents/ctxk/check-modern-code.md | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*")
+AGENT_LATEST_VERSION=$(sed -n '2p' ~/.ContextKit/Templates/Agents/check-modern-code.md | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*")
 ```
 
 ---
@@ -300,14 +300,14 @@ SUBAGENT_LATEST_VERSION=$(sed -n '2p' ~/.ContextKit/Templates/Subagents/check-mo
 ### 📜 **Templates/Scripts/** - All Scripts (Hooks & Standalone)
 **Purpose**: Shell scripts for automation hooks and utilities  
 **Copy Destinations**: 
-- `auto-format.sh`, `version-status.sh` → `Context/Scripts/` (team sharing)
-- `custom-statusline.sh` → `~/.claude/` (personal statusline)
+- `AutoFormat.sh`, `VersionStatus.sh` → `Context/Scripts/` (team sharing)
+- `CustomStatusline.sh` → `~/.claude/` (personal statusline)
 **Format**: Cross-platform shell scripts
 
 **Files & AI Implementation Notes**:
-- `auto-format.sh` - PostToolUse hook: detect Swift files, run SwiftFormat + swift-format
-- `version-status.sh` - SessionStart hook: check ContextKit versions, display migration warnings  
-- `custom-statusline.sh` - Standalone: 5h usage tracking with colored progress bars
+- `AutoFormat.sh` - PostToolUse hook: detect Swift files, run SwiftFormat + swift-format
+- `VersionStatus.sh` - SessionStart hook: check ContextKit versions, display migration warnings  
+- `CustomStatusline.sh` - Standalone: 5h usage tracking with colored progress bars
 
 ### ⚙️ **Templates/settings.json** - Claude Code Configuration
 **Purpose**: Complete Claude Code settings template with ContextKit defaults  
@@ -317,13 +317,13 @@ SUBAGENT_LATEST_VERSION=$(sed -n '2p' ~/.ContextKit/Templates/Subagents/check-mo
 
 **Contains**: Model defaults ("claude-3-5-sonnet-20241022"), statusline configuration, hook execution setup, ContextKit permissions
 
-### 🤖 **Templates/Subagents/** - AI Quality Assistants  
-**Purpose**: Specialized AI assistants for autonomous quality checks  
-**Copy Destination**: `.claude/subagents/`  
-**Format**: Markdown with YAML frontmatter (proper Claude Code subagent format)
+### 🤖 **Templates/Agents/** - AI Quality Assistants
+**Purpose**: Specialized AI assistants for autonomous quality checks
+**Copy Destination**: `.claude/agents/ctxk/`
+**Format**: Markdown with YAML frontmatter (proper Claude Code agent format)
 **Variables**: **NONE** - Dynamic context reading
 
-**Subagents & AI Implementation Focus**:
+**Agents & AI Implementation Focus**:
 - `build-project.md` - Execute builds, filter developer comments, report errors/warnings
 - `check-accessibility.md` - VoiceOver labels, color contrast, dynamic type validation
 - `check-localization.md` - String Catalog analysis, cultural adaptation, region formatters
@@ -429,7 +429,7 @@ Embed these validation checkpoints in every template where applicable:
    - NO variable substitution - intelligent template logic
    - Include hierarchical inheritance patterns
 
-4. **Subagents** (`Templates/Subagents/`): 
+4. **Agents** (`Templates/Agents/`):
    - YAML frontmatter with tool specifications
    - Focused scope (single quality concern)
    - Clear success/failure reporting
@@ -492,7 +492,7 @@ Before committing template changes:
 - [ ] Project type detection logic implemented (for commands)
 - [ ] Clear success/error states defined
 - [ ] Cross-platform compatibility verified (for scripts)
-- [ ] YAML frontmatter correct (for subagents)
+- [ ] YAML frontmatter correct (for agents)
 - [ ] No unnecessary variable substitution added
 - [ ] Testing workflow completed successfully
 
@@ -520,33 +520,35 @@ These files become completely user-managed after initial setup:
 - **`Templates/Contexts/Project.md`** → becomes `Context.md` in project root
 - **`Templates/Contexts/Workspace.md`** → becomes `Context.md` in workspace directory
 - **`Templates/Features/*.md`** → copied to `Context/Features/[FeatureName]/` during planning
-- **`Templates/Backlog/*.md`** → copied to `Context/Backlog/` as starting templates
+- **`Templates/Formatters/.*`** → formatter config files copied to project root (`.swift-format`, `.swiftformat`)
 
 **Key Characteristics**:
 - **No migration updates**: Users modify freely, `/ctxk:proj:migrate` never overwrites
 - **Full customization**: Users add project-specific content, modify structure as needed
+- **Safe to customize**: Formatter configs, Context files, Features, and Backlog templates are yours to edit
 - **Hierarchical inheritance**: Context files provide workspace → project inheritance
 
 ### 🛠️ **ContextKit-Managed Files** (Updated via migration, support user customization)
 These files are maintained by ContextKit but support project-specific customization:
 
 - **`Templates/Commands/**/*.md`** - Claude Code command templates
-- **`Templates/Subagents/*.md`** - AI quality assistant templates
-- **`Guidelines/*.md`** - Development reference guidelines
+- **`Templates/Agents/*.md`** - AI quality assistant templates
+- **`Templates/Backlog/*.md`** - Backlog management templates with evaluation frameworks
+- **`Templates/Guidelines/*.md`** - Development reference guidelines
 
 **Key Characteristics**:
 - **Migration updates**: `/ctxk:proj:migrate` updates core logic to newer versions
 - **User customization sections**: Dedicated sections for project-specific additions (see User Customization Pattern below)
 - **Version tracking**: Template version headers enable smart migration
 
-### ⚙️ **Configuration Files** (Static, replaced during migration)
-- **`Templates/settings.json`** - Claude Code configuration (replaced entirely)
-- **`Templates/Formatters/.*`** - Code formatting configurations (replaced entirely)
-- **`Templates/Scripts/*.sh`** - Hook automation scripts (replaced entirely, no customization sections)
+### ⚙️ **Configuration Files** (Static, updated behavior varies)
+- **`Templates/settings.json`** - Claude Code configuration (replaced entirely during migration)
+- **`Templates/Formatters/.*`** - Formatter configuration files (**never updated** - set once during setup)
+- **`Templates/Scripts/*.sh`** - Hook automation scripts (replaced entirely during migration, no customization sections)
 
 ### 🔧 **User Customization Pattern for ContextKit-Managed Files**
 
-**Problem**: Commands and subagents may need project-specific adjustments while maintaining updateability.
+**Problem**: Commands and agents may need project-specific adjustments while maintaining updateability.
 
 **Solution**: Dedicated user customization sections that are preserved during migration:
 
@@ -598,7 +600,7 @@ Used only for user-managed files that combine template structure with AI generat
 
 ### 🔧 **Implementation Requirements for All ContextKit-Managed Files**
 
-All commands, subagents, and guidelines that get copied to user projects MUST include:
+All commands, agents, and guidelines that get copied to user projects MUST include:
 
 1. **Template Version Header**: Line 2 versioning for migration tracking
 2. **User Warning**: Clear warning about editing restrictions and GitHub issue reporting
@@ -635,9 +637,9 @@ All commands, subagents, and guidelines that get copied to user projects MUST in
 
 ---
 
-## 🧭 Guidelines vs Subagents: Role Separation
+## 🧭 Guidelines vs Agents: Role Separation
 
-### **Guidelines/*.md - Strategic Planning Reference**
+### **Templates/Guidelines/*.md - Strategic Planning Reference**
 
 **Purpose**: High-level guidance for AI assistants during **planning and architecture phases**
 
@@ -667,7 +669,7 @@ All commands, subagents, and guidelines that get copied to user projects MUST in
 - ❌ **Avoid**: Custom URLSession implementations
 ```
 
-### **Templates/Subagents/*.md - Quality Validation Specialists**
+### **Templates/Agents/*.md - Quality Validation Specialists**
 
 **Purpose**: Detailed issue detection in **existing code during development phases**
 
@@ -711,7 +713,7 @@ scope: "Swift source files"
 
 ```
 Planning Phase               Development Phase
-├── Guidelines/*.md         ├── Templates/Subagents/*.md
+├── Templates/Guidelines/*.md ├── Templates/Agents/*.md
 │   ├── "What should I      │   ├── "What's wrong with
 │   │   choose?"            │   │   what I wrote?"
 │   ├── Strategic decisions │   ├── Issue detection
@@ -726,22 +728,53 @@ Framework selection         Code review
 
 ### **Key Benefits of This Separation**
 
-1. **No Duplication**: Guidelines stay high-level, subagents get detailed
+1. **No Duplication**: Guidelines stay high-level, agents get detailed
 2. **Clear Responsibilities**: Planning vs validation are distinct phases
 3. **Efficient Context**: AI gets right level of detail for each phase
-4. **Maintainability**: Guidelines change with strategy, subagents with common issues
-5. **Scalability**: Add new subagents without bloating guidelines
+4. **Maintainability**: Guidelines change with strategy, agents with common issues
+5. **Scalability**: Add new agents without bloating guidelines
 
 ### **Implementation Guidelines for Maintainers**
 
 **When writing Guidelines**:
 - Focus on strategic choices and preferences
 - Use ✅/❌ format for quick reference
-- Reference subagents for detailed validation
+- Reference agents for detailed validation
 - Keep examples minimal and preference-focused
 
-**When writing Subagents**:
+**When writing Agents**:
 - Focus on specific, detectable issues
 - Include YAML frontmatter with required tools
 - Provide detailed search patterns and detection logic
 - Generate actionable reports with line numbers
+
+---
+
+## 🔗 Claude Code Hook Implementation
+
+### Hook Interface
+PostToolUse hooks receive **JSON data via stdin**:
+```json
+{
+  "tool_input": {
+    "file_path": "/path/to/edited/file.swift"
+  }
+}
+```
+
+### Script Implementation Pattern
+```bash
+# Extract file path from JSON input
+FILE_PATH=$(jq -r '.tool_input.file_path')
+
+# Process the edited file
+if [[ "$FILE_PATH" == *.swift ]]; then
+    swiftformat "$FILE_PATH"
+fi
+```
+
+### Key Points
+- **Input method**: JSON via stdin (not command arguments)
+- **File processing**: One file per hook invocation
+- **Documentation**: https://docs.anthropic.com/en/docs/claude-code/hooks-guide
+- **Hook triggers**: Edit, MultiEdit, Write tools

@@ -40,7 +40,7 @@ Project-level Context.md template providing project-specific execution informati
 ║    → List available ContextKit workflow commands
 ║ 7. Create supporting ContextKit directory structure
 ║    → mkdir -p Context/Features Context/Backlog
-║    → Copy relevant hooks and subagents to .claude/
+║    → Copy relevant hooks and agents to .claude/
 ║ 8. Validate generated Context.md completeness
 ║    → All execution commands filled with detected values
 ║    → Project structure documented with actual paths
@@ -154,12 +154,12 @@ Project-level Context.md template providing project-specific execution informati
 **Quality Assurance**:
 - Build validation, accessibility checks, localization audit
 - Error handling validation, code modernization, technical debt cleanup
-- All quality checks available as `/Task` subagents
+- All quality checks available as `/Task` agents
 
 **Customization**:
 - Project-specific commands in `.claude/commands/`
-- Team hooks in `.claude/hooks/`
-- Quality subagents in `.claude/subagents/`
+- Team scripts in `Context/Scripts/` (hooks configured via settings.json)
+- Quality agents in `.claude/agents/ctxk/`
 
 ## ContextKit AI Integration
 
@@ -172,7 +172,7 @@ When executing ContextKit commands (`/ctxk:*`), always:
 3. **Combine both** core logic and project-specific customizations for execution
 
 ### **Developer Customization Sections**
-Each ContextKit command and subagent file contains a **👩‍💻 DEVELOPER CUSTOMIZATIONS** section with:
+Each ContextKit command and agent file contains a **👩‍💻 DEVELOPER CUSTOMIZATIONS** section with:
 - **Project-Specific Instructions**: Additional guidance specific to this project
 - **Additional Examples**: Project-relevant examples and patterns
 - **Override Behaviors**: Modifications to default ContextKit behavior
@@ -185,7 +185,7 @@ If users ask to "remember" preferences or modify ContextKit behavior:
 
 ### **Example User Requests**:
 - "Always include performance considerations in technical specs" → Add to `/plan/2-tech.md` customization section
-- "Skip localization checks for internal tools" → Add to relevant subagent customization section
+- "Skip localization checks for internal tools" → Add to relevant agent customization section
 - "Use our specific error handling patterns" → Add to `/impl/start-working.md` customization section
 
 ## Hierarchical Inheritance

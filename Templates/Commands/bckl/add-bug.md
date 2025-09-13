@@ -289,7 +289,7 @@ When creating bug reports from user prompts:
 - **`/Backlog/prioritize-backlog`**: Bulk triage and prioritization
 - **`/Implement/start-working`**: Pick up bugs from work queue
 
-### With Subagents
+### With Agents
 - **`check-accessibility`**: Validate accessibility-related bug fixes
 - **`check-localization`**: Validate i18n-related bug fixes
 - **`check-error-handling`**: Validate error handling improvements

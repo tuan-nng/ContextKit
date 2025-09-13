@@ -94,7 +94,7 @@
   "model": "sonnet",
   "statusLine": {
     "type": "command",
-    "command": "~/.claude/custom-statusline.sh",
+    "command": "~/.claude/CustomStatusline.sh",
     "padding": 5
   },
   "hooks": {
@@ -104,7 +104,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "./Context/Scripts/auto-format.sh"
+            "command": "./Context/Scripts/AutoFormat.sh"
           }
         ]
       }
@@ -115,7 +115,7 @@
         "hooks": [
           {
             "type": "command", 
-            "command": "./Context/Scripts/version-status.sh"
+            "command": "./Context/Scripts/VersionStatus.sh"
           }
         ]
       }

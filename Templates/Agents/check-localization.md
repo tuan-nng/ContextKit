@@ -12,7 +12,7 @@ tools: Read, Bash, Grep, Glob
 >
 > Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
-# Subagent: check-localization
+# Agent: check-localization
 
 ## Purpose
 Perform comprehensive localization audit with execution flow pattern to ensure iOS/macOS applications meet international and accessibility standards from day one.
@@ -24,7 +24,7 @@ Perform comprehensive localization audit with execution flow pattern to ensure i
 - String Catalog files (.xcstrings)
 - Localization configuration files
 
-## Execution Flow (subagent)
+## Execution Flow (agent)
 
 ### Phase 1: Project Build and String Catalog Update
 1. Execute project build to ensure compilation

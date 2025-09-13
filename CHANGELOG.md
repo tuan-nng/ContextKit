@@ -24,8 +24,8 @@ Used by `/ctxk:proj:migrate` command to track file changes and preserve user cus
 ║ - ❌ `init.md` or `proj/init.md`
 ║ 
 ║ Include brief description of what changed and short commit SHA:
-║ - ✅ `Templates/Scripts/auto-format.sh` - Added Swift 6 compatibility (a1b2c3d)
-║ - ❌ `Templates/Scripts/auto-format.sh` - Updated
+║ - ✅ `Templates/Scripts/AutoFormat.sh` - Added Swift 6 compatibility (a1b2c3d)
+║ - ❌ `Templates/Scripts/AutoFormat.sh` - Updated
 ║ 
 ║ Commit SHA format:
 ║ - Use short 7-character SHA: (a1b2c3d)
@@ -35,7 +35,7 @@ Used by `/ctxk:proj:migrate` command to track file changes and preserve user cus
 ║ ## Migration Markers
 ║ 
 ║ Use [M] prefix for changes that affect existing user projects:
-║ - [M] Template files that users customize (commands, subagents, hooks)
+║ - [M] Template files that users customize (commands, agents, hooks)
 ║ - [M] File moves/renames that require path updates
 ║ - [M] File deletions that need cleanup
 ║ - [M] Configuration changes that affect user settings

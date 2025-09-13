@@ -39,10 +39,10 @@ Execute comprehensive iOS/macOS app release workflow with constitutional complia
    → Apply Release.md guidelines for user-facing vs technical change categorization
    → If documentation generation fails: ERROR "Unable to analyze changes for release"
 4. Execute constitutional compliance validation (blocking gates)
-   → Execute accessibility subagent: VoiceOver labels, color contrast, keyboard navigation
-   → Execute privacy subagent: Privacy manifest accuracy, data usage compliance, encryption
-   → Execute localization subagent: String externalization, cultural appropriateness, formatters
-   → Execute maintainability subagent: Code quality, error handling, documentation
+   → Execute accessibility agent: VoiceOver labels, color contrast, keyboard navigation
+   → Execute privacy agent: Privacy manifest accuracy, data usage compliance, encryption
+   → Execute localization agent: String externalization, cultural appropriateness, formatters
+   → Execute maintainability agent: Code quality, error handling, documentation
    → If any blocking violations found: ERROR with specific remediation guidance
    → If warning violations found: DOCUMENT in release notes but allow release
 5. Update project version following Release.md guidelines

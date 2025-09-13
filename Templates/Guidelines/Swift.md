@@ -159,7 +159,7 @@ Tests/
 - **Required timing**: Before commits, after milestones, after successful builds
 
 ### Code Quality Gates
-Quality validation is handled by specialized subagents:
+Quality validation is handled by specialized agents:
 - **`check-modern-code`**: Validates modern API usage
 - **`check-accessibility`**: Ensures accessibility compliance
 - **`check-localization`**: Verifies string externalization

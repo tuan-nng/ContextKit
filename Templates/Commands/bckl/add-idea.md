@@ -318,7 +318,7 @@ All gates must pass before command completion:
 
 ### Quality Assurance Integration
 - Ideas with "Major" or "Critical" constitutional impact automatically flagged for architectural review
-- Constitutional assessment guides selection of appropriate subagents during implementation
+- Constitutional assessment guides selection of appropriate agents during implementation
 - Quality gates ensure constitutional principles addressed before idea progression to specification phase
 
 ════════════════════════════════════════════════════════════════════════════════

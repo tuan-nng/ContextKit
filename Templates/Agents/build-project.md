@@ -5,7 +5,7 @@ description: Execute project build operations with comprehensive error reporting
 tools: Bash, Read, Grep, Glob
 ---
 
-# Subagent: build-project
+# Agent: build-project
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -23,7 +23,7 @@ Execute project build operations with comprehensive error reporting, constitutio
 - Constitutional compliance requirements for project type
 - Build configuration and environment setup
 
-## Execution Flow (subagent)
+## Execution Flow (agent)
 1. Analyze project configuration and build requirements
    → Detect project type from Package.swift, *.xcodeproj, package.json, requirements.txt
    → Load build configuration from project files and workspace context
@@ -302,7 +302,7 @@ ${CONSTITUTIONAL_VIOLATIONS}
 ## Next Steps
 1. **Fix Critical Errors**: Address compilation failures first
 2. **Resolve Constitutional Violations**: Ensure compliance before continuing
-3. **Re-run Build**: Use `/build-project` subagent after fixes applied
+3. **Re-run Build**: Use `/build-project` agent after fixes applied
 4. **Continue Development**: Resume feature work when build succeeds
 ```
 

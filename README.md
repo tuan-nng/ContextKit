@@ -137,7 +137,7 @@ Break down **execution** into trackable work:
 ### Phase 4: Development (`/ctxk:impl:start-working`)
 Execute with supervised autonomy and specialized quality agents:
 - AI implements within your approved technical framework
-- Specialized subagents handle quality checks (accessibility, localization, modern code)
+- Specialized agents handle quality checks (accessibility, localization, modern code)
 - Automatic cleanup of AI artifacts (leftover comments, temporary code)
 - You maintain strategic oversight while AI handles tactical execution
 
@@ -172,9 +172,26 @@ ContextKit automatically checks for newer versions when you start a new session 
 - Simply type `/ctxk:proj:migrate` and ContextKit handles everything
 - Your project customizations are preserved automatically
 - Core templates update to the latest improvements
-- New commands and subagents are automatically added to your project
+- New commands and agents are automatically added to your project
 - Review all changes in Git before committing – full transparency
 - You stay in full control of when updates happen
+
+## 🔒 Files Safe to Customize
+
+**These files are NEVER updated by `/ctxk:proj:migrate` once created:**
+
+### ✅ Complete User Control (modify freely)
+- **Formatter Config Files** (`.swift-format`, `.swiftformat`) - Your coding style preferences, never overwritten
+- **Project Context** (`Context.md`) - Your project configuration, completely customizable
+- **Feature Specifications** (`Context/Features/*/`) - Feature specs, tech plans, and steps are yours to edit
+- **Workspace Context** (`[Workspace]/Context.md`) - Your workspace overrides, never touched
+
+### ⚙️ Partial Control (customization sections preserved)
+- **Commands & Agents** - Core logic updates, but your additions in "👩‍💻 DEVELOPER CUSTOMIZATIONS" sections are preserved
+- **Guidelines** - Reference content updates, but your project-specific customizations are preserved
+- **Backlog Templates** (`Context/Backlog/*.md`) - Evaluation frameworks update, but your ideas, bugs, and custom sections are preserved
+
+**Bottom Line**: Your formatter configs, project context, features, and backlog content are completely yours. ContextKit only updates core frameworks and logic while preserving all your customizations.
 
 ## 📋 Commands overview
 
@@ -224,10 +241,10 @@ ContextKit is built exclusively for Claude Code because it's currently the most 
 
 - **Commands**: Custom `/ctxk:*` commands for structured workflows
 - **Hooks**: Automatic code formatting and session management  
-- **Subagents**: Specialized quality agents that work autonomously
+- **Agents**: Specialized quality agents that work autonomously
 - **Mature ecosystem**: Proven, stable platform for serious development work
 
-Rather than abstracting across multiple tools, ContextKit leverages Claude Code's full feature set to deliver maximum productivity and reliability. But ContextKit could easily be forked and adjusted to the needs of other systems, given they also support commands, hooks, and subagents.
+Rather than abstracting across multiple tools, ContextKit leverages Claude Code's full feature set to deliver maximum productivity and reliability. But ContextKit could easily be forked and adjusted to the needs of other systems, given they also support commands, hooks, and agents.
 
 ## 🌍 Universal but opinionated
 

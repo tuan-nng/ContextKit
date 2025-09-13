@@ -156,7 +156,7 @@ New projects in this workspace automatically inherit:
 
 **Workspace Automation**:
 - Common formatting rules applied to all projects
-- Shared hooks and subagents for quality assurance
+- Shared hooks and agents for quality assurance
 - Consistent constitutional compliance across projects
 
 ## Hierarchical Inheritance

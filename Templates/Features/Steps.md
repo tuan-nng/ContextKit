@@ -179,15 +179,15 @@
   - Test: Network failures, invalid input, edge cases
 
 ### Quality Gates
-- [ ] S022 [P] Accessibility validation with check-accessibility subagent
+- [ ] S022 [P] Accessibility validation with check-accessibility agent
   - Dependencies: S017-S018 (UI implementation)
   - Verify: VoiceOver labels, dynamic type, keyboard navigation
 
-- [ ] S023 [P] Localization validation with check-localization subagent
+- [ ] S023 [P] Localization validation with check-localization agent
   - Dependencies: S017-S018 (UI with strings), S002 (TranslateKit)
   - Verify: String catalog updated, context provided, pluralization
 
-- [ ] S024 [P] Error handling review with check-error-handling subagent
+- [ ] S024 [P] Error handling review with check-error-handling agent
   - Dependencies: S013-S014 (services), S020-S021 (error tests)
   - Verify: Typed throws, user-friendly messages, proper propagation
 
@@ -212,15 +212,15 @@
   - Localization: Translate metadata for supported languages
 
 ### Final Validation  
-- [ ] S028 [P] Code quality review with check-modern-code subagent
+- [ ] S028 [P] Code quality review with check-modern-code agent
   - Dependencies: All implementation tasks complete
   - Modernize: Replace legacy patterns, update to latest APIs
 
-- [ ] S029 [P] Technical debt cleanup with check-code-debt subagent  
+- [ ] S029 [P] Technical debt cleanup with check-code-debt agent  
   - Dependencies: All implementation tasks complete
   - Cleanup: Remove AI comments, consolidate duplicated code
 
-- [ ] S030 Build validation with build-project subagent
+- [ ] S030 Build validation with build-project agent
   - Dependencies: S028-S029 (code cleanup)
   - Verify: Clean builds, no warnings, tests pass
 
@@ -327,7 +327,7 @@
 ║ 3. **Include iOS Specifics**: Privacy, accessibility, localization, App Store compliance
 ║ 4. **Validate Dependencies**: Ensure logical order and no circular dependencies
 ║ 5. **Constitutional Integration**: ErrorKit, 3-space style, package architecture
-║ 6. **Quality Gates**: Build validation, testing, subagent checks
+║ 6. **Quality Gates**: Build validation, testing, agent checks
 ║
 ║ ### Common iOS Task Patterns
 ║ ```

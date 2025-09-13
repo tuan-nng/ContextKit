@@ -20,10 +20,10 @@ Commit development changes with proper formatting, validation, and constitutiona
    → Verify current feature and active task from development session
    → If no active development context: ERROR "Start development session first with /Implement/start-working"
 2. Run pre-commit constitutional validation
-   → Execute accessibility subagent for UI changes (VoiceOver labels, color contrast)
-   → Execute privacy subagent for data handling changes (encryption, user consent)
-   → Execute localization subagent for user-facing changes (string externalization)
-   → Execute maintainability subagent for code changes (architecture, error handling)
+   → Execute accessibility agent for UI changes (VoiceOver labels, color contrast)
+   → Execute privacy agent for data handling changes (encryption, user consent)
+   → Execute localization agent for user-facing changes (string externalization)
+   → Execute maintainability agent for code changes (architecture, error handling)
    → If any validation fails: ERROR with specific guidance for fixes
 3. Apply code formatting and linting
    → Run SwiftFormat for self-explicit syntax and structure

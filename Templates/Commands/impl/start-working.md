@@ -41,7 +41,7 @@ Begin development workflow with context-aware setup and task execution guidance
    → Universal: Apply workspace coding standards and architectural patterns
 6. Initialize quality assurance hooks
    → Enable PostToolUse formatting hooks for code consistency
-   → Setup constitutional validation subagents (accessibility, localization, etc.)
+   → Setup constitutional validation agents (accessibility, localization, etc.)
    → Configure continuous integration checks if available
 7. Begin task execution with guidance
    → Show task description, file paths, and acceptance criteria
