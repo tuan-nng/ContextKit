@@ -12,13 +12,17 @@
 ## Table of Contents
 
 - [🤔 Why ContextKit exists](#-why-contextkit-exists)
-- [⚡ Get started](#-get-started) 
+- [⚡ Get started](#-get-started)
 - [🏛️ Core philosophy](#-core-philosophy)
+- [⚙️ Optimized Configuration](#-optimized-configuration)
 - [🏗️ How it works](#-how-it-works)
+- [🤖 Built-in Quality Agents](#-built-in-quality-agents)
+- [🔧 Project-Specific Customization](#-project-specific-customization)
 - [📋 Commands overview](#-commands-overview)
 - [🎯 Why Claude Code](#-why-claude-code)
 - [🌍 Universal but opinionated](#-universal-but-opinionated)
 - [🧪 Built from real experience](#-built-from-real-experience)
+- [Contributing](#contributing)
 
 ## 🤔 Why ContextKit exists
 
@@ -87,6 +91,24 @@ ContextKit is built on non-negotiable development principles embedded throughout
 - **Systematic approach**: Structured phases with explicit validation prevent common AI mistakes
 - **Context preservation**: Smart agents keep sessions focused without verbose build output
 
+## ⚙️ Optimized Configuration
+
+ContextKit configures Claude Code with optimized settings for systematic development:
+
+- **Sonnet Model Default**: Sufficient quality with proper guidance while reducing 5h-limit risk during complex planning phases
+- **Custom Statusline**: Real-time monitoring so you have full transparency about the limits:
+  ```
+  5h-Usage: 73% (1.4h left) | Chat: ▓▓▓▓▓▓░░░░ 64% (128k/200k)
+  ```
+  Progress bar colors: Light Gray (<50%), Yellow (50-80%), Red (>80%) for visual context awareness
+
+> [!TIP]
+> **Disable Auto-Compact for Better Control**
+>
+> Type `/config` in Claude and set "Auto-compact" to **false**. Auto-compact triggers at ~85% context usage, often interrupting you when nearly finished with a task and plenty of relevant context available.
+>
+> **Better workflow**: Start fresh chats when needed and resume with `/ctxk:impl:start-working` – ContextKit's structured approach makes this seamless. Manual `/compact` loses unpredictable amounts of context, while fresh starts preserve your systematic progress.
+
 ## 🏗️ How it works
 
 ContextKit implements a proven 4-phase methodology that prevents the chaos of unstructured AI development:
@@ -129,6 +151,7 @@ ContextKit includes specialized sub-agents that automatically ensure code qualit
 - **`check-modern-code`** - Replace outdated APIs (Date() → Date.now, TimeInterval → Duration, async/await patterns)
 - **`check-code-debt`** - Remove AI artifacts, consolidate patterns, extract reusable components
 - **`build-project`** - Execute builds and report results without filling context with verbose output
+- ... more to be added over time with updates!
 
 These agents activate automatically during development phases, ensuring consistent quality without manual oversight.
 
@@ -141,6 +164,17 @@ ContextKit commands and quality agents can be tailored to your project's needs t
 - **Team workflow adjustments**: Modify processes for your development practices
 
 Customizations are preserved during ContextKit updates, ensuring your project-specific improvements persist while core templates stay current.
+
+### 🔄 Seamless Updates
+
+ContextKit automatically checks for newer versions when you start a new session and displays update notifications if available – but **never interrupts your workflow**. When you're ready to update:
+
+- Simply type `/ctxk:proj:migrate` and ContextKit handles everything
+- Your project customizations are preserved automatically
+- Core templates update to the latest improvements
+- New commands and subagents are automatically added to your project
+- Review all changes in Git before committing – full transparency
+- You stay in full control of when updates happen
 
 ## 📋 Commands overview
 
@@ -161,26 +195,26 @@ Customizations are preserved during ContextKit updates, ensuring your project-sp
 <summary><strong>📋 Complete Command Reference</strong></summary>
 
 ### Project Management
-- `/ctxk:proj:init` - **Setup Project Context** - Auto-detect project type and configure ContextKit
-- `/ctxk:proj:init-workspace` - **Configure Team Standards** - Workspace-level settings for different clients/companies
-- `/ctxk:proj:migrate` - **Upgrade to Latest** - Update existing projects to newer ContextKit versions
+- `/ctxk:proj:init` - Setup project context by auto-detecting type and configuring ContextKit
+- `/ctxk:proj:init-workspace` - Configure team standards for different clients/companies
+- `/ctxk:proj:migrate` - Upgrade to latest ContextKit versions
 
 ### Systematic Feature Planning
-- `/ctxk:plan:1-spec` - **Define Requirements** - Create business specifications with user stories
-- `/ctxk:plan:2-tech` - **Design Architecture** - Technical planning with constitutional compliance
-- `/ctxk:plan:3-steps` - **Create Task List** - Break down into numbered, trackable implementation tasks
+- `/ctxk:plan:1-spec` - Define requirements with business specifications and user stories
+- `/ctxk:plan:2-tech` - Design architecture with technical planning and constitutional compliance
+- `/ctxk:plan:3-steps` - Create numbered, trackable implementation tasks
 
 ### Quality-Driven Implementation
-- `/ctxk:impl:start-working` - **Begin Development** - Context-aware development guidance
-- `/ctxk:impl:commit-changes` - **Commit Changes** - Smart formatting and commit message generation
-- `/ctxk:impl:release-app` - **Release to AppStore** - iOS/macOS release workflow with automation
-- `/ctxk:impl:release-package` - **Publish Package** - Swift Package release and publishing
+- `/ctxk:impl:start-working` - Begin development with context-aware guidance
+- `/ctxk:impl:commit-changes` - Commit changes with smart formatting and message generation
+- `/ctxk:impl:release-app` - Release to AppStore with iOS/macOS workflow automation
+- `/ctxk:impl:release-package` - Publish Swift packages with release workflow
 
 ### Backlog & Issue Management
-- `/ctxk:bckl:add-idea` - **Add Feature Idea** - Structured idea capture with evaluation framework
-- `/ctxk:bckl:add-bug` - **Report Bug** - Impact assessment and reproduction steps
-- `/ctxk:bckl:prioritize-ideas` - **Prioritize Ideas** - Strategic backlog organization
-- `/ctxk:bckl:prioritize-bugs` - **Triage Bugs** - Severity-based bug prioritization
+- `/ctxk:bckl:add-idea` - Add feature ideas with structured evaluation framework
+- `/ctxk:bckl:add-bug` - Report bugs with impact assessment and reproduction steps
+- `/ctxk:bckl:prioritize-ideas` - Prioritize ideas through strategic organization
+- `/ctxk:bckl:prioritize-bugs` - Triage bugs with severity-based prioritization
 
 </details>
 
@@ -234,9 +268,23 @@ ContextKit transforms AI from a powerful but unpredictable tool into a systemati
 
 The result: **You build features faster, with fewer bugs, that follow your architecture, and work correctly the first time.**
 
+## Contributing
+
+### Template Versioning
+
+For behavioral changes (not typos), update the line 2 header in each modified file:
+- Increment **Template Version** number
+- Update **Updated** date to current date
+
+For releases, update **ContextKit** version in all template files.
+
+### Custom Development Standards
+
+ContextKit is opinionated about coding style (3-space indentation, explicit `self.`) and framework choices (FlineDevKit ecosystem with ErrorKit, HandySwift, etc.). If the developer customization sections aren't enough for your needs, fork this repository, modify the guidelines and templates, and update the migrate command in `Templates/Commands/proj/migrate.md` to point to your custom repo URL.
+
 ## Showcase
 
-I created this framework for my own Indie app work (rate my apps to show your appreciation):
+I created this framework for my own Indie app work (rate my apps to support my work):
 
 <table>
   <tr>
@@ -350,17 +398,3 @@ I created this framework for my own Indie app work (rate my apps to show your ap
     <td>Vision</td>
   </tr>
 </table>
-
-## Contributing
-
-### Template Versioning
-
-For behavioral changes (not typos), update the line 2 header in each modified file:
-- Increment **Template Version** number
-- Update **Updated** date to current date
-
-For releases, update **ContextKit** version in all template files.
-
-### Custom Development Standards
-
-ContextKit is opinionated about coding style (3-space indentation, explicit `self.`) and framework choices (FlineDevKit ecosystem with ErrorKit, HandySwift, etc.). If the developer customization sections aren't enough for your needs, fork this repository, modify the guidelines and templates, and update the migrate command in `Templates/Commands/proj/migrate.md` to point to your custom repo URL.

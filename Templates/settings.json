@@ -3,11 +3,13 @@
   "permissions": {
     "allow": [
       "Bash",
-      "Edit", 
+      "BashOutput",
+      "Edit",
       "ExitPlanMode",
       "Glob",
       "Grep",
-      "LS", 
+      "KillShell",
+      "LS",
       "MultiEdit",
       "Read",
       "Task",
@@ -18,6 +20,7 @@
     ],
     "deny": [
       "Bash(base64 -d | sh:*)",
+      "Bash(brew install:*)",
       "Bash(cat /etc/passwd:*)",
       "Bash(cat ~/.ssh:*)",
       "Bash(chmod -R 777:*)",
@@ -28,6 +31,7 @@
       "Bash(defaults write:*)",
       "Bash(find :* -name ':*.key'::*)",
       "Bash(format:*)",
+      "Bash(gem install:*)",
       "Bash(git force:*)",
       "Bash(git push:*)",
       "Bash(git rebase:*)",
@@ -42,10 +46,12 @@
       "Bash(mkfs:*)",
       "Bash(nc -l:*)",
       "Bash(netcat -l:*)",
+      "Bash(npm i -g:*)",
       "Bash(npm install -g:*)",
       "Bash(openssl:*)",
       "Bash(osascript:*)",
       "Bash(pfctl:*)",
+      "Bash(pip install:*)",
       "Bash(pip install --trusted-host:*)",
       "Bash(python -m http.server:*)",
       "Bash(python3 -m http.server:*)",
@@ -69,8 +75,10 @@
       "Bash(sudo service:*)",
       "Bash(sudo systemctl:*)",
       "Bash(wget :* -O - | sh::*)",
+      "Bash(yarn global add:*)",
       "Read(*.mobileprovision)",
       "Read(*.p12)",
+      "Read(*.pem)",
       "Read(.env*)",
       "Read(.netrc)",
       "Read(AuthKey_*.p8)",
@@ -78,13 +86,15 @@
       "Read(~/.aws/*)",
       "Read(~/.docker/config.json)",
       "Read(~/.ssh/*)",
-      "Read(~/Library/Keychains/*)"
+      "Read(~/Library/Keychains/*)",
+      "Write(~/.aws/*)",
+      "Write(~/.ssh/*)"
     ]
   },
   "model": "sonnet",
   "statusLine": {
     "type": "command",
-    "command": "~/.ContextKit/Templates/Scripts/custom-statusline.sh",
+    "command": "~/.claude/custom-statusline.sh",
     "padding": 5
   },
   "hooks": {
