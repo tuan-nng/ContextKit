@@ -1,27 +1,30 @@
-# Ideas Inbox: ${PROJECT_NAME}
+# Ideas Inbox: [Project Name]
 
-**Project**: ${PROJECT_NAME}  
-**Created**: ${SETUP_DATE}  
+**Project**: [Detected Project Name]  
+**Created**: [Current Date]  
 **Purpose**: New idea capture with evaluation framework  
 **Usage**: Used by `/Backlog/add-idea` command for initial idea intake
 
 ## Quick Capture Guidelines
 
-### For AI Processing
-When adding ideas to this inbox:
-1. **Capture immediately**: Don't evaluate during capture - just record the idea
-2. **Include context**: Why now? What problem does this solve? Who benefits?
-3. **Mark uncertainties**: Use [NEEDS RESEARCH: specific question] for unclear aspects
-4. **Constitutional check**: Does this align with accessibility-first, privacy, localizability principles?
-
-### Evaluation Framework
-Each idea should eventually include:
-- **User Value**: Clear benefit statement for target users
-- **Effort Estimate**: T-shirt sizing (XS, S, M, L, XL) 
-- **Constitutional Alignment**: How does this support core principles?
-- **Success Metrics**: How will we measure success?
-
----
+════════════════════════════════════════════════════════════════════════════════
+║ 🤖 EXECUTION FLOW - IDEA CAPTURE PROCESSING
+════════════════════════════════════════════════════════════════════════════════
+║
+║ ### For AI Processing
+║ When adding ideas to this inbox:
+║ 1. **Capture immediately**: Don't evaluate during capture - just record the idea
+║ 2. **Include context**: Why now? What problem does this solve? Who benefits?
+║ 3. **Mark uncertainties**: Use [NEEDS RESEARCH: specific question] for unclear aspects
+║ 4. **Constitutional check**: Does this align with accessibility-first, privacy, localizability principles?
+║
+║ ### Evaluation Framework
+║ Each idea should eventually include:
+║ - **User Value**: Clear benefit statement for target users
+║ - **Effort Estimate**: T-shirt sizing (XS, S, M, L, XL) 
+║ - **Constitutional Alignment**: How does this support core principles?
+║ - **Success Metrics**: How will we measure success?
+════════════════════════════════════════════════════════════════════════════════
 
 ## Ideas Awaiting Evaluation
 

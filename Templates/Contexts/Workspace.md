@@ -1,214 +1,174 @@
-# Workspace Context: ${WORKSPACE_NAME}
+# Workspace Context Template
+
+**Template Type**: Context Configuration  
+**Hierarchy Level**: Workspace (middle precedence)  
+**Usage**: Workspace-level Context.md generation via `/ContextKit/setup-workspace`  
+**Inheritance**: Global → Workspace (this file) → Project
+
+## Description
+Workspace-level Context.md template providing workspace-specific configuration, client/company requirements, technology standards, and team workflow overrides for multi-project environments.
+
+════════════════════════════════════════════════════════════════════════════════
+║ 🤖 EXECUTION FLOW - WORKSPACE CONTEXT GENERATION
+════════════════════════════════════════════════════════════════════════════════
+║
+║ ## Execution Flow (main)
+║ ```
+║ 1. Detect workspace context from current directory
+║    → Scan subdirectories for project indicators and types
+║    → Analyze technology stack patterns across projects
+║    → If no projects found: ASK user about workspace purpose
+║ 2. Identify workspace type and purpose
+║    → Indie development workspace (personal projects)
+║    → Client workspace (contractor/agency work)
+║    → Enterprise workspace (company projects)
+║    → If unclear: ASK user to specify workspace type
+║ 3. Analyze existing workspace configuration
+║    → Load current Context.md if present
+║    → Preserve custom workspace configurations
+║    → If conflicts detected: ASK user to resolve
+║ 4. Extract technology stack preferences
+║    → Identify common frameworks and tools across projects
+║    → Detect consistent architectural patterns
+║    → Document workspace-specific technology choices
+║ 5. Apply client/company requirements (if applicable)
+║    → Coding style requirements (indentation, naming)
+║    → Communication guidelines (formal vs casual)
+║    → Quality standards and specific requirements
+║    → Security and compliance constraints
+║ 6. Configure workspace overrides
+║    → Override global constitutional principles if needed
+║    → Set workspace-specific coding standards
+║    → Define team collaboration patterns
+║    → Document client-specific constraints
+║ 7. Generate practical workspace Context.md
+║    → Include technology stack preferences
+║    → Document coding and communication standards
+║    → List quality requirements and overrides
+║    → Provide inheritance guidance for projects
+║ 8. Validate workspace configuration completeness
+║    → All workspace standards documented
+║    → Client requirements properly integrated
+║    → No conflicting settings with global principles
+║ 9. **FINAL STEP: Remove these system instructions**
+║    → Delete the entire boxed section from generated Context.md
+║    → Leave only the clean workspace context for team use
+║ 10. Return: SUCCESS (workspace Context.md ready for project inheritance)
+║ ```
+║
+║ ## Dynamic Content Generation
+║ The AI will detect and populate all workspace information dynamically:
+║ - **Workspace Detection**: Type, purpose, contained projects
+║ - **Technology Analysis**: Common frameworks, tools, architectural patterns
+║ - **Requirements Extraction**: Client/company constraints and preferences
+║ - **Standards Configuration**: Coding style, communication, quality overrides
+║ - **Inheritance Setup**: How projects inherit workspace settings
+║
+════════════════════════════════════════════════════════════════════════════════
+
+# Workspace Context: [Detected Workspace Name]
 
 ## ContextKit Configuration
-- **Version**: ${CONTEXTKIT_VERSION}
-- **Setup Date**: ${SETUP_DATE}
-- **Workspace Type**: ${WORKSPACE_TYPE} (indie, client, enterprise)
-- **Created By**: ${USER_NAME}
+- **Version**: [Current ContextKit Version]
+- **Setup Date**: [Current Date]
+- **Workspace Type**: [Detected: indie, client, enterprise]
+- **Contained Projects**: [Detected project count and types]
 
-## Execution Flow (workspace-setup)
-```
-1. Detect workspace type and projects
-   → Scan contained directories for project indicators
-   → Identify technology stacks across projects
-   → If no projects found: ASK user to specify workspace purpose
-2. Analyze existing workspace Context.md (if present)
-   → Load current settings and overrides
-   → Preserve custom configurations
-   → If conflicts detected: ASK user to resolve
-3. Apply hierarchical inheritance
-   → Load global constitutional principles
-   → Apply workspace-specific overrides
-   → If principle conflicts: ERROR "Must resolve constitutional conflicts"
-4. Configure technology stack specializations
-   → Swift/iOS: Apply iOS development patterns
-   → Other stacks: Adapt templates and guidelines
-   → Mixed stacks: Configure multi-language support
-5. Setup team configuration
-   → Configure communication guidelines
-   → Set commit message standards
-   → Apply client-specific requirements
-6. Generate workspace overrides
-   → Create workspace-specific template customizations
-   → Configure quality gates and validation rules
-   → If critical overrides missing: WARN with suggestions
-7. Install workspace commands and hooks
-   → Copy customized templates to projects
-   → Configure workspace-wide automation
-   → If installation fails: ERROR with specific guidance
-8. Return: SUCCESS (workspace configured with hierarchical inheritance)
-```
+## Workspace Identity
 
-## Workspace Architecture
-**Technology Stack**:
-- **Primary Languages**: ${PRIMARY_LANGUAGES} (Swift, TypeScript, Python, etc.)
-- **Frameworks**: ${WORKSPACE_FRAMEWORKS} (SwiftUI, React, Django, etc.) 
-- **Platforms**: ${TARGET_PLATFORMS} (iOS, macOS, web, Linux, etc.)
-- **Development Tools**: ${DEVELOPMENT_TOOLS} (Xcode, VS Code, etc.)
+**Purpose**: [AI detects workspace purpose - indie development, client work, company projects]
 
-**Project Distribution**:
-${PROJECT_LIST} (auto-detected from subdirectories)
+**Client/Company**: [AI detects client name or marks as N/A for indie]
 
-## Constitutional Principles (Workspace Overrides)
-```markdown
-### Global Inheritance
-${GLOBAL_CONSTITUTIONAL_PRINCIPLES} (inherited from ~/.ContextKit/ContextKit/Constitution.md)
+**Team Size**: [AI detects team configuration - solo, small team, large team]
 
-### Workspace Customizations
-${WORKSPACE_PRINCIPLE_OVERRIDES}
+## Technology Standards
 
-### Client Requirements Integration
-${CLIENT_REQUIREMENT_OVERRIDES}
-```
+**Preferred Stack**:
+- **Languages**: [AI detects common languages across projects]
+- **Frameworks**: [AI detects preferred frameworks]
+- **Tools**: [AI detects development tools in use]
+- **Platforms**: [AI detects target platforms]
 
-## Coding Standards (Workspace Level)
-**Indentation**: ${WORKSPACE_INDENTATION} (inherits from global: 3 spaces)
-**Naming Conventions**: ${WORKSPACE_NAMING} (inherits from global Swift patterns)
-**Code Formatting**: ${WORKSPACE_FORMATTING}
-**Error Handling**: ${WORKSPACE_ERROR_PATTERNS} (inherits from global ErrorKit patterns)
+**Architectural Guidelines**:
+[AI documents consistent architectural patterns across projects]
 
-## Communication Guidelines
-**Voice & Tone**: ${WORKSPACE_COMMUNICATION_STYLE}
-- **Client Communication**: ${CLIENT_COMMUNICATION_RULES}
-- **Team Communication**: ${TEAM_COMMUNICATION_RULES}
-- **AI Attribution**: ${AI_ATTRIBUTION_POLICY}
+**Technology Constraints**:
+[AI detects any client/company technology restrictions]
 
-**Commit Messages**: ${WORKSPACE_COMMIT_FORMAT}
-**Documentation Style**: ${WORKSPACE_DOCS_STYLE}
+## Coding Guidelines
 
-## Development Workflow
-**Planning Methodology**: ${PLANNING_APPROACH} (spec-kit based)
-**Quality Assurance**: ${QA_REQUIREMENTS}
-**Release Processes**: ${RELEASE_WORKFLOW}
-**Testing Standards**: ${TESTING_REQUIREMENTS}
+**Style Overrides** (from global defaults):
+- **Indentation**: [AI detects workspace preference or inherits global 3-space]
+- **Naming**: [AI detects workspace naming conventions]
+- **Formatting**: [AI detects workspace-specific formatter configs]
 
-## Team Configuration
-**Workspace Commands**: Customized for workspace needs
-**Shared Hooks**: Applied across all workspace projects
-**Quality Gates**: Workspace-specific validation rules
+**Quality Standards**:
+[AI documents workspace-specific quality requirements and any relaxed standards]
 
-## Template Customizations
-### Command Templates
-- **Planning Commands**: `/Plan/*` adapted for ${WORKSPACE_TYPE} workflows
-- **Implementation Commands**: `/Implement/*` with workspace-specific processes
-- **Backlog Commands**: `/Backlog/*` configured for team collaboration
+**Code Review Process**:
+[AI detects team code review patterns or marks as TBD]
 
-### Subagent Specializations
-- **Accessibility**: ${ACCESSIBILITY_REQUIREMENTS} compliance
-- **Localization**: ${LOCALIZATION_REQUIREMENTS} standards
-- **Code Quality**: ${CODE_QUALITY_STANDARDS} enforcement
-- **Security**: ${SECURITY_REQUIREMENTS} validation
+## Communication Standards
 
-### Constitutional Gates (Workspace Level)
-#### Technology Stack Gates
-- [ ] Technology choices align with workspace standards?
-- [ ] Cross-project consistency maintained?
-- [ ] Development tool compatibility ensured?
+**Voice & Tone**: [AI detects required communication style - professional, casual, formal]
 
-#### Client Requirements Gates  
-- [ ] Client coding standards applied?
-- [ ] Communication protocols followed?
-- [ ] Deliverable requirements met?
-- [ ] Privacy and security requirements addressed?
+**Client Communication**: [AI detects client interaction requirements]
 
-#### Quality Assurance Gates
-- [ ] Workspace testing standards applied?
-- [ ] Documentation requirements satisfied?
-- [ ] Review processes configured?
-- [ ] Release procedures established?
+**Team Collaboration**: [AI detects internal team communication patterns]
 
-## Variable Substitution
-```bash
-# Workspace-specific variables available to all projects
-WORKSPACE_NAME="${WORKSPACE_NAME}"
-WORKSPACE_TYPE="${WORKSPACE_TYPE}"
-CLIENT_NAME="${CLIENT_NAME}"
-COMMUNICATION_STYLE="${COMMUNICATION_STYLE}"
-QUALITY_STANDARDS="${QUALITY_STANDARDS}"
-DEVELOPMENT_STACK="${DEVELOPMENT_STACK}"
-```
+**AI Attribution**: [AI documents workspace policy on AI-assisted development]
 
-## Hierarchical Inheritance Pattern
-```
-Global Level (~/.ContextKit/)
-    ↓ (inherits constitutional principles, guidelines, templates)
-Workspace Level (${WORKSPACE_PATH}/Context.md)
-    ↓ (applies workspace overrides and client requirements)
-Project Level (${PROJECT_PATH}/Context.md)
-    ↓ (applies project-specific customizations)
-```
+**Commit Messages**: [AI detects workspace commit format preferences]
 
-## Project Integration
-**Auto-Setup**: New projects in this workspace automatically inherit:
-- Workspace coding standards and constitutional overrides
-- Communication guidelines and commit message formats  
+## Constitutional Principles
+
+**Global Inheritance**: [AI lists inherited constitutional principles]
+
+**Workspace Overrides**: [AI documents any workspace-specific principle modifications]
+
+**Client Requirements**: [AI documents client-specific requirement integrations]
+
+## Project Inheritance
+
+New projects in this workspace automatically inherit:
+- Technology stack preferences and constraints
+- Coding guidelines and style overrides  
+- Communication standards and client requirements
 - Quality gates and validation rules
-- Team-specific commands, hooks, and subagents
+- Workspace-specific constitutional principle overrides
 
-**Inheritance Resolution**: Project > Workspace > Global precedence
-**Conflict Handling**: Explicit resolution required for constitutional conflicts
+## ContextKit Workflow
 
-## Workspace Validation Gates
-*Checked before workspace setup completion*
+**Available Commands**: All `/ctxk:*` commands work within workspace projects
 
-### Completeness Gates
-- [ ] All technology stacks identified and configured?
-- [ ] Team communication guidelines established?
-- [ ] Quality assurance requirements defined?
-- [ ] Constitutional principle overrides documented?
+**Workspace Management**:
+- `/ctxk:proj:init-workspce` - Configure this workspace
+- `/ctxk:proj:verify` - Validate workspace configuration
+- `/ctxk:proj:migrate` - Update workspace to newer ContextKit version
 
-### Consistency Gates
-- [ ] Cross-project standards aligned?
-- [ ] Tool configurations compatible?
-- [ ] Development workflows consistent?
-- [ ] Documentation approaches unified?
+## Team Collaboration
 
-### Client Requirements Gates (if applicable)
-- [ ] Client coding standards integrated?
-- [ ] Communication protocols established?
-- [ ] Security requirements addressed?
-- [ ] Deliverable standards defined?
+**Shared Standards**:
+- Consistent coding style across all workspace projects
+- Unified communication guidelines for client/company interaction
+- Shared quality gates and validation rules
 
-## Update and Migration
-**Template Updates**: Workspace templates updated via `/ContextKit/migrate`
-**Customization Preservation**: Local workspace modifications preserved
-**Version Tracking**: Workspace tracks ContextKit version for migration
-**Rollback Support**: Previous configurations backed up during updates
+**Workspace Automation**:
+- Common formatting rules applied to all projects
+- Shared hooks and subagents for quality assurance
+- Consistent constitutional compliance across projects
 
-## For AI Generation
-When creating workspace configuration:
-1. **Detect workspace type**: Analyze project types and purposes
-2. **Identify technology patterns**: Scan for consistent technology usage
-3. **Mark ambiguities**: Use [NEEDS CLARIFICATION: specific workspace question]
-4. **Apply inheritance**: Start with global principles, apply workspace overrides
-5. **Validate consistency**: Ensure cross-project alignment
-6. **Document conflicts**: Mark any constitutional principle conflicts for resolution
+## Hierarchical Inheritance
 
-### Common Underspecified Areas
-- Client communication requirements: [NEEDS CLARIFICATION: formal or casual tone?]
-- Code review processes: [NEEDS CLARIFICATION: peer review required or AI-assisted only?]
-- Release approval workflows: [NEEDS CLARIFICATION: who approves releases?]
-- Quality thresholds: [NEEDS CLARIFICATION: test coverage requirements?]
-- Documentation standards: [NEEDS CLARIFICATION: API docs, user docs, or both?]
+This workspace inherits from and overrides:
+1. **Global Level** (`~/.ContextKit/`): Universal ContextKit defaults
+2. **Workspace Level** (this file): Client/company-specific overrides
+3. **Project Level**: Individual project customizations
 
-## Template Variables Reference
-```bash
-# Available for substitution in workspace templates
-${WORKSPACE_NAME}           # Directory name or specified workspace name
-${WORKSPACE_TYPE}           # indie/client/enterprise
-${WORKSPACE_PATH}           # Full path to workspace directory  
-${CLIENT_NAME}              # Client name (if applicable)
-${PRIMARY_LANGUAGES}        # Detected primary programming languages
-${WORKSPACE_FRAMEWORKS}     # Detected frameworks across projects
-${TARGET_PLATFORMS}         # Detected target platforms
-${DEVELOPMENT_TOOLS}        # Detected development tools
-${PROJECT_LIST}             # Auto-generated list of contained projects
-${SETUP_DATE}               # Workspace setup timestamp
-${USER_NAME}                # Developer name from git config
-${CONTEXTKIT_VERSION}       # ContextKit version used for setup
-```
+**Override Precedence**: Project > Workspace > Global
+
+**Conflict Resolution**: Projects can override workspace settings with documented justification
 
 ---
-*This workspace context provides hierarchical inheritance for all contained projects. Project-specific Context.md files will inherit and can override these workspace settings.*
-
-*Managed by ContextKit. Workspace customizations preserved during updates.*
+*This file is managed by ContextKit. Workspace customizations preserved during updates.*

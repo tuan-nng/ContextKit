@@ -1,85 +1,92 @@
-# Feature Steps: ${FEATURE_NAME}
+# Implementation Steps: [Feature from Tech.md]
 
 **Phase**: 2 (Implementation Plan)  
 **Input**: Technical plan from Tech.md  
 **Prerequisites**: Spec.md (business case), Tech.md (architecture)  
-**Purpose**: Break down feature into executable tasks with parallel markers and dependency tracking
+**Purpose**: Implementation task breakdown template with S001-S999 numbering and parallel markers. Used by `/ctxk:plan:3-steps` command.
 
-## Execution Flow (main)
+════════════════════════════════════════════════════════════════════════════════
+║ 🤖 EXECUTION FLOW - IMPLEMENTATION STEPS GENERATION
+════════════════════════════════════════════════════════════════════════════════
+║
+║ ## Execution Flow (main)
 
-```
-1. Load technical plan from Tech.md
-   → If missing: ERROR "Technical plan required - run /Plan/define-tech first"
-   → Extract: architecture decisions, file locations, dependencies
-2. Analyze plan complexity and scope
-   → Count: new files, modified files, new APIs, tests needed
-   → If scope > 20 tasks: WARN "Consider breaking into smaller features"
-3. Apply task generation rules:
-   → One task per file creation/modification
-   → One task per API endpoint
-   → One task per data model
-   → One task per significant UI component
-4. Generate tasks with S### enumeration (S001, S002...)
-   → Setup tasks: Project structure, dependencies, configuration
-   → Model tasks: Data layer implementation (TDD - tests first)
-   → Service tasks: Business logic and API integration
-   → UI tasks: SwiftUI views, navigation, user interaction
-   → Integration tasks: End-to-end flows and validation
-   → Polish tasks: Accessibility, localization, performance
-5. Apply parallel execution markers [P]:
-   → Different files = [P] parallel safe
-   → Same file = sequential only
-   → Independent components = [P] parallel safe
-   → Shared resources = sequential only
-6. Validate dependency chains:
-   → Models before Services before UI
-   → Tests can run parallel with implementation
-   → Configuration before usage
-   → Critical path identified and documented
-7. Run iOS-specific task validation:
-   → Privacy manifest updates included?
-   → Accessibility implementation planned?
-   → Localization tasks identified?
-   → App Store compliance verified?
-8. Generate completion verification checklist
-9. Return: SUCCESS (implementation plan ready for execution)
-```
+║
+║ ```
+║ 1. Load technical plan from Tech.md
+║   → If missing: ERROR "Technical plan required - run /Plan/define-tech first"
+║   → Extract: architecture decisions, file locations, dependencies
+║ 2. Analyze plan complexity and scope
+║   → Count: new files, modified files, new APIs, tests needed
+║   → If scope > 20 tasks: WARN "Consider breaking into smaller features"
+║ 3. Apply task generation rules:
+║   → One task per file creation/modification
+║   → One task per API endpoint
+║   → One task per data model
+║   → One task per significant UI component
+║ 4. Generate tasks with S### enumeration (S001, S002...)
+║   → Setup tasks: Project structure, dependencies, configuration
+║   → Model tasks: Data layer implementation (TDD - tests first)
+║   → Service tasks: Business logic and API integration
+║   → UI tasks: SwiftUI views, navigation, user interaction
+║   → Integration tasks: End-to-end flows and validation
+║   → Polish tasks: Accessibility, localization, performance
+║ 5. Apply parallel execution markers [P]:
+║   → Different files = [P] parallel safe
+║   → Same file = sequential only
+║   → Independent components = [P] parallel safe
+║   → Shared resources = sequential only
+║ 6. Validate dependency chains:
+║   → Models before Services before UI
+║   → Tests can run parallel with implementation
+║   → Configuration before usage
+║   → Critical path identified and documented
+║ 7. Run iOS-specific task validation:
+║   → Privacy manifest updates included?
+║   → Accessibility implementation planned?
+║   → Localization tasks identified?
+║   → App Store compliance verified?
+║ 8. Generate completion verification checklist
+║ 9. Return: SUCCESS (implementation plan ready for execution)
+║ ```
 
-## Task Generation Rules
-
-### Rule 1: One Task Per File/Entity
-- **File Creation**: Each new Swift file = separate task
-- **File Modification**: Significant changes to existing file = separate task  
-- **API Endpoints**: Each endpoint implementation = separate task
-- **Data Models**: Each model class/struct = separate task
-- **UI Components**: Each significant view = separate task
-
-### Rule 2: Parallel Execution Safety
-- **[P] Parallel Safe**: Different files, independent components, no shared state
-- **Sequential Required**: Same file, shared resources, dependent functionality
-- **Test Parallelism**: Tests can run [P] with their implementation counterparts
-
-### Rule 3: iOS-Specific Task Types
-- **Privacy Tasks**: Manifest updates, permission requests, data handling
-- **Accessibility Tasks**: VoiceOver labels, dynamic type, keyboard navigation  
-- **Localization Tasks**: String extraction, TranslateKit integration
-- **Performance Tasks**: Memory optimization, render performance, battery usage
-- **App Store Tasks**: Guidelines compliance, metadata updates, submission prep
-
-### Rule 4: Dependency Chain Validation
-```
-Setup Tasks (S001-S010)
-    ↓
-Model Layer (S011-S020) [P] within layer
-    ↓  
-Service Layer (S021-S030) [P] within layer
-    ↓
-UI Layer (S031-S040) [P] within layer
-    ↓
-Integration & Testing (S041-S050) [P] within phase
-    ↓
-Polish & Release (S051-S060) [P] within phase
-```
+║
+║ ## Task Generation Rules
+║
+║ ### Rule 1: One Task Per File/Entity
+║ - **File Creation**: Each new Swift file = separate task
+║ - **File Modification**: Significant changes to existing file = separate task
+║ - **API Endpoints**: Each endpoint implementation = separate task
+║ - **Data Models**: Each model class/struct = separate task
+║ - **UI Components**: Each significant view = separate task
+║
+║ ### Rule 2: Parallel Execution Safety
+║ - **[P] Parallel Safe**: Different files, independent components, no shared state
+║ - **Sequential Required**: Same file, shared resources, dependent functionality
+║ - **Test Parallelism**: Tests can run [P] with their implementation counterparts
+║
+║ ### Rule 3: iOS-Specific Task Types
+║ - **Privacy Tasks**: Manifest updates, permission requests, data handling
+║ - **Accessibility Tasks**: VoiceOver labels, dynamic type, keyboard navigation
+║ - **Localization Tasks**: String extraction, TranslateKit integration
+║ - **Performance Tasks**: Memory optimization, render performance, battery usage
+║ - **App Store Tasks**: Guidelines compliance, metadata updates, submission prep
+║
+║ ### Rule 4: Dependency Chain Validation
+║ ```
+║ Setup Tasks (S001-S010)
+║    ↓
+║ Model Layer (S011-S020) [P] within layer
+║    ↓
+║ Service Layer (S021-S030) [P] within layer
+║    ↓
+║ UI Layer (S031-S040) [P] within layer
+║    ↓
+║ Integration & Testing (S041-S050) [P] within phase
+║    ↓
+║ Polish & Release (S051-S060) [P] within phase
+║ ```
+════════════════════════════════════════════════════════════════════════════════
 
 ## Phase 3.1: Setup & Configuration
 *Foundation tasks that must complete before development*
@@ -306,35 +313,37 @@ Polish & Release (S051-S060) [P] within phase
 - "Code quality issues" → Implementation doesn't follow constitutional style
 - "Localization missing" → TranslateKit integration not properly planned
 
----
-
-## For AI Generation
-
-When creating implementation steps from a technical plan:
-
-1. **Apply Task Generation Rules**: Follow one-task-per-file/entity rule strictly
-2. **Mark Parallel Safety**: Use [P] only for truly independent tasks
-3. **Include iOS Specifics**: Privacy, accessibility, localization, App Store compliance
-4. **Validate Dependencies**: Ensure logical order and no circular dependencies  
-5. **Constitutional Integration**: ErrorKit, 3-space style, package architecture
-6. **Quality Gates**: Build validation, testing, subagent checks
-
-### Common iOS Task Patterns
-```
-Setup → Models (TDD) → Services → UI → Integration → Polish → Release
-  ↓         ↓           ↓         ↓         ↓           ↓         ↓
-S001    S004-S009   S011-S014  S015-S019  S020-S024   S025-S029  S030
-```
-
-### Parallel Execution Examples
-- **Models**: Different model files can implement [P] in parallel  
-- **Services**: Independent services can implement [P] in parallel
-- **UI Views**: Non-interacting views can implement [P] in parallel
-- **Tests**: Tests can run [P] with their implementation counterparts
-- **Quality**: Accessibility, localization, error handling checks can run [P]
-
-**IMPORTANT**: This template creates the implementation roadmap. Each S### task should be specific enough to execute without ambiguity while maintaining proper dependency order and parallel execution opportunities.
-
----
+════════════════════════════════════════════════════════════════════════════════
+║ 🤖 EXECUTION FLOW - IMPLEMENTATION STEPS GENERATION
+════════════════════════════════════════════════════════════════════════════════
+║
+║ ## For AI Generation
+║
+║ When creating implementation steps from a technical plan:
+║
+║ 1. **Apply Task Generation Rules**: Follow one-task-per-file/entity rule strictly
+║ 2. **Mark Parallel Safety**: Use [P] only for truly independent tasks
+║ 3. **Include iOS Specifics**: Privacy, accessibility, localization, App Store compliance
+║ 4. **Validate Dependencies**: Ensure logical order and no circular dependencies
+║ 5. **Constitutional Integration**: ErrorKit, 3-space style, package architecture
+║ 6. **Quality Gates**: Build validation, testing, subagent checks
+║
+║ ### Common iOS Task Patterns
+║ ```
+║ Setup → Models (TDD) → Services → UI → Integration → Polish → Release
+║  ↓         ↓           ↓         ↓         ↓           ↓         ↓
+║ S001    S004-S009   S011-S014  S015-S019  S020-S024   S025-S029  S030
+║ ```
+║
+║ ### Parallel Execution Examples
+║ - **Models**: Different model files can implement [P] in parallel
+║ - **Services**: Independent services can implement [P] in parallel
+║ - **UI Views**: Non-interacting views can implement [P] in parallel
+║ - **Tests**: Tests can run [P] with their implementation counterparts
+║ - **Quality**: Accessibility, localization, error handling checks can run [P]
+║
+║ **IMPORTANT**: This template creates the implementation roadmap. Each S### task should be specific enough to execute without
+║ ambiguity while maintaining proper dependency order and parallel execution opportunities.
+════════════════════════════════════════════════════════════════════════════════
 
 *Template follows spec-kit execution flow patterns with iOS/macOS constitutional principle integration and ContextKit hierarchical context inheritance.*

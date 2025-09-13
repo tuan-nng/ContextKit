@@ -5,23 +5,27 @@
 **Purpose**: Prioritized idea backlog with structured organization  
 **Usage**: Organized by `/Backlog/prioritize-ideas` command with strategic alignment
 
-## Prioritization Framework
-
-### Priority Levels
-- **🔴 Critical**: Constitutional violations, blocking accessibility, major user pain points
-- **🟡 High**: Significant user value, strategic alignment, competitive advantage
-- **🔵 Medium**: Nice to have, good user experience improvement, technical debt reduction
-- **⚪ Low**: Future consideration, experimental ideas, optimization opportunities
-- **⚫ Deferred**: Good ideas for later, insufficient resources, strategic misalignment
-
-### Effort Sizing
-- **XS**: 1-2 hours, single file change, configuration adjustment
-- **S**: Half day to 1 day, small feature, minor UI improvement
-- **M**: 2-5 days, medium feature, multiple file changes, some complexity
-- **L**: 1-2 weeks, major feature, architectural changes, significant testing
-- **XL**: 2+ weeks, large initiative, cross-cutting changes, extensive validation
-
----
+════════════════════════════════════════════════════════════════════════════════
+║ 🤖 EXECUTION FLOW - IDEA PRIORITIZATION PROCESSING
+════════════════════════════════════════════════════════════════════════════════
+║
+║ ## Prioritization Framework
+║
+║ ### Priority Levels
+║ - **🔴 Critical**: Constitutional violations, blocking accessibility, major user pain points
+║ - **🟡 High**: Significant user value, strategic alignment, competitive advantage
+║ - **🔵 Medium**: Nice to have, good user experience improvement, technical debt reduction
+║ - **⚪ Low**: Future consideration, experimental ideas, optimization opportunities
+║ - **⚫ Deferred**: Good ideas for later, insufficient resources, strategic misalignment
+║
+║ ### Effort Sizing
+║ - **XS**: 1-2 hours, single file change, configuration adjustment
+║ - **S**: Half day to 1 day, small feature, minor UI improvement
+║ - **M**: 2-5 days, medium feature, multiple file changes, some complexity
+║ - **L**: 1-2 weeks, major feature, architectural changes, significant testing
+║ - **XL**: 2+ weeks, large initiative, cross-cutting changes, extensive validation
+║
+════════════════════════════════════════════════════════════════════════════════
 
 ## 🔴 Critical Priority
 

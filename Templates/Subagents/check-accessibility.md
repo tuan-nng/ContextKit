@@ -245,8 +245,8 @@ HStack {
 ## Integration with ContextKit Workflow
 
 ### Called by Implementation Commands
-- `/Implement/start-working` can invoke before starting UI development
-- `/Implement/commit-changes` can validate accessibility before commits
+- `/ctxk:impl:start-working` can invoke before starting UI development
+- `/ctxk:impl:commit-changes` can validate accessibility before commits
 
 ### Constitutional Enforcement
 - Enforces "accessibility-first design" constitutional principle

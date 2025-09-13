@@ -5,22 +5,24 @@
 **Purpose**: Triaged bug backlog with severity-based organization  
 **Usage**: Organized by `/Backlog/prioritize-bugs` command with impact assessment
 
-## Triage Framework
-
-### Severity Levels
-- **🔴 Critical**: App-breaking, data loss, security issues, constitutional violations
-- **🟡 High**: Major functionality broken, significant user impact, accessibility barriers
-- **🔵 Medium**: Minor functionality issues, cosmetic problems with UX impact
-- **⚪ Low**: Edge cases, minor cosmetic issues, optimization opportunities
-
-### Fix Effort Sizing
-- **XS**: 15-30 minutes, typo fix, configuration change
-- **S**: 1-4 hours, single file fix, simple logic correction
-- **M**: Half day to 1 day, multi-file changes, moderate complexity
-- **L**: 2-3 days, complex fix, architectural changes, extensive testing
-- **XL**: 1+ weeks, major refactoring, system-wide changes, comprehensive fixes
-
----
+════════════════════════════════════════════════════════════════════════════════
+║ 🤖 EXECUTION FLOW - BUG TRIAGE PROCESSING
+════════════════════════════════════════════════════════════════════════════════
+║ ## Triage Framework
+║
+║ ### Severity Levels
+║ - **🔴 Critical**: App-breaking, data loss, security issues, constitutional violations
+║ - **🟡 High**: Major functionality broken, significant user impact, accessibility barriers
+║ - **🔵 Medium**: Minor functionality issues, cosmetic problems with UX impact
+║ - **⚪ Low**: Edge cases, minor cosmetic issues, optimization opportunities
+║
+║ ### Fix Effort Sizing
+║ - **XS**: 15-30 minutes, typo fix, configuration change
+║ - **S**: 1-4 hours, single file fix, simple logic correction
+║ - **M**: Half day to 1 day, multi-file changes, moderate complexity
+║ - **L**: 2-3 days, complex fix, architectural changes, extensive testing
+║ - **XL**: 1+ weeks, major refactoring, system-wide changes, comprehensive fixes
+════════════════════════════════════════════════════════════════════════════════
 
 ## 🔴 Critical Severity
 

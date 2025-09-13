@@ -13,7 +13,7 @@ Migrate existing project from old structure to current ContextKit version with s
 1. Version Detection and Validation
    → Detect current project ContextKit version from Context.md
    → If no version found: ASK user for manual version specification
-   → Load migration path from Changelog.md for version differences
+   → Load migration path from CHANGELOG.md for version differences
    → If unsupported version: ERROR with supported version ranges
 
 2. Backup Creation
@@ -24,7 +24,7 @@ Migrate existing project from old structure to current ContextKit version with s
 
 3. Migration Analysis
    → Analyze differences between current and target ContextKit versions
-   → Identify files to add, update, or remove based on Changelog.md
+   → Identify files to add, update, or remove based on CHANGELOG.md
    → Detect customizations in .claude/ directory that need preservation
    → Check for conflicting changes that require manual resolution
 
@@ -165,9 +165,9 @@ detect_current_version() {
 load_migration_path() {
     echo "📋 Loading migration requirements..."
     
-    local changelog_file="$CONTEXTKIT_DIR/ContextKit/Changelog.md"
+    local changelog_file="$CONTEXTKIT_DIR/CHANGELOG.md"
     if [[ ! -f "$changelog_file" ]]; then
-        echo "❌ ContextKit Changelog.md not found - reinstall ContextKit globally"
+        echo "❌ ContextKit CHANGELOG.md not found - reinstall ContextKit globally"
         exit 1
     fi
     
@@ -724,7 +724,7 @@ main "$@"
 ## Validation Gates
 
 - [ ] Current project version detected or specified?
-- [ ] Migration path loaded from Changelog.md?
+- [ ] Migration path loaded from CHANGELOG.md?
 - [ ] Complete backup created successfully?
 - [ ] Team customizations identified and preserved?
 - [ ] Critical files exist after migration?
@@ -741,7 +741,7 @@ main "$@"
 
 ## Integration Points
 
-- **Global ContextKit**: Uses ~/.ContextKit/ templates and Changelog.md for migration logic
+- **Global ContextKit**: Uses ~/.ContextKit/ templates and CHANGELOG.md for migration logic
 - **Version Management**: Reads and updates Context.md version information
 - **Team Collaboration**: Preserves .claude/ customizations while updating structure
 - **Constitutional Framework**: Ensures migrated projects comply with 1.0.0 principles

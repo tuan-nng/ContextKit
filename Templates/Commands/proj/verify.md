@@ -129,7 +129,7 @@ verify_global_installation() {
     # Check constitutional framework
     local constitutional_files=(
         "ContextKit/Constitution.md"
-        "ContextKit/Changelog.md"
+        "CHANGELOG.md"
         "Guidelines/Swift.md"
         "Guidelines/SwiftUI.md"
     )
@@ -168,8 +168,8 @@ verify_global_installation() {
     fi
     
     # Version consistency check
-    if [[ -f "$CONTEXTKIT_DIR/ContextKit/Changelog.md" ]]; then
-        local changelog_version=$(grep -m1 "## \[" "$CONTEXTKIT_DIR/ContextKit/Changelog.md" | sed 's/.*\[\(.*\)\].*/\1/' 2>/dev/null)
+    if [[ -f "$CONTEXTKIT_DIR/CHANGELOG.md" ]]; then
+        local changelog_version=$(grep -m1 "## \[" "$CONTEXTKIT_DIR/CHANGELOG.md" | sed 's/.*\[\(.*\)\].*/\1/' 2>/dev/null)
         if [[ "$changelog_version" != "$CURRENT_CONTEXTKIT_VERSION" ]]; then
             WARNINGS+=("Version mismatch: Changelog shows $changelog_version, expected $CURRENT_CONTEXTKIT_VERSION")
         fi

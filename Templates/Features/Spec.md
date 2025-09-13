@@ -1,84 +1,90 @@
-# Feature Specification: ${FEATURE_NAME}
+# Feature Specification: [Generated from $ARGUMENTS]
 
-**Feature Branch**: `feature/${FEATURE_BRANCH}`  
-**Created**: ${SETUP_DATE}  
+**Feature Branch**: `feature/[kebab-case-name]`  
+**Created**: [Current Date]  
 **Status**: Draft  
-**Input**: ${USER_DESCRIPTION}
+**Input**: $ARGUMENTS
 
-## Execution Flow (main)
-```
-1. Parse user description from Input
-   → If empty: ERROR "No feature description provided"
-2. Apply iOS/macOS constitutional principles
-   → Accessibility-first design mandatory
-   → Privacy by design enforced  
-   → Platform UX guidelines required
-3. Extract key concepts from description
-   → Identify: actors, actions, data, constraints
-   → Consider platform-specific patterns (iPhone, iPad, Mac)
-4. For each unclear aspect:
-   → Mark with [NEEDS CLARIFICATION: specific iOS/macOS question]
-   → Common gaps: user auth method, data persistence, platform targets
-5. Generate iOS/macOS user scenarios
-   → Include accessibility scenarios (VoiceOver, Switch Control)
-   → Account for different screen sizes and orientations
-   → Consider multi-platform usage patterns
-6. Create functional requirements with iOS/macOS context
-   → Privacy manifest considerations embedded
-   → App Store review guidelines compliance checked
-   → Platform-specific capabilities assessed (CloudKit, HealthKit, etc.)
-7. Run iOS/macOS validation gates
-   → App Store compliance check
-   → Privacy impact assessment
-   → Accessibility requirement verification
-   → Localization readiness review
-8. Anti-speculation enforcement
-   → No "nice to have" features without clear user value
-   → Each feature must solve specific problem
-   → Implementation cost vs benefit considered
-9. Self-validation checklist execution
-   → All mandatory sections complete
-   → No ambiguous requirements remain
-   → Constitutional principles satisfied
-10. Return: SUCCESS (iOS/macOS spec ready for technical planning)
-```
+Business requirements template for iOS/macOS features following constitutional principles. Used by `/ctxk:plan:1-spec` command to create systematic feature specifications.
 
----
-
-## ⚡ Quick Guidelines
-
-- ✅ Focus on WHAT users need and WHY
-- ❌ Avoid HOW to implement (no tech stack, APIs, code structure)
-- 👥 Written for business stakeholders, not developers
-- 🍎 iOS/macOS platform conventions and constitutional principles enforced
-
-### Section Requirements
-- **Mandatory sections**: Must be completed for every feature
-- **Optional sections**: Include only when relevant to the feature
-- When a section doesn't apply, remove it entirely (don't leave as "N/A")
-
-### For AI Generation
-When creating this spec from a user prompt:
-1. **Mark all ambiguities**: Use [NEEDS CLARIFICATION: specific question] for any assumption you'd need to make
-2. **Don't guess**: If the prompt doesn't specify something (e.g., "user authentication" without method), mark it
-3. **Think like a tester**: Every vague requirement should fail the "testable and unambiguous" checklist item
-4. **iOS/macOS specifics**: Consider platform differences, device capabilities, App Store requirements
-5. **Common underspecified areas**:
-   - User authentication method (Apple ID, email/password, OAuth)
-   - Data persistence approach (local CoreData, CloudKit sync, both)
-   - Target platforms (iOS only, universal, macOS specific)
-   - Performance targets and scale expectations
-   - Privacy data usage and collection policies
-   - Accessibility requirements beyond basic compliance
-   - Localization scope and target languages
-   - Integration requirements with platform services
-
----
+════════════════════════════════════════════════════════════════════════════════
+║ 🤖 EXECUTION FLOW - FEATURE SPECIFICATION GENERATION
+════════════════════════════════════════════════════════════════════════════════
+║ ## Execution Flow (main)
+║ ```
+║ 1. Parse user description from Input
+║   → If empty: ERROR "No feature description provided"
+║ 2. Apply iOS/macOS constitutional principles
+║   → Accessibility-first design mandatory
+║   → Privacy by design enforced  
+║   → Platform UX guidelines required
+║ 3. Extract key concepts from description
+║   → Identify: actors, actions, data, constraints
+║   → Consider platform-specific patterns (iPhone, iPad, Mac)
+║ 4. For each unclear aspect:
+║   → Mark with [NEEDS CLARIFICATION: specific iOS/macOS question]
+║   → Common gaps: user auth method, data persistence, platform targets
+║ 5. Generate iOS/macOS user scenarios
+║   → Include accessibility scenarios (VoiceOver, Switch Control)
+║   → Account for different screen sizes and orientations
+║   → Consider multi-platform usage patterns
+║ 6. Create functional requirements with iOS/macOS context
+║   → Privacy manifest considerations embedded
+║   → App Store review guidelines compliance checked
+║   → Platform-specific capabilities assessed (CloudKit, HealthKit, etc.)
+║ 7. Run iOS/macOS validation gates
+║   → App Store compliance check
+║   → Privacy impact assessment
+║   → Accessibility requirement verification
+║   → Localization readiness review
+║ 8. Anti-speculation enforcement
+║   → No "nice to have" features without clear user value
+║   → Each feature must solve specific problem
+║   → Implementation cost vs benefit considered
+║ 9. Self-validation checklist execution
+║   → All mandatory sections complete
+║   → No ambiguous requirements remain
+║   → Constitutional principles satisfied
+║ 10. Return: SUCCESS (iOS/macOS spec ready for technical planning)
+║ ```
+║
+║ ## ⚡ Quick Guidelines
+║
+║ - ✅ Focus on WHAT users need and WHY
+║ - ❌ Avoid HOW to implement (no tech stack, APIs, code structure)
+║ - 👥 Written for business stakeholders, not developers
+║ - 🍎 iOS/macOS platform conventions and constitutional principles enforced
+║
+║ ### Section Requirements
+║ - Mandatory sections: Must be completed for every feature
+║ - Optional sections: Include only when relevant to the feature
+║ - When a section doesn't apply, remove it entirely (don't leave as "N/A")
+║
+║ ### For AI Generation
+║ When creating this spec from a user prompt:
+║ 1. Mark all ambiguities: Use [NEEDS CLARIFICATION: specific question] for any
+║   assumption you'd need to make
+║ 2. Don't guess: If the prompt doesn't specify something (e.g., "user
+║   authentication" without method), mark it
+║ 3. Think like a tester: Every vague requirement should fail the "testable and
+║   unambiguous" checklist item
+║ 4. iOS/macOS specifics: Consider platform differences, device capabilities,
+║   App Store requirements
+║ 5. Common underspecified areas:
+║   - User authentication method (Apple ID, email/password, OAuth)
+║   - Data persistence approach (local CoreData, CloudKit sync, both)
+║   - Target platforms (iOS only, universal, macOS specific)
+║   - Performance targets and scale expectations
+║   - Privacy data usage and collection policies
+║   - Accessibility requirements beyond basic compliance
+║   - Localization scope and target languages
+║   - Integration requirements with platform services
+════════════════════════════════════════════════════════════════════════════════
 
 ## User Scenarios & Testing *(mandatory)*
 
 ### Primary User Story
-As a ${PRIMARY_USER_TYPE}, I want to ${PRIMARY_USER_GOAL} so that ${PRIMARY_USER_BENEFIT}.
+As a [User Type], I want to [User Goal] so that [User Benefit].
 
 **iOS/macOS Context**: 
 - Accessibility: How does this work with VoiceOver, Switch Control, or Assistive Touch?
@@ -86,13 +92,13 @@ As a ${PRIMARY_USER_TYPE}, I want to ${PRIMARY_USER_GOAL} so that ${PRIMARY_USER
 - Privacy: What personal data is involved and how is user consent obtained?
 
 ### Acceptance Scenarios
-1. **Given** ${SCENARIO_CONTEXT}, **When** ${USER_ACTION}, **Then** ${EXPECTED_OUTCOME}
+1. **Given** [Scenario Context], **When** [User Action], **Then** [Expected Outcome]
    - **Happy Path**: Normal successful usage
    - **Error Path**: What happens when things go wrong
    - **Accessibility Path**: How assistive technologies interact
    - **Privacy Path**: User data protection and consent flows
 
-2. **Given** ${SCENARIO_CONTEXT_2}, **When** ${USER_ACTION_2}, **Then** ${EXPECTED_OUTCOME_2}
+2. **Given** [Additional Context], **When** [Different Action], **Then** [Different Outcome]
    - Include different device contexts (iPhone, iPad, Mac)
    - Consider different user capabilities and preferences
    - Account for network conditions and offline scenarios
@@ -109,11 +115,11 @@ As a ${PRIMARY_USER_TYPE}, I want to ${PRIMARY_USER_GOAL} so that ${PRIMARY_USER
 
 ### Functional Requirements
 
-**[NEEDS CLARIFICATION: Review and customize these placeholder requirements]**
+**[AI INSTRUCTION: Generate specific requirements based on $ARGUMENTS input]**
 
-- **FR-001**: System MUST ${REQUIREMENT_1}
-- **FR-002**: System MUST ${REQUIREMENT_2}
-- **FR-003**: System MUST ${REQUIREMENT_3}
+- **FR-001**: System MUST [Specific Requirement 1]
+- **FR-002**: System MUST [Specific Requirement 2]  
+- **FR-003**: System MUST [Specific Requirement 3]
 
 *Each requirement must be:*
 - Testable with clear success/failure criteria
@@ -262,13 +268,10 @@ As a ${PRIMARY_USER_TYPE}, I want to ${PRIMARY_USER_GOAL} so that ${PRIMARY_USER
 
 **IMPORTANT**: This specification should remain high-level and readable. Any detailed technical implementations, code samples, or extensive technical specifications must be placed in separate implementation detail files in the Context/Features/[feature-name]/TechDetails/ directory during the technical planning phase.
 
-**Template Variables Used**:
-- `${FEATURE_NAME}` - Generated PascalCase feature name
-- `${FEATURE_BRANCH}` - Generated kebab-case branch name  
-- `${SETUP_DATE}` - Current date when spec created
-- `${USER_DESCRIPTION}` - Original user input description
-- `${PRIMARY_USER_TYPE}` - Identified primary user persona
-- `${PRIMARY_USER_GOAL}` - Main user objective
-- `${PRIMARY_USER_BENEFIT}` - Value delivered to user
+**Command Arguments Used**:
+- `$ARGUMENTS` - Original user input (e.g., "Add user authentication with Apple ID")
+- AI generates feature name from `$ARGUMENTS` (e.g., "UserAuthentication")
+- AI creates kebab-case branch name (e.g., "user-authentication") 
+- AI fills in current date and extracts user story components
 
-**Next Phase**: After this specification is approved, proceed to `/Plan/define-tech` for technical architecture planning with constitutional compliance validation.
+**Next Phase**: After this specification is approved, proceed to `/ctxk:plan:2-tech` for technical architecture planning with constitutional compliance validation.

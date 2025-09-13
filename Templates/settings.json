@@ -84,7 +84,7 @@
   "model": "sonnet",
   "statusLine": {
     "type": "command",
-    "command": "~/.claude/custom-statusline.sh",
+    "command": "~/.ContextKit/Templates/Scripts/custom-statusline.sh",
     "padding": 5
   },
   "hooks": {

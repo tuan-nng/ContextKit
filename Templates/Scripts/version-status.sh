@@ -42,8 +42,8 @@ check_contextkit_version() {
     
     # Get installed version
     local installed_version=""
-    if [ -f "$CONTEXTKIT_DIR/ContextKit/Changelog.md" ]; then
-        installed_version=$(grep -m 1 "## \[" "$CONTEXTKIT_DIR/ContextKit/Changelog.md" | sed 's/## \[\(.*\)\].*/\1/' || echo "unknown")
+    if [ -f "$CONTEXTKIT_DIR/CHANGELOG.md" ]; then
+        installed_version=$(grep -m 1 "## \[" "$CONTEXTKIT_DIR/CHANGELOG.md" | sed 's/## \[\(.*\)\].*/\1/' || echo "unknown")
     else
         installed_version="unknown"
     fi

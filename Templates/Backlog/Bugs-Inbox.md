@@ -7,21 +7,25 @@
 
 ## Quick Capture Guidelines
 
-### For AI Processing
-When adding bugs to this inbox:
-1. **Capture immediately**: Don't triage during reporting - just record the issue
-2. **Include reproduction**: Steps to reproduce, environment, expected vs actual behavior
-3. **Mark uncertainties**: Use [NEEDS INVESTIGATION: specific area] for unclear aspects
-4. **Constitutional check**: Does this violate accessibility, privacy, or other core principles?
-
-### Impact Assessment Framework
-Each bug should eventually include:
-- **Severity**: Critical, High, Medium, Low based on impact and frequency
-- **Constitutional Impact**: Does this violate core accessibility, privacy, or maintainability principles?
-- **Affected Users**: Who is impacted and how severely?
-- **Effort Estimate**: T-shirt sizing (XS, S, M, L, XL) for fix complexity
-
----
+════════════════════════════════════════════════════════════════════════════════
+║ 🤖 EXECUTION FLOW - BUG CAPTURE PROCESSING
+════════════════════════════════════════════════════════════════════════════════
+║
+║ ### For AI Processing
+║ When adding bugs to this inbox:
+║ 1. **Capture immediately**: Don't triage during reporting - just record the issue
+║ 2. **Include reproduction**: Steps to reproduce, environment, expected vs actual behavior
+║ 3. **Mark uncertainties**: Use [NEEDS INVESTIGATION: specific area] for unclear aspects
+║ 4. **Constitutional check**: Does this violate accessibility, privacy, or other core principles?
+║
+║ ### Impact Assessment Framework
+║ Each bug should eventually include:
+║ - **Severity**: Critical, High, Medium, Low based on impact and frequency
+║ - **Constitutional Impact**: Does this violate core accessibility, privacy, or maintainability principles?
+║ - **Affected Users**: Who is impacted and how severely?
+║ - **Effort Estimate**: T-shirt sizing (XS, S, M, L, XL) for fix complexity
+║
+════════════════════════════════════════════════════════════════════════════════
 
 ## Bugs Awaiting Triage
 
