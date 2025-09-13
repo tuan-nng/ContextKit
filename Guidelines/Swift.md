@@ -8,14 +8,9 @@
 >
 > Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
-**Effective**: 2025-09-13
-**Purpose**: High-level planning reference for AI assistants during Swift development
-
 ## Overview
 
 These guidelines provide strategic direction for Swift development in ContextKit-managed projects. They focus on **what to choose** during planning phases rather than detailed implementation patterns.
-
-**For detailed code validation**, see the specialized subagents: `check-modern-code`, `check-accessibility`, `check-localization`, `check-error-handling`, `check-code-debt`.
 
 ---
 
@@ -41,11 +36,6 @@ These guidelines provide strategic direction for Swift development in ContextKit
 ---
 
 ## Architecture Preferences
-
-### Package Strategy
-- ✅ **Package-first**: New reusable functionality starts as Swift packages
-- ✅ **Clear boundaries**: Explicit public APIs for packages
-- ✅ **Dependency injection**: Avoid singletons and global state
 
 ### UI Framework Choice
 - ✅ **SwiftUI first**: For new development and modern UI patterns
@@ -108,12 +98,22 @@ These guidelines provide strategic direction for Swift development in ContextKit
 
 ### Directory Structure
 ```
-ProjectName/
-├── App/Sources/
+App/
+├── Sources/
 │   ├── Models/        # Data models and core types
 │   ├── Views/         # SwiftUI components
 │   ├── Extensions/    # Type extensions (*Ext.swift)
 │   └── Global/        # Shared utilities and constants
+└── Resources/
+    ├── Assets.xcassets       # Images, colors, app icons
+    ├── Info.plist           # App configuration
+    ├── PrivacyInfo.xcprivacy # Privacy manifest
+    └── App.entitlements     # Capabilities and permissions
+Tests/
+└── Sources/
+    ├── Models/        # Unit tests for data models
+    ├── Extensions/    # Test extensions and utilities
+    └── Global/        # Shared test utilities and helpers
 ```
 
 ### File Organization
@@ -122,7 +122,7 @@ ProjectName/
 - **Related small types together** when closely coupled
 
 ### Build Configuration
-- **Standard scheme**: `App` for all indie projects
+- **Standard scheme**: `App` for all projects
 - **Build command**: `xcodebuild -scheme App build -quiet`
 - **Formatter sequence**: SwiftFormat first, then swift-format
 
@@ -159,35 +159,27 @@ All Swift development must support:
 - Minimal data collection with explicit purpose
 - Secure storage patterns (Keychain for sensitive data)
 - Privacy manifest updates when needed
-- User consent for tracking or analytics
+- No tracking and privacy-preserving analytics
 
 ### Localization Ready
-- No hardcoded user-facing strings
-- Semantic localization keys with context
+- No hardcoded user-facing strings in model layer
+- Generation of localization string comments for context (in String Catalog)
 - Regional formatting for dates, numbers, currencies
-- String Catalog integration
+- String Catalog integration (auto-added by Xcode upon builds)
 
 ### Platform Appropriate
 - Follow Human Interface Guidelines
 - Use system conventions and patterns
 - Integrate properly with platform features
-- Optimize for target platform performance
+- Optimize for target platform screen size & UX
+
+### Maintainability
+- Prevent overly lengthy functions and split logically
+- Prefer self-explaining code naming & structure over comments
+- Comment only complex logic / calculations explaining the WHY
+- Keep it simple wherever possible, avoiding boilerplate code
 
 ---
-
-## Decision Framework
-
-When choosing between options, prioritize in this order:
-
-1. **Constitutional compliance** - Accessibility, privacy, localization requirements
-2. **Modern Swift patterns** - Latest language features and best practices  
-3. **Existing infrastructure** - Leverage FlineDevKit ecosystem
-4. **Maintainability** - Clear, readable, testable code
-5. **Performance** - Optimize only after other requirements met
-
----
-
-**Remember**: These guidelines inform planning decisions. For detailed validation of implementation patterns, rely on the specialized subagents during the development phase.
 
 ════════════════════════════════════════════════════════════════════════════════
 👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION
