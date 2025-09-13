@@ -1,4 +1,12 @@
 # Triage Bugs
+<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26 -->
+
+> [!WARNING]
+> **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
+>
+> For project-specific customizations, use the designated section at the bottom of this file.
+>
+> Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
 ## Description
 Review and reprioritize bug backlog with impact assessment, constitutional compliance validation, and severity-based triage
@@ -74,3 +82,22 @@ All bug prioritization automatically considers:
 - **Localizability from day one**: Bugs affecting international users receive high priority
 - **Code maintainability**: Bugs indicating technical debt or code quality issues prioritized
 - **Platform-appropriate UX**: Bugs violating iOS/macOS design guidelines receive attention
+
+════════════════════════════════════════════════════════════════════════════════
+👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION
+════════════════════════════════════════════════════════════════════════════════
+
+This section is preserved during ContextKit migrations and updates.
+Add project-specific instructions, examples, and overrides below.
+
+## Project-Specific Instructions
+
+<!-- Add project-specific guidance here -->
+
+## Additional Examples
+
+<!-- Add examples specific to your project here -->
+
+## Override Behaviors
+
+<!-- Document any project-specific overrides here -->

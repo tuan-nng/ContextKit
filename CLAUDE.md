@@ -34,8 +34,7 @@ ContextKit/
     │   ├── Global/                  # Global ContextKit management commands
     │   │   ├── setup.md             # Project initialization
     │   │   ├── setup-workspace.md   # Workspace configuration
-    │   │   ├── migrate.md           # Version updates
-    │   │   └── verify.md            # Health checks
+    │   │   └── migrate.md           # Version updates
     │   ├── Plan/                    # Feature planning workflow
     │   │   ├── create-spec.md       # Business requirements
     │   │   ├── define-tech.md       # Technical architecture
@@ -101,10 +100,9 @@ cp -R ~/.ContextKit/Templates/Commands/* ~/.claude/commands/ctxk/
 ```
 
 **All Commands Available After Install**:
-- `/ctxk:proj:init` - Initialize project with ContextKit  
+- `/ctxk:proj:init` - Initialize project with ContextKit
 - `/ctxk:proj:init-workspce` - Configure workspace-level settings
 - `/ctxk:proj:migrate` - Update existing project to newer ContextKit version
-- `/ctxk:proj:verify` - Validate project ContextKit configuration
 - `/ctxk:plan:1-spec` - Create feature specification
 - `/ctxk:plan:2-tech` - Create technical architecture plan
 - `/ctxk:plan:3-steps` - Break down implementation steps
@@ -171,6 +169,114 @@ cp ~/.ContextKit/Templates/Features/Steps.md Context/Features/UserAuthentication
 
 ---
 
+## 📋 Template Versioning System
+
+**CRITICAL REQUIREMENT**: All template files that get copied during installation must include version information on **line 2** for migration tracking and automated updates.
+
+### Versioning Structure
+
+#### For .md Files
+```markdown
+# [File Title]
+<!-- Template Version: X | ContextKit: Y.Y.Y | Updated: YYYY-MM-DD -->
+
+[File content starts here...]
+```
+
+#### For .sh Files
+```bash
+#!/bin/bash
+# Template Version: X | ContextKit: Y.Y.Y | Updated: YYYY-MM-DD
+
+# [File description and purpose]
+
+[File content starts here...]
+```
+
+#### For Subagents (.md files with YAML frontmatter)
+```yaml
+---
+meta: "Template Version: X | ContextKit: Y.Y.Y | Updated: YYYY-MM-DD"
+name: subagent-name
+description: Subagent description
+tools: Read, Edit, Grep
+---
+
+# Subagent: subagent-name
+```
+
+### Parsing Requirements
+
+- **Line 2 MANDATORY**: Version info must always be on line 2 for ALL file types
+- **Format**: `Template Version: X | ContextKit: Y.Y.Y | Updated: YYYY-MM-DD`
+- **Implementation**:
+  - Regular .md files: HTML comment on line 2
+  - .sh files: Shell comment on line 2
+  - Subagents: YAML `meta:` field on line 2
+- **Parsing Command**: `sed -n '2p' file | grep "Template Version"`
+- **Migration Usage**: `/ctxk:proj:migrate` command uses this for version detection
+
+### Files Requiring Versioning (36 files)
+
+**All .md template files**:
+- `Guidelines/*.md` (2 files)
+- `Templates/Commands/**/*.md` (16 files)
+- `Templates/Subagents/*.md` (6 files)
+- `Templates/Features/*.md` (3 files)
+- `Templates/Backlog/*.md` (4 files)
+
+**All .sh template files**:
+- `Templates/Scripts/*.sh` (3 files)
+
+### Special Case: CHANGELOG.md
+
+**CHANGELOG.md uses modified format** (since it contains the ContextKit version):
+```markdown
+# ContextKit Changelog
+<!-- ContextKit: Y.Y.Y | Updated: YYYY-MM-DD -->
+```
+
+### Files Excluded from Versioning (7 files)
+
+**Core Repository Files** (not copied during installation):
+- `install.sh` - Global installer script
+- `README.md` - Public documentation
+- `CLAUDE.md` - This development guide
+- `LICENSE` - MIT license file
+
+**User-Editable Configuration Files** (become project/workspace specific):
+- `Templates/Contexts/Project.md` - Becomes user-editable project configuration
+- `Templates/Contexts/Workspace.md` - Becomes user-editable workspace configuration
+
+**Rarely Changed Configuration Files**:
+- `Templates/settings.json` - Claude Code settings template
+- `Templates/Formatters/*` - Formattter config files
+
+### Version Management Rules
+
+1. **Template Version**: Integer increment (0, 1, 2, 3...) for each file modification
+2. **ContextKit Version**: Semantic version of overall ContextKit system
+3. **Updated Date**: ISO format (YYYY-MM-DD) when file was last modified
+4. **Migration Tracking**: `/ctxk:proj:migrate` compares versions to determine update needs
+5. **Changelog Integration**: All version changes must be documented in CHANGELOG.md
+
+**Example Migration Detection**:
+```bash
+# Check if user's template is outdated (all files use line 2)
+USER_VERSION=$(sed -n '2p' .claude/commands/ctxk/plan/1-spec.md | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*")
+LATEST_VERSION=$(sed -n '2p' ~/.ContextKit/Templates/Commands/plan/1-spec.md | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*")
+
+if [ "$USER_VERSION" -lt "$LATEST_VERSION" ]; then
+    echo "⚠️ Template outdated: plan/1-spec.md v$USER_VERSION → v$LATEST_VERSION"
+fi
+
+# Works for subagents too since they use meta: field on line 2
+SUBAGENT_USER_VERSION=$(sed -n '2p' .claude/subagents/check-modern-code.md | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*")
+SUBAGENT_LATEST_VERSION=$(sed -n '2p' ~/.ContextKit/Templates/Subagents/check-modern-code.md | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*")
+```
+
+---
+
 ## 📋 Template Categories & Implementation Details
 
 ### 🎯 **Templates/Commands/** - Claude Code Commands
@@ -180,7 +286,7 @@ cp ~/.ContextKit/Templates/Features/Steps.md Context/Features/UserAuthentication
 **Variables**: **NONE** - Commands read `Context.md` dynamically when executed
 
 **Directory Structure in Templates/Commands/**:
-- `proj/` - Project management (init, init-workspce, migrate, verify)
+- `proj/` - Project management (init, init-workspce, migrate)
 - `plan/` - Feature planning (1-spec, 2-tech, 3-steps) 
 - `impl/` - Implementation (start-working, commit-changes, release-app, release-package)
 - `bckl/` - Backlog management (add-idea, add-bug, prioritize-ideas, prioritize-bugs)
@@ -406,75 +512,126 @@ When in doubt, ask: "How will this template help an AI assistant build better so
 
 ---
 
-## 📋 File Categories: AI-Only vs Mixed Content
+## 📋 File Categories: Usage Patterns & User Customization
 
-### 🤖 **Pure AI Instructions** (Not for human consumption)
-These files contain ONLY execution logic for AI assistants:
+### 🔄 **User-Managed Files** (Full user control, no ContextKit updates)
+These files become completely user-managed after initial setup:
 
-- **`Templates/Commands/**/*.md`** - Pure AI command logic (no human-readable content)
-- **`Templates/Subagents/**/*.md`** - Pure AI subagent instructions with YAML frontmatter
+- **`Templates/Contexts/Project.md`** → becomes `Context.md` in project root
+- **`Templates/Contexts/Workspace.md`** → becomes `Context.md` in workspace directory
+- **`Templates/Features/*.md`** → copied to `Context/Features/[FeatureName]/` during planning
+- **`Templates/Backlog/*.md`** → copied to `Context/Backlog/` as starting templates
 
-**Format**: Standard markdown with execution flows, no separation needed.
+**Key Characteristics**:
+- **No migration updates**: Users modify freely, `/ctxk:proj:migrate` never overwrites
+- **Full customization**: Users add project-specific content, modify structure as needed
+- **Hierarchical inheritance**: Context files provide workspace → project inheritance
 
-### 👥 **Mixed Content** (AI instructions + Human-readable content)
-These files combine AI execution logic with actual content that humans use:
+### 🛠️ **ContextKit-Managed Files** (Updated via migration, support user customization)
+These files are maintained by ContextKit but support project-specific customization:
 
-**Separation Pattern**: All use the same visual separator:
+- **`Templates/Commands/**/*.md`** - Claude Code command templates
+- **`Templates/Subagents/*.md`** - AI quality assistant templates
+- **`Guidelines/*.md`** - Development reference guidelines
+
+**Key Characteristics**:
+- **Migration updates**: `/ctxk:proj:migrate` updates core logic to newer versions
+- **User customization sections**: Dedicated sections for project-specific additions (see User Customization Pattern below)
+- **Version tracking**: Template version headers enable smart migration
+
+### ⚙️ **Configuration Files** (Static, replaced during migration)
+- **`Templates/settings.json`** - Claude Code configuration (replaced entirely)
+- **`Templates/Formatters/.*`** - Code formatting configurations (replaced entirely)
+- **`Templates/Scripts/*.sh`** - Hook automation scripts (replaced entirely, no customization sections)
+
+### 🔧 **User Customization Pattern for ContextKit-Managed Files**
+
+**Problem**: Commands and subagents may need project-specific adjustments while maintaining updateability.
+
+**Solution**: Dedicated user customization sections that are preserved during migration:
+
+```markdown
+[ContextKit-managed content above]
+
+════════════════════════════════════════════════════════════════════════════════
+👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION
+════════════════════════════════════════════════════════════════════════════════
+
+This section is preserved during ContextKit migrations and updates.
+Add project-specific instructions, examples, and overrides below.
+
+## Project-Specific Instructions
+
+[User adds custom content here]
+
+## Additional Examples
+
+[User adds project-specific examples here]
+
+## Override Behaviors
+
+[User documents any project-specific requirement overrides here]
+```
+
+**Migration Behavior**:
+- **Above the separator**: Updated by `/ctxk:proj:migrate` to latest ContextKit version
+- **Below the separator**: Completely preserved, never modified by ContextKit
+
+### 📝 **Mixed Content Pattern** (Template + AI Instructions)
+Used only for user-managed files that combine template structure with AI generation logic:
+
+**Separation Pattern**:
 ```
 ════════════════════════════════════════════════════════════════════════════════
 ║ 🤖 SYSTEM INSTRUCTIONS - [PURPOSE]
 ════════════════════════════════════════════════════════════════════════════════
 ║ AI execution logic goes here...
 ║ Indented with ║ prefix
-║ 
+║
 ════════════════════════════════════════════════════════════════════════════════
 ```
 
 **Files using this pattern**:
+- `Templates/Features/*.md` - Feature templates with AI generation logic
+- `Templates/Contexts/*.md` - Context generation templates
+- `Templates/Backlog/*.md` - Backlog management templates
 
-- **`Templates/Features/*.md`** - Feature templates with AI generation logic
-  - Contains: Template structure + AI instructions for dynamic content generation
-  - AI section: "🤖 EXECUTION FLOW - FEATURE SPECIFICATION GENERATION"
+### 🔧 **Implementation Requirements for All ContextKit-Managed Files**
 
-- **`Templates/Contexts/*.md`** - Context.md generation templates
-  - Contains: Template structure + AI logic for project detection/inheritance
-  - AI section: "🤖 EXECUTION FLOW - PROJECT CONTEXT GENERATION"
+All commands, subagents, and guidelines that get copied to user projects MUST include:
 
-- **`Templates/Backlog/*.md`** - Backlog management templates
-  - Contains: Actual backlog structure + AI instructions for idea processing
-  - AI section: "🤖 EXECUTION FLOW - IDEA CAPTURE PROCESSING"
+1. **Template Version Header**: Line 2 versioning for migration tracking
+2. **User Warning**: Clear warning about editing restrictions and GitHub issue reporting
+3. **User Customization Section**: Dedicated area for project-specific additions
+4. **Clear Separation**: Visual separation between ContextKit-managed and user-editable content
 
-### 📖 **Pure Human Content** (No AI instructions)
-These files are for human consumption only:
-
-- **`Guidelines/*.md`** - Development guidelines and coding standards (see Guidelines vs Subagents section below)
-- **`README.md`** - Public documentation
-- **`CHANGELOG.md`** - Version history
-- **`CLAUDE.md`** - This file (AI development guidance)
-
-### ⚙️ **Configuration Files** (No AI instructions)
-- **`Templates/settings.json`** - Claude Code configuration
-- **`Templates/Formatters/.*`** - Code formatting configurations
-- **`Templates/Scripts/*.sh`** - Shell scripts for hooks and automation
-
-### 🔧 **Key Implementation Notes**
-
-1. **Dynamic Content Generation**: 
-   - Claude Code commands use `$ARGUMENTS`, `$1`, `$2`, etc. for user input
-   - Templates contain AI instructions that generate content dynamically from command arguments
-   - No variable substitution needed - AI fills in content based on detection and analysis
-2. **Visual Separation**: The box-drawn separator clearly distinguishes AI logic from human content
-3. **AI Section Naming**: Always prefixed with "🤖" and describes the specific AI purpose
-4. **Indentation Pattern**: AI instructions indented with `║` character for clear visual separation
+**Required Warning Pattern** (after template version header):
+```markdown
+> [!WARNING]
+> **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
+>
+> For project-specific customizations, use the designated section at the bottom of this file.
+>
+> Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
+```
 
 ### 📝 **Content Review Guidelines**
 
-**For Pure AI Files**: Focus on execution flow logic, validation gates, and error conditions
-**For Mixed Content Files**: 
-- Review AI instructions in the boxed section for logic and completeness
-- Review human content section for accuracy and usefulness
-- Ensure dynamic content generation logic produces appropriate output
-**For Pure Human Files**: Standard content review for accuracy and clarity
+**For User-Managed Files**:
+- Review template structure and AI generation logic
+- Ensure boxed separator pattern is correctly implemented
+- Verify dynamic content generation produces appropriate output
+
+**For ContextKit-Managed Files**:
+- Review core execution logic for completeness and accuracy
+- Verify user customization section is properly implemented
+- Ensure version header is present on line 2
+- Test migration behavior preserves user customizations
+
+**For Configuration Files** (including Scripts):
+- Standard review for functionality and cross-platform compatibility
+- Scripts have warning headers but no customization sections (replaced entirely during migration)
+- Other config files have no special sections (replaced entirely during migration)
 
 ---
 

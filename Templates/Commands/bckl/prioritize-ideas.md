@@ -1,4 +1,12 @@
 # Prioritize Ideas
+<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26 -->
+
+> [!WARNING]
+> **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
+>
+> For project-specific customizations, use the designated section at the bottom of this file.
+>
+> Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
 ## Description
 Review and reprioritize idea backlog with smart promotion suggestions, constitutional compliance validation, and strategic planning alignment
@@ -74,3 +82,22 @@ All idea prioritization automatically considers:
 - **Localizability from day one**: Ideas supporting international users receive consideration
 - **Code maintainability**: Ideas reducing technical debt and improving code quality valued
 - **Platform-appropriate UX**: Ideas following iOS/macOS design guidelines preferred
+
+════════════════════════════════════════════════════════════════════════════════
+👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION
+════════════════════════════════════════════════════════════════════════════════
+
+This section is preserved during ContextKit migrations and updates.
+Add project-specific instructions, examples, and overrides below.
+
+## Project-Specific Instructions
+
+<!-- Add project-specific guidance here -->
+
+## Additional Examples
+
+<!-- Add examples specific to your project here -->
+
+## Override Behaviors
+
+<!-- Document any project-specific overrides here -->

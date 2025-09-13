@@ -1,4 +1,12 @@
 # Commit Changes
+<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26 -->
+
+> [!WARNING]
+> **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
+>
+> For project-specific customizations, use the designated section at the bottom of this file.
+>
+> Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
 ## Description
 Commit development changes with proper formatting, validation, and constitutional compliance checks
@@ -166,3 +174,22 @@ ${NEXT_ACTION} - Suggested next step based on feature completion status
 - Complex methods without documentation (warn to add docs)
 - Missing unit tests for new business logic (warn to add tests)
 - Performance concerns with current implementation (warn to optimize)
+
+════════════════════════════════════════════════════════════════════════════════
+👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION
+════════════════════════════════════════════════════════════════════════════════
+
+This section is preserved during ContextKit migrations and updates.
+Add project-specific instructions, examples, and overrides below.
+
+## Project-Specific Instructions
+
+<!-- Add project-specific guidance here -->
+
+## Additional Examples
+
+<!-- Add examples specific to your project here -->
+
+## Override Behaviors
+
+<!-- Document any project-specific overrides here -->

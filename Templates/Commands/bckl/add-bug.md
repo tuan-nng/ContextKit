@@ -1,4 +1,12 @@
 # Report Bug
+<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26 -->
+
+> [!WARNING]
+> **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
+>
+> For project-specific customizations, use the designated section at the bottom of this file.
+>
+> Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
 **Purpose**: Capture bug reports with impact assessment and reproduction steps following ContextKit's spec-kit methodology with constitutional principles and effort estimation.
 
@@ -303,3 +311,22 @@ The add-bug template should achieve:
 ---
 
 *This template follows ContextKit's spec-kit methodology with execution flows, validation gates, constitutional compliance, and systematic quality assurance for iOS/macOS development workflows.*
+
+════════════════════════════════════════════════════════════════════════════════
+👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION
+════════════════════════════════════════════════════════════════════════════════
+
+This section is preserved during ContextKit migrations and updates.
+Add project-specific instructions, examples, and overrides below.
+
+## Project-Specific Instructions
+
+<!-- Add project-specific guidance here -->
+
+## Additional Examples
+
+<!-- Add examples specific to your project here -->
+
+## Override Behaviors
+
+<!-- Document any project-specific overrides here -->

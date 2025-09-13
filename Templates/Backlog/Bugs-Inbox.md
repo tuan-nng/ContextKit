@@ -1,4 +1,5 @@
 # Bugs Inbox: ${PROJECT_NAME}
+<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26 -->
 
 **Project**: ${PROJECT_NAME}  
 **Created**: ${SETUP_DATE}  

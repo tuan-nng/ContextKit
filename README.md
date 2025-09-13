@@ -132,11 +132,20 @@ ContextKit includes specialized sub-agents that automatically ensure code qualit
 
 These agents activate automatically during development phases, ensuring consistent quality without manual oversight.
 
+## 🔧 Project-Specific Customization
+
+ContextKit commands and quality agents can be tailored to your project's needs through **developer customization sections** in each template file:
+
+- **Project-specific examples**: Add architectural patterns that work with your codebase
+- **Language/framework overrides**: Customize behavior for Python, React, or other tech stacks
+- **Team workflow adjustments**: Modify processes for your development practices
+
+Customizations are preserved during ContextKit updates, ensuring your project-specific improvements persist while core templates stay current.
+
 ## 📋 Commands overview
 
 ### Project Management
 - **`/ctxk:proj:init`** - One-command project initialization with auto-detection
-- **`/ctxk:proj:verify`** - Health check your ContextKit configuration
 
 ### Systematic Feature Development
 - **Planning workflow**: `/ctxk:plan:1-spec` → `/ctxk:plan:2-tech` → `/ctxk:plan:3-steps`
@@ -155,7 +164,6 @@ These agents activate automatically during development phases, ensuring consiste
 - `/ctxk:proj:init` - **Setup Project Context** - Auto-detect project type and configure ContextKit
 - `/ctxk:proj:init-workspace` - **Configure Team Standards** - Workspace-level settings for different clients/companies
 - `/ctxk:proj:migrate` - **Upgrade to Latest** - Update existing projects to newer ContextKit versions
-- `/ctxk:proj:verify` - **Health Check** - Validate configuration and suggest improvements
 
 ### Systematic Feature Planning
 - `/ctxk:plan:1-spec` - **Define Requirements** - Create business specifications with user stories

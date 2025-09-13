@@ -1,4 +1,12 @@
 # Add Feature Idea
+<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26 -->
+
+> [!WARNING]
+> **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
+>
+> For project-specific customizations, use the designated section at the bottom of this file.
+>
+> Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
 ## Description
 Capture new app ideas with structured evaluation framework, constitutional principle assessment, and priority context following spec-kit methodology
@@ -312,3 +320,22 @@ All gates must pass before command completion:
 - Ideas with "Major" or "Critical" constitutional impact automatically flagged for architectural review
 - Constitutional assessment guides selection of appropriate subagents during implementation
 - Quality gates ensure constitutional principles addressed before idea progression to specification phase
+
+════════════════════════════════════════════════════════════════════════════════
+👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION
+════════════════════════════════════════════════════════════════════════════════
+
+This section is preserved during ContextKit migrations and updates.
+Add project-specific instructions, examples, and overrides below.
+
+## Project-Specific Instructions
+
+<!-- Add project-specific guidance here -->
+
+## Additional Examples
+
+<!-- Add examples specific to your project here -->
+
+## Override Behaviors
+
+<!-- Document any project-specific overrides here -->

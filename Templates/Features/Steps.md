@@ -1,4 +1,5 @@
 # Implementation Steps: [Feature from Tech.md]
+<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26 -->
 
 **Phase**: 2 (Implementation Plan)  
 **Input**: Technical plan from Tech.md  

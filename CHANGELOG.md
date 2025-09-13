@@ -1,6 +1,5 @@
-**Current Version: 0.0.0**
-
 # ContextKit Changelog
+<!-- ContextKit: 0.0.0 | Updated: 2025-01-26 -->
 
 Maintains accurate changelog following [Keep a Changelog](https://keepachangelog.com/) format. 
 Used by `/ctxk:proj:migrate` command to track file changes and preserve user customizations.

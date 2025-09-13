@@ -1,4 +1,12 @@
 # Design Architecture
+<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26 -->
+
+> [!WARNING]
+> **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
+>
+> For project-specific customizations, use the designated section at the bottom of this file.
+>
+> Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
 ## Description
 Create technical implementation plan based on existing feature specification with platform-appropriate architecture
@@ -81,3 +89,22 @@ ${ARCHITECTURE_PATTERN} - Recommended architectural pattern for project type
 - **Platform Integration**: Sandboxing considerations, system services
 - **Constitutional**: Menu accessibility, keyboard navigation, system appearance
 - **Testing**: Unit tests + integration tests for system interactions
+
+════════════════════════════════════════════════════════════════════════════════
+👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION
+════════════════════════════════════════════════════════════════════════════════
+
+This section is preserved during ContextKit migrations and updates.
+Add project-specific instructions, examples, and overrides below.
+
+## Project-Specific Instructions
+
+<!-- Add any project-specific guidance for technical architecture planning here -->
+
+## Additional Examples
+
+<!-- Add examples of architectural patterns that work well with your project -->
+
+## Override Behaviors
+
+<!-- Document any project-specific architectural requirement overrides here -->

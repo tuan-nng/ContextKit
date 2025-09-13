@@ -1,8 +1,16 @@
 ---
+meta: "Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26"
 name: check-code-debt
 description: Refactor and clean up code generated across multiple AI iterations, removing artifacts and improving maintainability
 tools: Read, Edit, Grep, Glob
 ---
+
+> [!WARNING]
+> **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
+>
+> For project-specific customizations, use the designated section at the bottom of this file.
+>
+> Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
 # Subagent: check-code-debt
 
@@ -526,3 +534,22 @@ enum CodeDebtError: String {
 - Provide next session guidance based on cleanup results
 - Integrate refactoring learnings into ongoing development practices
 - Maintain continuity between debt cleanup and feature development sessions
+
+════════════════════════════════════════════════════════════════════════════════
+👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION
+════════════════════════════════════════════════════════════════════════════════
+
+This section is preserved during ContextKit migrations and updates.
+Add project-specific instructions, examples, and overrides below.
+
+## Project-Specific Instructions
+
+<!-- Add project-specific guidance here -->
+
+## Additional Examples
+
+<!-- Add examples specific to your project here -->
+
+## Override Behaviors
+
+<!-- Document any project-specific overrides here -->

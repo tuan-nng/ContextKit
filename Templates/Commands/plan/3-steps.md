@@ -1,4 +1,12 @@
 # Create Task List
+<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26 -->
+
+> [!WARNING]
+> **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
+>
+> For project-specific customizations, use the designated section at the bottom of this file.
+>
+> Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
 ## Description
 Break down technical implementation plan into executable tasks following spec-kit methodology
@@ -125,3 +133,22 @@ ${CONSTITUTIONAL_TASKS} - Tasks enforcing constitutional principles
 - Error handling consistency check
 - Documentation completeness audit
 - Technical debt assessment
+
+════════════════════════════════════════════════════════════════════════════════
+👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION
+════════════════════════════════════════════════════════════════════════════════
+
+This section is preserved during ContextKit migrations and updates.
+Add project-specific instructions, examples, and overrides below.
+
+## Project-Specific Instructions
+
+<!-- Add any project-specific guidance for task breakdown and step creation here -->
+
+## Additional Examples
+
+<!-- Add examples of task breakdown patterns that work well with your project -->
+
+## Override Behaviors
+
+<!-- Document any project-specific task organization overrides here -->

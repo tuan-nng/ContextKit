@@ -158,8 +158,35 @@ Project-level Context.md template providing project-specific execution informati
 
 **Customization**:
 - Project-specific commands in `.claude/commands/`
-- Team hooks in `.claude/hooks/` 
+- Team hooks in `.claude/hooks/`
 - Quality subagents in `.claude/subagents/`
+
+## ContextKit AI Integration
+
+**FOR AI ASSISTANTS**: Project-specific ContextKit behavior and customization guidance:
+
+### **ContextKit Command Execution**
+When executing ContextKit commands (`/ctxk:*`), always:
+1. **Read core command logic** from the template files in `.claude/commands/ctxk/`
+2. **Check developer customization sections** at the bottom of each command file
+3. **Combine both** core logic and project-specific customizations for execution
+
+### **Developer Customization Sections**
+Each ContextKit command and subagent file contains a **👩‍💻 DEVELOPER CUSTOMIZATIONS** section with:
+- **Project-Specific Instructions**: Additional guidance specific to this project
+- **Additional Examples**: Project-relevant examples and patterns
+- **Override Behaviors**: Modifications to default ContextKit behavior
+
+### **When Users Request Persistent Changes**
+If users ask to "remember" preferences or modify ContextKit behavior:
+1. **Add their instructions** to the appropriate file's developer customization section
+2. **Explain** that you've added it to ensure persistence across sessions
+3. **Do not** modify the core ContextKit template logic above the customization sections
+
+### **Example User Requests**:
+- "Always include performance considerations in technical specs" → Add to `/plan/2-tech.md` customization section
+- "Skip localization checks for internal tools" → Add to relevant subagent customization section
+- "Use our specific error handling patterns" → Add to `/impl/start-working.md` customization section
 
 ## Hierarchical Inheritance
 

@@ -1,6 +1,14 @@
 # Define Requirements
+<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26 -->
 
-## Description  
+> [!WARNING]
+> **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
+>
+> For project-specific customizations, use the designated section at the bottom of this file.
+>
+> Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
+
+## Description
 Create structured feature specification following spec-kit patterns with iOS/macOS constitutional principles
 
 ## Parameters
@@ -61,3 +69,22 @@ All specifications automatically include:
 - **Privacy by design**: Data handling assessment, user consent patterns for data features
 - **Localizability from day one**: String externalization, cultural considerations for user-facing features
 - **Code maintainability**: Clear architecture, testability, documentation requirements
+
+════════════════════════════════════════════════════════════════════════════════
+👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION
+════════════════════════════════════════════════════════════════════════════════
+
+This section is preserved during ContextKit migrations and updates.
+Add project-specific instructions, examples, and overrides below.
+
+## Project-Specific Instructions
+
+<!-- Add any project-specific guidance for feature specification creation here -->
+
+## Additional Examples
+
+<!-- Add examples of feature descriptions that work well with your project architecture -->
+
+## Override Behaviors
+
+<!-- Document any project-specific requirement overrides or special handling here -->

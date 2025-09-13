@@ -1,4 +1,5 @@
 # Feature Specification: [Generated from $ARGUMENTS]
+<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26 -->
 
 **Feature Branch**: `feature/[kebab-case-name]`  
 **Created**: [Current Date]  
