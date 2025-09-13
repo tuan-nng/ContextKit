@@ -1,5 +1,5 @@
 # Swift Development Guidelines
-<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26 -->
+<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-09-13 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -53,6 +53,18 @@ These guidelines provide strategic direction for Swift development in ContextKit
 
 ## Framework and Package Preferences
 
+### FlineDev Ecosystem Overview
+FlineDev frameworks provide a cohesive development experience (find all at https://github.com/FlineDev):
+
+**Auto-imported via `FlineDevKit`:**
+- **`ErrorKit`**: Enhanced error handling with typed throws, user-friendly messages, and error chain debugging
+- **`HandySwift`**: Essential utilities missing from Foundation (RESTClient, Debouncer, date/time types)
+- **`TranslateKitSDK`**: 2000+ pre-localized common UI strings via TK.Action, TK.Label, TK.Message, etc.
+- **`TelemetryDeck`**: Privacy-preserving analytics and app insights
+
+**Additional frameworks (manual import needed):**
+- **`IntelligenceKit`**: OpenAI GPT integration with structured responses and error handling - add to Package.swift and import separately when needed for AI features
+
 ### Import Strategy
 - ✅ **Primary**: Always import `FlineDevKit` first in new files
 - ✅ **Selective**: Only import additional frameworks when FlineDevKit insufficient
@@ -63,14 +75,25 @@ These guidelines provide strategic direction for Swift development in ContextKit
 - ❌ **Avoid**: Custom URLSession implementations
 - ❌ **Avoid**: Manual JSON parsing when structured solutions exist
 
-### Utilities
-- ✅ **Prefer**: `AsyncState<String>` for async operation tracking
-- ✅ **Prefer**: `Debouncer` for input throttling
-- ✅ **Prefer**: `GregorianDay/GregorianTime` for date/time-only storage
+### HandySwift Utilities
+
+**New Types:**
+- ✅ **Prefer**: `Debouncer` for input throttling and preventing rapid-fire operations
+- ✅ **Prefer**: `GregorianDay/GregorianTime` for date/time-only storage without timezone confusion
+
+**String Extensions:**
+- ✅ **Prefer**: `.isBlank` for checking empty or whitespace-only strings
+
+**Numeric Extensions:**
+- ✅ **Prefer**: `5.times { }`/`5.timesMake { }` for clean fixed times repetition/creation
+
+### Common UI Strings
+- ✅ **Prefer**: `Button(TK.Action.save) { }` for common actions (TranslateKitSDK)
+- ✅ **Prefer**: `Text(TK.Label.settings)` for common labels (TranslateKitSDK)
 
 ### Testing Strategy
+- ✅ **Swift Testing**: Use Swift Testing framework (`@Test`, `#expect`) over XCTest for new unit tests
 - ✅ **Minimal testing**: Only for complex algorithms with many edge cases
-- ❌ **Avoid**: UI testing (unnecessary complexity)
 - ❌ **Avoid**: Testing simple CRUD operations
 
 ---
@@ -142,42 +165,6 @@ Quality validation is handled by specialized subagents:
 - **`check-localization`**: Verifies string externalization
 - **`check-error-handling`**: Confirms ErrorKit patterns
 - **`check-code-debt`**: Removes AI artifacts and cleans up code
-
----
-
-## Constitutional Principles
-
-All Swift development must support:
-
-### Accessibility First
-- Dynamic Type support in all UI text
-- Semantic colors that adapt to system appearance
-- VoiceOver labels and hints for interactive elements
-- Keyboard navigation support
-
-### Privacy by Design  
-- Minimal data collection with explicit purpose
-- Secure storage patterns (Keychain for sensitive data)
-- Privacy manifest updates when needed
-- No tracking and privacy-preserving analytics
-
-### Localization Ready
-- No hardcoded user-facing strings in model layer
-- Generation of localization string comments for context (in String Catalog)
-- Regional formatting for dates, numbers, currencies
-- String Catalog integration (auto-added by Xcode upon builds)
-
-### Platform Appropriate
-- Follow Human Interface Guidelines
-- Use system conventions and patterns
-- Integrate properly with platform features
-- Optimize for target platform screen size & UX
-
-### Maintainability
-- Prevent overly lengthy functions and split logically
-- Prefer self-explaining code naming & structure over comments
-- Comment only complex logic / calculations explaining the WHY
-- Keep it simple wherever possible, avoiding boilerplate code
 
 ---
 

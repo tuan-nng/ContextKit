@@ -1,5 +1,5 @@
 #!/bin/bash
-# Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26
+# Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-09-13
 
 # Custom Claude Code statusline:
 # Format: 5h-Usage: 61% (92m left) | Chat: ████░░░░░░ 44% (87k/200k)

@@ -1,5 +1,5 @@
 # SwiftUI Development Guidelines
-<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26 -->
+<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-09-13 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -8,15 +8,10 @@
 >
 > Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
-**Effective**: 2025-01-26
-**Purpose**: High-level SwiftUI planning reference for AI assistants during UI development
 
 ## Overview
 
 These guidelines provide strategic direction for SwiftUI development in ContextKit-managed projects. They focus on **what UI patterns to choose** during planning phases rather than detailed implementation.
-
-**Prerequisites**: Read [Swift.md](Swift.md) first for language fundamentals.  
-**For detailed UI validation**, see specialized subagents: `check-accessibility`, `check-localization`, `check-modern-code`.
 
 ---
 
@@ -34,6 +29,7 @@ These guidelines provide strategic direction for SwiftUI development in ContextK
 - ✅ **`@State`**: For local view state (toggles, text input, selection)
 - ✅ **SwiftData**: For persistence with automatic UI updates
 - ✅ **Environment**: For dependency injection and app-wide services
+- ✅ **`@Entry`**: For custom environment values without boilerplate (Xcode 16+)
 - ❌ **Avoid**: `@StateObject`/`@ObservableObject` for new development
 
 ---
@@ -42,18 +38,20 @@ These guidelines provide strategic direction for SwiftUI development in ContextK
 
 ### View Organization Preferences
 - ✅ **`@ViewBuilder` properties**: For non-reusable view components
-- ✅ **Inline computed properties**: When components used only within one parent
+- ✅ **In-type computed/functions properties**: When components used only within one parent
 - ✅ **Separate View structs**: Only for truly reusable components across contexts
 - ❌ **Avoid**: Creating separate views for single-use components
 
 ### Modern API Adoption
+- ✅ **`#Preview`**: Use `#Preview` macro over `PreviewProvider` (Xcode 15+)
 - ✅ **`@Previewable @State`**: For interactive previews (Xcode 16+)
 - ✅ **`.rect()` shorthand**: For final shape calls over `RoundedRectangle()`
 - ✅ **Built-in formatters**: `Text(value, format: .percent)` over manual formatting
 - ✅ **Navigation Stack**: Over legacy `NavigationView` for iOS 16+
 
 ### Button and Interaction Patterns
-- ✅ **Trailing closure syntax**: `Button { action } label: { Text("Title") }`
+- ✅ **Trailing closure syntax**: `Button { action } label: { CustomView() }`
+- ✅ **Built-in initializers**: `Button("Save", systemImage: "checkmark") { }` over `Button { } label: { Label("Save", systemImage: "checkmark") }`
 - ✅ **Text selection**: Enable for error messages and important content
 - ✅ **Accessibility labels**: For all interactive elements
 - ❌ **Avoid**: `action:` parameter style for buttons
@@ -65,7 +63,8 @@ These guidelines provide strategic direction for SwiftUI development in ContextK
 ### Color System Preferences
 - ✅ **SwiftUI system colors**: `.gray.opacity(0.1)` over UIKit wrapped colors
 - ✅ **Semantic colors**: `.primary`, `.secondary`, `.accentColor`
-- ✅ **Adaptive materials**: `.regularMaterial`, `.systemBackground`
+- ✅ **Asset Catalog colors**: Add custom colors to Assets.xcassets, reference via generated symbols
+- ✅ **Adaptive materials**: `.regularMaterial`, `.ultraThinMaterial`
 - ❌ **Avoid**: `Color(.secondarySystemGroupedBackground)` and UIKit color wrapping
 
 ### Dark Mode and Accessibility
@@ -104,6 +103,38 @@ These guidelines provide strategic direction for SwiftUI development in ContextK
 - ✅ **Multiplier constants**: For simple mathematical relationships
 - ✅ **Extract expensive computations**: From view body calculations
 - ❌ **Avoid**: Complex calculations directly in view builders
+
+---
+
+## Framework and Package Preferences
+
+### FlineDev Ecosystem for SwiftUI
+FlineDev frameworks provide SwiftUI-specific tools (find all at https://github.com/FlineDev):
+
+**Auto-imported via `FlineDevKit`:**
+- **`HandySwiftUI`**: SwiftUI tools for async states, UI components, styles, and common patterns
+- **`TranslateKitSDK`**: 2000+ pre-localized common UI strings via TK.Action, TK.Label, TK.Message, etc.
+- **`FreemiumKit`**: In-app purchases with native paywalls and subscription management
+
+### HandySwiftUI Utilities
+
+**New Types:**
+- ✅ **Prefer**: `AsyncState<Error>` for async operation tracking with loading/success/failure states
+- ✅ **Prefer**: `Platform.value()` for platform-specific values (iOS vs macOS vs visionOS)
+- ✅ **Prefer**: `VPicker`/`HPicker` for vertical/horizontal picker layouts with custom styling
+- ✅ **Prefer**: `Emoji` for type-safe emoji handling and random emoji generation
+
+**View Modifiers:**
+- ✅ **Prefer**: `.onFirstAppear { }` for one-time setup actions vs repeated onAppear calls
+
+**Styles:**
+- ✅ **Prefer**: `.primary()` and `.secondary()` button styles for consistent UI (HandySwiftUI)
+- ✅ **Prefer**: `.checkboxUniversal` toggle style for cross-platform checkbox behavior (HandySwiftUI)
+- ✅ **Prefer**: `.vertical()` labeled content style for form layouts (HandySwiftUI)
+
+### Common UI Strings
+- ✅ **Prefer**: `Button(TK.Action.save) { }` for common actions (TranslateKitSDK)
+- ✅ **Prefer**: `Text(TK.Label.settings)` for common labels (TranslateKitSDK)
 
 ---
 
@@ -147,81 +178,70 @@ These guidelines provide strategic direction for SwiftUI development in ContextK
 
 ## Error Handling and User Feedback
 
-### Error Display Strategy
-- ✅ **User-friendly messages**: Never show technical errors directly
-- ✅ **Selectable error text**: Enable copying for support purposes
-- ✅ **Alert patterns**: Use `.alert()` for errors with retry options
-- ✅ **ContentUnavailableView**: For empty states and error conditions
+### ErrorKit Integration
+- ✅ **User-friendly messages**: Use `ErrorKit.userFriendlyMessage(for: error)` for both system and custom errors
+- ✅ **String interpolation**: Use `"Save failed: \(error)"` - automatic ErrorKit enhancement
+- ✅ **Throwable errors**: Custom error types should conform to `Throwable` protocol
+- ✅ **Typed throws**: Use `throws(SpecificError)` with `Catching` protocol for error nesting
 
-### Loading and Progress
-- ✅ **ProgressView**: For loading states with descriptive labels
-- ✅ **Accessibility labels**: "Loading user profile..." vs generic "Loading"
-- ✅ **Graceful degradation**: Handle network failures and timeouts
-- ✅ **State management**: Clear loading/success/error state transitions
-
----
-
-## Localization and Accessibility
-
-### Localization Strategy
-- ✅ **Semantic keys**: `"user.profile.welcome.title"` over literal text
-- ✅ **Built-in formatters**: Automatic locale-appropriate formatting
-- ✅ **String Catalog integration**: For translation management
-- ❌ **Avoid**: Hardcoded user-facing strings
-
-### Accessibility Requirements
-- ✅ **VoiceOver labels**: Descriptive labels for all interactive elements
-- ✅ **Dynamic Type**: Support user text size preferences
-- ✅ **Keyboard navigation**: Ensure all functionality accessible
-- ✅ **High contrast**: Consider accessibility in color and contrast choices
+### User Feedback Collection
+- ✅ **Feedback buttons**: Use `.mailComposer()` modifier with `ErrorKit.logAttachment()`
+- ✅ **Automatic log collection**: Include system logs from last 10-30 minutes for context
+- ✅ **Device context**: Include device model, iOS version, and app version in reports
+- ✅ **Structured logging**: Use `Logger()` instead of `print()` for proper log collection
 
 ---
 
-## Quality Assurance Integration
+## Testing Strategy
 
-### Automated Validation
-Quality validation handled by specialized subagents:
-- **`check-accessibility`**: VoiceOver, Dynamic Type, keyboard navigation
-- **`check-localization`**: String externalization, formatter usage
-- **`check-modern-code`**: Modern SwiftUI API adoption
-- **`check-code-debt`**: Component extraction, code organization
+### UI Testing Approach
+- ✅ **Swift Testing**: Use Swift Testing framework (`@Test`, `#expect`) over XCTest for new unit tests
+- ❌ **Avoid**: UI testing (unnecessary complexity and maintenance overhead)
+- ❌ **Avoid**: Testing SwiftUI view hierarchies directly
 
-### Development Gates
-- ✅ **Constitutional compliance**: Accessibility, privacy, localization
-- ✅ **Platform appropriateness**: HIG adherence, system integration
-- ✅ **Performance validation**: No expensive operations in view body
-- ✅ **Component reusability**: Universal design across platforms
+### Focus Areas
+- ✅ **Test ViewModels**: Business logic and state management
+- ✅ **Test data transformations**: Model conversions and formatting logic
+- ✅ **Test validation logic**: Input validation and error states
 
 ---
 
-## Decision Framework
+## Constitutional Principles
 
-When choosing SwiftUI patterns, prioritize in this order:
+All SwiftUI development must support:
 
-1. **Constitutional compliance** - Accessibility, localization, platform standards
-2. **Modern SwiftUI patterns** - Latest APIs and best practices
-3. **Universal design** - Works across iOS, macOS, visionOS
-4. **User experience** - Clear, intuitive, platform-appropriate
-5. **Performance** - Efficient rendering and state management
-6. **Development speed** - Simple, maintainable solutions
+### Accessibility First
+- Dynamic Type support in all UI text
+- Semantic colors that adapt to system appearance
+- VoiceOver labels and hints for interactive elements
+- Keyboard navigation support
+
+### Privacy by Design  
+- Minimal data collection with explicit purpose
+- Secure storage patterns (Keychain for sensitive data)
+- Privacy manifest updates when needed
+- No tracking and privacy-preserving analytics
+
+### Localization Ready
+- No hardcoded user-facing strings in model layer
+- Use TranslateKitSDK for common UI strings: `TK.Action.save`, `TK.Label.settings`
+- Generation of localization string comments for context (in String Catalog)
+- Regional formatting for dates, numbers, currencies
+- String Catalog integration (auto-added by Xcode upon builds)
+
+### Platform Appropriate
+- Follow Human Interface Guidelines
+- Use system conventions and patterns
+- Integrate properly with platform features
+- Optimize for target platform screen size & UX
+
+### Maintainability
+- Prevent overly lengthy functions/views and split logically
+- Prefer self-explaining code/components naming & structure over comments
+- Comment only complex logic / calculations explaining the WHY
+- Keep it simple wherever possible, avoiding boilerplate code
 
 ---
-
-## Integration with Swift Guidelines
-
-### Language Pattern Integration
-- Follow Swift.md for general language preferences (`Date.now`, switch expressions)
-- Apply SwiftUI-specific patterns on top of Swift fundamentals
-- Use modern Swift features within SwiftUI contexts
-
-### Error Handling Integration
-- Use typed throws from Swift guidelines in SwiftUI async operations
-- Apply ErrorKit patterns for user-friendly error display
-- Integrate error chains with SwiftUI alert and error state patterns
-
----
-
-**Remember**: These guidelines inform UI planning decisions. For detailed validation of SwiftUI implementation patterns, rely on the specialized subagents during the development phase.
 
 ════════════════════════════════════════════════════════════════════════════════
 👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION

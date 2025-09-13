@@ -1,5 +1,5 @@
 ---
-meta: "Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26"
+meta: "Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-09-13"
 name: check-accessibility
 description: Comprehensive accessibility compliance validation for iOS/macOS applications with VoiceOver, accessibility traits, and inclusive design patterns
 tools: Read, Grep, Glob

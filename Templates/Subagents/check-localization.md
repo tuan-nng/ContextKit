@@ -1,5 +1,5 @@
 ---
-meta: "Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26"
+meta: "Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-09-13"
 name: check-localization
 description: Comprehensive localization audit with String Catalog validation, cultural adaptation, and TranslateKit integration
 tools: Read, Bash, Grep, Glob

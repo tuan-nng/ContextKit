@@ -1,5 +1,5 @@
 ---
-meta: "Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26"
+meta: "Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-09-13"
 name: check-error-handling
 description: Review error handling implementation with ErrorKit patterns, typed throws, and user-friendly error messages
 tools: Read, Grep, Glob

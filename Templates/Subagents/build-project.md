@@ -1,5 +1,5 @@
 ---
-meta: "Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26"
+meta: "Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-09-13"
 name: build-project
 description: Execute project build operations with comprehensive error reporting, constitutional compliance validation, and development workflow integration
 tools: Bash, Read, Grep, Glob

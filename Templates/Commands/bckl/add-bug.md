@@ -1,5 +1,5 @@
 # Report Bug
-<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26 -->
+<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-09-13 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.

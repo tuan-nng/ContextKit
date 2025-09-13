@@ -1,5 +1,5 @@
 ---
-meta: "Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-01-26"
+meta: "Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-09-13"
 name: check-modern-code
 description: Modernize code by detecting and replacing outdated APIs and patterns with contemporary Swift equivalents
 tools: Read, Edit, Grep, Glob

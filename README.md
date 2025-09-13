@@ -350,3 +350,17 @@ I created this framework for my own Indie app work (rate my apps to show your ap
     <td>Vision</td>
   </tr>
 </table>
+
+## Contributing
+
+### Template Versioning
+
+For behavioral changes (not typos), update the line 2 header in each modified file:
+- Increment **Template Version** number
+- Update **Updated** date to current date
+
+For releases, update **ContextKit** version in all template files.
+
+### Custom Development Standards
+
+ContextKit is opinionated about coding style (3-space indentation, explicit `self.`) and framework choices (FlineDevKit ecosystem with ErrorKit, HandySwift, etc.). If the developer customization sections aren't enough for your needs, fork this repository, modify the guidelines and templates, and update the migrate command in `Templates/Commands/proj/migrate.md` to point to your custom repo URL.
