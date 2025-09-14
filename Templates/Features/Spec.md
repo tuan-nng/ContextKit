@@ -1,166 +1,178 @@
-# Feature Specification: [Generated from $ARGUMENTS]
-<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-09-13 -->
+# Feature Specification Template
+<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14 -->
 
-**Feature Branch**: `feature/[kebab-case-name]`  
-**Created**: [Current Date]  
-**Status**: Draft  
-**Input**: $ARGUMENTS
-
-Business requirements template for iOS/macOS features following constitutional principles. Used by `/ctxk:plan:1-spec` command to create systematic feature specifications.
+## Description
+Feature specification template providing systematic business requirements generation with progress tracking and quality validation.
 
 ════════════════════════════════════════════════════════════════════════════════
 ║ 🤖 EXECUTION FLOW - FEATURE SPECIFICATION GENERATION
 ════════════════════════════════════════════════════════════════════════════════
+║
 ║ ## Execution Flow (main)
-║ ```
-║ 1. Parse user description from Input
-║   → If empty: ERROR "No feature description provided"
-║ 2. Apply iOS/macOS constitutional principles
-║   → Accessibility-first design mandatory
-║   → Privacy by design enforced  
-║   → Platform UX guidelines required
-║ 3. Extract key concepts from description
-║   → Identify: actors, actions, data, constraints
-║   → Consider platform-specific patterns (iPhone, iPad, Mac)
-║ 4. For each unclear aspect:
-║   → Mark with [NEEDS CLARIFICATION: specific iOS/macOS question]
-║   → Common gaps: user auth method, data persistence, platform targets
-║ 5. Generate iOS/macOS user scenarios
-║   → Include accessibility scenarios (VoiceOver, Switch Control)
-║   → Account for different screen sizes and orientations
-║   → Consider multi-platform usage patterns
-║ 6. Create functional requirements with iOS/macOS context
-║   → Privacy manifest considerations embedded
-║   → App Store review guidelines compliance checked
-║   → Platform-specific capabilities assessed (CloudKit, HealthKit, etc.)
-║ 7. Run iOS/macOS validation gates
-║   → App Store compliance check
-║   → Privacy impact assessment
-║   → Accessibility requirement verification
-║   → Localization readiness review
-║ 8. Anti-speculation enforcement
-║   → No "nice to have" features without clear user value
-║   → Each feature must solve specific problem
-║   → Implementation cost vs benefit considered
-║ 9. Self-validation checklist execution
-║   → All mandatory sections complete
-║   → No ambiguous requirements remain
-║   → Constitutional principles satisfied
-║ 10. Return: SUCCESS (iOS/macOS spec ready for technical planning)
-║ ```
 ║
-║ ## ⚡ Quick Guidelines
+║ ### Phase 1: Context Analysis & Guidelines Loading
 ║
-║ - ✅ Focus on WHAT users need and WHY
-║ - ❌ Avoid HOW to implement (no tech stack, APIs, code structure)
-║ - 👥 Written for business stakeholders, not developers
-║ - 🍎 iOS/macOS platform conventions and constitutional principles enforced
+║ 1. **Load Project Context**
+║    - Use `Read` tool to read project Context.md: `Read Context.md`
+║    - Extract project type, tech stack, development patterns, workspace reference
+║    - Document project context for specification customization
 ║
-║ ### Section Requirements
-║ - Mandatory sections: Must be completed for every feature
-║ - Optional sections: Include only when relevant to the feature
-║ - When a section doesn't apply, remove it entirely (don't leave as "N/A")
+║ 2. **Load Development Guidelines**
+║    - Based on project type detected from Context.md:
+║      - If Swift detected: Use `Read` tool: `Read Context/Guidelines/Swift.md`
+║      - If SwiftUI detected: Use `Read` tool: `Read Context/Guidelines/SwiftUI.md`
+║      - If other languages detected: Look for workspace-specific guidelines in Context/Guidelines/
+║    - For workspace projects: Use `Read` tool on workspace Context.md for additional standards
+║    - Document loaded guidelines for development pattern application
 ║
-║ ### For AI Generation
-║ When creating this spec from a user prompt:
-║ 1. Mark all ambiguities: Use [NEEDS CLARIFICATION: specific question] for any
-║   assumption you'd need to make
-║ 2. Don't guess: If the prompt doesn't specify something (e.g., "user
-║   authentication" without method), mark it
-║ 3. Think like a tester: Every vague requirement should fail the "testable and
-║   unambiguous" checklist item
-║ 4. iOS/macOS specifics: Consider platform differences, device capabilities,
-║   App Store requirements
-║ 5. Common underspecified areas:
-║   - User authentication method (Apple ID, email/password, OAuth)
-║   - Data persistence approach (local CoreData, CloudKit sync, both)
-║   - Target platforms (iOS only, universal, macOS specific)
-║   - Performance targets and scale expectations
-║   - Privacy data usage and collection policies
-║   - Accessibility requirements beyond basic compliance
-║   - Localization scope and target languages
-║   - Integration requirements with platform services
+║ 3. **Extract User Requirements from Original Input**
+║    - Parse original feature description provided by user
+║    - Identify key concepts: primary functionality, user actors, data involved, platform targets
+║    - Generate initial understanding of user needs and business value
+║
+║ ### Phase 2: Specification Content Generation
+║
+║ 4. **Generate Feature Information**
+║    - Use `Edit` tool to replace template header with specific feature information:
+║      - Title: "# Feature Specification: [Feature Name]"
+║      - Feature Branch: `feature/[kebab-case-name]` (from parent command)
+║      - Created: [Current Date]
+║      - Status: Draft
+║      - Input: [Original user description]
+║
+║ 5. **Create Primary User Story**
+║    - Generate "As a [User Type], I want to [User Goal] so that [User Benefit]"
+║    - Include platform-specific context (iOS/macOS considerations)
+║    - Add multi-platform context sections
+║
+║ 6. **Generate Acceptance Scenarios**
+║    - Create comprehensive Given/When/Then scenarios
+║    - Include Happy Path, Error Path, Edge Cases
+║    - Add device-specific scenarios (iPhone, iPad, Mac)
+║    - Consider network conditions and offline scenarios
+║
+║ 7. **Define Functional Requirements**
+║    - Generate specific, testable requirements (FR-001, FR-002, etc.)
+║    - Each requirement must be:
+║      - Testable with clear success/failure criteria
+║      - Platform-appropriate for iOS/macOS conventions
+║      - User-focused and business-value driven
+║
+║ ### Phase 3: Business Validation & Scope Definition
+║
+║ 8. **Focus on Business Value**
+║    - Keep specification focused on user needs and business requirements
+║    - Avoid technical implementation details (frameworks, APIs, code structure)
+║    - Document what users need, not how to build it
+║
+║ 9. **Feature Justification & Scope Definition**
+║    - Fill Value Validation section: user problem, success metrics, cost/benefit
+║    - Define clear scope boundaries:
+║      - IN SCOPE: Specific features with clear user value
+║      - OUT OF SCOPE: Exclude unnecessary features
+║      - FUTURE CONSIDERATIONS: Ideas for later phases
+║    - Apply anti-speculation enforcement (check all relevant boxes)
+║
+║ 10. **Mark Clarification Needs**
+║     - For any ambiguous or underspecified requirements, mark with:
+║       [NEEDS CLARIFICATION: specific question]
+║     - Common areas: authentication methods, data persistence, target platforms,
+║       performance targets, user flows, business requirements
+║
+║ ### Phase 4: Validation & Completion
+║
+║ 11. **Execute Business Validation Gates**
+║     - User Value: Clear user problems solved, measurable success criteria
+║     - Scope Clarity: Well-defined boundaries, no feature creep
+║     - Testability: Requirements can be validated with clear pass/fail criteria
+║     - Quality Assurance: Complete user flows, edge cases, measurable criteria
+║
+║ 12. **Template Quality Validation**
+║     - Content Quality: No implementation details, focused on user value, stakeholder-appropriate
+║     - Requirement Completeness: Testable requirements, clear scope, identified dependencies
+║     - Business Focus: Requirements focused on what users need, not how to build it
+║     - Check all boxes in template validation section
+║
+║ 13. **Update Execution Status**
+║     - Check off all completed execution status items:
+║       - User description parsed
+║       - Development guidelines applied
+║       - Key concepts extracted
+║       - Ambiguities marked with [NEEDS CLARIFICATION]
+║       - Platform-specific user scenarios defined
+║       - Platform-specific requirements generated
+║       - Anti-speculation enforcement applied
+║       - Validation gates executed
+║       - Template self-validation completed
+║       - Review checklist passed
+║
+║ 14. **COMPLETION**
+║     - Use `Edit` tool to remove this entire boxed system instructions section
+║     - Leave only the clean feature specification content for team use
+║     - Final document focused on business requirements, not generation process
+║
+║ ## Success Criteria
+║ - All specification sections completed with specific, project-appropriate content
+║ - Development guidelines from loaded standards properly applied throughout
+║ - Requirements are specific, testable, and unambiguous with clear success criteria
+║ - Platform considerations (iOS/macOS) integrated throughout specification
+║ - User value clearly articulated without technical implementation details
+║ - All validation gates passed and checkboxes marked appropriately
+║ - [NEEDS CLARIFICATION] markers used for genuine ambiguities only
+║ - System instructions completely removed from final specification document
+║
 ════════════════════════════════════════════════════════════════════════════════
+
+# Feature Specification: [AI Generated Feature Name]
+
+**Feature Branch**: `feature/[ai-generated-branch-name]`
+**Created**: [AI Generated Current Date]
+**Status**: Draft
+**Input**: [AI Populated Original User Description]
 
 ## User Scenarios & Testing *(mandatory)*
 
 ### Primary User Story
-As a [User Type], I want to [User Goal] so that [User Benefit].
+[AI Generated: As a [User Type], I want to [User Goal] so that [User Benefit]]
 
-**iOS/macOS Context**: 
-- Accessibility: How does this work with VoiceOver, Switch Control, or Assistive Touch?
-- Multi-platform: How does the experience differ between iPhone, iPad, and Mac?
-- Privacy: What personal data is involved and how is user consent obtained?
+**Platform Context**:
+- **Multi-platform**: [AI Generated platform-specific experience differences]
+- **User Experience**: [AI Generated user experience considerations]
+- **Data Handling**: [AI Generated data and user information considerations]
 
 ### Acceptance Scenarios
-1. **Given** [Scenario Context], **When** [User Action], **Then** [Expected Outcome]
-   - **Happy Path**: Normal successful usage
-   - **Error Path**: What happens when things go wrong
-   - **Accessibility Path**: How assistive technologies interact
-   - **Privacy Path**: User data protection and consent flows
+[AI Generated comprehensive Given/When/Then scenarios based on user input and business requirements]
 
-2. **Given** [Additional Context], **When** [Different Action], **Then** [Different Outcome]
-   - Include different device contexts (iPhone, iPad, Mac)
-   - Consider different user capabilities and preferences
-   - Account for network conditions and offline scenarios
+1. **Given** [AI Generated Scenario Context], **When** [AI Generated User Action], **Then** [AI Generated Expected Outcome]
+   - **Happy Path**: [AI Generated normal successful usage scenario]
+   - **Error Path**: [AI Generated error handling scenario]
+   - **Edge Cases**: [AI Generated edge case scenarios]
+
+2. **Given** [AI Generated Additional Context], **When** [AI Generated Different Action], **Then** [AI Generated Different Outcome]
+   - [AI Generated device-specific scenarios from loaded guidelines]
 
 ### Edge Cases
-- **Platform variations**: iPhone vs iPad vs Mac specific behaviors
-- **Accessibility scenarios**: VoiceOver navigation, voice control, reduced motion
-- **Privacy edge cases**: User denies permissions, data export requests, account deletion
-- **Multi-device usage**: Handoff, Continuity, CloudKit sync conflicts
-- **App lifecycle**: Background processing, memory pressure, system interruptions
-- **Localization**: Right-to-left languages, different date/number formats, cultural differences
+[AI Generated edge cases based on user requirements and business logic]
+- **Platform variations**: [AI Generated device-specific behaviors if applicable]
+- **Multi-device usage**: [AI Generated sync conflicts if applicable]
+- **App lifecycle**: [AI Generated background processing, interruption scenarios]
+- **Network conditions**: [AI Generated offline/online state changes]
+- **User scenarios**: [AI Generated different user types, permissions, data states]
 
 ## Requirements *(mandatory)*
 
 ### Functional Requirements
+[AI Generated specific requirements based on user input and loaded development guidelines]
 
-**[AI INSTRUCTION: Generate specific requirements based on $ARGUMENTS input]**
+- **FR-001**: System MUST [AI Generated Specific Requirement 1 based on user input]
+- **FR-002**: System MUST [AI Generated Specific Requirement 2 based on user input]
+- **FR-003**: System MUST [AI Generated Specific Requirement 3 based on user input]
 
-- **FR-001**: System MUST [Specific Requirement 1]
-- **FR-002**: System MUST [Specific Requirement 2]  
-- **FR-003**: System MUST [Specific Requirement 3]
+*[AI ensures each requirement is:]*
+- *Testable with clear success/failure criteria*
+- *Focused on user value and business needs*
+- *Free of technical implementation details*
 
-*Each requirement must be:*
-- Testable with clear success/failure criteria
-- Platform-appropriate for iOS/macOS conventions
-- Accessibility-compliant from day one
-- Privacy-respectful by design
-- Localizable without code changes
-
-### iOS/macOS Constitutional Gates (Constitutional Validation)
-
-#### Privacy by Design Gate (Constitutional Principle I)
-- [ ] Privacy manifest impact assessed for any data collection/storage?
-- [ ] User consent flows designed for all personal data usage?
-- [ ] Data minimization principle applied (collect only what's needed)?
-- [ ] User data export and deletion capabilities planned?
-
-#### Accessibility-First Gate (Constitutional Principle II)  
-- [ ] VoiceOver labels and hints specified for all UI elements?
-- [ ] Dynamic Type support planned for all text content?
-- [ ] Color contrast requirements met (4.5:1 minimum)?
-- [ ] Keyboard navigation flow defined for all interactions?
-- [ ] Switch Control compatibility considered for all gestures?
-
-#### Localizability Gate (Constitutional Principle III)
-- [ ] All user-facing text identified for TranslateKit integration?
-- [ ] Date, number, and currency formatting uses system preferences?
-- [ ] Right-to-left language layout considerations included?
-- [ ] Cultural appropriateness assessed for content and imagery?
-
-#### Platform UX Gate (Constitutional Principle IV)
-- [ ] Human Interface Guidelines compliance verified?
-- [ ] Platform-specific interaction patterns followed?
-- [ ] System integration opportunities identified (Shortcuts, Widgets, etc.)?
-- [ ] App Store review guidelines compliance checked?
-
-#### Code Maintainability Gate (Constitutional Principle V)
-- [ ] Feature complexity justified (max 3 major components)?
-- [ ] Simple solution chosen over complex alternatives?
-- [ ] Clear testing strategy defined for all requirements?
-- [ ] Documentation and knowledge sharing plan included?
 
 ## Feature Justification Required
 *Every proposed feature must pass these criteria*
@@ -173,9 +185,9 @@ As a [User Type], I want to [User Goal] so that [User Benefit].
 - [ ] Maintenance burden considered and acceptable?
 
 ### Scope Boundaries
-- **IN SCOPE**: [Specific features with clear user value and constitutional compliance]
-- **OUT OF SCOPE**: [Explicitly exclude tempting but unnecessary features]
-- **FUTURE CONSIDERATIONS**: [Ideas for later that shouldn't be implemented now]
+- **IN SCOPE**: [AI Generated specific features with clear user value]
+- **OUT OF SCOPE**: [AI Generated explicitly excluded tempting but unnecessary features]
+- **FUTURE CONSIDERATIONS**: [AI Generated ideas for later that shouldn't be implemented now]
 
 ### Anti-Speculation Enforcement
 - [ ] No speculative or "future-proofing" features included?
@@ -185,38 +197,20 @@ As a [User Type], I want to [User Goal] so that [User Benefit].
 
 ---
 
-## iOS/macOS Validation Gates (Auto-executed)
+## Business Validation Gates (Auto-executed)
 *Checked by execution flow before returning SUCCESS*
 
-### Platform Compliance
-- [ ] Human Interface Guidelines adherence verified?
-- [ ] App Store Review Guidelines compliance checked?  
-- [ ] Platform capabilities and limitations considered?
-- [ ] Device-specific adaptations planned (iPhone/iPad/Mac)?
-
-### Privacy & Security
-- [ ] Privacy manifest requirements identified?
-- [ ] Data collection and usage clearly specified?
-- [ ] User consent mechanisms defined?
-- [ ] Security best practices applied?
-
-### Accessibility Foundation
-- [ ] VoiceOver support designed from start?
-- [ ] Dynamic Type compatibility planned?
-- [ ] Color accessibility requirements met?
-- [ ] Motor accessibility accommodations included?
-
-### Localization Readiness
-- [ ] Internationalization requirements identified?
-- [ ] Cultural sensitivity considerations addressed?
-- [ ] Technical localization requirements specified?
-- [ ] Market-specific compliance needs identified?
-
-### Quality Assurance
+### Requirements Quality
 - [ ] All user flows have Happy Path + Error Path scenarios?
 - [ ] Edge cases documented with expected behaviors?
 - [ ] Success criteria are measurable with specific metrics?
 - [ ] No [NEEDS CLARIFICATION] markers remain unresolved?
+
+### Business Value
+- [ ] Clear user problems identified and documented?
+- [ ] Success metrics defined and measurable?
+- [ ] Feature scope properly bounded (IN/OUT/FUTURE)?
+- [ ] Requirements focused on user needs, not technical implementation?
 
 ---
 
@@ -237,17 +231,14 @@ As a [User Type], I want to [User Goal] so that [User Benefit].
 - [ ] Scope is clearly bounded with IN/OUT/FUTURE sections
 - [ ] Dependencies and assumptions identified
 
-### Constitutional Integration
-- [ ] All five constitutional principles addressed
-- [ ] iOS/macOS platform conventions followed
+### Business Focus
+- [ ] Requirements focused on user value, not technical implementation
 - [ ] Anti-speculation enforcement applied
 - [ ] Quality gates embedded throughout specification
 
-### iOS/macOS Specificity
-- [ ] Platform differences considered (iPhone/iPad/Mac)
-- [ ] Apple ecosystem integration opportunities identified  
-- [ ] App Store and platform compliance verified
-- [ ] Accessibility-first approach demonstrated
+### Scope Clarity
+- [ ] Platform differences considered if relevant to user experience
+- [ ] Clear boundaries between business requirements and implementation details
 
 ---
 
@@ -255,8 +246,8 @@ As a [User Type], I want to [User Goal] so that [User Benefit].
 *Updated by main() during processing*
 
 - [ ] User description parsed
-- [ ] Constitutional principles applied
-- [ ] Key concepts extracted  
+- [ ] Development guidelines applied
+- [ ] Key concepts extracted
 - [ ] Ambiguities marked with [NEEDS CLARIFICATION]
 - [ ] iOS/macOS user scenarios defined
 - [ ] Platform-specific requirements generated
@@ -275,4 +266,35 @@ As a [User Type], I want to [User Goal] so that [User Benefit].
 - AI creates kebab-case branch name (e.g., "user-authentication") 
 - AI fills in current date and extracts user story components
 
-**Next Phase**: After this specification is approved, proceed to `/ctxk:plan:2-tech` for technical architecture planning with constitutional compliance validation.
+---
+
+## Execution Status *(Progress Tracking)*
+*Updated by AI during specification generation - check off completed steps*
+
+### Phase 1: Context Analysis & Guidelines Loading
+- [ ] Project Context.md loaded and analyzed
+- [ ] Development guidelines loaded based on project type
+- [ ] Development patterns extracted from loaded guidelines
+- [ ] User requirements extracted from original input
+
+### Phase 2: Specification Content Generation
+- [ ] Feature information header generated
+- [ ] Primary user story created with platform context
+- [ ] Comprehensive acceptance scenarios generated
+- [ ] Functional requirements defined with clear user value
+
+### Phase 3: Business Validation & Scope Definition
+- [ ] Business value and user problems clearly documented
+- [ ] Feature justification and scope boundaries defined
+- [ ] Clarification needs marked with [NEEDS CLARIFICATION] format
+- [ ] All validation gates executed and boxes checked
+
+### Phase 4: Final Validation & Completion
+- [ ] All validation sections completed with appropriate checks
+- [ ] Template quality validation completed
+- [ ] Execution status fully updated
+- [ ] System instructions removed from final document
+
+---
+
+**Next Phase**: After this specification is approved, proceed to `/ctxk:plan:2-tech` for technical architecture planning and implementation design.

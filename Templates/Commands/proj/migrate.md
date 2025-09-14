@@ -1,5 +1,5 @@
 # Upgrade to Latest
-<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-09-13 -->
+<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -11,80 +11,109 @@
 ## Description
 Update ContextKit templates to latest versions while preserving user customizations
 
-## Parameters
-None (fully automatic)
+## Reference
+
+**User Question Format**: When asking user questions, use this consistent format:
+```
+═══════════════════════════════════════════════════
+║ ❓ [DESCRIPTIVE HEADER]
+═══════════════════════════════════════════════════
+║
+║ [Question text and context]
+║ [Options if applicable]
+║
+║ [Clear response instruction]
+```
 
 ## Execution Flow (main)
-```
-1. Update Global ContextKit
-   → Pull latest changes to ~/.ContextKit/ repository
-   → If pull fails (no internet): WARN "Could not check for updates" and continue
-
-2. Scan Project Template Files
-   → Check version differences between project and ~/.ContextKit/ templates
-   → Identify files needing updates and new files to add
-
-3. Auto-Update Files
-   → Update files with version differences preserving user customizations
-   → Add new template files that don't exist in project
-   → Skip files with missing/corrupted customization sections (with warning)
-
-4. Summary Report
-   → Display updated files and any warnings
-   → Confirm migration complete
-```
-
-## Implementation
 
 ### Phase 1: Update Global ContextKit
-```
+
 1. Check if ~/.ContextKit/ directory exists
-   → If missing: ERROR "Run global installation first"
+   - Use Bash tool: ls -la ~/.ContextKit/
+   - If missing: ERROR "Run global installation first"
 
 2. Update global repository with git pull
-   → cd ~/.ContextKit/ && git pull origin main --quiet
-   → If pull fails: WARN "Could not check for updates (no internet)" and continue
-```
+   - Use Bash tool: cd ~/.ContextKit/ && git pull origin main --quiet
+   - If pull fails: WARN "Could not check for updates (no internet)" and continue
 
 ### Phase 2: Scan Project Templates
-```
+
 1. Define file mappings for all template types:
    - Templates/Guidelines/*.md → Context/Guidelines/
    - Templates/Commands/**/*.md → .claude/commands/ctxk/
    - Templates/Agents/*.md → .claude/agents/ctxk/
    - Templates/Scripts/*.sh → Context/Scripts/ (team sharing, hooks via settings.json)
+   - Templates/settings.json → .claude/settings.json (intelligent merge only)
    - Templates/Backlog/*.md → Context/Backlog/ (preserving user content via customization sections)
 
 2. For each mapping:
-   → Check template version using `sed -n '2p' file | grep "Template Version"`
-   → Compare with project file version (if exists)
-   → Add to update list if versions differ or file missing
-```
+   - Use Bash tool: sed -n '2p' file | grep "Template Version" to check template versions
+   - Use Read tool to examine project files if they exist
+   - Compare versions and add to update list if versions differ or file missing
 
 ### Phase 3: Update Files Preserving Customizations
-```
+
+#### Phase 3.1: Intelligent Settings.json Merge
+
+1. Use Read tool to examine current .claude/settings.json
+2. Use Read tool to read ~/.ContextKit/Templates/settings.json for latest template
+
+3. StatusLine Configuration:
+   - If user has statusLine setting with path containing "CustomStatusline.sh":
+     - Check if path is correct (should be "./Context/Scripts/CustomStatusline.sh")
+     - If path incorrect: Update path to correct location using Edit tool
+     - If path correct: No change needed
+   - If user has no statusLine setting or different script: Skip (user opted out)
+
+4. Model Setting:
+   - Skip entirely - never update user's model preference
+
+5. Permissions Array Merge:
+   - Read current allow/deny arrays from user settings
+   - Read template allow/deny arrays from ContextKit template
+   - For allow list: Smart merge avoiding duplicates, keep alphabetically sorted
+   - For deny list: Smart merge avoiding duplicates, keep alphabetically sorted
+   - Use Edit tool to update only if arrays changed
+
+6. Hooks Configuration:
+   - Identify ContextKit hooks: PostToolUse="./Context/Scripts/AutoFormat.sh", SessionStart="./Context/Scripts/VersionStatus.sh"
+   - Keep all user-specific hooks unchanged
+   - Add missing ContextKit hooks
+   - Update existing ContextKit hooks if paths changed
+   - Remove only ContextKit hooks that no longer exist in template
+   - Use Edit tool to update only if hooks changed
+
+7. Track settings.json changes:
+   - Add to UPDATED_FILES if any changes made
+   - Add to WARNINGS if merge had issues
+
+### Phase 3.2: Other Files
+
 1. For each file needing update:
-   → If new file: Copy directly to project location
-   → If existing file with customizations:
-     - Find "👩‍💻 DEVELOPER CUSTOMIZATIONS" line number in both files
-     - Merge: template content above + user content below separator
+   - If new file: Use Bash tool cp to copy directly to project location
+   - If existing file with customizations:
+     - Use Read tool to examine both template and project files
+     - Use Grep tool to find "👩‍💻 DEVELOPER CUSTOMIZATIONS" line number in both files
+     - Use Edit tool to merge: template content above + user content below separator
      - If separator missing: SKIP with warning
-   → If existing file without customizations (Scripts): Replace entirely
+   - If existing file without customizations (Scripts): Use Bash tool cp to replace entirely
+   - If settings.json: Use intelligent merge logic (see Phase 3.1)
 
 2. Track results:
-   → NEW_FILES: List of files copied
-   → UPDATED_FILES: List of files merged with version info
-   → WARNINGS: List of files skipped or issues encountered
-```
+   - NEW_FILES: List of files copied
+   - UPDATED_FILES: List of files merged with version info
+   - WARNINGS: List of files skipped or issues encountered
 
 ### Phase 4: Summary Report
-```
+
 Display results organized by:
-→ New files added (count and list)
-→ Files updated (count and version changes)
-→ Warnings (count and descriptions)
-→ Overall status (complete/no updates needed)
-```
+- New files added (count and list)
+- Files updated (count and version changes)
+- Settings.json merge results (if applicable)
+- Warnings (count and descriptions)
+- Overall status (complete/no updates needed)
+- Git review reminder: "Migration complete. Review changes with 'git status' and commit when ready."
 
 ## Error Conditions
 
@@ -110,16 +139,13 @@ Display results organized by:
 ════════════════════════════════════════════════════════════════════════════════
 
 This section is preserved during ContextKit migrations and updates.
-Add project-specific instructions, examples, and overrides below.
+Add migration-specific customizations below.
 
-## Project-Specific Instructions
+## Custom Migration Steps
+<!-- Add extra steps like CI/CD configs, custom agents, or company workflows -->
 
-<!-- Add project-specific guidance here -->
+## Skip Migration Files
+<!-- Document files to exclude like custom settings or company statuslines -->
 
-## Additional Examples
-
-<!-- Add examples specific to your project here -->
-
-## Override Behaviors
-
-<!-- Document any project-specific overrides here -->
+## Custom Template Sources
+<!-- Define alternative sources like company-specific templates or internal repositories -->

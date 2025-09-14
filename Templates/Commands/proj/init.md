@@ -11,10 +11,19 @@
 ## Description
 Initialize current project with ContextKit development workflow system. Sets up systematic development environment with template distribution and context generation.
 
-## Parameters
-None (automatic setup with user confirmations when needed)
-
 ## Execution Flow (main)
+
+**User Question Format**: When asking user questions, use this consistent format:
+```
+═══════════════════════════════════════════════════
+║ ❓ [DESCRIPTIVE HEADER]
+═══════════════════════════════════════════════════
+║
+║ [Question text and context]
+║ [Options if applicable]
+║
+║ [Clear response instruction]
+```
 
 ### Phase 1: Project Status Assessment
 
@@ -70,43 +79,50 @@ None (automatic setup with user confirmations when needed)
    ```
    > **Note**: First `/*` copies all files, then `/*.sh` applies executable permissions to all .sh files
 
-9. **Copy Backlog Templates**
+9. **Copy Development Guidelines**
+   ```bash
+   mkdir -p Context/Guidelines
+   cp ~/.ContextKit/Templates/Guidelines/* Context/Guidelines/
+   echo "✅ Copied development guidelines (Swift.md, SwiftUI.md, etc.)"
+   ```
+
+10. **Copy Backlog Templates**
    ```bash
    cp ~/.ContextKit/Templates/Backlog/* Context/Backlog/
    echo "✅ Copied backlog templates (Ideas-Inbox.md, Bugs-Backlog.md, etc.)"
    ```
 
-10. **Copy Project Context Template**
+11. **Copy Project Context Template**
     ```bash
     cp ~/.ContextKit/Templates/Contexts/Project.md Context.md
     echo "✅ Copied project context template"
     ```
 
-11. **Check Existing Settings**
+12. **Check Existing Settings**
     - Use `Read` tool to check if `.claude/settings.json` exists
-    - If doesn't exist: Copy complete template and skip to step 16
+    - If doesn't exist: Copy complete template and skip to step 17
     ```bash
     cp ~/.ContextKit/Templates/settings.json .claude/settings.json
     echo "✅ Installed complete ContextKit settings"
     ```
 
-12. **Configure Model Setting**
+13. **Configure Model Setting**
     - Use `Read` tool to examine current model setting
-    - If missing or different from "sonnet", ask user: "Current model: [current/none]. Set to 'sonnet'? Default Claude Code uses Opus which burns through the 5-hour limit quickly. ContextKit uses Sonnet to avoid hitting limits during complex planning phases while maintaining sufficient quality with proper guidance. (recommended)"
+    - If missing or different from "sonnet", ask user: "Current model: [current/none]. Set to 'sonnet'? Default Claude Code uses Opus which burns through the 5-hour limit quickly. ContextKit uses Sonnet to avoid hitting limits during complex planning phases while maintaining sufficient quality with proper guidance. (recommended Y/N)"
     - If user agrees or no current setting: Use `Edit` tool to set `"model": "sonnet"`
 
-13. **Configure Status Line**
+14. **Configure Status Line**
     - Check current statusLine configuration in settings.json
-    - If missing or different from "./Context/Scripts/CustomStatusline.sh", ask user: "Current statusline: [current/none]. Set to ContextKit statusline? Provides real-time monitoring: '5h-Usage: 73% (1.4h left) | Chat: ▓▓▓▓▓▓░░░░ 64% (128k/200k)' with colored progress bars (Light Gray <50%, Yellow 50-80%, Red >80%) for context awareness. (recommended)"
+    - If missing or different from "./Context/Scripts/CustomStatusline.sh", ask user: "Current statusline: [current/none]. Set to ContextKit statusline? Provides real-time monitoring: '5h-Usage: 73% (1.4h left) | Chat: ▓▓▓▓▓▓░░░░ 64% (128k/200k)' with colored progress bars (Light Gray <50%, Yellow 50-80%, Red >80%) for context awareness. (recommended Y/N)"
     - If user agrees or no current setting: Use `Edit` tool to set complete statusLine configuration from template
 
-14. **Merge Permissions**
+15. **Merge Permissions**
     - If no existing permissions: Use `Edit` tool to set complete permissions from template
     - If existing permissions: Use `Edit` tool to intelligently merge arrays:
       - **Allow list**: Remove existing entries that are subsets of ContextKit permissions (e.g., remove "Bash" if ContextKit has "Bash"), add ContextKit entries, remove exact duplicates, sort alphabetically with each entry on own line
       - **Deny list**: Add ContextKit entries, remove only exact duplicates (keep all specific denials), sort alphabetically with each entry on own line
 
-15. **Add ContextKit Hooks**
+16. **Add ContextKit Hooks**
     - Add PostToolUse hook for AutoFormat: `./Context/Scripts/AutoFormat.sh`
     - Add SessionStart hook for VersionStatus: `./Context/Scripts/VersionStatus.sh`
     - If no existing hooks: Use `Edit` tool to set complete hooks configuration from template
@@ -114,18 +130,18 @@ None (automatic setup with user confirmations when needed)
 
 ### Phase 3: Context Integration & Project Investigation
 
-16. **Discover Workspace Context**
+17. **Discover Workspace Context**
     - Use `Bash` tool to traverse parent directories: `cd .. && pwd` then check for Context.md
     - Continue checking parent directories until reaching root `/` or finding workspace Context.md
     - If workspace Context.md found: note the workspace name and inheritance rules
     - If multiple workspace contexts found in path: ask user which to inherit from
 
-17. **Handle Existing CLAUDE.md**
+18. **Handle Existing CLAUDE.md**
     - If `CLAUDE.md` exists: append `@Context.md` reference if not already present using `Edit` tool
     - If no `CLAUDE.md`: create minimal one with `@Context.md` reference using `Write` tool
     - Include workspace context reference if discovered
 
-18. **Copy Project-Specific Formatters** (should be done before Context.md investigation)
+19. **Copy Project-Specific Formatters** (should be done before Context.md investigation)
     - For Swift projects (swift-package, ios-app, vapor-server):
       ```bash
       cp ~/.ContextKit/Templates/Formatters/.swift-format .
@@ -133,7 +149,7 @@ None (automatic setup with user confirmations when needed)
       echo "✅ Copied Swift formatter configurations"
       ```
 
-19. **Execute Context.md Template Instructions**
+20. **Execute Context.md Template Instructions**
     - Use `Read` tool to read the copied `Context.md` file
     - Follow the **system instructions** section (boxed area) step by step
     - The template contains project detection logic (Package.swift → swift-package, etc.)
@@ -143,7 +159,7 @@ None (automatic setup with user confirmations when needed)
 
 ### Phase 4: Verification & Completion
 
-20. **Verify Installation**
+21. **Verify Installation**
     - Use `Read` tool to confirm `Context.md` exists and contains project-specific content
     - Use `Glob` tool to verify `.claude/commands/ctxk/plan/1-spec.md` exists
     - Use `Bash` tool to check `Context/Scripts/AutoFormat.sh` is executable: `ls -la Context/Scripts/AutoFormat.sh`
@@ -151,7 +167,16 @@ None (automatic setup with user confirmations when needed)
     - Use `Bash` tool to verify status line configured: `grep "CustomStatusline.sh" .claude/settings.json`
     - Use `Read` tool to confirm `.claude/settings.json` contains ContextKit configuration
 
-21. **Display Completion**
+22. **Update Workspace Context (if applicable)**
+    - If workspace Context.md was discovered in step 17:
+      - Use `Read` tool to read the workspace Context.md file
+      - Look for current project name in the "Discovered Projects" or "Project Inventory" section
+      - If project is listed with status "not setup yet":
+        - Use `Edit` tool to change status from "not setup yet" to "ContextKit-enabled"
+        - Update the setup status count (e.g., "2 of 5 projects have ContextKit enabled" → "3 of 5 projects have ContextKit enabled")
+      - If project not listed in workspace: Use `Edit` tool to add project to the discovered projects list with "ContextKit-enabled" status
+
+23. **Display Completion**
     - Display success message using template below
     - Suggest next steps based on project state (new vs existing project)
 
@@ -164,6 +189,7 @@ None (automatic setup with user confirmations when needed)
    ✓ Context.md - Project configuration and development context
    ✓ Context/Features/ - Systematic feature development
    ✓ Context/Backlog/ - Ideas and bugs with evaluation frameworks
+   ✓ Context/Guidelines/ - Development standards and constitutional principles
    ✓ Context/Scripts/ - Code formatting and status automation
    ✓ .claude/commands/ctxk/ - Development workflow commands
    ✓ .claude/agents/ctxk/ - Quality assurance specialists
@@ -178,10 +204,10 @@ None (automatic setup with user confirmations when needed)
    Better workflow: Start fresh chats when needed and resume with /ctxk:impl:start-working.
 
 [NEW PROJECT DETECTED]:
-   🎯 Begin with: /ctxk:plan:1-spec "[AppName] - [brief app concept description]"
+   🎯 Begin with: /ctxk:plan:1-spec
 
 [EXISTING PROJECT DETECTED]:
-   🎯 Begin with: /ctxk:plan:1-spec "[suggested feature based on project analysis]"
+   🎯 Begin with: /ctxk:plan:1-spec
 
 💡 Available commands: /ctxk:plan:*, /ctxk:impl:*, /ctxk:bckl:*
 ```

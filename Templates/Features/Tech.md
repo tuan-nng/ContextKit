@@ -5,7 +5,7 @@
 **Input**: Specification from Phase 0 (Spec.md)  
 **Output**: Technical implementation plan ready for task breakdown
 
-Technical planning template for iOS/macOS features with constitutional compliance. Used by `/ctxk:plan:2-tech` command for architecture decisions.
+Technical planning template for iOS/macOS features with Context/Guidelines compliance. Used by `/ctxk:plan:2-tech` command for architecture decisions.
 
 ════════════════════════════════════════════════════════════════════════════════
 ║ 🤖 EXECUTION FLOW - TECHNICAL ARCHITECTURE GENERATION  
@@ -19,7 +19,7 @@ Technical planning template for iOS/macOS features with constitutional complianc
 ║ 2. Analyze specification for technical requirements
 ║   → Extract: user flows, data models, integration needs, performance targets
 ║   → Identify: complexity factors, external dependencies, platform constraints
-║ 3. Apply constitutional compliance gates (Phase -1)
+║ 3. Apply Context/Guidelines compliance gates (Phase -1)
 ║   → Package-first principle: Can this be a Swift package?
 ║   → ErrorKit integration: How will errors be handled?
 ║   → 3-space indentation: Coding style confirmed?
@@ -39,7 +39,7 @@ Technical planning template for iOS/macOS features with constitutional complianc
 ║   → Mark uncertain areas with [NEEDS CLARIFICATION: specific technical question]
 ║ 7. Run technical validation gates
 ║   → Architecture supports all user scenarios from specification?
-║   → Constitutional principles maintained throughout?
+║   → Context/Guidelines standards maintained throughout?
 ║   → Dependencies reasonable and well-justified?
 ║   → Performance implications acceptable?
 ║   → If validation fails: ERROR with specific remediation guidance
@@ -50,41 +50,31 @@ Technical planning template for iOS/macOS features with constitutional complianc
 - `${FEATURE_NAME}` - PascalCase feature name from specification
 - `${PROJECT_TYPE}` - Detected project type (ios-app, swift-package, vapor-server)
 - `${EXISTING_ARCHITECTURE}` - Current project architectural patterns
-- `${CONSTITUTIONAL_PRINCIPLES}` - Applied constitutional compliance requirements
+- `${GUIDELINE_STANDARDS}` - Applied Context/Guidelines compliance requirements
 - `${PERFORMANCE_TARGETS}` - Extracted performance requirements from specification
 
-## Phase -1: Constitutional Compliance Gates
+## Phase -1: Context/Guidelines Compliance Gates
 *Must pass before proceeding to architecture design*
 
-### Swift Package Gate (Constitutional Principle I)
-- [ ] Can new functionality be designed as Swift package?
-- [ ] Clear API boundaries defined between package and app?
-- [ ] Package can be independently tested and validated?
-- [ ] If not package-appropriate: Documented justification with specific reasons?
+### Swift Development Principles
+- [ ] Architecture follows Context/Guidelines/Swift.md package-first approach?
+- [ ] Error handling strategy aligns with Context/Guidelines/Swift.md ErrorKit patterns?
+- [ ] Code quality meets Context/Guidelines/Swift.md standards (3-space, modern Swift)?
 
-### ErrorKit Integration Gate (Constitutional Principle II)  
-- [ ] All error scenarios identified from specification?
-- [ ] Error types conform to ErrorKit.Failable protocol?
-- [ ] User-friendly error messages planned through Throwable?
-- [ ] Error propagation strategy defined using Catching?
+### SwiftUI Platform Standards
+- [ ] UI design follows Context/Guidelines/SwiftUI.md accessibility principles?
+- [ ] Platform integration aligns with Context/Guidelines/SwiftUI.md patterns?
+- [ ] User experience meets Context/Guidelines/SwiftUI.md quality standards?
 
-### Code Quality Gate (Constitutional Principle III)
-- [ ] 3-space indentation confirmed for all Swift files?
-- [ ] Modern Swift patterns prioritized (Date.now, Duration, switch expressions)?
-- [ ] Clean architecture principles maintained?
-- [ ] Simple solutions chosen over complex alternatives?
-
-### iOS Platform Gate (Constitutional Principle IV)
-- [ ] Human Interface Guidelines compliance planned?
-- [ ] Accessibility-first design incorporated?
-- [ ] Privacy by design principles applied?
-- [ ] Localizability considerations included?
+### Context/Guidelines Compliance Validation
+- [ ] If any principle not followed: Documented justification with specific alternatives?
+- [ ] All architectural decisions reference appropriate guideline sections?
 
 **Gate Failure Handling**:
 ```
 If any gate fails:
 → Document specific justification in Complexity Tracking section
-→ If no valid justification exists: ERROR "Simplify approach to meet constitutional requirements"
+→ If no valid justification exists: ERROR "Simplify approach to meet Context/Guidelines standards"
 → All gates must pass or have documented exceptions before proceeding
 ```
 
@@ -260,11 +250,10 @@ If any gate fails:
 ║ - [ ] State management scalable and maintainable?
 ║ - [ ] Performance implications assessed and acceptable?
 ║
-║ ### Constitutional Principle Adherence
-║ - [ ] Package-first principle applied or justified exception documented?
-║ - [ ] ErrorKit integration planned throughout error handling?
-║ - [ ] Code quality standards maintained (3-space, modern Swift)?
-║ - [ ] Platform UX guidelines incorporated in design?
+║ ### Context/Guidelines Standards Adherence
+║ - [ ] Swift.md principles applied or justified exceptions documented?
+║ - [ ] SwiftUI.md standards incorporated throughout design?
+║ - [ ] All guidelines referenced appropriately in architectural decisions?
 ║
 ║ ### Implementation Readiness
 ║ - [ ] Architecture sufficiently detailed for task breakdown?
@@ -321,7 +310,7 @@ If any gate fails:
 ║ ### Ready for Implementation Planning (Phase 2)
 ║ **Deliverables for Steps Template**:
 ║ - ✅ Technical architecture decisions documented
-║ - ✅ Constitutional compliance validated
+║ - ✅ Context/Guidelines compliance validated
 ║ - ✅ Complexity assessment completed  
 ║ - ✅ Dependencies identified
 ║ - ✅ Platform requirements defined
@@ -335,7 +324,7 @@ If any gate fails:
 ║ ### Success Criteria for This Phase
 ║ - [ ] Technical plan supports all specification requirements
 ║ - [ ] Architecture decisions documented with rationale
-║ - [ ] Constitutional principles maintained or exceptions justified
+║ - [ ] Context/Guidelines standards maintained or exceptions justified
 ║ - [ ] Implementation complexity realistically assessed
 ║ - [ ] All blocking uncertainties resolved or clearly documented
 ║ - [ ] Plan ready for systematic task breakdown in Phase 2
@@ -346,7 +335,7 @@ If any gate fails:
 When creating this technical plan from a feature specification:
 
 1. **Analyze the specification thoroughly**: Extract all technical implications from user scenarios and requirements
-2. **Apply constitutional gates rigorously**: Don't compromise on package-first, ErrorKit, or quality standards without explicit justification  
+2. **Apply Context/Guidelines compliance rigorously**: Don't compromise on package-first, ErrorKit, or quality standards without explicit justification  
 3. **Make architectural decisions explicit**: Document why you chose specific approaches and what alternatives you considered
 4. **Be realistic about complexity**: Don't underestimate implementation effort or overlook potential risks
 5. **Focus on iOS/macOS excellence**: Leverage platform-specific capabilities and follow platform conventions
@@ -355,7 +344,7 @@ When creating this technical plan from a feature specification:
 
 ### Common Technical Pitfalls to Avoid
 - Over-engineering solutions when simple approaches would work
-- Ignoring constitutional principles without proper justification
+- Ignoring Context/Guidelines standards without proper justification
 - Making assumptions about external dependencies or API availability  
 - Underestimating integration complexity with existing code
 - Forgetting platform-specific requirements (accessibility, privacy, App Store)
@@ -364,7 +353,7 @@ When creating this technical plan from a feature specification:
 ### Quality Checklist Before Completion
 - [ ] Every specification requirement has a technical solution
 - [ ] All architectural decisions include rationale  
-- [ ] Constitutional compliance verified at every level
+- [ ] Context/Guidelines compliance verified at every level
 - [ ] Complexity assessment includes realistic time estimates
 - [ ] Risk mitigation strategies defined for high-risk areas
 - [ ] Integration with existing codebase carefully planned
@@ -374,4 +363,4 @@ When creating this technical plan from a feature specification:
 
 ---
 
-*This template follows spec-kit methodology with constitutional compliance gates and iOS/macOS optimization. It ensures high-quality technical planning that leads to successful implementation.*
+*This template follows spec-kit methodology with Context/Guidelines compliance gates and iOS/macOS optimization. It ensures high-quality technical planning that leads to successful implementation.*

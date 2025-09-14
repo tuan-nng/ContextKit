@@ -1,5 +1,5 @@
-# Begin Development
-<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-09-13 -->
+# Begin Development with Context
+<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -9,164 +9,236 @@
 > Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
 ## Description
-Begin development workflow with context-aware setup and task execution guidance
+Begin systematic development with context-aware setup, task analysis, and guided implementation initiation based on completed planning phases.
 
-## Parameters
-- `feature_path` (optional): Path to specific feature directory, defaults to detecting active feature
+## User Input Format
+
+```
+═══════════════════════════════════════════════════
+║ ❓ USER INPUT REQUIRED - [Topic]
+═══════════════════════════════════════════════════
+║
+║ [Question and context]
+║
+║ [Response instruction]
+```
 
 ## Execution Flow (main)
-1. Detect active feature and validate prerequisites
-   → Search Context/Features/ for features with completed Steps.md
-   → If feature_path provided: use specified feature
-   → If multiple candidates: ASK user to choose
-   → If none ready: ERROR "Complete planning phase first (/Plan/create-spec, /Plan/define-tech, /Plan/plan-steps)"
-2. Load development context
-   → Read project Context.md for coding standards and preferences
-   → Read workspace Context.md for client requirements and constraints
-   → Load constitutional principles for project type
-   → Check git status and branch management
-3. Setup development environment
-   → Ensure proper git branch (feature/[feature-name])
-   → Verify dependencies are installed and up to date
-   → Run any required setup scripts or formatters
-   → Check that build passes before starting work
-4. Load task execution plan
-   → Read Context/Features/[FeatureName]/Steps.md for task breakdown
-   → Identify next pending task or ask user to specify
-   → Load task-specific context and requirements
-   → Prepare constitutional validation checklist
-5. Apply development workflow patterns
-   → Swift Package: Import FlineDevKit, use typed throws, protocol-oriented design
-   → iOS/macOS App: SwiftUI + SwiftData patterns, accessibility-first development
-   → Universal: Apply workspace coding standards and architectural patterns
-6. Initialize quality assurance hooks
-   → Enable PostToolUse formatting hooks for code consistency
-   → Setup constitutional validation agents (accessibility, localization, etc.)
-   → Configure continuous integration checks if available
-7. Begin task execution with guidance
-   → Show task description, file paths, and acceptance criteria
-   → Remind of constitutional requirements for task type
-   → Provide code pattern examples relevant to project type
-   → Enable real-time validation during development
-8. Return: SUCCESS (development environment ready, task guidance provided)
 
-## Template Variables
-${ACTIVE_FEATURE} - Currently active feature name
-${CURRENT_TASK} - Next task to be executed from Steps.md
-${PROJECT_PATTERNS} - Project-specific development patterns and standards
-${CONSTITUTIONAL_CHECKS} - Relevant constitutional principle reminders for current task
-${WORKSPACE_CONSTRAINTS} - Client-specific requirements and coding standards
+### Phase 1: Prerequisites & Feature Detection
 
-## Development Environment Setup
+1. **Check Project Setup**
+   - Use `Glob` tool to verify Context.md exists: `Glob . Context.md`
+   - If Context.md missing:
+     ```
+     ❌ ContextKit not initialized in this project!
 
-### Git Branch Management
-- Ensure feature branch exists and is current: `feature/[kebab-case-feature-name]`
-- Check for uncommitted changes and guide resolution
-- Verify branch is synchronized with remote if team collaboration enabled
+     Run /ctxk:proj:init first to setup ContextKit in this project.
+     This command requires project context for systematic development.
+     ```
+     → END (exit with error)
 
-### Dependency Verification
-- Swift Package: Verify Package.swift dependencies resolve cleanly
-- iOS/macOS: Check that Xcode project builds without errors
-- Universal: Run project-specific dependency checks
+2. **Detect Current Feature from Git Branch**
+   ```bash
+   git branch --show-current || echo "⚠️ Not in git repository or no current branch"
+   ```
+   - If branch format is `feature/[kebab-case-name]`:
+     - Convert kebab-case to PascalCase (e.g., `feature/custom-model-selection` → `CustomModelSelection`)
+     - Set FEATURE_NAME variable for subsequent steps
+   - If not on feature branch:
+     ```
+     ⚠️ Not on a feature branch!
 
-### Code Formatting Setup
-- Enable SwiftFormat + swift-format hooks for consistent style
-- Apply project-specific formatting configurations
-- Verify formatters are compatible with current codebase
+     Current branch: [current_branch_name]
 
-## Constitutional Development Guidance
+     Expected: feature/[feature-name] branch from /ctxk:plan:1-spec
 
-### Accessibility-First Development
-- **UI Tasks**: Include VoiceOver labels, semantic colors, dynamic type support
-- **Navigation**: Ensure keyboard accessibility, logical focus order
-- **Content**: Use semantic markup, provide alternative content for visual elements
+     Switch to feature branch or create one with /ctxk:plan:1-spec
+     Continue anyway? (y/N):
+     ```
+     - Wait for user confirmation
+     - If "N" or no response: EXIT
+     - If "y": Ask user to specify feature name manually
 
-### Privacy by Design Implementation
-- **Data Collection**: Minimize data collection, explicit user consent
-- **Storage**: Use encrypted storage, respect user data deletion requests
-- **Sharing**: Clear privacy policies, opt-in sharing mechanisms
+3. **Validate Feature Planning Completion**
+   - Use `Glob` tool to find feature directory: `Glob Context/Features [FEATURE_NAME]*`
+   - Use `Read` tool to check each required file exists and has content:
+     ```bash
+     ls -la Context/Features/[FEATURE_NAME]/Spec.md && echo "✅ Spec.md exists"
+     ls -la Context/Features/[FEATURE_NAME]/Tech.md && echo "✅ Tech.md exists"
+     ls -la Context/Features/[FEATURE_NAME]/Steps.md && echo "✅ Steps.md exists"
+     ```
+   - Use `Read` tool to verify Steps.md contains task breakdown (not empty placeholder)
+   - If any file missing or empty:
+     ```
+     ❌ Feature planning incomplete!
 
-### Localizability from Day One
-- **Strings**: Externalize all user-facing strings with semantic keys
-- **Formatting**: Use system formatters for numbers, dates, currencies
-- **Layout**: Design for variable text lengths, RTL language support
+     Missing or empty files detected:
+     [List missing files]
 
-### Code Maintainability Patterns
-- **Architecture**: Follow established patterns (MVVM, protocol-oriented design)
-- **Error Handling**: Use typed throws with ErrorKit, clear error messages
-- **Documentation**: Inline documentation for complex logic, clear API documentation
+     Complete the planning phases first:
+     1. /ctxk:plan:1-spec - Business requirements
+     2. /ctxk:plan:2-tech - Technical architecture
+     3. /ctxk:plan:3-steps - Implementation tasks
 
-## Task Execution Patterns
+     Cannot proceed with development until planning is complete.
+     ```
+     → END (exit with error)
 
-### For UI Implementation Tasks
-```swift
-// Accessibility-first SwiftUI development
-struct FeatureView: View {
-   var body: some View {
-      VStack {
-         Text("Feature Title")
-            .accessibilityAddTraits(.isHeader)
-         
-         Button("Primary Action") { 
-            // Action implementation
-         }
-         .accessibilityLabel("Perform primary feature action")
-         .accessibilityHint("Double tap to execute the main feature functionality")
-      }
-      .navigationTitle("Feature")
-   }
-}
-```
+### Phase 2: Context Loading & Environment Setup
 
-### For Data Model Tasks
-```swift
-// Constitutional data model with privacy considerations
-struct UserPreferences: Codable {
-   let id: UUID
-   let preferences: [String: PreferenceValue]
-   
-   // Privacy: No sensitive data in model, use secure storage
-   // Localizability: Preference keys externalized
-   // Maintainability: Clear type safety, validation methods
-}
-```
+4. **Load Development Context**
+   - Use `Read` tool to read project Context.md: `Read Context.md`
+   - Extract project type, architecture patterns, and coding standards
+   - Use `Bash` tool to check for workspace context:
+     ```bash
+     cd .. && find . -name "Context.md" -path "*/Context.md" | head -1 || echo "No workspace context found"
+     ```
+   - If workspace Context.md found: Use `Read` tool to load workspace-specific overrides
 
-### For Service Implementation Tasks
-```swift
-// Typed throws with constitutional error handling
-enum FeatureError: Throwable, Catching {
-   case invalidInput(field: String)
-   case serviceUnavailable
-   case caught(Error)
-   
-   var userFriendlyMessage: String {
-      switch self {
-      case .invalidInput(let field):
-         String(localized: "Please check the \(field) field and try again.")
-      case .serviceUnavailable:
-         String(localized: "The service is temporarily unavailable. Please try again later.")
-      case .caught(let error):
-         ErrorKit.userFriendlyMessage(for: error)
-      }
-   }
-}
-```
+5. **Verify Development Environment**
+   ```bash
+   git status --porcelain || echo "⚠️ Git not available"
+   ```
+   - If uncommitted changes exist:
+     ```
+     ⚠️ Uncommitted changes detected!
 
-## Validation Gates
-- [ ] Prerequisites completed (Spec.md, Tech.md, Steps.md)?
-- [ ] Development environment properly configured?
-- [ ] Git branch management in place?
-- [ ] Constitutional principles loaded for project type?
-- [ ] Quality assurance hooks enabled?
-- [ ] Task context and requirements clear?
-- [ ] Code pattern guidance appropriate for current task?
+     You have uncommitted work that might be overwritten during development.
+     Commit or stash changes before starting new development work.
+
+     Continue anyway? (y/N):
+     ```
+     - Wait for user confirmation
+     - If "N": EXIT (recommend committing first)
+     - If "y": Continue with warning
+
+
+### Phase 3: Task Analysis & Selection
+
+6. **Load Implementation Plan**
+   - Use `Read` tool to read Steps.md: `Read Context/Features/[FEATURE_NAME]/Steps.md`
+   - Parse task list for pending items (unchecked boxes)
+   - Extract S001-S999 numbered tasks with [P] parallel markers
+   - Identify dependencies and logical execution order
+
+7. **Select Next Task**
+   - If multiple pending tasks available:
+     ```
+     ═══════════════════════════════════════════════════
+     ║ ❓ TASK SELECTION REQUIRED
+     ═══════════════════════════════════════════════════
+     ║
+     ║ Multiple tasks available for implementation:
+     ║ [List 3-5 next available tasks with S### numbers]
+     ║
+     ║ Which task would you like to work on?
+     ║ Enter task number (e.g., S001) or 'auto' for first available:
+     ```
+     - Wait for user input
+     - Validate task selection for context
+   - If only one available: Auto-select and continue
+   - If no pending tasks: Display completion status and next steps
+
+8. **Load Task Context**
+   - Extract task details: file paths, acceptance criteria, dependencies
+   - Use `Read` tool to examine target files if they exist
+   - Identify constitutional principles relevant to task type (UI, models, services, etc.)
+
+### Phase 4: Development Initiation
+
+9. **Display Development Guidance**
+    - Show current task description and acceptance criteria
+    - Display relevant file paths and expected changes
+    - Reference appropriate guidelines based on project type:
+      - iOS/macOS App projects → `Context/Guidelines/Swift.md` and `Context/Guidelines/SwiftUI.md`
+      - Swift Package projects → `Context/Guidelines/Swift.md`
+
+10. **Initialize Task Execution**
+    - Display constitutional reminders for current task type
+    - Provide starting guidance based on project patterns
+    - Begin implementation work
+
+11. **Quality Assurance Integration**
+    - **After completing any step or significant changes**: Run systematic quality validation
+    - **Execution Order** (run sequentially, stop and fix if any fail):
+      1. `build-project` - Verify compilation and catch build errors first
+      2. `check-modern-code` - Modernize APIs and patterns
+      3. `check-error-handling` - Validate error handling patterns
+      4. `check-accessibility` - Ensure UI accessibility compliance
+      5. `check-localization` - Verify localization readiness (includes build check)
+    - **When to run**: After completing views, features, models with user-facing content, or any substantial code changes
+    - **If agents fail**: Focus on fixing the specific issue before continuing, then re-run the failed agent to verify the fix
 
 ## Error Conditions
-- "Planning incomplete" → Must complete all planning phases first
-- "Environment setup failed" → Must resolve dependency or configuration issues
-- "Git conflicts" → Must resolve branch conflicts before starting development
-- "No pending tasks" → All tasks complete or Steps.md needs updating
-- "Constitutional requirements unclear" → Must specify which principles apply to current task
+
+- **"Context.md not found"** → User must run `/ctxk:proj:init` to initialize ContextKit
+- **"Not on feature branch"** → Create feature branch with `/ctxk:plan:1-spec` or switch to existing one
+- **"Planning phases incomplete"** → Complete `/ctxk:plan:1-spec`, `/ctxk:plan:2-tech`, `/ctxk:plan:3-steps` sequence
+- **"No feature directory found"** → Feature name detection failed, verify branch name format
+- **"Steps.md empty"** → Run `/ctxk:plan:3-steps` to create implementation breakdown
+- **"Build environment broken"** → Resolve dependency issues before starting development
+- **"All tasks complete"** → No pending work, consider `/ctxk:impl:commit-changes` or new feature
+
+## Validation Gates
+
+**Prerequisites:**
+- ContextKit project setup complete?
+- Git repository with feature branch active?
+- All planning phases completed (Spec.md, Tech.md, Steps.md)?
+- Development environment verified and functional?
+
+**Context Loading:**
+- Project and workspace context loaded successfully?
+- Constitutional principles identified for project type?
+- Development patterns and standards accessible?
+
+**Task Selection:**
+- Implementation plan parsed successfully?
+- Valid task selected with clear acceptance criteria?
+- Task dependencies satisfied and ready for execution?
+
+**Development Ready:**
+- Quality assurance hooks enabled?
+- Relevant guidelines referenced for task type?
+- Development guidance displayed and ready to proceed?
+
+## Integration Points
+
+- **Planning Commands**: Requires completed `/ctxk:plan:1-spec`, `/ctxk:plan:2-tech`, `/ctxk:plan:3-steps` workflow
+- **Project Setup**: Uses Context.md from `/ctxk:proj:init` for project type detection and standards
+- **Quality Agents**: Integrates with `/run check-*` agents for autonomous quality validation
+- **Workspace Context**: Inherits client-specific requirements from workspace-level Context.md files
+- **Git Workflow**: Works within feature branch structure established by planning commands
+- **Development Hooks**: Enables PostToolUse formatting and SessionStart version checking
+- **Task Tracking**: Updates Steps.md progress tracking for systematic development workflow
+
+## Success Messages
+
+### Development Session Started
+```
+🚀 Development session started for [FeatureName]
+
+📋 Current Task: [TaskNumber] [TaskDescription]
+📂 Files to modify: [file_paths]
+📖 Guidelines: Context/Guidelines/[RelevantGuideline].md
+
+⚡ Quality validation runs automatically after substantial changes:
+   build-project → check-modern-code → check-error-handling → check-accessibility → check-localization
+
+💡 Ready to implement!
+```
+
+### All Tasks Complete
+```
+🎉 Feature [FeatureName] implementation complete!
+
+🔗 Next steps:
+   1. Quality validation will run automatically
+   2. Test functionality manually
+   3. Commit: /ctxk:impl:commit-changes
+   4. Release: /ctxk:impl:release-app [version]
+```
 
 ════════════════════════════════════════════════════════════════════════════════
 👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION
@@ -175,14 +247,11 @@ enum FeatureError: Throwable, Catching {
 This section is preserved during ContextKit migrations and updates.
 Add project-specific instructions, examples, and overrides below.
 
-## Project-Specific Instructions
+## Custom Task Selection Logic
+<!-- Override automatic task selection with project-specific priority rules -->
 
-<!-- Add project-specific guidance here -->
+## Additional Environment Checks
+<!-- Add project-specific dependency or tool verification steps -->
 
-## Additional Examples
-
-<!-- Add examples specific to your project here -->
-
-## Override Behaviors
-
-<!-- Document any project-specific overrides here -->
+## Custom Constitutional Reminders
+<!-- Add project-specific architectural principles or coding standards -->

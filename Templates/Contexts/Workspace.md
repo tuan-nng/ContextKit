@@ -1,10 +1,5 @@
 # Workspace Context Template
 
-**Template Type**: Context Configuration  
-**Hierarchy Level**: Workspace (middle precedence)  
-**Usage**: Workspace-level Context.md generation via `/ContextKit/setup-workspace`  
-**Inheritance**: Global → Workspace (this file) → Project
-
 ## Description
 Workspace-level Context.md template providing workspace-specific configuration, client/company requirements, technology standards, and team workflow overrides for multi-project environments.
 
@@ -13,162 +8,186 @@ Workspace-level Context.md template providing workspace-specific configuration, 
 ════════════════════════════════════════════════════════════════════════════════
 ║
 ║ ## Execution Flow (main)
+║
+║ ### Phase 1: Project Discovery & Analysis
+║
+║ 1. **Discover Contained Projects**
+║    - Use `Glob` tool to list subdirectories: `Glob . */`
+║    - For each subdirectory, check project characteristics:
+║      - Use `Glob [dirname] Package.swift` (Swift package detection)
+║      - Use `Glob [dirname] *.xcodeproj` (iOS app detection)
+║      - Use `Glob [dirname] package.json` (JavaScript project detection)
+║      - Use `Glob [dirname] requirements.txt pyproject.toml setup.py` (Python detection)
+║    - Document found projects: name, type, language, framework
+║
+║ 2. **Analyze Project Setup Status**
+║    - For each discovered project directory:
+║      - Use `Glob [dirname] Context.md` to check for existing ContextKit setup
+║      - Use `Glob [dirname] .claude/commands/ctxk` to check for ContextKit installation
+║    - Categorize projects: ContextKit-enabled vs. not setup yet
+║    - Count total projects and ContextKit setup status
+║
+║ 3. **Detect Technology Patterns**
+║    - Identify primary language (most common across projects)
+║    - For Swift projects: Use `Read` on Package.swift to detect dependencies
+║    - Document common frameworks and architectural patterns
+║    - Note consistent coding style preferences if detectable
+║
+║ ### Phase 2: Interactive Workspace Configuration
+║
+║ **User Question Format**: Use consistent format for all user questions:
 ║ ```
-║ 1. Detect workspace context from current directory
-║    → Scan subdirectories for project indicators and types
-║    → Analyze technology stack patterns across projects
-║    → If no projects found: ASK user about workspace purpose
-║ 2. Identify workspace type and purpose
-║    → Indie development workspace (personal projects)
-║    → Client workspace (contractor/agency work)
-║    → Enterprise workspace (company projects)
-║    → If unclear: ASK user to specify workspace type
-║ 3. Analyze existing workspace configuration
-║    → Load current Context.md if present
-║    → Preserve custom workspace configurations
-║    → If conflicts detected: ASK user to resolve
-║ 4. Extract technology stack preferences
-║    → Identify common frameworks and tools across projects
-║    → Detect consistent architectural patterns
-║    → Document workspace-specific technology choices
-║ 5. Apply client/company requirements (if applicable)
-║    → Coding style requirements (indentation, naming)
-║    → Communication guidelines (formal vs casual)
-║    → Quality standards and specific requirements
-║    → Security and compliance constraints
-║ 6. Configure workspace overrides
-║    → Override global constitutional principles if needed
-║    → Set workspace-specific coding standards
-║    → Define team collaboration patterns
-║    → Document client-specific constraints
-║ 7. Generate practical workspace Context.md
-║    → Include technology stack preferences
-║    → Document coding and communication standards
-║    → List quality requirements and overrides
-║    → Provide inheritance guidance for projects
-║ 8. Validate workspace configuration completeness
-║    → All workspace standards documented
-║    → Client requirements properly integrated
-║    → No conflicting settings with global principles
-║ 9. **FINAL STEP: Remove these system instructions**
-║    → Delete the entire boxed section from generated Context.md
-║    → Leave only the clean workspace context for team use
-║ 10. Return: SUCCESS (workspace Context.md ready for project inheritance)
+║ ═══════════════════════════════════════════════════
+║ ║ ❓ USER INPUT REQUIRED
+║ ═══════════════════════════════════════════════════
+║ ║
+║ ║ [Question text and options]
+║ ║
+║ ║ [Response instruction]
 ║ ```
 ║
-║ ## Dynamic Content Generation
-║ The AI will detect and populate all workspace information dynamically:
-║ - **Workspace Detection**: Type, purpose, contained projects
-║ - **Technology Analysis**: Common frameworks, tools, architectural patterns
-║ - **Requirements Extraction**: Client/company constraints and preferences
-║ - **Standards Configuration**: Coding style, communication, quality overrides
-║ - **Inheritance Setup**: How projects inherit workspace settings
+║ 4. **Workspace Type Selection**
+║    - Ask user: "What type of workspace is this?"
+║      1. Personal/Indie Development
+║      2. Client/Contract Work
+║      3. Enterprise/Company
+║      4. Open Source Project
+║    - Based on selection, ask follow-up questions:
+║      - Client/Enterprise: Ask for company name and contract identifier
+║      - All types: Ask for brief workspace description
+║
+║ 5. **Coding Standards Configuration**
+║    - Present detected patterns: "Current projects use: [detected indentation/architecture]"
+║    - Ask user: "Override indentation preference? (default: 3 spaces)"
+║      1. Keep current/default (3 spaces)
+║      2. Use 2 spaces
+║      3. Use 4 spaces
+║      4. Use tabs
+║    - For Swift projects: Ask about architecture preferences:
+║      1. Package-first (constitutional default)
+║      2. Monolithic app structure (constitutional override)
+║      3. Hybrid approach
+║
+║ 6. **Development Principles Customization**
+║    - Display development principles:
+║      • Accessibility-first design
+║      • Privacy by design
+║      • Localizability from day one
+║      • Code maintainability
+║      • Platform-appropriate UX
+║    - For Client/Enterprise workspaces: Ask "Any client requirements that override these principles?"
+║    - If overrides requested: Ask for explicit justification for each principle override
+║    - Document all overrides with detailed justifications
+║
+║ ### Phase 3: Context Generation & Completion
+║
+║ 7. **Generate Workspace Context Content**
+║    - Use `Edit` tool to replace this entire template with workspace-specific content
+║    - Include discovered projects list with setup status
+║    - Document workspace type, client info, and configuration choices
+║    - Record coding standards and architectural preferences
+║    - List development principle overrides with justifications
+║    - Establish clear inheritance rules for child projects
+║
+║ 8. **Final Validation**
+║    - Verify all workspace sections are completed with specific information
+║    - Ensure principle overrides have proper justification
+║    - Confirm project inventory is accurate and complete
+║    - Check that inheritance rules are clearly defined
+║
+║ 9. **COMPLETION**
+║    - Use `Edit` tool to remove this entire boxed system instructions section
+║    - Leave only the clean workspace context content for team use
+║    - Display project-specific setup recommendations based on discovery results
+║
+║ ## Success Criteria
+║ - All workspace information populated with specific, not placeholder, content
+║ - Development principle overrides documented with explicit justification
+║ - Project inventory complete with accurate setup status
+║ - Inheritance rules clearly defined for child project setup
+║ - System instructions completely removed from final Context.md
+║ - Final document focused on workspace context, not tooling explanations
 ║
 ════════════════════════════════════════════════════════════════════════════════
 
-# Workspace Context: [Detected Workspace Name]
-
-## ContextKit Configuration
-- **Version**: [Current ContextKit Version]
-- **Setup Date**: [Current Date]
-- **Workspace Type**: [Detected: indie, client, enterprise]
-- **Contained Projects**: [Detected project count and types]
+# Workspace: [AI Detects Workspace Name]
 
 ## Workspace Identity
 
-**Purpose**: [AI detects workspace purpose - indie development, client work, company projects]
+**Purpose**: [AI Generated Based on User Input and Project Analysis]
 
-**Client/Company**: [AI detects client name or marks as N/A for indie]
+**Client/Company**: [User Input or N/A for indie work]
 
-**Team Size**: [AI detects team configuration - solo, small team, large team]
+**Team Configuration**: [AI Detected: solo, small team, large team based on project patterns]
 
 ## Technology Standards
 
-**Preferred Stack**:
-- **Languages**: [AI detects common languages across projects]
-- **Frameworks**: [AI detects preferred frameworks]
-- **Tools**: [AI detects development tools in use]
-- **Platforms**: [AI detects target platforms]
+**Primary Technology Stack**:
+- **Languages**: [AI Detected Common Languages]
+- **Frameworks**: [AI Detected Preferred Frameworks]
+- **Architecture**: [User Selected + AI Analysis]
+- **Target Platforms**: [AI Detected Platforms]
 
-**Architectural Guidelines**:
-[AI documents consistent architectural patterns across projects]
+**Development Tools**:
+- **Package Managers**: [AI Detected Tools]
+- **Build Systems**: [AI Detected Systems]
+- **Version Control**: [AI Detected VCS patterns]
 
-**Technology Constraints**:
-[AI detects any client/company technology restrictions]
+## Coding Standards
 
-## Coding Guidelines
+**Style Guidelines**:
+- **Indentation**: [User Selected Override or Default 3 spaces]
+- **Naming Conventions**: [AI Detected Patterns]
+- **Code Formatting**: [Workspace-Specific Formatter Configs]
 
-**Style Overrides** (from global defaults):
-- **Indentation**: [AI detects workspace preference or inherits global 3-space]
-- **Naming**: [AI detects workspace naming conventions]
-- **Formatting**: [AI detects workspace-specific formatter configs]
+**Quality Requirements**:
+- **Code Review**: [AI Detected Process or TBD]
+- **Testing Standards**: [AI Detected Requirements]
+- **Documentation**: [Workspace Documentation Requirements]
 
-**Quality Standards**:
-[AI documents workspace-specific quality requirements and any relaxed standards]
+## Communication & Collaboration
 
-**Code Review Process**:
-[AI detects team code review patterns or marks as TBD]
+**Voice & Tone**: [AI Detected Required Style: professional/casual/formal]
 
-## Communication Standards
+**Client Communication**: [Client Communication Requirements if applicable]
 
-**Voice & Tone**: [AI detects required communication style - professional, casual, formal]
+**Team Collaboration**: [Internal Communication Patterns]
 
-**Client Communication**: [AI detects client interaction requirements]
+**Development Attribution**: [Workspace Policy on AI-Assisted Development]
 
-**Team Collaboration**: [AI detects internal team communication patterns]
+## Development Principles
 
-**AI Attribution**: [AI documents workspace policy on AI-assisted development]
+**Core Principles**:
+- ✅ Accessibility-first design (UI supports all assistive technologies)
+- ✅ Privacy by design (minimal data collection, explicit consent)
+- ✅ Localizability from day one (externalized strings, cultural adaptation)
+- ✅ Code maintainability (readable, testable, documented code)
+- ✅ Platform-appropriate UX (native conventions, platform guidelines)
 
-**Commit Messages**: [AI detects workspace commit format preferences]
+**Workspace-Specific Adjustments**:
+[AI Lists Any Development Principle Overrides with Detailed Justifications]
 
-## Constitutional Principles
+## Project Inventory
 
-**Global Inheritance**: [AI lists inherited constitutional principles]
+**Contained Projects**:
+[AI Generated List with Format:]
+- **[ProjectName]**: [project-type] ([language], [framework]) - [ContextKit-enabled/not setup yet]
 
-**Workspace Overrides**: [AI documents any workspace-specific principle modifications]
+**Development Setup Status**: [X] of [Total] projects have ContextKit enabled
 
-**Client Requirements**: [AI documents client-specific requirement integrations]
+**Project Standards**:
+- All projects inherit workspace technology standards
+- Projects inherit coding guidelines and style preferences
+- Development principle adjustments apply across all projects
+- Individual projects may override workspace settings with justification
 
-## Project Inheritance
+## Inheritance & Configuration
 
-New projects in this workspace automatically inherit:
-- Technology stack preferences and constraints
-- Coding guidelines and style overrides  
-- Communication standards and client requirements
-- Quality gates and validation rules
-- Workspace-specific constitutional principle overrides
+**Configuration Hierarchy**: Global Defaults → **This Workspace** → Individual Projects
 
-## ContextKit Workflow
+**Override Rules**: Project-specific settings take precedence over workspace settings
 
-**Available Commands**: All `/ctxk:*` commands work within workspace projects
-
-**Workspace Management**:
-- `/ctxk:proj:init-workspce` - Configure this workspace
-- `/ctxk:proj:verify` - Validate workspace configuration
-- `/ctxk:proj:migrate` - Update workspace to newer ContextKit version
-
-## Team Collaboration
-
-**Shared Standards**:
-- Consistent coding style across all workspace projects
-- Unified communication guidelines for client/company interaction
-- Shared quality gates and validation rules
-
-**Workspace Automation**:
-- Common formatting rules applied to all projects
-- Shared hooks and agents for quality assurance
-- Consistent constitutional compliance across projects
-
-## Hierarchical Inheritance
-
-This workspace inherits from and overrides:
-1. **Global Level** (`~/.ContextKit/`): Universal ContextKit defaults
-2. **Workspace Level** (this file): Client/company-specific overrides
-3. **Project Level**: Individual project customizations
-
-**Override Precedence**: Project > Workspace > Global
-
-**Conflict Resolution**: Projects can override workspace settings with documented justification
+**Standards Enforcement**: Consistent coding style and quality standards across all workspace projects
 
 ---
-*This file is managed by ContextKit. Workspace customizations preserved during updates.*
+*Generated by ContextKit. Workspace-specific manual edits are preserved during ContextKit updates.*

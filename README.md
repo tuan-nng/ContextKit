@@ -60,7 +60,7 @@ claude
 
 ```bash
 # Step 1: Define what you're building (business requirements)
-/ctxk:plan:1-spec "Add user authentication with Apple ID"
+/ctxk:plan:1-spec
 
 # Step 2: Plan the technical architecture
 /ctxk:plan:2-tech
@@ -217,7 +217,7 @@ ContextKit automatically checks for newer versions when you start a new session 
 - `/ctxk:proj:migrate` - Upgrade to latest ContextKit versions
 
 ### Systematic Feature Planning
-- `/ctxk:plan:1-spec` - Define requirements with business specifications and user stories
+- `/ctxk:plan:1-spec` - Define requirements with business specifications and user stories (prompts interactively)
 - `/ctxk:plan:2-tech` - Design architecture with technical planning and constitutional compliance
 - `/ctxk:plan:3-steps` - Create numbered, trackable implementation tasks
 

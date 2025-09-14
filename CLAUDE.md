@@ -103,7 +103,7 @@ cp -R ~/.ContextKit/Templates/Commands/* ~/.claude/commands/ctxk/
 - `/ctxk:proj:init` - Initialize project with ContextKit
 - `/ctxk:proj:init-workspce` - Configure workspace-level settings
 - `/ctxk:proj:migrate` - Update existing project to newer ContextKit version
-- `/ctxk:plan:1-spec` - Create feature specification
+- `/ctxk:plan:1-spec` - Create feature specification (prompts for description interactively)
 - `/ctxk:plan:2-tech` - Create technical architecture plan
 - `/ctxk:plan:3-steps` - Break down implementation steps
 - `/ctxk:impl:start-working` - Begin development with context
@@ -150,7 +150,7 @@ All `/ctxk:*` commands listed above are already installed and work in any direct
 
 ### Phase 3: Feature Development (Commands Use Templates)
 
-**When users run**: `/ctxk:plan:1-spec "Add user authentication"`
+**When users run**: `/ctxk:plan:1-spec`
 
 **What the command does**:
 ```bash
@@ -459,7 +459,7 @@ claude  # Start Claude Code
 /ctxk:proj:init  # Initialize with ContextKit
 
 # 4. Test workflow commands function properly
-/ctxk:plan:1-spec "test authentication feature"
+/ctxk:plan:1-spec
 /ctxk:plan:2-tech
 /ctxk:plan:3-steps
 /ctxk:impl:start-working

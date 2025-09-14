@@ -105,7 +105,7 @@
 - [ ] S003 [P] Setup code formatting tools
   - Path: .swift-format, .swiftformat files
   - Dependencies: None (can run parallel with S001-S002)
-  - Configure: 3-space indentation, constitutional style rules
+  - Configure: Per Context/Guidelines/Swift.md formatter standards
 
 ## Phase 3.2: Model Layer (TDD - Tests First)
 *Data models and business logic foundation*
@@ -137,7 +137,7 @@
 - [ ] S013 ${SERVICE_1} implementation in Sources/Services/${SERVICE_1}.swift
   - Dependencies: S007-S009 (models), S011 (tests)
   - API: RESTful endpoints or local data management
-  - Error Handling: ErrorKit patterns with typed throws
+  - Error Handling: Per Context/Guidelines/Swift.md ErrorKit patterns
 
 - [ ] S014 ${SERVICE_2} implementation in Sources/Services/${SERVICE_2}.swift  
   - Dependencies: S013 (if services interact), S012 (tests)
@@ -153,8 +153,7 @@
 ### SwiftUI Implementation
 - [ ] S017 [P] ${VIEW_1} implementation in Sources/Views/${VIEW_1}.swift
   - Dependencies: S013-S014 (services for data)
-  - Accessibility: Labels, hints, semantic markup
-  - Localization: TranslateKit keys for all user text
+  - Implementation: Per Context/Guidelines/SwiftUI.md accessibility/localization standards
 
 - [ ] S018 [P] ${VIEW_2} implementation in Sources/Views/${VIEW_2}.swift
   - Dependencies: S017 (if views interact), S016 (tests)  
@@ -181,15 +180,15 @@
 ### Quality Gates
 - [ ] S022 [P] Accessibility validation with check-accessibility agent
   - Dependencies: S017-S018 (UI implementation)
-  - Verify: VoiceOver labels, dynamic type, keyboard navigation
+  - Validate: Per Context/Guidelines/SwiftUI.md accessibility requirements
 
 - [ ] S023 [P] Localization validation with check-localization agent
   - Dependencies: S017-S018 (UI with strings), S002 (TranslateKit)
-  - Verify: String catalog updated, context provided, pluralization
+  - Validate: Per Context/Guidelines/SwiftUI.md localization standards
 
 - [ ] S024 [P] Error handling review with check-error-handling agent
   - Dependencies: S013-S014 (services), S020-S021 (error tests)
-  - Verify: Typed throws, user-friendly messages, proper propagation
+  - Validate: Per Context/Guidelines/Swift.md ErrorKit compliance
 
 ## Phase 3.6: Polish & Release Preparation
 *Performance, App Store compliance, deployment readiness*
@@ -214,7 +213,7 @@
 ### Final Validation  
 - [ ] S028 [P] Code quality review with check-modern-code agent
   - Dependencies: All implementation tasks complete
-  - Modernize: Replace legacy patterns, update to latest APIs
+  - Validate: Per Context/Guidelines/Swift.md modern code standards
 
 - [ ] S029 [P] Technical debt cleanup with check-code-debt agent  
   - Dependencies: All implementation tasks complete
@@ -259,12 +258,12 @@
 - [ ] Localization: All user-facing text extracted and TranslateKit integrated?
 - [ ] Privacy: Data usage documented in privacy manifest?
 - [ ] Performance: 60fps UI confirmed, memory usage acceptable?
-- [ ] Constitutional compliance: Package-first architecture, clean code practices?
+- [ ] Context/Guidelines compliance: Per Swift.md and SwiftUI.md standards?
 
 ### Quality Gate Validation
 - [ ] Build passes cleanly with no warnings or errors?
 - [ ] All unit tests and integration tests pass?
-- [ ] Code follows constitutional principles (3-space indentation, ErrorKit patterns)?
+- [ ] Code follows Context/Guidelines/Swift.md principles and patterns?
 - [ ] No [NEEDS CLARIFICATION] items remain unresolved?
 - [ ] Feature branch ready for merge to main?
 
@@ -308,11 +307,11 @@
 - "App Store compliance" → Feature may violate App Store Review Guidelines  
 - "Performance concerns" → Implementation may cause performance degradation
 
-**Constitutional Errors**:  
-- "Package architecture violation" → Feature doesn't follow package-first principles
-- "Error handling incomplete" → ErrorKit patterns not properly integrated
-- "Code quality issues" → Implementation doesn't follow constitutional style
-- "Localization missing" → TranslateKit integration not properly planned
+**Context/Guidelines Compliance Errors**:
+- "Architecture violation" → Feature doesn't follow Context/Guidelines/Swift.md principles
+- "Error handling incomplete" → Context/Guidelines/Swift.md ErrorKit patterns not integrated
+- "Code quality issues" → Implementation doesn't follow Context/Guidelines/Swift.md standards
+- "Platform compliance" → Context/Guidelines/SwiftUI.md requirements not met
 
 ════════════════════════════════════════════════════════════════════════════════
 ║ 🤖 EXECUTION FLOW - IMPLEMENTATION STEPS GENERATION
@@ -326,7 +325,7 @@
 ║ 2. **Mark Parallel Safety**: Use [P] only for truly independent tasks
 ║ 3. **Include iOS Specifics**: Privacy, accessibility, localization, App Store compliance
 ║ 4. **Validate Dependencies**: Ensure logical order and no circular dependencies
-║ 5. **Constitutional Integration**: ErrorKit, 3-space style, package architecture
+║ 5. **Context/Guidelines Integration**: Per Swift.md and SwiftUI.md standards
 ║ 6. **Quality Gates**: Build validation, testing, agent checks
 ║
 ║ ### Common iOS Task Patterns
@@ -347,4 +346,4 @@
 ║ ambiguity while maintaining proper dependency order and parallel execution opportunities.
 ════════════════════════════════════════════════════════════════════════════════
 
-*Template follows spec-kit execution flow patterns with iOS/macOS constitutional principle integration and ContextKit hierarchical context inheritance.*
+*Template follows spec-kit execution flow patterns with iOS/macOS Context/Guidelines integration and ContextKit hierarchical context inheritance.*

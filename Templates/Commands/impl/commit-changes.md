@@ -1,5 +1,5 @@
 # Commit Changes
-<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-09-13 -->
+<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -9,171 +9,213 @@
 > Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
 ## Description
-Commit development changes with proper formatting, validation, and constitutional compliance checks
-
-## Parameters
-- `message` (optional): Custom commit message, defaults to generating from current task context
+Analyze current git changes, apply code formatting, generate intelligent commit messages with proper format validation, and commit changes.
 
 ## Execution Flow (main)
-1. Validate development state and prerequisites
-   → Check that /Implement/start-working was executed and development context exists
-   → Verify current feature and active task from development session
-   → If no active development context: ERROR "Start development session first with /Implement/start-working"
-2. Run pre-commit constitutional validation
-   → Execute accessibility agent for UI changes (VoiceOver labels, color contrast)
-   → Execute privacy agent for data handling changes (encryption, user consent)
-   → Execute localization agent for user-facing changes (string externalization)
-   → Execute maintainability agent for code changes (architecture, error handling)
-   → If any validation fails: ERROR with specific guidance for fixes
-3. Apply code formatting and linting
-   → Run SwiftFormat for self-explicit syntax and structure
-   → Run swift-format for line breaks and Apple style conformance
-   → Apply project-specific formatting rules from workspace Context.md
-   → Run any additional linters configured for project type
-4. Verify build and test status
-   → Ensure project builds successfully after formatting
-   → Run relevant tests for changed components
-   → For Swift Package: Verify Linux compatibility if cross-platform
-   → For iOS/macOS: Run accessibility and UI tests if UI changes detected
-5. Generate or validate commit message
-   → If message provided: validate against GitCommit.md guidelines
-   → If not provided: generate from active task description and constitutional compliance
-   → Follow format: "[Action] [what] [+ additional context if needed]"
-   → Ensure message is 50 characters or less, imperative mood, no period
-   → NEVER include AI attribution, co-authorship, or emoji
-6. Stage changes and create commit
-   → Stage all formatter changes and implementation changes
-   → Create commit with validated message following GitCommit.md standards
-   → Update task tracking: mark current task as completed in Steps.md
-   → Update development session context for next task
-7. Post-commit validation and next steps
-   → Verify commit was created successfully
-   → Check if feature is complete (all tasks in Steps.md done)
-   → If feature complete: suggest next steps (/Implement/release-app or /Implement/release-package)
-   → If feature incomplete: suggest continuing with next task
-8. Return: SUCCESS (changes committed with constitutional compliance)
 
-## Template Variables
-${CURRENT_TASK} - Active task being committed
-${CONSTITUTIONAL_STATUS} - Results of constitutional validation checks
-${FORMATTING_APPLIED} - List of formatters that were applied
-${COMMIT_MESSAGE} - Generated or validated commit message
-${NEXT_ACTION} - Suggested next step based on feature completion status
+### Phase 1: Project Context Assessment
 
-## Pre-Commit Constitutional Validation
+1. **Read Project Context**
+   - Use `Read` tool to examine `Context.md` file
+   - Understand project structure (single repo, multi-repo, workspace layout)
+   - Identify active components and current work areas
+   - Note any special commit conventions or repository organization
+   - If Context.md missing: WARN "No Context.md found - proceeding with basic git analysis"
 
-### Accessibility Validation (for UI changes)
-- **VoiceOver Support**: All interactive elements have accessibility labels and hints
-- **Color Contrast**: Semantic colors used, sufficient contrast ratios maintained
-- **Keyboard Navigation**: Logical focus order, all actions keyboard accessible
-- **Dynamic Type**: Text scales properly, layouts adapt to larger text sizes
+2. **Analyze Conversation Context**
+   - Review current chat conversation for work that was performed
+   - Identify files that were modified, created, or discussed
+   - Understand the purpose and scope of recent changes
+   - Focus commit scope on actual work performed in this session
 
-### Privacy Validation (for data changes)
-- **Data Minimization**: Only necessary data collected and stored
-- **User Consent**: Clear consent mechanisms for data collection/sharing
-- **Secure Storage**: Sensitive data encrypted, keychain usage for credentials
-- **Privacy Manifest**: Accurate declaration of data usage and third-party SDKs
+### Phase 2: Git Status Assessment
 
-### Localization Validation (for user-facing changes)
-- **String Externalization**: All user-facing strings use String(localized:) or equivalent
-- **Semantic Keys**: Localization keys are descriptive and context-aware
-- **Formatting**: Numbers, dates, currencies use system formatters
-- **Layout Adaptation**: UI handles variable text lengths and RTL languages
+3. **Check Repository Status**
+   ```bash
+   git status --porcelain
+   ```
+   - If no changes: ERROR "No changes to commit"
+   - If not in git repository: ERROR "Not in a git repository"
+   - If merge conflicts exist: ERROR "Resolve merge conflicts first"
 
-### Maintainability Validation (for all changes)
-- **Architecture Consistency**: Code follows established patterns and conventions
-- **Error Handling**: Proper error types, user-friendly messages, typed throws
-- **Documentation**: Complex logic documented, API changes documented
-- **Testing**: Critical paths covered by tests, no broken existing tests
+4. **Analyze Current Changes Overview**
+   ```bash
+   git diff --name-only
+   git diff --staged --name-only
+   ```
+   - Identify modified, added, and deleted files
+   - Cross-reference with conversation context to understand change purpose
+   - Detect file types and affected components
+   - Identify which repositories are affected (for multi-repo projects)
+
+### Phase 3: Detailed Change Analysis
+
+5. **Launch Change Analysis Tasks** (parallel execution)
+   - **Single Repository**: Use `Task` tool with general-purpose agent
+     - Prompt: "Analyze the complete git diff output and provide a semantic summary of changes. Include: 1) What was changed (functions, classes, configs, etc.), 2) Why these changes were made (purpose/intent), 3) Technical scope (refactoring, new features, fixes, etc.), 4) Impact assessment. Focus on semantic meaning, not line-by-line details. Git diff: [FULL_DIFF_OUTPUT]"
+
+   - **Multiple Repositories** (if Context.md shows multi-repo structure): Launch parallel tasks
+     - For each affected repository: Launch separate `Task` with general-purpose agent
+     - Repository-specific prompt: "Analyze git diff for [REPO_NAME] component and provide semantic summary focusing on this component's changes. Include purpose, technical scope, and component-specific impact. Git diff for [REPO_NAME]: [REPO_SPECIFIC_DIFF]"
+     - Wait for all repository analysis tasks to complete before proceeding
+
+   - **Consolidate Analysis Results**
+     - Combine individual repository analyses (if multiple)
+     - Create unified understanding of overall change impact
+     - Identify primary change theme (bug fix, feature, refactor, etc.)
+
+### Phase 4: Code Formatting (if applicable)
+
+6. **Apply Code Formatting** (conditional)
+   ```bash
+   # Swift formatting (if configs exist)
+   test -f .swiftformat && swiftformat . --config .swiftformat
+   test -f .swift-format && swift-format --in-place --recursive Sources/
+   ```
+   - Apply additional formatters from Context.md if specified
+
+### Phase 5: Build Verification
+
+7. **Verify Code Builds** (using build-project agent)
+   - Use `Task` tool to launch `build-project` agent
+   - If build fails: present errors to user and ask whether to proceed
+
+### Phase 6: Intelligent Commit Message Generation
+
+8. **Generate Commit Message from Analysis**
+   - Use detailed change analysis results from Phase 3
+   - Combine semantic understanding with technical scope assessment
+   - Consider project structure (single/multi-repo) and component affected
+   - Follow pattern: `[Action] [what] [+ context if needed]`
+   - Ensure 50 character limit, imperative mood, capitalized, no period
+   - **CRITICAL**: Never add AI attribution, Co-Authored-By, or emoji
+
+9. **Message Generation Logic**
+   **Context-Driven Actions:**
+   - **Bug fixes**: "Fix [specific issue]"
+   - **Feature addition**: "Add [feature name]"
+   - **Refactoring**: "Improve [area]" or "Refactor [component]"
+   - **Configuration**: "Configure [tool/setting]"
+   - **Documentation**: "Document [area]"
+   - **Performance**: "Optimize [component]"
+   - **Testing**: "Add tests for [feature]"
+   - **Dependencies**: "Update dependencies" or "Add [package] dependency"
+   - **Cleanup**: "Clean up [area]" or "Remove unused [items]"
+   - **Migration**: "Migrate [from X to Y]"
+
+   **File-Based Fallbacks:**
+   - **New files**: "Add [description based on purpose]"
+   - **Modified files**: "Update [component]"
+   - **Deleted files**: "Remove [description]"
+
+### Phase 7: Staging and Commit
+
+10. **Stage Changes**
+    ```bash
+    git add .
+    ```
+
+11. **Execute Commit**
+    ```bash
+    git commit -m "[GENERATED_MESSAGE_HERE]"
+    ```
+    - **CRITICAL**: Single-line format only, no AI attribution
+
+### Phase 8: Post-Commit Verification
+
+12. **Verify Commit Success and Format**
+    ```bash
+    git log -1 --format="%s%n%b"
+    ```
+    - **CRITICAL**: Check single line with no body, no AI attribution
+    - If violations found: Use `git commit --amend -m "[CLEAN_MESSAGE]"` to fix
+
+13. **Report Status**
+    - Show final commit hash and message
+    - Display files committed
+    - Summary of change analysis results used
 
 ## Code Formatting Pipeline
-*Executed in order during pre-commit process*
+*Applied conditionally based on file types and config availability*
 
-1. **SwiftFormat** (if Swift code changed)
-   ```bash
-   swiftformat . --config .swiftformat
-   ```
-   - Adds explicit `self.` where required
-   - Enforces consistent spacing and structure
+### Swift Formatting (if .swiftformat and .swift-format exist)
+```bash
+# 1. SwiftFormat first (structure and self. enforcement)
+swiftformat . --config .swiftformat
 
-2. **swift-format** (if Swift code changed)
-   ```bash
-   swift-format --in-place --recursive Sources/
-   ```
-   - Applies Apple's official formatting rules
-   - Handles line breaks and complex formatting
+# 2. swift-format second (Apple style and line breaks)
+swift-format --in-place --recursive Sources/
+```
 
-3. **Project-Specific Formatters**
-   - Apply any additional formatters defined in workspace Context.md
-   - Run language-specific linters (SwiftLint, ESLint, etc.)
+### Other Language Support
+- **JavaScript/TypeScript**: ESLint, Prettier (if configs exist)
+- **Python**: Black, isort (if configs exist)
+- **Other**: Check Context.md for project-specific formatters
 
 ## Commit Message Generation Rules
-*Following GitCommit.md guidelines*
 
-### Format: `[Action] [what] [+ additional context if needed]`
-- **Action**: Add, Fix, Update, Remove, Rename, Merge, Apply, Clean, Document, Improve
-- **Length**: 50 characters max, extend to 72 if clarity requires
-- **Style**: Imperative mood, capitalize first word, no period
+### Format Requirements
+- **Length**: 50 characters maximum (extend to 72 only if absolutely necessary)
+- **Style**: Imperative mood ("Add feature" not "Added feature")
+- **Capitalization**: First word capitalized
+- **Punctuation**: No period at end
+- **Single Line**: Never use multi-line commits or body paragraphs
 - **Content**: Focus on functionality, never mention formatting
+- **AI Attribution**: **ABSOLUTELY FORBIDDEN** - no AI mentions, Claude references, or co-authorship anywhere
 
-### Examples
+### Action Verbs
+- **Add**: New functionality, files, or features
+- **Fix**: Bug fixes and error corrections
+- **Update**: Modifications to existing functionality
+- **Remove**: Deletion of code, files, or features
+- **Improve**: Performance, readability, or architectural enhancements
+- **Rename**: File or function name changes
+- **Merge**: Branch merging (typically automated)
+
+### Example Messages
 ```bash
 # Good examples
 "Add user authentication with biometric support"
-"Fix accessibility labels in settings screen"  
-"Update privacy manifest for location usage"
-"Improve error handling in network layer"
+"Fix memory leak in image caching system"
+"Update privacy manifest for location services"
+"Remove deprecated networking layer"
+"Improve error handling in data persistence"
 
 # Bad examples (avoid)
-"Added user auth" (wrong tense)
-"fix bug" (not capitalized, too vague)
-"Update formatting and add feature" (mentions formatting)
-"🤖 Add feature with AI assistance" (emoji, AI attribution)
+"Added user authentication"           # Wrong tense
+"fix memory leak"                     # Not capitalized
+"Update formatting and add feature"   # Mentions formatting
+"🤖 Add feature with Claude Code"     # AI attribution (FORBIDDEN)
+"Add feature
+
+Co-Authored-By: Claude"               # Multi-line with AI attribution (FORBIDDEN)
 ```
 
-## Task Completion Tracking
-
-### Steps.md Update Process
-1. Mark current task as complete: `- [x] T### Task description`
-2. Add completion timestamp and constitutional compliance status
-3. Update progress tracking for feature completion percentage
-4. Identify next pending task for continued development
-
-### Feature Completion Detection
-- All tasks in Steps.md marked complete → Feature ready for release
-- Remaining tasks → Continue development workflow
-- Constitutional violations → Address before feature completion
-
 ## Validation Gates
-- [ ] Development session active with current task context?
-- [ ] All constitutional validation checks passed?
-- [ ] Code formatting applied successfully?
-- [ ] Project builds and tests pass?
-- [ ] Commit message follows GitCommit.md guidelines?
-- [ ] Task completion status updated in Steps.md?
-- [ ] Next development step identified?
+
+**Pre-Commit Validation:**
+- [ ] Git repository in valid state (no conflicts)?
+- [ ] Changes detected and analyzed?
+- [ ] Code formatting applied successfully (if applicable)?
+- [ ] Generated commit message follows proper format (50 chars, imperative, capitalized, no period)?
+- [ ] No AI attribution, emoji, or multi-line format in commit message?
+
+**Post-Commit Validation:**
+- [ ] Commit created successfully?
+- [ ] Commit message is single line with no body?
+- [ ] No AI attribution, Claude mentions, or co-authorship in commit?
+- [ ] All intended files included in commit?
 
 ## Error Conditions
-- "No development session" → Must run /Implement/start-working first
-- "Constitutional violations" → Must fix accessibility, privacy, localization, or maintainability issues
-- "Formatting failures" → Must resolve code formatting conflicts or errors
-- "Build failures" → Must fix compilation errors before committing
-- "Invalid commit message" → Must follow GitCommit.md format guidelines
-- "Git conflicts" → Must resolve merge conflicts before committing
 
-## Constitutional Compliance Enforcement
-
-### Blocking Violations (prevent commit)
-- Missing accessibility labels on interactive UI elements
-- Hardcoded user-facing strings (not externalized for localization)
-- Unencrypted sensitive data storage
-- Missing error handling for network calls or file operations
-
-### Warning Violations (allow commit with warning)
-- Suboptimal color contrast (warn to improve)
-- Complex methods without documentation (warn to add docs)
-- Missing unit tests for new business logic (warn to add tests)
-- Performance concerns with current implementation (warn to optimize)
+- **"Not in git repository"** → Must be run from within a git repository
+- **"No changes to commit"** → Stage changes first or modify files
+- **"Merge conflicts detected"** → Resolve conflicts with `git status` and fix conflicted files
+- **"Build failed after formatting"** → Fix compilation errors or skip build check
+- **"Commit message too long"** → Shorten message to 50 characters (72 max)
+- **"Invalid commit format"** → Follow imperative mood, capitalization, and single-line requirements
+- **"Formatter config missing"** → Formatters skipped, continuing with commit
+- **"Permission denied"** → Check repository write permissions
 
 ════════════════════════════════════════════════════════════════════════════════
 👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION
@@ -182,14 +224,14 @@ ${NEXT_ACTION} - Suggested next step based on feature completion status
 This section is preserved during ContextKit migrations and updates.
 Add project-specific instructions, examples, and overrides below.
 
-## Project-Specific Instructions
+## Project-Specific Formatters
+<!-- Add additional formatting commands (ESLint, Prettier, Black, etc.) -->
 
-<!-- Add project-specific guidance here -->
+## Custom Commit Message Patterns
+<!-- Add project-specific patterns (ticket references, conventions) -->
 
-## Additional Examples
+## Build Verification Overrides
+<!-- Document custom build commands or skip conditions -->
 
-<!-- Add examples specific to your project here -->
-
-## Override Behaviors
-
-<!-- Document any project-specific overrides here -->
+## Staging Behavior Modifications
+<!-- Document project-specific staging rules -->
