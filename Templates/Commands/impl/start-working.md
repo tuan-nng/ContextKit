@@ -159,14 +159,53 @@ Begin systematic development with context-aware setup, task analysis, and guided
     - Provide starting guidance based on project patterns
     - Begin implementation work
 
-11. **Quality Assurance Integration**
-    - **After completing any step or significant changes**: Run systematic quality validation
+11. **Quality Assurance Integration with Targeted Context**
+    - **After completing any step or significant changes**: Run systematic quality validation with targeted file analysis
+    - **Context Passing**: Provide recently modified files and line ranges to focus agent analysis
+
+    **Example Agent Calls**:
+    ```
+    Use Task tool with build-project:
+    "Execute project build and report status."
+
+    Use Task tool with check-modern-code:
+    "Check for outdated patterns in recent code.
+
+    FILES:
+    - Sources/Services/AuthService.swift:23-89,145-201
+    - Sources/Models/User.swift:45-78
+    - Sources/Views/LoginView.swift
+
+    Focus analysis on these specific areas only."
+
+    Use Task tool with check-accessibility:
+    "Check accessibility issues in recent UI changes.
+
+    FILES:
+    - Sources/Views/ProfileView.swift:34-156
+    - Sources/Components/CustomButton.swift
+
+    Focus analysis on these specific areas only."
+    ```
+
     - **Execution Order** (run sequentially, stop and fix if any fail):
-      1. `build-project` - Verify compilation and catch build errors first
-      2. `check-modern-code` - Modernize APIs and patterns
-      3. `check-error-handling` - Validate error handling patterns
-      4. `check-accessibility` - Ensure UI accessibility compliance
-      5. `check-localization` - Verify localization readiness (includes build check)
+      1. `build-project` - Verify compilation (project-wide)
+      2. `check-modern-code` - Modernize APIs (recent files only)
+      3. `check-error-handling` - Validate error patterns (recent files only)
+      4. `check-accessibility` - Check UI accessibility (recent UI files only)
+      5. `check-localization` - Verify localization (recent UI files only)
+      6. `check-code-debt` - Clean up artifacts (recent files only)
+
+    - **Optional Testing Agents** (use when working on tests or before releases):
+      - `run-specific-test` - When debugging a failing test or validating new test code
+      - `run-test-suite` - Before package releases or after significant changes to verify full test coverage
+
+    - **File Context Rules**:
+      - Include entire function ranges for significant modifications (60%+ changed)
+      - Provide full file paths for new or completely rewritten files
+      - Merge nearby line ranges (e.g., 23-25,27-29 → 23-29)
+      - Focus agents only on recently modified code, not entire codebase
+
     - **When to run**: After completing views, features, models with user-facing content, or any substantial code changes
     - **If agents fail**: Focus on fixing the specific issue before continuing, then re-run the failed agent to verify the fix
 

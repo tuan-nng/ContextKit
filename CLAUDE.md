@@ -59,7 +59,9 @@ ContextKit/
     │   ├── check-localization.md    # Localization readiness audit (String Catalog, cultural adaptation)
     │   ├── check-error-handling.md  # ErrorKit pattern validation and typed throws
     │   ├── check-modern-code.md     # API modernization (Date.now, Duration, async/await)
-    │   └── check-code-debt.md       # Technical debt cleanup and code consolidation
+    │   ├── check-code-debt.md       # Technical debt cleanup and code consolidation
+    │   ├── run-test-suite.md        # Execute complete test suite with build validation and structured failure reporting
+    │   └── run-specific-test.md     # Execute specific test with build validation and focused failure analysis
     ├── Features/                    # → FEATURE TEMPLATES (used by /Plan/create-spec, etc.)
     │   ├── Spec.md                  # Business requirements and user stories (spec-kit methodology)
     │   ├── Tech.md                  # Technical architecture and constitutional compliance
@@ -216,12 +218,12 @@ tools: Read, Edit, Grep
 - **Parsing Command**: `sed -n '2p' file | grep "Template Version"`
 - **Migration Usage**: `/ctxk:proj:migrate` command uses this for version detection
 
-### Files Requiring Versioning (36 files)
+### Files Requiring Versioning (38 files)
 
 **All .md template files**:
 - `Templates/Guidelines/*.md` (2 files)
 - `Templates/Commands/**/*.md` (16 files)
-- `Templates/Agents/*.md` (6 files)
+- `Templates/Agents/*.md` (8 files)
 - `Templates/Features/*.md` (3 files)
 - `Templates/Backlog/*.md` (4 files)
 
@@ -330,6 +332,8 @@ AGENT_LATEST_VERSION=$(sed -n '2p' ~/.ContextKit/Templates/Agents/check-modern-c
 - `check-error-handling.md` - ErrorKit patterns, typed throws, user-friendly error messages
 - `check-modern-code.md` - Replace Date() → Date.now, TimeInterval → Duration, async/await
 - `check-code-debt.md` - Remove AI artifacts, consolidate patterns, extract components
+- `run-test-suite.md` - Execute complete test suite with build validation and structured failure reporting
+- `run-specific-test.md` - Execute specific test with build validation and focused failure analysis
 
 ### 📝 **Templates/Features/** - Feature Development Templates
 **Purpose**: Templates copied during feature planning commands  

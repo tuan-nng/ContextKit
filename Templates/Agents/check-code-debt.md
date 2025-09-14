@@ -1,8 +1,8 @@
 ---
-meta: "Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-09-13"
+meta: "Template Version: 1 | ContextKit: 0.1.0 | Updated: 2025-09-14"
 name: check-code-debt
-description: Refactor and clean up code generated across multiple AI iterations, removing artifacts and improving maintainability
-tools: Read, Edit, Grep, Glob
+description: Clean up technical debt from AI-generated code by removing artifacts, consolidating patterns, and improving maintainability
+tools: Read, Edit, Grep, Glob, Task
 ---
 
 > [!WARNING]
@@ -15,525 +15,252 @@ tools: Read, Edit, Grep, Glob
 # Agent: check-code-debt
 
 ## Purpose
-Refactor and clean up code generated across multiple AI iterations with constitutional compliance integration, removing leftover artifacts, consolidating patterns, and extracting reusable components.
+Identify and clean up technical debt accumulated during AI-assisted development sessions. Focuses on removing AI communication artifacts, consolidating duplicate patterns, and breaking down overly complex code into maintainable components across any programming language.
 
-## Context Requirements  
-- Project files and codebase structure (Swift, SwiftUI, JavaScript, Python, etc.)
-- Current development session context and active feature specifications
-- Constitutional compliance requirements for project type
-- Previous AI-generated code across multiple sessions and iterations
+## Context Requirements
+- Source code files from any programming language
+- Project files generated across multiple AI sessions
+- Recent development history and iteration context
+- Project Context.md file to understand tech stack and project specifics
+- Examples below use Swift/SwiftUI but concepts apply universally
+
+## Recent Work Input Format
+
+When called with targeted analysis, agents receive specific files and ranges:
+
+```
+FILES:
+- Sources/ViewModels/SettingsViewModel.swift:12-156
+- Sources/Services/AuthService.swift:45-89,120-167
+- Sources/Models/UserProfile.swift
+```
+
+**Structure Interpretation**:
+- **File path**: Relative to project root
+- **Line ranges**: `12-156` = lines 12 through 156
+- **Multiple ranges**: `45-89,120-167` = lines 45-89 AND lines 120-167
+- **No ranges**: Analyze entire file (new files or completely rewritten)
+- **Analysis scope**: Focus on specified files and ranges, BUT expand to include enclosing functions/types for proper context
+- **Context expansion**: When checking function/type complexity, analyze the complete enclosing function or type definition, not just the specified lines
+- **Debt focus**: Look for AI artifacts and complexity in recent work areas, with smart boundary expansion for refactoring decisions
+
+## Smart Boundary Expansion Logic
+
+**Complexity Analysis Requires Full Context**: Unlike other agents that can work with line ranges, code-debt analysis needs complete function/type boundaries to make proper refactoring decisions.
+
+### Boundary Expansion Rules
+- **Function modifications**: If specified lines fall within a function, analyze the entire function scope
+- **Type definitions**: If specified lines are within a class/struct, analyze the complete type definition
+- **Component boundaries**: For UI components, expand to include the complete component structure
+- **Method chains**: Include complete method call chains for pattern recognition
+- **Variable scope**: Expand to include complete variable lifecycle for unused variable detection
+
+### Examples
+```swift
+// Input: Sources/UserService.swift:45-67
+// But function spans lines 30-120
+// → Analyze lines 30-120 (complete function) for complexity assessment
+
+// Input: Sources/ProfileView.swift:89-156
+// But SwiftUI view body spans lines 23-200
+// → Analyze lines 23-200 (complete view) for decomposition opportunities
+```
 
 ## Execution Flow (agent)
-1. Analyze codebase for AI-generated code debt patterns
-   → Detect project type from Package.swift, *.xcodeproj, package.json, requirements.txt, etc.
-   → Scan for temporary AI communication comments and iteration artifacts
-   → Identify duplicate code patterns across multiple AI sessions
-   → Locate overly complex functions and views that need decomposition
-   → If project type unclear: ERROR "Cannot determine project structure"
-2. Validate constitutional compliance in existing code
-   → Check accessibility implementation completeness in UI code
-   → Verify privacy by design patterns in data handling code
-   → Assess localization readiness and hardcoded string usage
-   → Evaluate maintainability and clean code principles adherence
-3. Identify technical debt from AI iteration cycles
-   → Remove leftover artifacts: "// TODO: AI to implement", "// Added for X feature"
-   → Clean temporary AI communication comments: "// Updated this section", "// Fixed in previous iteration"
-   → Find unused variables and dead code from refactoring sessions
-   → Detect inconsistent naming patterns across AI generations
-   → Locate functions that grew too large during iterative development
-4. Extract reusable components and consolidate patterns
-   → Identify repeated code blocks that can become shared functions
-   → Find similar SwiftUI views that can be composed from common components
-   → Detect duplicate data models or service patterns across features
-   → Locate hardcoded values that should be configurable constants
-   → Identify error handling patterns that can be centralized
-5. Apply constitutional maintainability principles
-   → Split overly long functions into focused, single-responsibility methods
-   → Break down complex SwiftUI views into composable subviews
-   → Extract business logic from UI components following clean architecture
-   → Ensure proper separation of concerns across architectural layers
-   → Apply consistent error handling using typed throws patterns
-6. Generate comprehensive refactoring plan
-   → Categorize debt by impact: Critical (blocks development), Major (reduces quality), Minor (polish opportunities)
-   → Provide specific refactoring steps with constitutional compliance integration
-   → Include code examples showing before/after patterns
-   → Estimate refactoring effort and suggest implementation order
-7. Integrate with development workflow context
-   → Assess impact on current active features and development tasks
-   → Recommend optimal timing for debt cleanup (between features, before releases)
-   → Update session context with debt status and cleanup progress
-   → Provide next steps guidance for systematic debt reduction
-8. Return: STRUCTURED DEBT CLEANUP REPORT (issues categorized, refactoring plan, constitutional compliance status)
+1. **Read Project Context**
+   → Use Read to examine Context.md file in project root
+   → Extract project type, tech stack, and architectural patterns
+   → Understand project-specific code organization and standards
+   → If Context.md missing: proceed with auto-detection
 
-## Input Format
-```
-Project Type: ${PROJECT_TYPE}
-Codebase Structure: ${CODEBASE_ANALYSIS}
-Active Features: ${CURRENT_FEATURES}
-Constitutional Requirements: ${CONSTITUTIONAL_REQUIREMENTS}
-Development Session Context: ${SESSION_CONTEXT}
-```
+2. **AI Artifact Detection in Specified Areas**
+   → **If FILES provided**: Focus scan only on specified files and line ranges
+   → **If no FILES provided**:
+     - WARN "No FILES specified - scanning uncommitted changes instead"
+     - WARN "Consider running /ctxk:impl:start-working for proper targeted analysis"
+     - Use Bash to get uncommitted files: `git diff --name-only HEAD`
+     - If git not available: ERROR "Git repository required for automatic file detection"
+     - If no uncommitted files: INFO "No uncommitted changes found - nothing to analyze"
+     - Use Read to examine uncommitted files only for AI artifacts
+   → Scan for temporary AI communication comments and debugging remnants
+   → Identify TODO comments that reference AI implementation
+   → Find leftover iteration markers and session communication
+   → If no artifacts found: INFO "No AI artifacts detected"
 
-## Technical Debt Analysis Patterns
+3. **Code Complexity Analysis with Context Expansion**
+   → **Smart boundary detection**: When specified lines fall within functions/types, analyze the complete enclosing scope
+   → Detect functions longer than 50 lines with mixed responsibilities (analyze entire function even if only part was modified)
+   → Find UI components exceeding 100 lines that need decomposition (analyze complete component structure)
+   → Identify duplicate code patterns across files, expanding context as needed for proper comparison
+   → Locate unused variables and dead code from refactoring within expanded scope
+   → **Example**: If lines 45-67 are specified in a 120-line function, analyze the entire function (lines 30-150) for complexity assessment
 
-### Swift/SwiftUI Specific Patterns
+4. **Pattern Consolidation Opportunities with Smart Scope**
+   → Find similar async operation patterns that can be extracted (compare complete patterns, not partial matches)
+   → Detect repeated component patterns (analyze complete components for proper pattern recognition)
+   → Identify common validation or error handling logic within expanded function boundaries
+   → Locate hardcoded values that should be constants within complete logical scopes
+
+5. **Validate Build After Changes**
+   → Use Task tool to launch `build-project` agent: "Verify project builds after code debt cleanup"
+   → If build fails: Use Edit tool to fix compilation errors caused by cleanup changes
+   → If build fails repeatedly: Revert problematic changes and report build issues
+   → Continue only if build succeeds
+
+6. **Generate Cleanup Report**
+   → Prioritize issues: Critical (blocking) vs Recommended (maintainability)
+   → Provide specific file locations and line numbers
+   → Include before/after code examples for major refactoring
+   → Include build validation status in the report
+   → Return: SUCCESS (cleanup completed and verified) or INFO (no significant debt found)
+
+## Universal AI Artifact Detection Patterns
+*These patterns appear across all programming languages during AI-assisted development*
+
+### AI Communication Comments
+*AI responding to user requests via comments instead of chat*
 ```swift
-// AI iteration artifacts to remove
-// TODO: Implement this feature - AI generated
-// Added this in previous session
-// Updated to fix the issue mentioned earlier
-// Fixed based on user feedback
+// I've updated the authentication logic as requested
+// Changed this based on your feedback
+// This addresses the issue you mentioned
+// Updated per your request
+// I added error handling here
+// This should resolve the problem
+```
 
-// Functions grown too large during iteration
-func handleUserAction() { // 200+ lines of mixed concerns
-    // Authentication logic
-    // Validation logic  
-    // UI updates
-    // Analytics tracking
-    // Error handling
-    // Business logic
+### Debug Remnants and Artifacts
+*Temporary debugging code left by AI across languages*
+```swift
+// Debug: Testing this approach
+// FIXME: AI generated placeholder
+print("DEBUG: Checking value: \(someValue)")
+// Placeholder comment for AI context
+```
+
+### Iteration Markers
+*AI tracking changes across sessions*
+```swift
+// Updated in response to your feedback
+// This replaces the previous implementation
+// Revised approach based on your input
+```
+
+## Universal Code Complexity Detection
+*These patterns indicate technical debt across all programming languages*
+
+### Overgrown Functions with Mixed Responsibilities
+*Functions that handle multiple concerns - common in all languages*
+```swift
+// DETECTED: Mixed concerns in single function
+func handleUserAuthentication(email: String, password: String) {
+    // 20 lines of validation
+    // 25 lines of API communication
+    // 15 lines of UI state updates
+    // 18 lines of error handling
 }
 
-// SwiftUI views that need decomposition
-struct UserProfileView: View { // 300+ lines
+// RECOMMENDED: Split into focused functions
+func authenticateUser(email: String, password: String) async throws -> User
+func validateCredentials(email: String, password: String) throws
+func updateAuthenticationUI(state: AuthState)
+```
+
+### Complex UI Components with Multiple Sections
+*UI components grown too large - pattern exists in all UI frameworks*
+```swift
+// DETECTED: Monolithic view with multiple sections
+struct UserProfileView: View {
     var body: some View {
         VStack {
-            // Header section (50 lines)
-            // Profile image section (30 lines)  
-            // User details section (80 lines)
-            // Action buttons section (40 lines)
-            // Settings section (60 lines)
-            // Footer section (30 lines)
+            // 30 lines: Header section
+            // 25 lines: Profile image handling
+            // 40 lines: User details form
+            // 20 lines: Action buttons
         }
     }
 }
 
-// Duplicate patterns to consolidate
-// Found in LoginView.swift
-Button("Sign In") {
-    showingLoading = true
-    Task {
-        do {
-            try await authService.signIn(email: email, password: password)
-            await MainActor.run { showingLoading = false }
-        } catch {
-            await MainActor.run { 
-                showingLoading = false
-                errorMessage = error.localizedDescription 
-            }
-        }
-    }
-}
-
-// Nearly identical pattern in RegisterView.swift, ResetPasswordView.swift
-// Should be extracted to AuthenticationButton component
-```
-
-### Constitutional Compliance Debt Patterns
-```swift
-// Accessibility debt from AI iterations
-Button("Save") { saveDocument() } // Missing accessibility labels
-TextField("Email", text: $email) // Missing accessibility hints
-NavigationLink("Settings") { SettingsView() } // No VoiceOver guidance
-
-// Privacy compliance debt
-let userData = fetchUserData() // No privacy impact assessment
-saveToCloud(personalInfo) // Privacy manifest not updated
-trackAnalytics(userBehavior) // Data collection not declared
-
-// Localization debt from rapid AI development
-Text("Welcome back!") // Hardcoded English strings
-alertTitle = "Error occurred" // Not using String(localized:)
-placeholderText = "Enter your name" // Missing semantic keys
-```
-
-### JavaScript/React Specific Patterns
-```javascript
-// AI iteration artifacts to remove
-// TODO: Add proper error handling - AI note
-// Fixed this component in last session
-// Updated based on previous feedback
-
-// Components grown complex during development
-function UserDashboard() { // 400+ lines mixing concerns
-    // State management (50 lines)
-    // API calls (80 lines)
-    // Event handlers (120 lines)  
-    // Rendering logic (150 lines)
-}
-
-// Duplicate patterns across components
-// Found in LoginForm.js, RegisterForm.js, ContactForm.js
-const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-        const response = await api.post(endpoint, data);
-        setLoading(false);
-        onSuccess(response);
-    } catch (error) {
-        setLoading(false);
-        setError(error.message);
-    }
-};
-```
-
-## Code Debt Cleanup Report Format
-
-### Critical Issues Structure  
-```markdown
-# Code Debt Cleanup Report: ${PROJECT_NAME}
-
-**Analysis Date**: $(date)
-**Project Type**: ${PROJECT_TYPE}
-**Codebase Size**: ${FILE_COUNT} files, ${LINE_COUNT} lines
-**Constitutional Compliance**: ${COMPLIANCE_STATUS}
-
-## Executive Summary
-- **Total Debt Items**: ${TOTAL_DEBT_COUNT}
-- **Critical Issues**: ${CRITICAL_COUNT} (blocking development quality)
-- **Major Issues**: ${MAJOR_COUNT} (reducing maintainability)
-- **Minor Issues**: ${MINOR_COUNT} (polish opportunities)
-- **Estimated Cleanup Effort**: ${EFFORT_ESTIMATE}
-
-## Critical Issues (Must Fix Immediately)
-
-### AI Iteration Artifacts
-**Impact**: Code contains development artifacts that confuse team members and indicate unfinished work
-
-**Issues Found**:
-- **Temporary Comments**: ${TEMP_COMMENT_COUNT} AI communication comments in ${AFFECTED_FILES}
-  - `UserService.swift:45`: "// TODO: AI to implement proper error handling"
-  - `LoginView.swift:78`: "// Updated this section based on previous iteration"
-  - `DataManager.swift:123`: "// Fixed to address the issue mentioned earlier"
-
-**Resolution**:
-```swift
-// BEFORE: Temporary AI artifacts
-func authenticate(user: User) {
-    // TODO: AI to implement proper validation
-    // Updated this section in previous iteration
-    validateUser(user)
-}
-
-// AFTER: Clean, focused implementation
-func authenticate(user: User) throws {
-    try validateUser(user)
-    try processAuthentication(user)
-}
-```
-
-### Constitutional Compliance Violations
-**Impact**: Code fails to meet accessibility, privacy, and localization standards
-
-**Issues Found**:
-- **Accessibility Debt**: ${ACCESSIBILITY_ISSUES} interactive elements missing accessibility labels
-  - `SettingsView.swift:34`: Button lacks `.accessibilityLabel()`
-  - `ProfileImage.swift:67`: Image missing `.accessibilityDescription()`
-- **Privacy Violations**: ${PRIVACY_ISSUES} data collection points without manifest updates
-  - `AnalyticsService.swift:89`: User tracking without privacy declaration
-  - `CloudSync.swift:156`: Personal data sync missing consent check
-- **Localization Debt**: ${LOCALIZATION_ISSUES} hardcoded strings blocking internationalization
-  - `WelcomeView.swift:23`: "Welcome back!" not externalized
-  - `ErrorHandler.swift:45`: "Connection failed" hardcoded English
-
-**Resolution Pattern**:
-```swift
-// BEFORE: Constitutional violations
-Button("Save") { saveData() }
-Text("Error: Connection failed")
-trackEvent("user_action", data: userData)
-
-// AFTER: Constitutional compliance
-Button("Save") { saveData() }
-    .accessibilityLabel(String(localized: "button.save.label"))
-    .accessibilityHint(String(localized: "button.save.hint"))
-
-Text(String(localized: "error.connection.failed"))
-
-// Privacy-compliant tracking
-if userHasConsented {
-    trackEvent("user_action", data: anonymizedData)
-}
-```
-
-## Major Issues (Should Fix This Sprint)
-
-### Overgrown Functions and Components
-**Impact**: Code becomes unmaintainable and hard to test as AI iterations add complexity
-
-**Issues Found**:
-- **Large Functions**: ${LARGE_FUNCTION_COUNT} functions exceeding 50 lines
-  - `UserController.swift:processUserRegistration()`: 187 lines mixing validation, processing, UI updates
-  - `DashboardView.swift:body`: 234 lines in single SwiftUI view
-- **Mixed Concerns**: ${MIXED_CONCERN_COUNT} components handling multiple responsibilities
-  - `DataManager.swift`: Combines networking, caching, parsing, error handling
-
-**Refactoring Plan**:
-```swift
-// BEFORE: Overgrown function with mixed concerns
-func processUserRegistration(email: String, password: String) { // 187 lines
-    // Email validation (30 lines)
-    // Password strength check (25 lines)
-    // API call setup (40 lines)
-    // Network request handling (45 lines)
-    // UI state updates (25 lines)
-    // Error handling (22 lines)
-}
-
-// AFTER: Decomposed with single responsibilities
-struct UserRegistrationProcessor {
-    func processRegistration(email: String, password: String) async throws -> User {
-        try validateEmail(email)
-        try validatePassword(password)
-        return try await performRegistration(email: email, password: password)
-    }
-    
-    private func validateEmail(_ email: String) throws {
-        // Focused email validation logic
-    }
-    
-    private func validatePassword(_ password: String) throws {
-        // Focused password validation logic
-    }
-    
-    private func performRegistration(email: String, password: String) async throws -> User {
-        // Focused network operation
-    }
-}
-```
-
-### Duplicate Code Patterns
-**Impact**: Changes require updates in multiple locations, increasing bug risk
-
-**Issues Found**:
-- **Similar Network Calls**: ${DUPLICATE_NETWORK_COUNT} nearly identical API request patterns
-- **Repeated UI Components**: ${DUPLICATE_UI_COUNT} similar SwiftUI views that could be composed
-- **Common Validation Logic**: ${DUPLICATE_VALIDATION_COUNT} repeated validation patterns
-
-**Consolidation Strategy**:
-```swift
-// BEFORE: Duplicate patterns across files
-// LoginView.swift
-Button("Sign In") {
-    isLoading = true
-    Task {
-        do {
-            try await authService.signIn(credentials)
-            isLoading = false
-            navigateToMain()
-        } catch {
-            isLoading = false
-            showError(error)
-        }
-    }
-}
-
-// RegisterView.swift  
-Button("Create Account") {
-    isLoading = true
-    Task {
-        do {
-            try await authService.register(userInfo)
-            isLoading = false
-            navigateToMain()
-        } catch {
-            isLoading = false
-            showError(error)
-        }
-    }
-}
-
-// AFTER: Extracted reusable component
-struct AsyncActionButton<T>: View {
-    let title: String
-    let action: () async throws -> T
-    let onSuccess: (T) -> Void
-    let onFailure: (Error) -> Void
-    
-    @State private var isLoading = false
-    
+// RECOMMENDED: Decomposed components
+struct UserProfileView: View {
     var body: some View {
-        Button(title) {
-            isLoading = true
-            Task {
-                do {
-                    let result = try await action()
-                    await MainActor.run {
-                        isLoading = false
-                        onSuccess(result)
-                    }
-                } catch {
-                    await MainActor.run {
-                        isLoading = false
-                        onFailure(error)
-                    }
-                }
-            }
+        VStack {
+            UserProfileHeader(user: user)
+            UserProfileImage(user: user, onUpdate: updateImage)
+            UserDetailsForm(user: $user)
+            UserActionButtons(user: user, onAction: handleAction)
         }
-        .disabled(isLoading)
-        .accessibilityLabel(String(localized: "button.\(title.lowercased()).label"))
     }
 }
 ```
 
-## Minor Issues (Polish When Time Permits)
+## Universal Duplicate Pattern Detection
+*Similar code appearing across multiple files - occurs in all programming languages*
 
-### Naming Inconsistencies  
-**Impact**: Codebase appears unprofessional and reduces developer velocity
-
-**Issues Found**:
-- **Variable Naming**: ${NAMING_INCONSISTENCY_COUNT} inconsistent naming patterns
-  - Some files use `userId`, others use `user_id`, `userID`
-  - API response keys inconsistently named: `fullName` vs `full_name`
-- **Function Naming**: Mixed conventions across AI-generated functions
-  - Some use `handleUserAction`, others `processUserAction`, `manageUserAction`
-
-### Dead Code from Refactoring Sessions
-**Impact**: Increases bundle size and cognitive load
-
-**Issues Found**:
-- **Unused Variables**: ${UNUSED_VAR_COUNT} variables declared but never used
-- **Orphaned Functions**: ${ORPHANED_FUNCTION_COUNT} functions no longer called
-- **Commented Out Code**: ${COMMENTED_CODE_COUNT} blocks of old implementations
-
-## Implementation Roadmap
-
-### Phase 1: Critical Fixes (1-2 days)
-1. **Remove AI Artifacts**
-   - [ ] Clean ${TEMP_COMMENT_COUNT} temporary comments across ${AFFECTED_FILES} files
-   - [ ] Remove TODO comments that reference AI implementation
-   - [ ] Clear development session communication comments
-
-2. **Fix Constitutional Violations**  
-   - [ ] Add accessibility labels to ${ACCESSIBILITY_ISSUES} interactive elements
-   - [ ] Externalize ${LOCALIZATION_ISSUES} hardcoded strings
-   - [ ] Update privacy manifest for ${PRIVACY_ISSUES} data collection points
-
-### Phase 2: Major Refactoring (3-5 days)
-1. **Decompose Large Functions**
-   - [ ] Split `UserController.processUserRegistration()` into focused methods
-   - [ ] Break down `DashboardView.body` into composable subviews
-   - [ ] Extract business logic from UI components
-
-2. **Consolidate Duplicate Patterns**
-   - [ ] Create `AsyncActionButton` component for common async operations
-   - [ ] Extract `NetworkService` base class for API patterns
-   - [ ] Build `ValidationService` for common validation logic
-
-### Phase 3: Polish and Optimization (1-2 days)
-1. **Standardize Naming**
-   - [ ] Establish consistent naming conventions document
-   - [ ] Apply conventions across ${AFFECTED_FILES} files
-   - [ ] Update API integration to match naming standards
-
-2. **Remove Dead Code**
-   - [ ] Delete ${UNUSED_VAR_COUNT} unused variables
-   - [ ] Remove ${ORPHANED_FUNCTION_COUNT} orphaned functions
-   - [ ] Clean up ${COMMENTED_CODE_COUNT} commented code blocks
-
-## Constitutional Compliance Integration
-
-### Accessibility Improvements
-- All refactored UI components must include proper accessibility labels and hints
-- Complex views split into logical accessibility containers  
-- Semantic markup preserved during component extraction
-
-### Privacy by Design
-- Extracted data handling components must include privacy impact assessment
-- Consolidated API services require consent verification integration
-- Refactored analytics patterns must respect user privacy preferences
-
-### Localization Readiness
-- All extracted components use semantic localization keys
-- String consolidation follows "feature.component.purpose" naming convention
-- Refactored UI components support RTL layouts and dynamic type
-
-### Maintainability Standards
-- Extracted functions follow single responsibility principle
-- Component composition enables easy testing and modification
-- Clean architecture patterns applied consistently across refactored code
-
-## Development Workflow Integration
-
-### Impact on Active Features
-**Current Active Features**: ${ACTIVE_FEATURES}
-**Development Impact**: ${IMPACT_ASSESSMENT}
-
-### Recommended Timing
-- **Critical Issues**: Fix immediately before continuing feature development
-- **Major Issues**: Address during current sprint planning
-- **Minor Issues**: Include in next maintenance sprint
-
-### Testing Strategy
-- Unit tests for all extracted components and functions
-- Integration tests for consolidated API patterns  
-- Accessibility testing for refactored UI components
-- Performance testing for complex view decomposition
-
-### Next Steps After Cleanup
-1. **Establish Debt Prevention**: Configure hooks to prevent AI artifact accumulation
-2. **Quality Gates**: Add constitutional compliance checks to build process
-3. **Regular Maintenance**: Schedule quarterly debt assessment and cleanup
-4. **Team Guidelines**: Document patterns and standards for consistent AI-assisted development
-
----
-*This debt cleanup plan integrates constitutional maintainability principles throughout the refactoring process, ensuring that cleaned code meets accessibility, privacy, localization, and architectural standards.*
-```
-
-## Constitutional Integration Framework
-
-### Accessibility-First Refactoring
-- All component extraction preserves and improves VoiceOver navigation
-- UI decomposition creates logical accessibility groupings
-- Refactored interactions include proper accessibility actions and labels
-
-### Privacy by Design in Cleanup  
-- Data handling consolidation includes privacy impact reassessment
-- API pattern extraction integrates consent management by default
-- Analytics cleanup ensures compliance with privacy manifest declarations
-
-### Localization-Ready Architecture
-- String externalization uses semantic, hierarchical key structures
-- Component extraction supports cultural adaptation and RTL layouts  
-- Refactored text handling integrates proper pluralization and formatting
-
-### Clean Code Maintainability
-- Function decomposition follows single responsibility and clean architecture
-- Component extraction enables comprehensive testing and future modification
-- Consolidated patterns reduce cognitive load and improve team velocity
-
-## Error Handling and Recovery
-
-### Debt Analysis Failures
+### Repeated Async Operations Pattern
+*Common async handling patterns duplicated across components*
 ```swift
-enum CodeDebtError: String {
-    case projectStructureUnclear = "Cannot analyze project structure"
-    case constitutionalAssessmentFailed = "Unable to assess constitutional compliance"
-    case refactoringPlanIncomplete = "Refactoring analysis incomplete"
-    case workflowIntegrationUnclear = "Cannot assess impact on development workflow"
+// FOUND IN: LoginView.swift, RegisterView.swift, ResetPasswordView.swift
+Button("Submit") {
+    isLoading = true
+    Task {
+        do {
+            let result = try await authService.performAction()
+            await MainActor.run {
+                isLoading = false
+                handleSuccess(result)
+            }
+        } catch {
+            await MainActor.run {
+                isLoading = false
+                handleError(error)
+            }
+        }
+    }
 }
+
+// CONSOLIDATE TO: AsyncActionButton component
 ```
 
-### Recovery Guidance  
-- **Structure Issues**: Provide project type detection guidance and manual setup
-- **Constitutional Assessment**: Include examples and patterns for compliance evaluation
-- **Refactoring Planning**: Suggest incremental approach with focused scope
-- **Workflow Integration**: Guide through active feature assessment and timing recommendations
+### Common Validation Logic Pattern
+*Validation rules repeated across multiple files*
+```swift
+// DUPLICATED: Email validation in 4+ files
+guard email.contains("@"), email.contains(".") else {
+    throw ValidationError.invalidEmail
+}
 
-## Integration with Development Session Context
+// EXTRACT TO: ValidationService.validateEmail(_:)
+```
 
-### Active Feature Coordination
-- Assess debt cleanup impact on current development tasks
-- Recommend optimal cleanup timing to minimize workflow disruption  
-- Coordinate with feature implementation to avoid merge conflicts
-- Track constitutional compliance improvements alongside feature progress
+## Output Format
 
-### Session Context Updates
-- Update development context with debt status and cleanup progress
-- Provide next session guidance based on cleanup results
-- Integrate refactoring learnings into ongoing development practices
-- Maintain continuity between debt cleanup and feature development sessions
+```markdown
+✅ CODE DEBT CLEANUP APPLIED
+
+Removed 8 AI artifacts, cleaned 5 unused variables across 7 files
+Build validated: SUCCESS
+
+Manual review needed:
+- AuthenticationController.swift - Split 127-line function (mixed concerns)
+- DashboardView.swift - Decompose 156-line view (5 sections)
+
+Files modified: UserService.swift, LoginView.swift, ProfileViewModel.swift
+```
+
+## Validation Gates
+*Agent execution refuses to complete if these fail*
+
+- [ ] Source code files provided for analysis?
+- [ ] Project type/language detected or specified?
+- [ ] AI artifacts clearly identified with specific locations?
+- [ ] Code complexity issues include before/after examples?
+- [ ] All recommendations are actionable with clear priorities?
+
+## Error Conditions
+- "No source files provided" → User must specify files to analyze
+- "Language detection failed" → Cannot determine appropriate detection patterns
+- "Insufficient code context" → Need more than single file snippets
+- "Analysis incomplete" → File parsing errors prevent full assessment
 
 ════════════════════════════════════════════════════════════════════════════════
 👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION

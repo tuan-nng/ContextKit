@@ -197,104 +197,100 @@ Feature specification template providing systematic business requirements genera
 
 ---
 
-## Business Validation Gates (Auto-executed)
-*Checked by execution flow before returning SUCCESS*
-
-### Requirements Quality
-- [ ] All user flows have Happy Path + Error Path scenarios?
-- [ ] Edge cases documented with expected behaviors?
-- [ ] Success criteria are measurable with specific metrics?
-- [ ] No [NEEDS CLARIFICATION] markers remain unresolved?
-
-### Business Value
-- [ ] Clear user problems identified and documented?
-- [ ] Success metrics defined and measurable?
-- [ ] Feature scope properly bounded (IN/OUT/FUTURE)?
-- [ ] Requirements focused on user needs, not technical implementation?
-
----
-
-## Template Validation (Auto-executed)
-*Checked by execution flow before returning SUCCESS*
-
-### Content Quality
-- [ ] No implementation details (languages, frameworks, APIs)
-- [ ] Focused on user value and business needs  
-- [ ] Written for non-technical stakeholders
-- [ ] All mandatory sections completed
-- [ ] Platform-specific considerations integrated throughout
-
-### Requirement Completeness  
-- [ ] No [NEEDS CLARIFICATION] markers remain
-- [ ] Requirements are testable and unambiguous
-- [ ] Success criteria are measurable
-- [ ] Scope is clearly bounded with IN/OUT/FUTURE sections
-- [ ] Dependencies and assumptions identified
-
-### Business Focus
-- [ ] Requirements focused on user value, not technical implementation
-- [ ] Anti-speculation enforcement applied
-- [ ] Quality gates embedded throughout specification
-
-### Scope Clarity
-- [ ] Platform differences considered if relevant to user experience
-- [ ] Clear boundaries between business requirements and implementation details
-
----
-
-## Execution Status
-*Updated by main() during processing*
-
-- [ ] User description parsed
-- [ ] Development guidelines applied
-- [ ] Key concepts extracted
-- [ ] Ambiguities marked with [NEEDS CLARIFICATION]
-- [ ] iOS/macOS user scenarios defined
-- [ ] Platform-specific requirements generated
-- [ ] Anti-speculation enforcement applied
-- [ ] Validation gates executed
-- [ ] Template self-validation completed
-- [ ] Review checklist passed
-
----
-
-**IMPORTANT**: This specification should remain high-level and readable. Any detailed technical implementations, code samples, or extensive technical specifications must be placed in separate implementation detail files in the Context/Features/[feature-name]/TechDetails/ directory during the technical planning phase.
-
-**Command Arguments Used**:
-- `$ARGUMENTS` - Original user input (e.g., "Add user authentication with Apple ID")
-- AI generates feature name from `$ARGUMENTS` (e.g., "UserAuthentication")
-- AI creates kebab-case branch name (e.g., "user-authentication") 
-- AI fills in current date and extracts user story components
-
----
-
-## Execution Status *(Progress Tracking)*
-*Updated by AI during specification generation - check off completed steps*
-
-### Phase 1: Context Analysis & Guidelines Loading
-- [ ] Project Context.md loaded and analyzed
-- [ ] Development guidelines loaded based on project type
-- [ ] Development patterns extracted from loaded guidelines
-- [ ] User requirements extracted from original input
-
-### Phase 2: Specification Content Generation
-- [ ] Feature information header generated
-- [ ] Primary user story created with platform context
-- [ ] Comprehensive acceptance scenarios generated
-- [ ] Functional requirements defined with clear user value
-
-### Phase 3: Business Validation & Scope Definition
-- [ ] Business value and user problems clearly documented
-- [ ] Feature justification and scope boundaries defined
-- [ ] Clarification needs marked with [NEEDS CLARIFICATION] format
-- [ ] All validation gates executed and boxes checked
-
-### Phase 4: Final Validation & Completion
-- [ ] All validation sections completed with appropriate checks
-- [ ] Template quality validation completed
-- [ ] Execution status fully updated
-- [ ] System instructions removed from final document
-
----
-
-**Next Phase**: After this specification is approved, proceed to `/ctxk:plan:2-tech` for technical architecture planning and implementation design.
+════════════════════════════════════════════════════════════════════════════════
+║ 🤖 VALIDATION & EXECUTION STATUS - AI WORKFLOW INSTRUCTIONS
+════════════════════════════════════════════════════════════════════════════════
+║
+║ ## Business Validation Gates (Auto-executed)
+║ *Checked by execution flow before returning SUCCESS*
+║
+║ ### Requirements Quality
+║ - [ ] All user flows have Happy Path + Error Path scenarios?
+║ - [ ] Edge cases documented with expected behaviors?
+║ - [ ] Success criteria are measurable with specific metrics?
+║ - [ ] No [NEEDS CLARIFICATION] markers remain unresolved?
+║
+║ ### Business Value
+║ - [ ] Clear user problems identified and documented?
+║ - [ ] Success metrics defined and measurable?
+║ - [ ] Feature scope properly bounded (IN/OUT/FUTURE)?
+║ - [ ] Requirements focused on user needs, not technical implementation?
+║
+║ ## Template Validation (Auto-executed)
+║ *Checked by execution flow before returning SUCCESS*
+║
+║ ### Content Quality
+║ - [ ] No implementation details (languages, frameworks, APIs)
+║ - [ ] Focused on user value and business needs
+║ - [ ] Written for non-technical stakeholders
+║ - [ ] All mandatory sections completed
+║ - [ ] Platform-specific considerations integrated throughout
+║
+║ ### Requirement Completeness
+║ - [ ] No [NEEDS CLARIFICATION] markers remain
+║ - [ ] Requirements are testable and unambiguous
+║ - [ ] Success criteria are measurable
+║ - [ ] Scope is clearly bounded with IN/OUT/FUTURE sections
+║ - [ ] Dependencies and assumptions identified
+║
+║ ### Business Focus
+║ - [ ] Requirements focused on user value, not technical implementation
+║ - [ ] Anti-speculation enforcement applied
+║ - [ ] Quality gates embedded throughout specification
+║
+║ ### Scope Clarity
+║ - [ ] Platform differences considered if relevant to user experience
+║ - [ ] Clear boundaries between business requirements and implementation details
+║
+║ ## Execution Status
+║ *Updated by main() during processing*
+║
+║ - [ ] User description parsed
+║ - [ ] Development guidelines applied
+║ - [ ] Key concepts extracted
+║ - [ ] Ambiguities marked with [NEEDS CLARIFICATION]
+║ - [ ] iOS/macOS user scenarios defined
+║ - [ ] Platform-specific requirements generated
+║ - [ ] Anti-speculation enforcement applied
+║ - [ ] Validation gates executed
+║ - [ ] Template self-validation completed
+║ - [ ] Review checklist passed
+║
+║ **IMPORTANT**: This specification should remain high-level and readable. Any detailed technical implementations, code samples, or extensive technical specifications must be placed in separate implementation detail files in the Context/Features/[feature-name]/TechDetails/ directory during the technical planning phase.
+║
+║ **Command Arguments Used**:
+║ - `$ARGUMENTS` - Original user input (e.g., "Add user authentication with Apple ID")
+║ - AI generates feature name from `$ARGUMENTS` (e.g., "UserAuthentication")
+║ - AI creates kebab-case branch name (e.g., "user-authentication")
+║ - AI fills in current date and extracts user story components
+║
+║ ## Execution Status *(Progress Tracking)*
+║ *Updated by AI during specification generation - check off completed steps*
+║
+║ ### Phase 1: Context Analysis & Guidelines Loading
+║ - [ ] Project Context.md loaded and analyzed
+║ - [ ] Development guidelines loaded based on project type
+║ - [ ] Development patterns extracted from loaded guidelines
+║ - [ ] User requirements extracted from original input
+║
+║ ### Phase 2: Specification Content Generation
+║ - [ ] Feature information header generated
+║ - [ ] Primary user story created with platform context
+║ - [ ] Comprehensive acceptance scenarios generated
+║ - [ ] Functional requirements defined with clear user value
+║
+║ ### Phase 3: Business Validation & Scope Definition
+║ - [ ] Business value and user problems clearly documented
+║ - [ ] Feature justification and scope boundaries defined
+║ - [ ] Clarification needs marked with [NEEDS CLARIFICATION] format
+║ - [ ] All validation gates executed and boxes checked
+║
+║ ### Phase 4: Final Validation & Completion
+║ - [ ] All validation sections completed with appropriate checks
+║ - [ ] Template quality validation completed
+║ - [ ] Execution status fully updated
+║ - [ ] System instructions removed from final document
+║
+║ **Next Phase**: After this specification is approved, proceed to `/ctxk:plan:2-tech` for technical architecture planning and implementation design.
+║
+════════════════════════════════════════════════════════════════════════════════

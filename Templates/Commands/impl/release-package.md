@@ -33,11 +33,8 @@ Execute Swift Package release workflow with version management, release notes ge
    - If not in git repository: ERROR "Git repository required for package releases."
 
 3. **Validate Package Builds and Tests**
-   ```bash
-   echo "🧪 Running package validation..."
-   swift build -c release
-   swift test --parallel
-   ```
+   - Use `Task` tool to launch `build-project` agent: "Execute release build validation"
+   - Use `Task` tool to launch `run-test-suite` agent: "Execute complete test suite for release validation"
    - If build fails: ERROR "Package must build successfully before release."
    - If tests fail: ERROR "All tests must pass before release."
 

@@ -136,7 +136,7 @@ Generate implementation task breakdown by detecting current feature, validating 
 1. Review Context/Features/[Name]/Steps.md to ensure task breakdown is comprehensive
 2. [If clarifications needed:] Edit the steps file to resolve marked implementation questions
 3. When satisfied with the implementation plan: commit your changes with git
-4. Run /ctxk:impl:start-working to begin systematic development execution
+4. Run /ctxk:impl:start-working (in a new chat) to begin systematic development execution
 
 💡 Implementation roadmap ready for development execution!
 ```

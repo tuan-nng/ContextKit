@@ -65,23 +65,45 @@ Generate technical architecture plan by detecting current feature, validating pr
    - Check for [NEEDS CLARIFICATION] markers in specification
    - If clarifications exist: WARN user to resolve them first
 
-### Phase 3: Template Setup & Execution
+### Phase 3: Research Phase Execution
 
-5. **Copy Technical Template**
+5. **Copy Research Template**
+   ```bash
+   cp ~/.ContextKit/Templates/Features/Research.md Context/Features/[FeatureName]/Research.md
+   echo "✅ Copied technical research template"
+   ```
+
+6. **Execute Research Template**
+   - Use `Read` tool to read the copied Research.md: `Read Context/Features/[FeatureName]/Research.md`
+   - Follow the **system instructions** section (boxed area) step by step
+   - The template handles knowledge acquisition via WebFetch/WebSearch for technologies mentioned in specification
+   - Use tools (`Read`, `Edit`, `WebFetch`, `WebSearch`) as directed by the template instructions
+   - **Research execution**: The copied Research.md handles technology research, API investigation, and pattern analysis
+   - **Progress tracking**: User can see research checkboxes being completed in the copied file
+
+7. **Validate Research Completion**
+   - Use `Read` tool to verify research completion: `Read Context/Features/[FeatureName]/Research.md`
+   - Ensure all technologies mentioned in specification have been researched
+   - Verify research findings are documented with decisions and rationale
+   - If research incomplete: WARN user to complete research before proceeding
+
+### Phase 4: Technical Architecture Planning
+
+8. **Copy Technical Architecture Template**
    ```bash
    cp ~/.ContextKit/Templates/Features/Tech.md Context/Features/[FeatureName]/Tech.md
    echo "✅ Copied technical architecture template"
    ```
 
-6. **Execute Technical Template**
+9. **Execute Technical Architecture Template**
    - Use `Read` tool to read the copied Tech.md: `Read Context/Features/[FeatureName]/Tech.md`
    - Follow the **system instructions** section (boxed area) step by step
-   - The template contains technical architecture generation logic and constitutional compliance
+   - The template contains technical architecture generation logic informed by research results
    - Use tools (`Read`, `Edit`) as directed by the template instructions
-   - **Template execution**: The copied Tech.md handles all context reading, guidelines loading, architecture decisions, and validation
-   - **Progress tracking**: User can see checkboxes being completed in the copied file
+   - **Template execution**: The copied Tech.md handles architecture decisions, Context/Guidelines compliance, and complexity assessment
+   - **Progress tracking**: User can see architectural planning checkboxes being completed in the copied file
 
-7. **Display Success Message** (see Success Messages section)
+10. **Display Success Message** (see Success Messages section)
 
 ## Error Conditions
 
@@ -115,46 +137,29 @@ Generate technical architecture plan by detecting current feature, validating pr
 
 ## Success Messages
 
-### Technical Plan Created Successfully
+### Research & Technical Plan Created Successfully
 ```
-🎉 Technical architecture plan created successfully!
+🎉 Technical research and architecture planning completed successfully!
 
+✅ Created: Context/Features/[Name]/Research.md
 ✅ Created: Context/Features/[Name]/Tech.md
+✅ Researched all technologies mentioned in specification
 ✅ Applied Context/Guidelines/Swift.md and SwiftUI.md standards
-✅ All mandatory sections completed with architectural decisions
+✅ All mandatory sections completed with research-informed decisions
 
-[If NEEDS CLARIFICATION items exist in tech plan:]
+[If NEEDS CLARIFICATION items exist in plans:]
 ⚠️  Technical clarifications needed for:
-• [Template will list specific technical questions that need answers]
+• [Templates will list specific questions that need answers]
 
 🔗 Next Steps:
-1. Review Context/Features/[Name]/Tech.md to ensure technical decisions are sound
-2. [If clarifications needed:] Edit the tech file to resolve marked technical questions
-3. When satisfied with the technical plan: commit your changes with git
-4. Run /ctxk:plan:3-steps to proceed with implementation task breakdown
+1. Review Context/Features/[Name]/Research.md to verify research findings
+2. Review Context/Features/[Name]/Tech.md to ensure technical decisions are sound
+3. [If clarifications needed:] Edit the files to resolve marked questions
+4. When satisfied with both research and technical plan: commit your changes with git
+5. Run /ctxk:plan:3-steps to proceed with implementation task breakdown
 
-💡 Technical architecture ready for your review and approval before task planning!
+💡 Research-informed technical architecture ready for your review and approval!
 ```
-
-## Platform-Specific Technical Guidance
-
-### Swift Package
-- **Architecture**: Protocol-oriented design, value types, clear module boundaries
-- **Dependencies**: Minimal external dependencies, prefer standard library
-- **Testing**: Comprehensive unit tests, Linux compatibility testing
-- **Documentation**: DocC documentation with examples
-
-### iOS App  
-- **Architecture**: SwiftUI + SwiftData, MVVM where appropriate
-- **Platform Integration**: CloudKit, HealthKit, App Store guidelines
-- **Platform Standards**: Per Context/Guidelines/SwiftUI.md compliance requirements
-- **Testing**: Unit tests + UI tests with accessibility testing
-
-### macOS App
-- **Architecture**: SwiftUI with AppKit integration where needed
-- **Platform Integration**: Sandboxing considerations, system services
-- **Platform Standards**: Per Context/Guidelines/SwiftUI.md macOS requirements
-- **Testing**: Unit tests + integration tests for system interactions
 
 ════════════════════════════════════════════════════════════════════════════════
 👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION

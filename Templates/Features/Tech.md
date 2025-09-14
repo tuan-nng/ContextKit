@@ -1,240 +1,283 @@
 # Technical Architecture: [Feature from Spec.md]
-<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-09-13 -->
+<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14 -->
 
-**Phase**: 1 (Technical Architecture)  
-**Input**: Specification from Phase 0 (Spec.md)  
-**Output**: Technical implementation plan ready for task breakdown
-
-Technical planning template for iOS/macOS features with Context/Guidelines compliance. Used by `/ctxk:plan:2-tech` command for architecture decisions.
+## Description
+Technical architecture template providing systematic iOS/macOS implementation planning with Context/Guidelines compliance validation and architectural decision documentation.
 
 ════════════════════════════════════════════════════════════════════════════════
-║ 🤖 EXECUTION FLOW - TECHNICAL ARCHITECTURE GENERATION  
+║ 🤖 EXECUTION FLOW - TECHNICAL ARCHITECTURE GENERATION
 ════════════════════════════════════════════════════════════════════════════════
+║
 ║ ## Execution Flow (main)
 ║
-║ ```
-║ 1. Load feature specification from current feature directory Spec.md
-║   → If missing: ERROR "Phase 0 specification required before technical planning"
-║   → If incomplete: ERROR "Resolve [NEEDS CLARIFICATION] markers in specification first"
-║ 2. Analyze specification for technical requirements
-║   → Extract: user flows, data models, integration needs, performance targets
-║   → Identify: complexity factors, external dependencies, platform constraints
-║ 3. Apply Context/Guidelines compliance gates (Phase -1)
-║   → Package-first principle: Can this be a Swift package?
-║   → ErrorKit integration: How will errors be handled?
-║   → 3-space indentation: Coding style confirmed?
-║   → If any gate fails: DOCUMENT justification or ERROR "Simplify approach"
-║ 4. Design iOS/macOS architecture with rationale
-║   → SwiftUI structure: Views, ViewModels, navigation patterns
-║   → Data layer: CoreData, CloudKit, or package-based storage
-║   → Service layer: API integration, business logic separation
-║   → For each decision: DOCUMENT rationale and alternatives considered
-║ 5. Validate architectural decisions against project context
-║   → Review existing codebase patterns and consistency
-║   → Check dependency compatibility and version requirements
-║   → Assess performance impact on app launch and memory usage
-║ 6. Generate implementation complexity assessment
-║   → Estimate development time and effort requirements
-║   → Identify potential risks and mitigation strategies
-║   → Mark uncertain areas with [NEEDS CLARIFICATION: specific technical question]
-║ 7. Run technical validation gates
-║   → Architecture supports all user scenarios from specification?
-║   → Context/Guidelines standards maintained throughout?
-║   → Dependencies reasonable and well-justified?
-║   → Performance implications acceptable?
-║   → If validation fails: ERROR with specific remediation guidance
-║ 8. Return: SUCCESS (technical plan ready for Phase 2 task breakdown)
-║ ```
+║ ### Phase 1: Prerequisites & Context Loading
+║
+║ 1. **Load Technical Research Results**
+║    - Use `Read` tool to read current feature directory Research.md: `Read Context/Features/[FeatureName]/Research.md`
+║    - If missing: ERROR "Technical research required before architecture planning - run research phase first"
+║    - Extract: researched technology decisions, API constraints, architectural patterns
+║    - Document research findings for informed architecture decisions
+║
+║ 2. **Load Feature Specification**
+║    - Use `Read` tool to read current feature directory Spec.md: `Read Context/Features/[FeatureName]/Spec.md`
+║    - If missing: ERROR "Feature specification required for architecture planning"
+║    - Extract: user flows, functional requirements, business constraints
+║    - Cross-reference with research findings for technology alignment
+║
+║ 3. **Load Project Context**
+║    - Use `Read` tool to read project Context.md: `Read Context.md`
+║    - Extract project type, existing architecture, tech stack preferences
+║    - For workspace projects: Use `Read` tool on workspace Context.md for overrides
+║
+║ 4. **Load Development Guidelines**
+║    - Based on project type detected:
+║      - If Swift detected: Use `Read` tool: `Read Context/Guidelines/Swift.md`
+║      - If SwiftUI detected: Use `Read` tool: `Read Context/Guidelines/SwiftUI.md`
+║    - Document loaded guidelines for architectural compliance validation
+║
+║ ### Phase 2: Architecture Design & Validation
+║
+║ 5. **Apply Context/Guidelines Compliance Gates**
+║    - Package-first principle: Can this be architected as Swift package?
+║    - ErrorKit integration: How will errors be handled with typed throws?
+║    - Code quality: Does architecture meet Context/Guidelines/Swift.md standards?
+║    - Platform compliance: Does design follow Context/Guidelines/SwiftUI.md patterns?
+║    - If any gate fails: DOCUMENT justification or ERROR "Simplify approach"
+║
+║ 6. **Design iOS/macOS Architecture with Research-Informed Decisions**
+║    - SwiftUI structure: Views, ViewModels, navigation patterns
+║    - Data layer: SwiftData, CoreData, CloudKit, or package-based storage
+║    - Service layer: API integration, business logic separation
+║    - For each decision: DOCUMENT rationale and alternatives considered
+║
+║ 7. **Generate Implementation Complexity Assessment"
+║    - Estimate development time and effort requirements
+║    - Identify potential risks and mitigation strategies
+║    - Mark uncertain areas with [NEEDS CLARIFICATION: specific technical question]
+║
+║ ### Phase 3: Technical Plan Generation
+║
+║ 8. **Generate Technical Architecture Content"
+║    - Use `Edit` tool to replace template header with specific feature information:
+║      - Title: "# Technical Architecture: [Feature Name]"
+║      - Created: [Current Date]
+║      - Status: Technical Plan
+║      - Prerequisites: Reference to completed Spec.md
+║
+║ 9. **Fill System Overview Section"
+║    - High-level architecture description and component relationships
+║    - Core components with clear responsibilities
+║    - Data flow documentation
+║
+║ 10. **Complete Implementation Details Sections"
+║    - SwiftUI structure with view hierarchy and state management
+║    - Data layer design with storage strategy and model architecture
+║    - Service layer with integration patterns and dependency management
+║    - Platform-specific considerations (iOS/macOS requirements)
+║
+║ 11. **Generate Complexity Assessment"
+║     - Development effort estimation with realistic timelines
+║     - Risk assessment and mitigation strategies
+║     - Dependency analysis (external and internal)
+║
+║ ### Phase 4: Validation & Completion
+║
+║ 12. **Run Technical Validation Gates"
+║     - Architecture supports all user scenarios from specification?
+║     - Context/Guidelines standards maintained throughout?
+║     - Dependencies reasonable and well-justified?
+║     - Performance implications assessed and acceptable?
+║     - If validation fails: ERROR with specific remediation guidance
+║
+║ 13. **Update Technical Plan Status"
+║     - Check off all completed technical planning items
+║     - Mark any remaining [NEEDS CLARIFICATION] areas
+║     - Validate all mandatory sections completed
+║
+║ 14. **COMPLETION"
+║     - Use `Edit` tool to remove this entire boxed system instructions section
+║     - Leave only the clean technical architecture content for team use
+║     - Final document focused on architectural decisions and implementation guidance
+║
+║ ## Success Criteria
+║ - All technical sections completed with specific architectural decisions
+║ - Context/Guidelines compliance validated throughout architecture
+║ - Implementation complexity realistically assessed with timelines
+║ - Platform considerations (iOS/macOS) integrated throughout plan
+║ - Technical decisions clearly documented with rationale
+║ - All validation gates passed and dependencies identified
+║ - [NEEDS CLARIFICATION] markers used for genuine technical uncertainties only
+║ - System instructions completely removed from final technical plan document
+║
+════════════════════════════════════════════════════════════════════════════════
 
-## Template Variables
-- `${FEATURE_NAME}` - PascalCase feature name from specification
-- `${PROJECT_TYPE}` - Detected project type (ios-app, swift-package, vapor-server)
-- `${EXISTING_ARCHITECTURE}` - Current project architectural patterns
-- `${GUIDELINE_STANDARDS}` - Applied Context/Guidelines compliance requirements
-- `${PERFORMANCE_TARGETS}` - Extracted performance requirements from specification
+# Technical Architecture: [AI Generated Feature Name]
 
-## Phase -1: Context/Guidelines Compliance Gates
-*Must pass before proceeding to architecture design*
+**Created**: [AI Generated Current Date]
+**Status**: Technical Plan
+**Prerequisites**: Completed business specification (Spec.md) and technical research (Research.md)
 
-### Swift Development Principles
-- [ ] Architecture follows Context/Guidelines/Swift.md package-first approach?
-- [ ] Error handling strategy aligns with Context/Guidelines/Swift.md ErrorKit patterns?
-- [ ] Code quality meets Context/Guidelines/Swift.md standards (3-space, modern Swift)?
+## System Overview
 
-### SwiftUI Platform Standards
-- [ ] UI design follows Context/Guidelines/SwiftUI.md accessibility principles?
-- [ ] Platform integration aligns with Context/Guidelines/SwiftUI.md patterns?
-- [ ] User experience meets Context/Guidelines/SwiftUI.md quality standards?
+### High-Level Architecture
+[AI Generated: Brief description of component relationships and overall system design]
 
-### Context/Guidelines Compliance Validation
-- [ ] If any principle not followed: Documented justification with specific alternatives?
-- [ ] All architectural decisions reference appropriate guideline sections?
+### Core Components
+- **[Component Name]**: [AI Generated responsibility and purpose]
+- **[Component Name]**: [AI Generated responsibility and purpose]
+- **[Component Name]**: [AI Generated responsibility and purpose]
 
-**Gate Failure Handling**:
+### Data Flow
+[AI Generated: Description of how data moves through the system and key interaction patterns]
+
+## iOS/macOS Implementation Details
+
+### SwiftUI Structure
+
+**View Hierarchy**:
 ```
-If any gate fails:
-→ Document specific justification in Complexity Tracking section
-→ If no valid justification exists: ERROR "Simplify approach to meet Context/Guidelines standards"
-→ All gates must pass or have documented exceptions before proceeding
+[Feature Name]View (main entry point)
+├── [Child View Name] ([AI Generated purpose])
+├── [Child View Name] ([AI Generated purpose])
+└── [Child View Name] ([AI Generated purpose])
 ```
 
-║
-║ ## Technical Architecture Plan
-║
-║ ### System Overview
-║ **High-Level Architecture**:
-║ [ARCHITECTURE_DIAGRAM: Brief text description of component relationships]
-║
-║ **Core Components**:
-║ - **${COMPONENT_1}**: ${RESPONSIBILITY_1}
-║ - **${COMPONENT_2}**: ${RESPONSIBILITY_2}  
-║ - **${COMPONENT_3}**: ${RESPONSIBILITY_3}
-║
-║ **Data Flow**:
-║ [DATA_FLOW_DESCRIPTION: How data moves through the system]
+**State Management**:
+- **ViewModels**: [AI Generated strategy and patterns]
+- **Data Binding**: [AI Generated binding approach]
+- **Navigation**: [AI Generated navigation pattern]
 
-║
-║ ### iOS/macOS Implementation Details
-║
-║ #### SwiftUI Structure
-║ **View Hierarchy**:
-║ ```
-║ ${FEATURE_NAME}View (main entry point)
-║ ├── ${CHILD_VIEW_1} (${PURPOSE_1})
-║ ├── ${CHILD_VIEW_2} (${PURPOSE_2})
-║ └── ${CHILD_VIEW_3} (${PURPOSE_3})
-║ ```
-║
-║ **State Management**:
-║ - **ViewModels**: ${VIEWMODEL_STRATEGY}
-║ - **Data Binding**: ${BINDING_APPROACH}
-║ - **Navigation**: ${NAVIGATION_PATTERN}
-║
-║ **Architectural Decision Rationale**:
-║ - **Why this structure**: ${STRUCTURE_RATIONALE}
-║ - **Alternatives considered**: ${ALTERNATIVE_OPTIONS}
-║ - **Trade-offs**: ${TRADEOFF_ANALYSIS}
+**Architectural Decision Rationale**:
+- **Why this structure**: [AI Generated reasoning for chosen structure]
+- **Alternatives considered**: [AI Generated alternative options evaluated]
+- **Trade-offs**: [AI Generated analysis of benefits vs costs]
 
-║
-║ #### Data Layer Design
-║ **Storage Strategy**: ${STORAGE_CHOICE} (CoreData | CloudKit | Package-based | File-based)
-║
-║ **Model Architecture**:
-║ ```swift
-║ // Primary entities (conceptual - detailed implementation in Phase 2)
-║ struct ${PRIMARY_MODEL} {
-║    // Key properties identified from specification
-║ }
-║
-║ struct ${SECONDARY_MODEL} {
-║    // Supporting data structures
-║ }
-║ ```
-║
-║ **Data Access Pattern**: ${DATA_ACCESS_PATTERN}
-║ **Synchronization Strategy**: ${SYNC_STRATEGY} (if applicable)
-║
-║ **Decision Rationale**:
-║ - **Why this storage approach**: ${STORAGE_RATIONALE}  
-║ - **Performance characteristics**: ${PERFORMANCE_ANALYSIS}
-║ - **Scalability considerations**: ${SCALABILITY_ASSESSMENT}
+### Data Layer Design
 
-║
-║ #### Service Layer Architecture
-║ **Service Organization**:
-║ - **${SERVICE_1}**: ${SERVICE_RESPONSIBILITY_1}
-║ - **${SERVICE_2}**: ${SERVICE_RESPONSIBILITY_2}
-║
-║ **External Integration Strategy**:
-║ - **APIs**: ${API_INTEGRATION_APPROACH}
-║ - **Authentication**: ${AUTH_STRATEGY}
-║ - **Error Handling**: ${ERROR_HANDLING_STRATEGY} (using ErrorKit patterns)
-║
-║ **Dependency Management**:
-║ - **Package Dependencies**: ${PACKAGE_DEPENDENCIES}
-║ - **Version Requirements**: ${VERSION_CONSTRAINTS}
-║ - **Integration Points**: ${INTEGRATION_STRATEGY}
+**Storage Strategy**: [AI Generated choice] (SwiftData | CoreData | CloudKit | Package-based | File-based)
 
-║
-║ ### Platform-Specific Considerations
-║
-║ #### iOS Implementation
-║ - **Minimum iOS Version**: ${MIN_IOS_VERSION} (justified by feature requirements)
-║ - **Device Support**: ${DEVICE_SUPPORT} (iPhone, iPad, Mac Catalyst)
-║ - **Performance Targets**: 
-║  - App launch impact: ${LAUNCH_IMPACT}
-║  - Memory usage: ${MEMORY_IMPACT}  
-║  - UI responsiveness: 60fps maintained during ${CRITICAL_OPERATIONS}
-║
-║ #### macOS Implementation (if applicable)
-║ - **Minimum macOS Version**: ${MIN_MACOS_VERSION}
-║ - **Mac-Specific Features**: ${MAC_FEATURES}
-║ - **Menu Integration**: ${MENU_STRATEGY}
-║
-║ #### App Store Compliance
-║ - **Privacy Manifest Updates**: ${PRIVACY_IMPACT}
-║ - **New Permissions Required**: ${PERMISSIONS_NEEDED}
-║ - **Review Guidelines Considerations**: ${REVIEW_CONSIDERATIONS}
+**Model Architecture**:
+```swift
+// Primary entities (conceptual - detailed implementation in Steps phase)
+struct [Primary Model] {
+   // [AI Generated: Key properties identified from specification]
+}
 
-║
-║ ## Implementation Complexity Assessment
-║
-║ ### Development Effort Estimation
-║ **Complexity Level**: ${COMPLEXITY_LEVEL} (Simple | Moderate | Complex | Very Complex)
-║
-║ **Estimated Timeline**: ${TIME_ESTIMATE}
-║ - Setup and infrastructure: ${SETUP_TIME}
-║ - Core implementation: ${CORE_TIME}  
-║ - Testing and polish: ${TESTING_TIME}
-║ - Integration and validation: ${INTEGRATION_TIME}
-║
-║ **Risk Assessment**:
-║ - **High Risk Areas**: ${HIGH_RISKS}
-║ - **Mitigation Strategies**: ${RISK_MITIGATION}
-║ - **Unknowns Requiring Research**: ${RESEARCH_NEEDED}
+struct [Secondary Model] {
+   // [AI Generated: Supporting data structures]
+}
+```
 
-║
-║ ### Dependency Analysis
-║ **External Dependencies**:
-║ - **Swift Packages**: ${REQUIRED_PACKAGES}
-║ - **iOS Frameworks**: ${IOS_FRAMEWORKS}  
-║ - **Third-Party Services**: ${THIRD_PARTY_SERVICES}
-║
-║ **Internal Dependencies**:
-║ - **Existing Code Modifications**: ${EXISTING_CODE_CHANGES}
-║ - **New Shared Components**: ${NEW_SHARED_COMPONENTS}
-║ - **Breaking Changes**: ${BREAKING_CHANGES} (if any)
+**Data Access Pattern**: [AI Generated data access strategy]
+**Synchronization Strategy**: [AI Generated sync approach] (if applicable)
 
-║
-║ ### Quality Assurance Requirements
-║ **Testing Strategy**:
-║ - **Unit Tests**: ${UNIT_TEST_APPROACH}
-║ - **Integration Tests**: ${INTEGRATION_TEST_APPROACH}
-║ - **UI Tests**: ${UI_TEST_APPROACH}
-║
-║ **Validation Requirements**:
-║ - **Accessibility Testing**: VoiceOver validation, dynamic type testing
-║ - **Performance Testing**: ${PERFORMANCE_TEST_STRATEGY}
-║ - **Localization Testing**: ${L10N_TEST_STRATEGY}
+**Decision Rationale**:
+- **Why this storage approach**: [AI Generated storage reasoning]
+- **Performance characteristics**: [AI Generated performance analysis]
+- **Scalability considerations**: [AI Generated scalability assessment]
 
-║
-║ ## Uncertainty Tracking
-║
-║ ### Technical Clarifications Needed
-║ [Mark any uncertain technical aspects requiring resolution before implementation]
-║
-║ - [NEEDS CLARIFICATION: ${TECHNICAL_QUESTION_1}]
-║ - [NEEDS CLARIFICATION: ${TECHNICAL_QUESTION_2}]
-║
-║ ### Research Required
-║ **Technology Investigations**:
-║ - ${RESEARCH_TOPIC_1}: ${RESEARCH_REASON}
-║ - ${RESEARCH_TOPIC_2}: ${RESEARCH_REASON}
-║
-║ **Proof of Concept Needs**:
-║ - ${POC_1}: ${POC_JUSTIFICATION}
-║ - ${POC_2}: ${POC_JUSTIFICATION}
+### Service Layer Architecture
 
+**Service Organization**:
+- **[Service Name]**: [AI Generated service responsibility]
+- **[Service Name]**: [AI Generated service responsibility]
+
+**External Integration Strategy**:
+- **APIs**: [AI Generated API integration approach]
+- **Authentication**: [AI Generated auth strategy]
+- **Error Handling**: [AI Generated error handling strategy using Context/Guidelines/Swift.md ErrorKit patterns]
+
+**Dependency Management**:
+- **Package Dependencies**: [AI Generated required packages]
+- **Version Requirements**: [AI Generated version constraints]
+- **Integration Points**: [AI Generated integration strategy]
+
+### Platform-Specific Considerations
+
+#### iOS Implementation
+- **Minimum iOS Version**: [AI Generated version] (justified by feature requirements)
+- **Device Support**: [AI Generated devices] (iPhone, iPad, Mac Catalyst)
+- **Performance Targets**:
+  - App launch impact: [AI Generated impact assessment]
+  - Memory usage: [AI Generated memory analysis]
+  - UI responsiveness: 60fps maintained during [AI Generated critical operations]
+
+#### macOS Implementation (if applicable)
+- **Minimum macOS Version**: [AI Generated version]
+- **Mac-Specific Features**: [AI Generated Mac features]
+- **Menu Integration**: [AI Generated menu strategy]
+
+#### App Store Compliance
+- **Privacy Manifest Updates**: [AI Generated privacy impact]
+- **New Permissions Required**: [AI Generated permissions needed]
+- **Review Guidelines Considerations**: [AI Generated review considerations]
+
+## Implementation Complexity Assessment
+
+### Development Effort Estimation
+**Complexity Level**: [AI Generated Level] (Simple | Moderate | Complex | Very Complex)
+
+**Estimated Timeline**: [AI Generated time estimate]
+- Setup and infrastructure: [AI Generated setup time]
+- Core implementation: [AI Generated core time]
+- Testing and polish: [AI Generated testing time]
+- Integration and validation: [AI Generated integration time]
+
+**Risk Assessment**:
+- **High Risk Areas**: [AI Generated high risks identified]
+- **Mitigation Strategies**: [AI Generated risk mitigation approaches]
+- **Unknowns Requiring Research**: [AI Generated research needs]
+
+### Dependency Analysis
+
+**External Dependencies**:
+- **Swift Packages**: [AI Generated required packages]
+- **iOS Frameworks**: [AI Generated iOS frameworks needed]
+- **Third-Party Services**: [AI Generated external services]
+
+**Internal Dependencies**:
+- **Existing Code Modifications**: [AI Generated existing code changes]
+- **New Shared Components**: [AI Generated new shared components]
+- **Breaking Changes**: [AI Generated breaking changes] (if any)
+
+### Quality Assurance Requirements
+
+**Testing Strategy**:
+- **Unit Tests**: [AI Generated unit test approach]
+- **Integration Tests**: [AI Generated integration test approach]
+- **UI Tests**: [AI Generated UI test approach]
+
+**Validation Requirements**:
+- **Context/Guidelines Validation**: Per Swift.md and SwiftUI.md compliance standards
+- **Performance Testing**: [AI Generated performance test strategy]
+- **Platform Testing**: [AI Generated platform-specific testing needs]
+
+## Technical Clarifications
+
+### Areas Requiring Resolution
+[AI Generated: Mark any uncertain technical aspects requiring resolution before implementation]
+
+- [NEEDS CLARIFICATION: [AI Generated specific technical question]]
+- [NEEDS CLARIFICATION: [AI Generated specific technical question]]
+
+### Research Requirements
+**Technology Investigations**:
+- [AI Generated research topic]: [AI Generated research reason]
+- [AI Generated research topic]: [AI Generated research reason]
+
+**Proof of Concept Needs**:
+- [AI Generated POC need]: [AI Generated POC justification]
+- [AI Generated POC need]: [AI Generated POC justification]
+
+---
+
+**Next Phase**: After this technical architecture is approved, proceed to `/ctxk:plan:3-steps` for implementation task breakdown and development planning.
+
+---
+
+════════════════════════════════════════════════════════════════════════════════
+║ 🤖 VALIDATION & EXECUTION STATUS - AI WORKFLOW INSTRUCTIONS
+════════════════════════════════════════════════════════════════════════════════
 ║
 ║ ## Architecture Validation Gates
 ║
@@ -261,23 +304,13 @@ If any gate fails:
 ║ - [ ] Risk areas identified with mitigation plans?
 ║ - [ ] No blocking [NEEDS CLARIFICATION] items remain?
 ║
-║ **Validation Result**:
-║ ```
-║ If all gates pass: → Ready for Phase 2 (Implementation Planning)
-║ If validation fails: → Return to architecture design with specific feedback
-║ If clarifications needed: → Document uncertainties and request user input
-║ ```
-
-║
-║ ## Context-Aware Project Integration
-║
-║ ### Project Type Specific Validation
+║ ## Project Type Specific Validation
 ║ *Applied automatically based on detected project type*
 ║
 ║ **For iOS App Projects**:
 ║ - [ ] App Store Guidelines compliance reviewed?
-║ - [ ] Privacy manifest impact assessed?  
-║ - [ ] Accessibility requirements planned?
+║ - [ ] Privacy manifest impact assessed?
+║ - [ ] Platform accessibility requirements planned?
 ║ - [ ] Device compatibility confirmed?
 ║
 ║ **For Swift Package Projects**:
@@ -292,75 +325,34 @@ If any gate fails:
 ║ - [ ] Database migration strategy planned?
 ║ - [ ] Docker deployment considerations included?
 ║
-║ ### Existing Codebase Integration
-║ **Consistency Checks**:
-║ - [ ] New architecture aligns with existing patterns?
-║ - [ ] Dependencies compatible with current project setup?
-║ - [ ] Code style matches established conventions?
-║ - [ ] Integration points clearly defined?
+║ ## Execution Status
+║ *Updated by main() during processing*
 ║
-║ **Impact Assessment**:
-║ - **Files to be Modified**: ${MODIFIED_FILES}
-║ - **New Files to be Created**: ${NEW_FILES}
-║ - **Potential Conflicts**: ${POTENTIAL_CONFLICTS}
-
+║ ### Phase 1: Prerequisites & Context Loading
+║ - [ ] Technical research results loaded from Research.md
+║ - [ ] Feature specification loaded and cross-referenced with research
+║ - [ ] Project Context.md loaded for tech stack preferences
+║ - [ ] Development guidelines loaded based on project type
+║ - [ ] Workspace Context.md loaded for overrides (if applicable)
 ║
-║ ## Next Phase Preparation
+║ ### Phase 2: Architecture Design & Validation
+║ - [ ] Context/Guidelines compliance gates validated
+║ - [ ] iOS/macOS architecture designed with rationale
+║ - [ ] Implementation complexity assessed
+║ - [ ] Technical uncertainties marked with [NEEDS CLARIFICATION]
 ║
-║ ### Ready for Implementation Planning (Phase 2)
-║ **Deliverables for Steps Template**:
-║ - ✅ Technical architecture decisions documented
-║ - ✅ Context/Guidelines compliance validated
-║ - ✅ Complexity assessment completed  
-║ - ✅ Dependencies identified
-║ - ✅ Platform requirements defined
+║ ### Phase 3: Technical Plan Generation
+║ - [ ] Technical architecture content generated
+║ - [ ] System overview section completed
+║ - [ ] Implementation details sections filled
+║ - [ ] Complexity assessment completed
 ║
-║ **Information for Task Breakdown**:
-║ - **Component Structure**: Clearly defined for file-level task creation
-║ - **Implementation Order**: Dependency chain established
-║ - **Parallel Opportunities**: Independent components identified
-║ - **Testing Strategy**: Unit, integration, and UI test requirements defined
+║ ### Phase 4: Validation & Completion
+║ - [ ] Technical validation gates executed
+║ - [ ] Technical plan status updated
+║ - [ ] All mandatory sections completed
+║ - [ ] System instructions removed from final document
 ║
-║ ### Success Criteria for This Phase
-║ - [ ] Technical plan supports all specification requirements
-║ - [ ] Architecture decisions documented with rationale
-║ - [ ] Context/Guidelines standards maintained or exceptions justified
-║ - [ ] Implementation complexity realistically assessed
-║ - [ ] All blocking uncertainties resolved or clearly documented
-║ - [ ] Plan ready for systematic task breakdown in Phase 2
+║ **Next Phase**: After this technical architecture is approved, proceed to `/ctxk:plan:3-steps` for implementation task breakdown and development planning.
+║
 ════════════════════════════════════════════════════════════════════════════════
-
-## For AI Generation
-
-When creating this technical plan from a feature specification:
-
-1. **Analyze the specification thoroughly**: Extract all technical implications from user scenarios and requirements
-2. **Apply Context/Guidelines compliance rigorously**: Don't compromise on package-first, ErrorKit, or quality standards without explicit justification  
-3. **Make architectural decisions explicit**: Document why you chose specific approaches and what alternatives you considered
-4. **Be realistic about complexity**: Don't underestimate implementation effort or overlook potential risks
-5. **Focus on iOS/macOS excellence**: Leverage platform-specific capabilities and follow platform conventions
-6. **Mark genuine uncertainties**: Use [NEEDS CLARIFICATION] for technical questions that require domain expertise or user preference
-7. **Validate completeness**: Ensure the technical plan addresses every requirement from the specification
-
-### Common Technical Pitfalls to Avoid
-- Over-engineering solutions when simple approaches would work
-- Ignoring Context/Guidelines standards without proper justification
-- Making assumptions about external dependencies or API availability  
-- Underestimating integration complexity with existing code
-- Forgetting platform-specific requirements (accessibility, privacy, App Store)
-- Creating technical debt through shortcuts or temporary solutions
-
-### Quality Checklist Before Completion
-- [ ] Every specification requirement has a technical solution
-- [ ] All architectural decisions include rationale  
-- [ ] Context/Guidelines compliance verified at every level
-- [ ] Complexity assessment includes realistic time estimates
-- [ ] Risk mitigation strategies defined for high-risk areas
-- [ ] Integration with existing codebase carefully planned
-- [ ] Platform guidelines and best practices incorporated
-
-**IMPORTANT**: This technical plan should provide sufficient detail for systematic task breakdown while remaining focused on architectural decisions rather than implementation minutiae. Detailed code examples and extensive technical specifications should be deferred to Phase 2 implementation planning.
-
----
-
-*This template follows spec-kit methodology with Context/Guidelines compliance gates and iOS/macOS optimization. It ensures high-quality technical planning that leads to successful implementation.*

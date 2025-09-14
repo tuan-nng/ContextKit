@@ -1,349 +1,362 @@
 # Implementation Steps: [Feature from Tech.md]
-<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-09-13 -->
+<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14 -->
 
-**Phase**: 2 (Implementation Plan)  
-**Input**: Technical plan from Tech.md  
-**Prerequisites**: Spec.md (business case), Tech.md (architecture)  
-**Purpose**: Implementation task breakdown template with S001-S999 numbering and parallel markers. Used by `/ctxk:plan:3-steps` command.
+## Description
+Implementation task breakdown template providing systematic S001-S999 task enumeration with parallel execution markers and dependency analysis for iOS/macOS development workflows.
 
 ════════════════════════════════════════════════════════════════════════════════
 ║ 🤖 EXECUTION FLOW - IMPLEMENTATION STEPS GENERATION
 ════════════════════════════════════════════════════════════════════════════════
 ║
 ║ ## Execution Flow (main)
-
 ║
-║ ```
-║ 1. Load technical plan from Tech.md
-║   → If missing: ERROR "Technical plan required - run /Plan/define-tech first"
-║   → Extract: architecture decisions, file locations, dependencies
-║ 2. Analyze plan complexity and scope
-║   → Count: new files, modified files, new APIs, tests needed
-║   → If scope > 20 tasks: WARN "Consider breaking into smaller features"
-║ 3. Apply task generation rules:
-║   → One task per file creation/modification
-║   → One task per API endpoint
-║   → One task per data model
-║   → One task per significant UI component
-║ 4. Generate tasks with S### enumeration (S001, S002...)
-║   → Setup tasks: Project structure, dependencies, configuration
-║   → Model tasks: Data layer implementation (TDD - tests first)
-║   → Service tasks: Business logic and API integration
-║   → UI tasks: SwiftUI views, navigation, user interaction
-║   → Integration tasks: End-to-end flows and validation
-║   → Polish tasks: Accessibility, localization, performance
-║ 5. Apply parallel execution markers [P]:
-║   → Different files = [P] parallel safe
-║   → Same file = sequential only
-║   → Independent components = [P] parallel safe
-║   → Shared resources = sequential only
-║ 6. Validate dependency chains:
-║   → Models before Services before UI
-║   → Tests can run parallel with implementation
-║   → Configuration before usage
-║   → Critical path identified and documented
-║ 7. Run iOS-specific task validation:
-║   → Privacy manifest updates included?
-║   → Accessibility implementation planned?
-║   → Localization tasks identified?
-║   → App Store compliance verified?
-║ 8. Generate completion verification checklist
-║ 9. Return: SUCCESS (implementation plan ready for execution)
-║ ```
-
+║ ### Phase 1: Prerequisites & Planning Analysis
 ║
-║ ## Task Generation Rules
+║ 1. **Load Technical Architecture Plan**
+║    - Use `Read` tool to read current feature directory Tech.md: `Read Context/Features/[FeatureName]/Tech.md`
+║    - If missing: ERROR "Technical plan required - run /ctxk:plan:2-tech first"
+║    - Extract: architecture decisions, component structure, dependencies
+║    - If [NEEDS CLARIFICATION] markers exist: ERROR "Resolve technical uncertainties first"
 ║
-║ ### Rule 1: One Task Per File/Entity
-║ - **File Creation**: Each new Swift file = separate task
-║ - **File Modification**: Significant changes to existing file = separate task
-║ - **API Endpoints**: Each endpoint implementation = separate task
-║ - **Data Models**: Each model class/struct = separate task
-║ - **UI Components**: Each significant view = separate task
+║ 2. **Load Feature Specification**
+║    - Use `Read` tool to read current feature directory Spec.md: `Read Context/Features/[FeatureName]/Spec.md`
+║    - Extract: user stories, functional requirements, acceptance criteria
+║    - Map requirements to implementation tasks
 ║
-║ ### Rule 2: Parallel Execution Safety
-║ - **[P] Parallel Safe**: Different files, independent components, no shared state
-║ - **Sequential Required**: Same file, shared resources, dependent functionality
-║ - **Test Parallelism**: Tests can run [P] with their implementation counterparts
+║ 3. **Analyze Implementation Complexity and Scope**
+║    - Count: new files, modified files, new APIs, tests needed
+║    - If scope > 25 tasks: WARN "Consider breaking into smaller features"
+║    - Identify critical path and parallel opportunities
 ║
-║ ### Rule 3: iOS-Specific Task Types
-║ - **Privacy Tasks**: Manifest updates, permission requests, data handling
-║ - **Accessibility Tasks**: VoiceOver labels, dynamic type, keyboard navigation
-║ - **Localization Tasks**: String extraction, TranslateKit integration
-║ - **Performance Tasks**: Memory optimization, render performance, battery usage
-║ - **App Store Tasks**: Guidelines compliance, metadata updates, submission prep
+║ ### Phase 2: Task Generation & Organization
 ║
-║ ### Rule 4: Dependency Chain Validation
-║ ```
-║ Setup Tasks (S001-S010)
-║    ↓
-║ Model Layer (S011-S020) [P] within layer
-║    ↓
-║ Service Layer (S021-S030) [P] within layer
-║    ↓
-║ UI Layer (S031-S040) [P] within layer
-║    ↓
-║ Integration & Testing (S041-S050) [P] within phase
-║    ↓
-║ Polish & Release (S051-S060) [P] within phase
-║ ```
+║ 4. **Apply Task Generation Rules**
+║    - One task per file creation/modification
+║    - One task per API endpoint implementation
+║    - One task per data model definition
+║    - One task per significant UI component
+║    - TDD approach: tests before implementation
+║
+║ 5. **Generate Tasks with S### Enumeration (S001, S002...)**
+║    - Setup tasks: Project structure, dependencies, configuration (S001-S010)
+║    - Model tasks: Data layer implementation with TDD approach (S011-S020)
+║    - Service tasks: Business logic and API integration (S021-S030)
+║    - UI tasks: SwiftUI views, navigation, user interaction (S031-S040)
+║    - Integration tasks: End-to-end flows and validation (S041-S050)
+║    - Polish tasks: Performance, compliance, release prep (S051-S060)
+║
+║ 6. **Apply Parallel Execution Markers [P]**
+║    - Different files = [P] parallel safe
+║    - Same file = sequential only
+║    - Independent components = [P] parallel safe
+║    - Shared resources = sequential only
+║    - Tests can run [P] with their implementation counterparts
+║
+║ ### Phase 3: Dependency Analysis & Validation
+║
+║ 7. **Validate Dependency Chains**
+║    - Models before Services before UI
+║    - Tests can run parallel with implementation
+║    - Configuration before usage
+║    - Critical path identified and documented
+║    - No circular dependencies
+║
+║ 8. **Run iOS-Specific Task Validation**
+║    - Privacy manifest updates included?
+║    - Context/Guidelines validation tasks planned?
+║    - App Store compliance tasks identified?
+║    - Platform-specific testing coverage adequate?
+║
+║ ### Phase 4: Implementation Plan Generation
+║
+║ 9. **Generate Implementation Steps Content**
+║    - Use `Edit` tool to replace template header with specific feature information:
+║      - Title: "# Implementation Steps: [Feature Name]"
+║      - Created: [Current Date]
+║      - Status: Implementation Plan
+║      - Prerequisites: Reference to completed Spec.md and Tech.md
+║
+║ 10. **Fill Task Breakdown Sections**
+║     - Setup & Configuration phase with exact file paths
+║     - Model Layer with TDD approach and parallel markers
+║     - Service Layer with dependency tracking
+║     - UI Layer with SwiftUI implementation tasks
+║     - Integration & Quality Assurance with validation tasks
+║     - Polish & Release Preparation with compliance tasks
+║
+║ 11. **Generate Dependency Analysis**
+║     - Critical path analysis with longest dependency chain
+║     - Parallel execution opportunities documentation
+║     - Platform-specific dependencies mapping
+║
+║ 12. **Create Completion Verification Checklist**
+║     - iOS feature completeness requirements
+║     - Quality gate validation criteria
+║     - App Store readiness verification
+║
+║ ### Phase 5: Validation & Completion
+║
+║ 13. **Run Implementation Validation Gates**
+║     - All requirements have corresponding implementation tasks?
+║     - All architecture components have creation tasks?
+║     - Context/Guidelines compliance tasks included?
+║     - Parallel tasks truly independent (different files)?
+║     - Each task specifies exact file path?
+║     - Dependency graph shows clear execution order?
+║
+║ 14. **Update Implementation Plan Status**
+║     - Check off all completed implementation planning items
+║     - Mark any remaining [NEEDS CLARIFICATION] areas
+║     - Validate all mandatory sections completed
+║
+║ 15. **COMPLETION**
+║     - Use `Edit` tool to remove this entire boxed system instructions section
+║     - Leave only the clean implementation steps content for team use
+║     - Final document focused on executable task breakdown with clear dependencies
+║
+║ ## Success Criteria
+║ - All implementation phases completed with specific S### task enumeration
+║ - Parallel execution markers [P] applied correctly for independent tasks
+║ - Dependency chains validated with no circular dependencies
+║ - Context/Guidelines compliance tasks integrated throughout workflow
+║ - Critical path analysis completed with realistic execution order
+║ - Platform considerations (iOS/macOS) integrated in task definitions
+║ - [NEEDS CLARIFICATION] markers used for genuine implementation uncertainties only
+║ - System instructions completely removed from final implementation plan document
+║
 ════════════════════════════════════════════════════════════════════════════════
 
-## Phase 3.1: Setup & Configuration
+# Implementation Steps: [AI Generated Feature Name]
+
+**Created**: [AI Generated Current Date]
+**Status**: Implementation Plan
+**Prerequisites**: Completed business specification (Spec.md) and technical architecture (Tech.md)
+
+## Implementation Phases *(mandatory)*
+
+### Phase 1: Setup & Configuration
 *Foundation tasks that must complete before development*
 
-- [ ] S001 Create project structure per technical plan
-  - Path: ${PROJECT_ROOT}/${NEW_DIRECTORIES}
-  - Dependencies: None
-  - Parallel: Individual directory creation [P]
+- [ ] **S001** [AI Generated: Create project structure task]
+  - **Path**: [AI Generated: Specific directories/files to create]
+  - **Dependencies**: None
+  - **Notes**: [AI Generated: Setup requirements from tech plan]
 
-- [ ] S002 Configure Swift package dependencies
-  - Path: Package.swift or *.xcodeproj
-  - Dependencies: S001 (project structure)
-  - Add: ErrorKit, FreemiumKit, HandySwift, HandySwiftUI, TranslateKit
+- [ ] **S002** [AI Generated: Dependency configuration task]
+  - **Path**: [AI Generated: Package.swift or *.xcodeproj modifications]
+  - **Dependencies**: [AI Generated: Previous setup tasks]
+  - **Notes**: [AI Generated: Required packages from tech plan]
 
-- [ ] S003 [P] Setup code formatting tools
-  - Path: .swift-format, .swiftformat files
-  - Dependencies: None (can run parallel with S001-S002)
-  - Configure: Per Context/Guidelines/Swift.md formatter standards
+- [ ] **S003** [P] [AI Generated: Additional setup tasks that can run in parallel]
 
-## Phase 3.2: Model Layer (TDD - Tests First)
-*Data models and business logic foundation*
+**🏁 MILESTONE: Foundation Setup**
+*Consider commit: "Setup [feature] foundation - project structure and dependencies"*
 
-### Tests First Approach
-- [ ] S004 [P] Unit tests for ${MODEL_1} in Tests/${MODEL_1}Tests.swift
-- [ ] S005 [P] Unit tests for ${MODEL_2} in Tests/${MODEL_2}Tests.swift
-- [ ] S006 [P] Unit tests for ${MODEL_3} in Tests/${MODEL_3}Tests.swift
+### Phase 2: Data Layer (TDD Approach)
+*Models, data structures, and business logic foundation*
 
-### Model Implementation  
-- [ ] S007 [P] ${MODEL_1} implementation in Sources/Models/${MODEL_1}.swift
-- [ ] S008 [P] ${MODEL_2} implementation in Sources/Models/${MODEL_2}.swift
-- [ ] S009 [P] ${MODEL_3} implementation in Sources/Models/${MODEL_3}.swift
+#### Test-First Implementation
+- [ ] **S004** [P] [AI Generated: Model test creation tasks]
+- [ ] **S005** [P] [AI Generated: Additional model test tasks]
+- [ ] **S006** [P] [AI Generated: Data validation test tasks]
 
-### Data Persistence
-- [ ] S010 Core Data model configuration (if required)
-  - Path: DataModel.xcdatamodeld
-  - Dependencies: S007-S009 (model definitions)
-  - Privacy: Update manifest for data storage
+#### Model Implementation
+- [ ] **S007** [P] [AI Generated: Model implementation tasks]
+- [ ] **S008** [P] [AI Generated: Additional model tasks]
+- [ ] **S009** [AI Generated: Data persistence configuration if needed]
 
-## Phase 3.3: Service Layer
+**🏁 MILESTONE: Data Foundation**
+*Consider commit: "Implement [feature] data models and validation"*
+
+### Phase 3: Service Layer
 *Business logic, API integration, data management*
 
-### Service Tests
-- [ ] S011 [P] ${SERVICE_1}Tests.swift - Integration tests for service layer
-- [ ] S012 [P] ${SERVICE_2}Tests.swift - API integration validation tests
+#### Service Testing
+- [ ] **S010** [P] [AI Generated: Service integration test tasks]
+- [ ] **S011** [P] [AI Generated: API integration test tasks]
 
-### Service Implementation
-- [ ] S013 ${SERVICE_1} implementation in Sources/Services/${SERVICE_1}.swift
-  - Dependencies: S007-S009 (models), S011 (tests)
-  - API: RESTful endpoints or local data management
-  - Error Handling: Per Context/Guidelines/Swift.md ErrorKit patterns
+#### Service Implementation
+- [ ] **S012** [AI Generated: Primary service implementation]
+  - **Dependencies**: [AI Generated: Model dependencies from Phase 2]
+  - **Error Handling**: [AI Generated: ErrorKit pattern requirements]
+  - **Integration**: [AI Generated: External service integration notes]
 
-- [ ] S014 ${SERVICE_2} implementation in Sources/Services/${SERVICE_2}.swift  
-  - Dependencies: S013 (if services interact), S012 (tests)
-  - Integration: External APIs, CloudKit, or third-party services
+- [ ] **S013** [AI Generated: Additional service tasks if needed]
 
-## Phase 3.4: UI Layer (SwiftUI)
-*User interface, navigation, interaction design*
+**🏁 MILESTONE: Business Logic Complete**
+*Consider commit: "Implement [feature] services and business logic"*
 
-### SwiftUI View Tests
-- [ ] S015 [P] UI tests for ${VIEW_1} in Tests/UI/${VIEW_1}Tests.swift
-- [ ] S016 [P] UI tests for ${VIEW_2} in Tests/UI/${VIEW_2}Tests.swift
+### Phase 4: User Interface
+*SwiftUI views, navigation, user interaction*
 
-### SwiftUI Implementation
-- [ ] S017 [P] ${VIEW_1} implementation in Sources/Views/${VIEW_1}.swift
-  - Dependencies: S013-S014 (services for data)
-  - Implementation: Per Context/Guidelines/SwiftUI.md accessibility/localization standards
+#### UI Testing
+- [ ] **S014** [P] [AI Generated: UI test tasks for primary views]
+- [ ] **S015** [P] [AI Generated: UI test tasks for additional views]
 
-- [ ] S018 [P] ${VIEW_2} implementation in Sources/Views/${VIEW_2}.swift
-  - Dependencies: S017 (if views interact), S016 (tests)  
-  - Navigation: SwiftUI navigation patterns
-  - State Management: @State, @StateObject, @ObservedObject patterns
+#### UI Implementation
+- [ ] **S016** [P] [AI Generated: Primary UI view implementation]
+  - **Dependencies**: [AI Generated: Service layer dependencies]
+  - **Patterns**: [AI Generated: SwiftUI patterns from guidelines]
 
-- [ ] S019 Navigation coordinator/flow implementation
-  - Path: Sources/Navigation/${NAVIGATION_COORDINATOR}.swift
-  - Dependencies: S017-S018 (views), navigation between screens
-  - Patterns: Coordinator pattern or SwiftUI NavigationStack
+- [ ] **S017** [P] [AI Generated: Additional UI view tasks]
+- [ ] **S018** [AI Generated: Navigation and flow coordination]
 
-## Phase 3.5: Integration & Quality Assurance  
-*End-to-end functionality, error handling, edge cases*
+**🏁 MILESTONE: User Interface Complete**
+*Consider commit: "Implement [feature] user interface and navigation"*
 
-### Integration Testing
-- [ ] S020 [P] End-to-end flow testing for happy path scenarios
-  - Dependencies: S017-S019 (UI complete)
-  - Coverage: User journeys from feature specification
+### Phase 5: Integration & Validation
+*End-to-end functionality, error scenarios, edge cases*
 
-- [ ] S021 [P] Error scenario testing and validation
-  - Dependencies: S013-S014 (services with error handling)
-  - Test: Network failures, invalid input, edge cases
+- [ ] **S019** [P] [AI Generated: Happy path integration testing]
+- [ ] **S020** [P] [AI Generated: Error scenario testing]
+- [ ] **S021** [P] [AI Generated: Edge case validation]
+- [ ] **S022** [AI Generated: Performance testing and optimization]
 
-### Quality Gates
-- [ ] S022 [P] Accessibility validation with check-accessibility agent
-  - Dependencies: S017-S018 (UI implementation)
-  - Validate: Per Context/Guidelines/SwiftUI.md accessibility requirements
+**🏁 MILESTONE: Feature Integration**
+*Consider commit: "Complete [feature] integration and validation"*
 
-- [ ] S023 [P] Localization validation with check-localization agent
-  - Dependencies: S017-S018 (UI with strings), S002 (TranslateKit)
-  - Validate: Per Context/Guidelines/SwiftUI.md localization standards
+### Phase 6: Quality & Compliance
+*Code quality, platform compliance, release preparation*
 
-- [ ] S024 [P] Error handling review with check-error-handling agent
-  - Dependencies: S013-S014 (services), S020-S021 (error tests)
-  - Validate: Per Context/Guidelines/Swift.md ErrorKit compliance
+- [ ] **S023** [P] [AI Generated: Accessibility validation tasks]
+- [ ] **S024** [P] [AI Generated: Localization validation tasks]
+- [ ] **S025** [P] [AI Generated: Code quality and modernization tasks]
+- [ ] **S026** [AI Generated: Privacy and compliance updates if needed]
+- [ ] **S027** [AI Generated: Documentation and release preparation]
 
-## Phase 3.6: Polish & Release Preparation
-*Performance, App Store compliance, deployment readiness*
+**🏁 MILESTONE: Release Ready**
+*Consider commit: "Finalize [feature] - quality gates and compliance"*
 
-### Performance Optimization
-- [ ] S025 [P] Performance testing and optimization
-  - Dependencies: S020 (integration complete)
-  - Focus: SwiftUI render performance, memory usage, battery impact
-  - Tools: Instruments profiling, performance benchmarks
+## Implementation Structure *(AI guidance)*
 
-### App Store Compliance
-- [ ] S026 Privacy manifest updates for new data usage
-  - Path: PrivacyInfo.xcprivacy
-  - Dependencies: S013-S014 (services that collect/store data)
-  - Review: Data types, usage purposes, third-party SDKs
+### Task Numbering Convention
+- **Format**: `S###` with sequential numbering (S001, S002, S003...)
+- **Parallel Markers**: `[P]` for tasks that can run concurrently
+- **Dependencies**: Clear prerequisite task references
+- **File Paths**: Specific target files for each implementation task
 
-- [ ] S027 App Store metadata and screenshots
-  - Dependencies: S017-S018 (UI complete), S025 (polish complete)
-  - Generate: Feature screenshots, update What's New text
-  - Localization: Translate metadata for supported languages
+### Parallel Execution Rules
+- **Different files** = `[P]` parallel safe
+- **Same file modifications** = Sequential only
+- **Independent components** = `[P]` parallel safe
+- **Shared resources** = Sequential only
+- **Tests with implementation** = Can run `[P]` parallel
 
-### Final Validation  
-- [ ] S028 [P] Code quality review with check-modern-code agent
-  - Dependencies: All implementation tasks complete
-  - Validate: Per Context/Guidelines/Swift.md modern code standards
+### Quality Integration
+*Built into implementation phases, not separate agent tasks*
 
-- [ ] S029 [P] Technical debt cleanup with check-code-debt agent  
-  - Dependencies: All implementation tasks complete
-  - Cleanup: Remove AI comments, consolidate duplicated code
+- **Code Standards**: Follow Context/Guidelines patterns throughout
+- **Error Handling**: Apply ErrorKit patterns during service implementation
+- **UI Guidelines**: Follow SwiftUI patterns during UI implementation
+- **Testing Coverage**: Include test tasks for each implementation phase
+- **Platform Compliance**: Consider iOS/macOS requirements in each phase
 
-- [ ] S030 Build validation with build-project agent
-  - Dependencies: S028-S029 (code cleanup)
-  - Verify: Clean builds, no warnings, tests pass
+## Dependency Analysis *(AI generated)*
 
-## Dependency Chain Validation
+### Critical Path
+[AI Generated: Longest dependency chain through phases]
 
-### Critical Path Analysis
-**Longest Dependency Chain**: S001 → S002 → S007-S009 → S013-S014 → S017-S018 → S019 → S020-S021 → S026-S027 → S030
+### Parallel Opportunities
+[AI Generated: Tasks that can execute concurrently with [P] markers]
 
-**Parallel Opportunities**:
-- Models (S007-S009) can implement in parallel after tests (S004-S006)
-- Services (S013-S014) can implement in parallel if independent  
-- UI Views (S017-S018) can implement in parallel if non-interactive
-- Quality gates (S022-S024) can run in parallel during integration phase
-- Polish tasks (S025, S028-S029) can run in parallel in final phase
+### Platform Dependencies
+[AI Generated: iOS/macOS specific requirements and dependencies]
 
-### iOS Development Dependencies
-**Architectural Layers**:
-- SwiftUI Views depend on ViewModels/Services for data
-- Services depend on Models for data structures
-- All layers depend on ErrorKit for error handling
-- Localization depends on TranslateKit integration
-- Privacy compliance depends on data flow understanding
+## Completion Verification *(mandatory)*
 
-**Platform-Specific Dependencies**:
-- Privacy manifest (S026) requires understanding of data usage from services
-- Accessibility implementation (S022) requires UI structure from views
-- App Store submission (S027) requires feature completion and testing
-- Performance optimization (S025) requires full implementation for profiling
+### Implementation Completeness
+- [ ] All user scenarios from Spec.md have corresponding implementation tasks?
+- [ ] All architectural components from Tech.md have creation/modification tasks?
+- [ ] Error handling and edge cases covered in task breakdown?
+- [ ] Performance requirements addressed in implementation plan?
+- [ ] Platform-specific requirements integrated throughout phases?
 
-## Completion Verification
+### Quality Standards
+- [ ] Each task specifies exact file paths and dependencies?
+- [ ] Parallel markers `[P]` applied correctly for independent tasks?
+- [ ] Test tasks included for all major implementation components?
+- [ ] Code standards and guidelines referenced throughout plan?
+- [ ] No implementation details that should be in tech plan?
 
-### iOS Feature Completeness Checklist
-- [ ] All user flows from Spec.md implemented and tested?
-- [ ] Happy path and error scenarios validated with automated tests?
-- [ ] Accessibility: VoiceOver labels, hints, and semantic markup complete?
-- [ ] Localization: All user-facing text extracted and TranslateKit integrated?
-- [ ] Privacy: Data usage documented in privacy manifest?
-- [ ] Performance: 60fps UI confirmed, memory usage acceptable?
-- [ ] Context/Guidelines compliance: Per Swift.md and SwiftUI.md standards?
+### Release Readiness
+- [ ] Privacy and compliance considerations addressed?
+- [ ] Documentation and release preparation tasks included?
+- [ ] Feature branch ready for systematic development execution?
+- [ ] All milestones defined with appropriate commit guidance?
 
-### Quality Gate Validation
-- [ ] Build passes cleanly with no warnings or errors?
-- [ ] All unit tests and integration tests pass?
-- [ ] Code follows Context/Guidelines/Swift.md principles and patterns?
-- [ ] No [NEEDS CLARIFICATION] items remain unresolved?
-- [ ] Feature branch ready for merge to main?
+---
 
-### App Store Readiness  
-- [ ] Privacy manifest updated for any new data collection/storage?
-- [ ] Accessibility tested with VoiceOver and Accessibility Inspector?
-- [ ] Feature screenshots generated for App Store metadata?
-- [ ] Localized content prepared for supported languages?
-- [ ] Beta testing completed with TestFlight (if applicable)?
+**Next Phase**: After implementation steps are completed, proceed to `/ctxk:impl:start-working` to begin systematic development execution.
 
-## Template Variables
-
-**Feature Context**:
-- `${FEATURE_NAME}` - PascalCase feature name from Spec.md
-- `${PROJECT_ROOT}` - Project root directory path
-- `${TARGET_PLATFORMS}` - iOS, macOS, tvOS, watchOS support
-
-**Architecture Context**:
-- `${MODEL_1}`, `${MODEL_2}`, `${MODEL_3}` - Data models from Tech.md
-- `${SERVICE_1}`, `${SERVICE_2}` - Service classes from Tech.md  
-- `${VIEW_1}`, `${VIEW_2}` - SwiftUI views from Tech.md
-- `${NAVIGATION_COORDINATOR}` - Navigation implementation from Tech.md
-
-**File Structure**:
-- `${NEW_DIRECTORIES}` - New directory structure required
-- `${MODIFIED_FILES}` - Existing files that need updates
-- `${TEST_FILES}` - Test files to be created
-- `${CONFIG_FILES}` - Configuration files to be updated
-
-## Error Conditions
-
-**Planning Errors**:
-- "Technical plan required" → Must complete `/Plan/define-tech` first
-- "Architecture unclear" → Tech.md missing critical implementation details  
-- "Scope too large" → Feature should be broken into smaller, focused features
-- "Dependency conflicts" → Tasks have circular or unresolvable dependencies
-
-**iOS-Specific Errors**:
-- "Privacy impact unclear" → Data usage patterns must be documented
-- "Accessibility gaps" → UI components lack sufficient accessibility planning
-- "App Store compliance" → Feature may violate App Store Review Guidelines  
-- "Performance concerns" → Implementation may cause performance degradation
-
-**Context/Guidelines Compliance Errors**:
-- "Architecture violation" → Feature doesn't follow Context/Guidelines/Swift.md principles
-- "Error handling incomplete" → Context/Guidelines/Swift.md ErrorKit patterns not integrated
-- "Code quality issues" → Implementation doesn't follow Context/Guidelines/Swift.md standards
-- "Platform compliance" → Context/Guidelines/SwiftUI.md requirements not met
+---
 
 ════════════════════════════════════════════════════════════════════════════════
-║ 🤖 EXECUTION FLOW - IMPLEMENTATION STEPS GENERATION
+║ 🤖 VALIDATION & EXECUTION STATUS - AI WORKFLOW INSTRUCTIONS
 ════════════════════════════════════════════════════════════════════════════════
 ║
-║ ## For AI Generation
+║ ## Implementation Validation Gates
 ║
-║ When creating implementation steps from a technical plan:
+║ ### Task Generation Quality
+║ - [ ] All requirements have corresponding implementation tasks?
+║ - [ ] All architecture components have creation tasks?
+║ - [ ] Context/Guidelines compliance tasks included for relevant features?
+║ - [ ] Parallel tasks truly independent (different files)?
+║ - [ ] Each task specifies exact file path and dependencies?
+║ - [ ] Task descriptions specific enough for execution without ambiguity?
 ║
-║ 1. **Apply Task Generation Rules**: Follow one-task-per-file/entity rule strictly
-║ 2. **Mark Parallel Safety**: Use [P] only for truly independent tasks
-║ 3. **Include iOS Specifics**: Privacy, accessibility, localization, App Store compliance
-║ 4. **Validate Dependencies**: Ensure logical order and no circular dependencies
-║ 5. **Context/Guidelines Integration**: Per Swift.md and SwiftUI.md standards
-║ 6. **Quality Gates**: Build validation, testing, agent checks
+║ ### Dependency Management
+║ - [ ] Dependency graph shows clear execution order?
+║ - [ ] No circular dependencies in task chain?
+║ - [ ] Critical path identified and realistic?
+║ - [ ] Parallel execution opportunities properly marked with [P]?
+║ - [ ] Platform-specific dependencies documented?
 ║
-║ ### Common iOS Task Patterns
-║ ```
-║ Setup → Models (TDD) → Services → UI → Integration → Polish → Release
-║  ↓         ↓           ↓         ↓         ↓           ↓         ↓
-║ S001    S004-S009   S011-S014  S015-S019  S020-S024   S025-S029  S030
-║ ```
+║ ### iOS/macOS Implementation Coverage
+║ - [ ] SwiftUI implementation tasks cover all UI requirements?
+║ - [ ] Data layer tasks address all storage needs from tech plan?
+║ - [ ] Service layer tasks handle all business logic requirements?
+║ - [ ] Testing tasks provide adequate coverage for all components?
+║ - [ ] Platform compliance tasks address App Store and guideline requirements?
 ║
-║ ### Parallel Execution Examples
-║ - **Models**: Different model files can implement [P] in parallel
-║ - **Services**: Independent services can implement [P] in parallel
-║ - **UI Views**: Non-interacting views can implement [P] in parallel
-║ - **Tests**: Tests can run [P] with their implementation counterparts
-║ - **Quality**: Accessibility, localization, error handling checks can run [P]
+║ ### Implementation Completeness
+║ - [ ] All user scenarios from specification have implementation tasks?
+║ - [ ] Error handling tasks address all failure modes?
+║ - [ ] Performance tasks address all technical plan requirements?
+║ - [ ] Quality assurance tasks validate all Context/Guidelines standards?
 ║
-║ **IMPORTANT**: This template creates the implementation roadmap. Each S### task should be specific enough to execute without
-║ ambiguity while maintaining proper dependency order and parallel execution opportunities.
+║ ## Execution Status
+║ *Updated by main() during processing*
+║
+║ ### Phase 1: Prerequisites & Planning Analysis
+║ - [ ] Technical architecture plan loaded and analyzed
+║ - [ ] Feature specification loaded for requirement mapping
+║ - [ ] Implementation complexity and scope assessed
+║ - [ ] Critical path and parallel opportunities identified
+║
+║ ### Phase 2: Task Generation & Organization
+║ - [ ] Task generation rules applied systematically
+║ - [ ] S### enumeration generated with proper sequencing
+║ - [ ] Parallel execution markers [P] applied correctly
+║ - [ ] Task dependencies mapped and validated
+║
+║ ### Phase 3: Dependency Analysis & Validation
+║ - [ ] Dependency chains validated with no circular references
+║ - [ ] iOS-specific task validation completed
+║ - [ ] Platform-specific dependencies documented
+║ - [ ] Critical path analysis completed
+║
+║ ### Phase 4: Implementation Plan Generation
+║ - [ ] Implementation steps content generated
+║ - [ ] Task breakdown sections completed with exact file paths
+║ - [ ] Dependency analysis documented with parallel opportunities
+║ - [ ] Completion verification checklists created
+║
+║ ### Phase 5: Validation & Completion
+║ - [ ] Implementation validation gates executed
+║ - [ ] Implementation plan status updated
+║ - [ ] All mandatory sections completed
+║ - [ ] System instructions removed from final document
+║
+║ **Next Phase**: After implementation steps are completed, proceed to `/ctxk:impl:start-working` to begin systematic development execution.
+║
 ════════════════════════════════════════════════════════════════════════════════
-
-*Template follows spec-kit execution flow patterns with iOS/macOS Context/Guidelines integration and ContextKit hierarchical context inheritance.*

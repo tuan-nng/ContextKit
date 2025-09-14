@@ -151,6 +151,8 @@ ContextKit includes specialized sub-agents that automatically ensure code qualit
 - **`check-modern-code`** - Replace outdated APIs (Date() → Date.now, TimeInterval → Duration, async/await patterns)
 - **`check-code-debt`** - Remove AI artifacts, consolidate patterns, extract reusable components
 - **`build-project`** - Execute builds and report results without filling context with verbose output
+- **`run-test-suite`** - Execute complete test suite with build validation and structured failure reporting
+- **`run-specific-test`** - Execute specific test with build validation and focused failure analysis
 - ... more to be added over time with updates!
 
 These agents activate automatically during development phases, ensuring consistent quality without manual oversight.
