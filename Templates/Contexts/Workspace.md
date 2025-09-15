@@ -10,7 +10,16 @@ Workspace-level Context.md template providing workspace-specific configuration, 
 ║
 ║ ## Execution Flow (main)
 ║
-║ ### Phase 1: Complete Repository Discovery & Deep Analysis
+║ ### Phase 1: User Configuration Collection
+║
+║ **NOTE**: User preferences are collected by init-workspace.md command before template execution.
+║ The following user preferences are available for use during context generation:
+║ - Workspace type (Personal/Client/Enterprise/Open Source)
+║ - Company name and description (if applicable)
+║ - Coding standards preference (indentation)
+║ - Development principle overrides (if any)
+║
+║ ### Phase 2: Complete Repository Discovery & Deep Analysis
 ║
 ║ 1. **Recursive Repository Discovery**
 ║    - Use `Bash` command to find ALL git repositories: `find . -name ".git" -type d`
@@ -77,81 +86,37 @@ Workspace-level Context.md template providing workspace-specific configuration, 
 ║    - Identify shared libraries/frameworks within the workspace
 ║    - Note version consistency or conflicts across projects
 ║
-║ ### Phase 2: Interactive Workspace Configuration
-║
-║ **User Question Format**: Use consistent format for all user questions:
-║ ```
-║ ═══════════════════════════════════════════════════
-║ ║ ❓ USER INPUT REQUIRED
-║ ═══════════════════════════════════════════════════
-║ ║
-║ ║ [Question text and options]
-║ ║
-║ ║ [Response instruction]
-║ ```
-║
-║ 6. **Workspace Type Selection**
-║    - Ask user: "What type of workspace is this?"
-║      1. Personal/Indie Development
-║      2. Client/Contract Work
-║      3. Enterprise/Company
-║      4. Open Source Project
-║    - Based on selection, ask follow-up questions:
-║      - Client/Enterprise: Ask for company name and contract identifier
-║      - All types: Ask for brief workspace description
-║
-║ 7. **Coding Standards Configuration**
-║    - Present ACTUAL detected patterns: "Analysis found: [list specific findings from formatter configs and code samples]"
-║    - If no specific patterns detected, state: "No consistent coding standards detected"
-║    - Ask user: "Override indentation preference based on findings?"
-║      1. Keep detected/current patterns
-║      2. Standardize on 3 spaces
-║      3. Standardize on 2 spaces
-║      4. Standardize on 4 spaces
-║      5. Standardize on tabs
-║
-║ 8. **Development Principles Customization**
-║    - Display development principles:
-║      • Accessibility-first design
-║      • Privacy by design
-║      • Localizability from day one
-║      • Code maintainability
-║      • Platform-appropriate UX
-║    - For Client/Enterprise workspaces: Ask "Any client requirements that override these principles?"
-║    - If overrides requested: Ask for explicit justification for each principle override
-║    - Document all overrides with detailed justifications
-║
 ║ ### Phase 3: Context Generation & Completion
 ║
-║ 9. **Generate Hierarchical Repository Structure**
+║ 6. **Generate Hierarchical Repository Structure**
 ║    - Create complete hierarchical view of all repositories found
 ║    - Show parent-child relationships, submodules, nested projects
 ║    - Include for each repository: name, type, purpose, tech stack, ContextKit status
 ║    - Use indentation to show nesting levels and relationships
 ║    - Format: Repository Name (Type) - Purpose - Tech Stack - Status
 ║
-║ 10. **Generate Technology Findings Summary**
+║ 7. **Generate Technology Findings Summary**
 ║     - Document ONLY what was actually detected, not assumptions
 ║     - List common dependencies and their versions across projects
 ║     - Report actual code style findings from formatter configs and source analysis
 ║     - Identify shared frameworks and architectural patterns found in code
 ║     - Note version consistency or conflicts discovered
 ║
-║ 11. **Generate Workspace Context Content**
+║ 8. **Generate Workspace Context Content**
 ║     - Use `Edit` tool to replace this entire template with new structure focused on:
 ║       A) Hierarchical Repository Structure (primary focus)
 ║       B) Technology Findings (actual detected patterns and dependencies)
-║       C) Workspace Configuration (user input results)
+║       C) Workspace Configuration (user preferences collected by init-workspace.md)
 ║     - Remove or minimize sections not relevant to detected repositories
 ║     - CRITICAL: Only include Communication & Collaboration if relevant to workspace type
 ║
-║ 12. **Final Validation**
+║ 9. **Final Validation**
 ║     - Verify all information is based on actual analysis, not assumptions
 ║     - Ensure hierarchical repository structure is complete and accurate
 ║     - Confirm technology findings are backed by file analysis
 ║     - Check that no placeholder content remains
 ║
-║ 13. **COMPLETION**
+║ 10. **COMPLETION**
 ║     - Use `Edit` tool to remove this entire boxed system instructions section
 ║     - Leave only the clean workspace context content for team use
 ║     - Display repository-specific setup recommendations based on analysis
@@ -170,11 +135,11 @@ Workspace-level Context.md template providing workspace-specific configuration, 
 
 ## Workspace Identity
 
-**Type**: [User Selected: Personal/Indie/Client/Enterprise/Open Source]
+**Type**: [User Selected via init-workspace.md: Personal/Indie/Client/Enterprise/Open Source]
 
-**Purpose**: [User Input - Brief Description]
+**Purpose**: [User Input via init-workspace.md - Brief Description]
 
-**Client/Company**: [User Input or N/A for indie work]
+**Client/Company**: [User Input via init-workspace.md or N/A for indie work]
 
 ## Repository Structure
 
@@ -229,8 +194,8 @@ Workspace-level Context.md template providing workspace-specific configuration, 
 ## Workspace Configuration
 
 **Coding Standards**:
-- **Indentation**: [User Selected based on findings or override]
-- **Code Formatting**: [Based on detected formatter configs or user choice]
+- **Indentation**: [User Selected via init-workspace.md based on findings or override]
+- **Code Formatting**: [Based on detected formatter configs and user preference]
 
 **Development Principles**:
 - ✅ Accessibility-first design
@@ -239,7 +204,7 @@ Workspace-level Context.md template providing workspace-specific configuration, 
 - ✅ Code maintainability
 - ✅ Platform-appropriate UX
 
-**Principle Overrides**: [User specified overrides with justifications, or "None"]
+**Principle Overrides**: [User specified overrides via init-workspace.md with justifications, or "None"]
 
 [CONDITIONAL SECTION - Only for Client/Enterprise workspaces:]
 ## Communication & Collaboration

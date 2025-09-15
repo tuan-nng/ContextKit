@@ -13,6 +13,18 @@ Initialize workspace-level context configuration. Copies workspace template and 
 
 ## Execution Flow (main)
 
+**User Question Format**: When asking user questions, use this consistent format:
+```
+═══════════════════════════════════════════════════
+║ ❓ [DESCRIPTIVE HEADER]
+═══════════════════════════════════════════════════
+║
+║ [Question text and context]
+║ [Options if applicable]
+║
+║ [Clear response instruction]
+```
+
 ### Phase 1: Workspace Status Check
 
 1. **Check Existing Workspace Setup**
@@ -47,10 +59,29 @@ Initialize workspace-level context configuration. Copies workspace template and 
    echo "✅ Copied workspace context template"
    ```
 
-4. **Execute Context.md Template Instructions**
+4. **Collect User Preferences for Workspace Configuration**
+   - **Workspace Type Selection**: Ask user: "What type of workspace is this?"
+     1. Personal/Indie Development
+     2. Client/Contract Work
+     3. Enterprise/Company
+     4. Open Source Project
+   - **Follow-up Details**: Based on selection, ask follow-up questions:
+     - Client/Enterprise: Ask for company name and contract identifier
+     - All types: Ask for brief workspace description
+   - **Coding Standards**: Ask user: "Override indentation preference for this workspace?"
+     1. Keep current/detected patterns
+     2. Standardize on 3 spaces
+     3. Standardize on 2 spaces
+     4. Standardize on 4 spaces
+     5. Standardize on tabs
+   - **Development Principles**: For Client/Enterprise workspaces, ask: "Any client requirements that override default principles (accessibility, privacy, localizability, maintainability, platform UX)?"
+   - **Configuration Summary**: Display all collected preferences to user for confirmation
+
+5. **Execute Context.md Template Instructions with User Preferences**
    - Use `Read` tool to read the copied `Context.md` file
    - Follow the **system instructions** section (boxed area) step by step
-   - The template requires DEEP analysis of ALL repositories in the workspace:
+   - Pass collected user preferences to template execution
+   - The template performs DEEP analysis of ALL repositories in the workspace:
      - Recursive git repository discovery (including submodules and nested repos)
      - README analysis for project purpose detection
      - Build file analysis for tech stack detection (Package.swift, package.json, etc.)
@@ -59,7 +90,7 @@ Initialize workspace-level context configuration. Copies workspace template and 
    - Use tools (`Bash`, `Glob`, `Read`, `Grep`, `Edit`) as directed by template
    - **At completion**: Use `Edit` tool to remove the system instructions section entirely
 
-5. **Display Success Message**
+6. **Display Success Message**
    ```
    🎉 Workspace initialization complete!
 

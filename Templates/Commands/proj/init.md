@@ -25,7 +25,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
 ║ [Clear response instruction]
 ```
 
-### Phase 1: Project Status Assessment
+### Phase 1: Pre-Flight Checks & User Configuration
 
 1. **Check Git Repository Status**
    ```bash
@@ -50,14 +50,31 @@ Initialize current project with ContextKit development workflow system. Sets up 
    ls -la ~/.ContextKit/Templates/ || echo "❌ ContextKit not installed globally. Run: curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | sh"
    ```
 
-### Phase 2: Template Installation
+5. **Collect All User Preferences (Early Configuration)**
+   - **Model Setting**: Use `Read` tool to examine current model setting
+     - If missing or different from "sonnet", ask user: "Current model: [current/none]. Set to 'sonnet'? Default Claude Code uses Opus which burns through the 5-hour limit quickly. ContextKit uses Sonnet to avoid hitting limits during complex planning phases while maintaining sufficient quality with proper guidance. (recommended Y/N)"
+   - **Status Line Setup**: Check current statusLine configuration in settings.json
+     - If missing or different from "./Context/Scripts/CustomStatusline.sh", ask user: "Current statusline: [current/none]. Set to ContextKit statusline? Provides real-time monitoring: '5h-Usage: 73% (1.4h left) | Chat: ▓▓▓▓▓▓░░░░ 64% (128k/200k)' with colored progress bars (Light Gray <50%, Yellow 50-80%, Red >80%) for context awareness. (recommended Y/N)"
+     - If user agrees: Ask user: "What Claude plan do you have?"
+       1. Pro ($20/month)
+       2. Max 5x ($100/month)
+       3. Max 20x ($200/month)
+   - **Workspace Discovery**: Use `Bash` tool to traverse parent directories: `cd .. && pwd` then check for Context.md
+     - Continue checking parent directories until reaching root `/` or finding workspace Context.md
+     - If multiple workspace contexts found in path: ask user which to inherit from
 
-5. **Create Directory Structure**
+6. **Configuration Summary**
+   - Display all collected preferences to user for confirmation
+   - Store preferences for use in automated setup phases
+
+### Phase 2: Automated Template Installation
+
+7. **Create Directory Structure**
    ```bash
    mkdir -p .claude/commands/ctxk .claude/agents/ctxk Context/Features Context/Backlog Context/Scripts
    ```
 
-6. **Copy Workflow Command Templates (Local Only)**
+8. **Copy Workflow Command Templates (Local Only)**
    ```bash
    cp -r ~/.ContextKit/Templates/Commands/plan .claude/commands/ctxk/
    cp -r ~/.ContextKit/Templates/Commands/impl .claude/commands/ctxk/
@@ -67,14 +84,14 @@ Initialize current project with ContextKit development workflow system. Sets up 
    ```
    > **Note**: Only workflow commands are copied locally. Project management commands (proj/) stay global for auto-updates.
 
-7. **Copy Agent Templates**
+9. **Copy Agent Templates**
    ```bash
    cp ~/.ContextKit/Templates/Agents/* .claude/agents/ctxk/
    echo "✅ Copied agent templates (build-project, check-accessibility, etc.)"
    ```
    > **Note**: `/*` means copy ALL .md files from Agents/ directory individually
 
-8. **Copy Script Templates**
+10. **Copy Script Templates**
    ```bash
    cp ~/.ContextKit/Templates/Scripts/* Context/Scripts/
    chmod +x Context/Scripts/*.sh
@@ -82,47 +99,35 @@ Initialize current project with ContextKit development workflow system. Sets up 
    ```
    > **Note**: First `/*` copies all files, then `/*.sh` applies executable permissions to all .sh files
 
-9. **Copy Development Guidelines**
+11. **Copy Development Guidelines**
    ```bash
    mkdir -p Context/Guidelines
    cp ~/.ContextKit/Templates/Guidelines/* Context/Guidelines/
    echo "✅ Copied development guidelines (Swift.md, SwiftUI.md, etc.)"
    ```
 
-10. **Copy Backlog Templates**
+12. **Copy Backlog Templates**
    ```bash
    cp ~/.ContextKit/Templates/Backlog/* Context/Backlog/
    echo "✅ Copied backlog templates (Ideas-Inbox.md, Bugs-Backlog.md, etc.)"
    ```
 
-11. **Copy Project Context Template**
+13. **Copy Project Context Template**
     ```bash
     cp ~/.ContextKit/Templates/Contexts/Project.md Context.md
     echo "✅ Copied project context template"
     ```
 
-12. **Check Existing Settings**
+14. **Configure Settings Using Collected Preferences**
     - Use `Read` tool to check if `.claude/settings.json` exists
-    - If doesn't exist: Copy complete template and skip to step 17
+    - If doesn't exist: Copy complete template
     ```bash
     cp ~/.ContextKit/Templates/settings.json .claude/settings.json
     echo "✅ Installed complete ContextKit settings"
     ```
-
-13. **Configure Model Setting**
-    - Use `Read` tool to examine current model setting
-    - If missing or different from "sonnet", ask user: "Current model: [current/none]. Set to 'sonnet'? Default Claude Code uses Opus which burns through the 5-hour limit quickly. ContextKit uses Sonnet to avoid hitting limits during complex planning phases while maintaining sufficient quality with proper guidance. (recommended Y/N)"
-    - If user agrees or no current setting: Use `Edit` tool to set `"model": "sonnet"`
-
-14. **Configure Status Line**
-    - Check current statusLine configuration in settings.json
-    - If missing or different from "./Context/Scripts/CustomStatusline.sh", ask user: "Current statusline: [current/none]. Set to ContextKit statusline? Provides real-time monitoring: '5h-Usage: 73% (1.4h left) | Chat: ▓▓▓▓▓▓░░░░ 64% (128k/200k)' with colored progress bars (Light Gray <50%, Yellow 50-80%, Red >80%) for context awareness. (recommended Y/N)"
-    - If user agrees or no current setting:
-      - Ask user: "What Claude plan do you have?"
-        1. Pro ($20/month)
-        2. Max 5x ($100/month)
-        3. Max 20x ($200/month)
-      - Based on selection, set statusLine configuration with correct plan parameter:
+    - Apply user preferences collected in Phase 1:
+      - **Model Setting**: Use `Edit` tool to set model preference if user agreed
+      - **Status Line**: Configure statusLine with correct plan parameter if user agreed:
         - Pro: `"command": "./Context/Scripts/CustomStatusline.sh --plan Pro"`
         - Max 5x: `"command": "./Context/Scripts/CustomStatusline.sh --plan Max5"`
         - Max 20x: `"command": "./Context/Scripts/CustomStatusline.sh --plan Max20"`
@@ -214,30 +219,24 @@ Initialize current project with ContextKit development workflow system. Sets up 
     - Use `Read` on .editorconfig files if present
     - Check for consistent patterns across source files in component
 
-### Phase 4: Context Integration & Workspace Discovery
+### Phase 4: Context Integration & Final Setup
 
-19. **Discover Workspace Context**
-    - Use `Bash` tool to traverse parent directories: `cd .. && pwd` then check for Context.md
-    - Continue checking parent directories until reaching root `/` or finding workspace Context.md
-    - If workspace Context.md found: note the workspace name and inheritance rules
-    - If multiple workspace contexts found in path: ask user which to inherit from
-
-20. **Create/Update CLAUDE.md with Context References**
+19. **Create/Update CLAUDE.md with Context References**
     - Check if `CLAUDE.md` exists using `Read` tool
     - If `CLAUDE.md` exists:
       - Use `Read` to check current content
       - Use `Edit` to ensure `@Context.md` reference is present
-      - If workspace Context.md discovered: ensure workspace reference is present (e.g., `@../Context.md`)
+      - If workspace Context.md discovered in Phase 1: ensure workspace reference is present (e.g., `@../Context.md`)
     - If no `CLAUDE.md`: Use `Write` tool to create new one with:
       ```markdown
       # Project Development Context
 
       @Context.md
-      [If workspace discovered: @../Context.md]
+      [If workspace discovered in Phase 1: @../Context.md]
       ```
-    - **CRITICAL**: Ensure both project Context.md AND workspace Context.md (if found) are referenced
+    - **CRITICAL**: Ensure both project Context.md AND workspace Context.md (if found in Phase 1) are referenced
 
-21. **Copy Project-Specific Formatters** (for Swift projects only)
+20. **Copy Project-Specific Formatters** (for Swift projects only)
     - For Swift projects detected during investigation:
       ```bash
       cp ~/.ContextKit/Templates/Formatters/.swift-format .
@@ -245,7 +244,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
       echo "✅ Copied Swift formatter configurations"
       ```
 
-22. **Execute Context.md Template Instructions**
+21. **Execute Context.md Template Instructions**
     - Use `Read` tool to read the copied `Context.md` file
     - Follow the **system instructions** section (boxed area) step by step
     - **CRITICAL**: Use the comprehensive findings from Phase 3 investigation:
@@ -260,7 +259,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 ### Phase 5: Verification & Completion
 
-23. **Verify Installation**
+22. **Verify Installation**
     - Use `Read` tool to confirm `Context.md` exists and contains project-specific content
     - Use `Glob` tool to verify workflow commands exist: `.claude/commands/ctxk/plan/1-spec.md`, `.claude/commands/ctxk/impl/start-working.md`, `.claude/commands/ctxk/bckl/add-idea.md`
     - Use `Bash` tool to verify global proj commands accessible: `ls ~/.claude/commands/ctxk/proj/init.md`
@@ -269,8 +268,8 @@ Initialize current project with ContextKit development workflow system. Sets up 
     - Use `Bash` tool to verify status line configured with plan: `grep "CustomStatusline.sh --plan" .claude/settings.json`
     - Use `Read` tool to confirm `.claude/settings.json` contains ContextKit configuration
 
-24. **Update Workspace Context (if applicable)**
-    - If workspace Context.md was discovered in step 19:
+23. **Update Workspace Context (if applicable)**
+    - If workspace Context.md was discovered in Phase 1:
       - Use `Read` tool to read the workspace Context.md file
       - Look for current project name in the "Repository Structure" or "Project Inventory" section
       - If project is listed with status "not setup yet":
@@ -278,7 +277,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
         - Update the setup status count (e.g., "2 of 21 projects have ContextKit enabled" → "3 of 21 projects have ContextKit enabled")
       - If project not listed in workspace: Use `Edit` tool to add project to the repository structure with "ContextKit-enabled" status and detected component details
 
-25. **Display Completion**
+24. **Display Completion**
     - Display success message using template below
     - Include summary of components discovered and validated
     - Suggest next steps based on project analysis findings
