@@ -48,7 +48,9 @@ ContextKit/
     │       ├── add-idea.md          # Capture new ideas with evaluation
     │       ├── add-bug.md           # Bug report with impact assessment
     │       ├── prioritize-ideas.md  # Organize ideas backlog
-    │       └── prioritize-bugs.md   # Triage bugs backlog
+    │       ├── prioritize-bugs.md   # Triage bugs backlog
+    │       ├── remove-idea.md       # Remove completed ideas from backlog
+    │       └── remove-bug.md        # Remove fixed bugs from backlog
     ├── Scripts/                     # → ALL SCRIPTS (hooks & standalone, get copied during /ContextKit/setup)
     │   ├── AutoFormat.sh           # Auto-format edited Swift files (PostToolUse hook)
     │   ├── VersionStatus.sh        # Version checking and status display (SessionStart hook)
@@ -113,9 +115,11 @@ cp -R ~/.ContextKit/Templates/Commands/* ~/.claude/commands/ctxk/
 - `/ctxk:impl:release-app` - iOS/macOS app release workflow
 - `/ctxk:impl:release-package` - Swift package release workflow
 - `/ctxk:bckl:add-idea` - Capture new ideas
-- `/ctxk:bckl:add-bug` - Report bugs  
+- `/ctxk:bckl:add-bug` - Report bugs
 - `/ctxk:bckl:prioritize-ideas` - Organize ideas backlog
 - `/ctxk:bckl:prioritize-bugs` - Triage bugs backlog
+- `/ctxk:bckl:remove-idea` - Remove completed ideas from backlog
+- `/ctxk:bckl:remove-bug` - Remove fixed bugs from backlog
 
 ### Phase 2: Project Setup (`/ctxk:proj:init`)
 
@@ -291,7 +295,7 @@ AGENT_LATEST_VERSION=$(sed -n '2p' ~/.ContextKit/Templates/Agents/check-modern-c
 - `proj/` - Project management (init, init-workspce, migrate)
 - `plan/` - Feature planning (1-spec, 2-tech, 3-steps) 
 - `impl/` - Implementation (start-working, commit-changes, release-app, release-package)
-- `bckl/` - Backlog management (add-idea, add-bug, prioritize-ideas, prioritize-bugs)
+- `bckl/` - Backlog management (add-idea, add-bug, prioritize-ideas, prioritize-bugs, remove-idea, remove-bug)
 
 **AI Implementation Focus**:
 - Include execution flows with explicit branching logic

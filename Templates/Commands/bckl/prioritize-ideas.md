@@ -1,5 +1,5 @@
-# Prioritize Ideas
-<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-09-13 -->
+# Prioritize Ideas with Binary Search Evaluation
+<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-15 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -9,79 +9,222 @@
 > Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
 ## Description
-Review and reprioritize idea backlog with smart promotion suggestions, constitutional compliance validation, and strategic planning alignment
+Process ideas from inbox through systematic 5-step evaluation with binary search priority placement. Orchestrates user interaction and calls database operations defined in Ideas-Backlog.md.
 
-## Parameters
-- `focus` (optional): Specific focus area for prioritization (e.g., "accessibility", "performance", "user-experience")
-- `horizon` (optional): Planning horizon (e.g., "sprint", "quarter", "release") - defaults to "quarter"
+## User Input Format
+
+```
+────────────────────────────────────────────────────────────────
+**💬 [Insert the specific question here]**
+────────────────────────────────────────────────────────────────
+
+**Idea:** [Idea name or description]
+
+[Additional context fields]
+
+────────────────────────────────────────────────────────────────
+```
 
 ## Execution Flow (main)
-1. Load and validate ideas backlog state
-   → Read Context/Backlog/Ideas-Inbox.md and Context/Backlog/Ideas-Backlog.md
-   → If missing: ERROR "No ideas found - use /Backlog/add-idea first"
-   → Validate idea entries and identify any corrupt or incomplete items
-   → Load existing prioritization context from previous sessions
-2. Gather comprehensive context for idea prioritization
-   → Read project Context.md for strategic goals and user priorities
-   → Analyze recent development velocity and capacity constraints
-   → Review constitutional principle compliance status and gaps
-   → Assess current feature development pipeline and resource allocation
-3. Analyze idea backlog items systematically
-   → Load detailed content from Context/Backlog/Ideas/ files
-   → Assess constitutional principle alignment for each idea (accessibility-first, privacy, localizability)
-   → Calculate value-effort ratios using consistent scoring methodology
-   → Identify synergies between related ideas and potential feature combinations
-4. Apply constitutional compliance prioritization rules
-   → Escalate ideas addressing constitutional violations to high priority
-   → Prioritize accessibility-first features affecting underserved users
-   → Highlight privacy-enhancing ideas requiring immediate consideration
-   → Flag localization ideas affecting international market expansion
-5. Generate strategic prioritization recommendations
-   → Create priority tiers: Critical, High, Medium, Low, Deferred
-   → Recommend promotion of inbox ideas ready for active development
-   → Suggest idea combinations that create compound value
-   → Identify ideas requiring further research or validation
-6. Update backlog organization with rationale
-   → Move promoted ideas from Ideas-Inbox.md to Ideas-Backlog.md with updated priority
-   → Reorder Ideas-Backlog.md based on new prioritization decisions
-   → Document prioritization rationale and decision criteria used
-   → Update priority scores and effort estimates based on current analysis
-7. Generate actionable next steps and recommendations
-   → Suggest top 3-5 ideas for immediate consideration in next planning cycle
-   → Identify ideas requiring additional research, validation, or stakeholder input
-   → Recommend ideas for deferral or removal based on strategic alignment
-   → Provide clear rationale for all prioritization decisions made
 
-## Context Sources
-Read these files to understand project configuration and strategic context dynamically:
-- `Context.md` - Project strategic goals, user priorities, constitutional principles
-- `Context/Backlog/Ideas-Inbox.md` - New ideas awaiting evaluation and prioritization
-- `Context/Backlog/Ideas-Backlog.md` - Prioritized ideas ready for development planning
-- Parent directory `Context.md` files - Workspace-specific strategic priorities
-- `~/.ContextKit/Meta/Constitution.md` - Universal constitutional principles for prioritization
+### Phase 1: Setup & Inventory
 
-## Validation Gates
-- [ ] Ideas backlog files exist and are properly formatted?
-- [ ] Project strategic context loaded from Context.md?
-- [ ] Constitutional principles applied to prioritization decisions?
-- [ ] Value-effort analysis completed for all ideas?
-- [ ] Prioritization rationale documented for transparency?
-- [ ] Clear next steps identified for top-priority ideas?
-- [ ] Backlog organization updated to reflect new priorities?
+1. **Check Ideas Infrastructure**
+   - Use `Glob` tool to verify: `Glob Context/Backlog Ideas-Inbox.md Ideas-Backlog.md`
+   - If missing files:
+     ```
+     ❌ Ideas infrastructure incomplete!
+
+     Missing files detected. Run /ctxk:proj:init to setup complete backlog system.
+     Required: Context/Backlog/Ideas-Inbox.md and Ideas-Backlog.md
+     ```
+     → END (exit with error)
+
+2. **Load Ideas Inventory**
+   - Use `Read` tool to read Ideas-Inbox.md: `Read Context/Backlog/Ideas-Inbox.md`
+   - Parse all ideas awaiting evaluation (look for `## [IDEA-###]` entries)
+   - If no ideas in inbox:
+     ```
+     💡 Ideas inbox is empty!
+
+     All ideas have been processed. Use /ctxk:bckl:add-idea to capture new ideas.
+     Current state: Ready for development with existing backlog.
+     ```
+     → END (success - no work needed)
+
+3. **Load Existing Backlog Database**
+   - Use `Read` tool to read Ideas-Backlog.md: `Read Context/Backlog/Ideas-Backlog.md`
+   - Review documented database operations (BINARY_SEARCH_INSERT, ADD_ENTRY, etc.)
+   - Parse existing Priority Index for binary search reference material
+
+### Phase 2: Systematic Idea Processing
+
+4. **Process Each Idea from Inbox Using 5-Step Evaluation**
+   - For each idea in Ideas-Inbox.md, execute systematic evaluation:
+
+   **Step 1: Effort Assessment**
+   ```
+   ────────────────────────────────────────────────────────────────
+   **⏱️ EFFORT: How many hours would this task take to complete?**
+   ────────────────────────────────────────────────────────────────
+
+   **Idea:** [Idea Title]
+   **Source:** [Source attribution]
+   **Context:** [Idea description/context]
+
+   ────────────────────────────────────────────────────────────────
+   ```
+   - If >4 hours: Ask "This seems large. Should we split it into smaller pieces?"
+   - Document effort assessment and any splitting decisions
+
+   **Step 2: Deadline Assessment**
+   ```
+   ────────────────────────────────────────────────────────────────
+   **📅 DEADLINE: Does this have a deadline or time-sensitive requirement?**
+   ────────────────────────────────────────────────────────────────
+
+   **Idea:** [Idea Title]
+   **Effort:** ~[X] hours
+
+   ────────────────────────────────────────────────────────────────
+   ```
+   - Document deadline requirements for DEADLINE_BUBBLE_UP operation
+
+   **Step 3: Binary Search Priority Placement**
+   - **Call BINARY_SEARCH_INSERT operation from Ideas-Backlog.md**
+   - Present exactly 3 reference ideas from existing Priority Index:
+   ```
+   ────────────────────────────────────────────────────────────────
+   **📍 PRIORITY: Where would you place this idea?**
+   ────────────────────────────────────────────────────────────────
+
+   **New Idea:** [Idea Title] ([Effort], [Source])
+
+   A) ← Higher priority
+   ─────────────────────────────────
+   • [Existing idea with context (effort, source)]
+   ─────────────────────────────────
+   B) ← Between here
+   ─────────────────────────────────
+   • [Another existing idea with context]
+   ─────────────────────────────────
+   C) ← Lower priority
+
+   ────────────────────────────────────────────────────────────────
+   ```
+   - **Continue narrowing** until exact insertion point identified
+   - **Never stop** until position between two consecutive ideas found
+
+   **Step 4: Dependencies and Grouping**
+   ```
+   ────────────────────────────────────────────────────────────────
+   **🔗 DEPENDENCIES: Does this depend on any other ideas, or would it work well grouped with anything?**
+   ────────────────────────────────────────────────────────────────
+
+   **Idea:** [Idea Title]
+   **Priority:** [Placement decided via binary search]
+
+   ────────────────────────────────────────────────────────────────
+   ```
+   - Document dependencies for metadata tables
+
+   **Step 5: Finalize Using ADD_ENTRY Operation**
+   - **Call ADD_ENTRY operation from Ideas-Backlog.md** with collected information:
+     - Priority score from binary search
+     - Effort assessment
+     - Deadline information (if any)
+     - Dependencies
+     - Source attribution
+     - Full context and evaluation notes
+   - **Remove processed item from Ideas-Inbox.md**
+   - Continue with next inbox item
+
+### Phase 3: Session Completion & Database Maintenance
+
+5. **Execute Session Management Operations**
+   - **Call DEADLINE_BUBBLE_UP operation** to check for urgent deadlines
+   - **Call REBALANCE_SCORES operation** if priority gaps have become too small
+   - Update session tracking information in Ideas-Backlog.md
+
+6. **Clean Inbox and Update Status**
+   - Use `Edit` tool to remove all processed ideas from Ideas-Inbox.md
+   - Update "Last Priority Session" date in Ideas-Backlog.md
+   - Calculate next review due date (7 days or when >5 new ideas)
+
+7. **Display Session Summary**
+   ```
+   💡 Ideas prioritization complete!
+
+   ✅ Processed: [X] ideas from inbox
+   ✅ Database operations: BINARY_SEARCH_INSERT, ADD_ENTRY, [others if used]
+   ✅ Updated: Context/Backlog/Ideas-Backlog.md with new priorities
+
+   📊 Summary:
+   • [X] ideas added to active backlog
+   • Highest priority: [IDEA-###] [Title] (Score: [X])
+   • [If deadlines exist] Urgent items: [count] ideas with approaching deadlines
+   • Next review due: [Date] (7 days) or when >5 new ideas captured
+
+   🔗 Next Steps:
+   • Review Context/Backlog/Ideas-Backlog.md for complete prioritized list
+   • Use /ctxk:plan:1-spec to begin work on highest priority ideas
+   • Continue capturing new ideas with /ctxk:bckl:add-idea
+
+   💡 Ideas are now ready for development planning!
+   ```
+
+## Binary Search Implementation Details
+
+### Reference Selection Strategy
+- **Pick 3 ideas** from different priority ranges in existing Priority Index
+- **Include meaningful context**: effort estimate, source, deadline info
+- **Example format**: "Dark mode UI support (8h, customer requests)" not just "Dark mode"
+
+### User Interaction Flow
+- If user picks "A) Higher priority": Select references from higher range and continue
+- If user picks "C) Lower priority": Select references from lower range and continue
+- **Never terminate** until exact insertion point between consecutive items identified
+- **Calculate precise score** using formula from BINARY_SEARCH_INSERT operation
+
+### Database Operation Calls
+- **BINARY_SEARCH_INSERT**: For finding exact priority position
+- **ADD_ENTRY**: For adding idea with complete metadata
+- **DEADLINE_BUBBLE_UP**: For promoting urgent deadlines
+- **REBALANCE_SCORES**: For maintaining priority score spacing
+- **REMOVE_COMPLETED**: If user indicates ideas are already implemented
 
 ## Error Conditions
-- "No ideas found" → User must add ideas with /Backlog/add-idea first
-- "Invalid backlog format" → Ideas backlog files need repair or regeneration
-- "Missing strategic context" → Project Context.md must define goals and priorities
-- "Constitutional conflict" → Ideas must align with accessibility-first and privacy principles
 
-## Constitutional Principles Integration
-All idea prioritization automatically considers:
-- **Accessibility-first design**: Ideas improving accessibility receive priority boost
-- **Privacy by design**: Ideas enhancing user privacy and data protection prioritized
-- **Localizability from day one**: Ideas supporting international users receive consideration
-- **Code maintainability**: Ideas reducing technical debt and improving code quality valued
-- **Platform-appropriate UX**: Ideas following iOS/macOS design guidelines preferred
+- **"Ideas-Inbox.md empty"** → No ideas to process, suggest adding ideas first
+- **"Ideas-Backlog.md missing operations"** → Database template may be corrupted
+- **"Binary search incomplete"** → Must continue until exact position found
+- **"User abandoned session"** → Partially processed ideas remain in inbox
+- **"Database operation failed"** → Check Ideas-Backlog.md structure and operations
+
+## Validation Gates
+
+**Prerequisites:**
+- Ideas infrastructure files exist and are readable?
+- At least one idea exists in inbox for processing?
+- Ideas-Backlog.md contains documented database operations?
+
+**Processing:**
+- Each idea goes through complete 5-step evaluation?
+- Binary search continues until exact position identified?
+- Database operations called with complete information?
+
+**Output:**
+- Ideas moved from inbox to backlog using documented operations?
+- Priority Index maintained in correct sorted order?
+- Session tracking information updated properly?
+
+## Integration Points
+
+- **Idea Capture**: Processes ideas from `/ctxk:bckl:add-idea` command
+- **Database Operations**: Uses methods documented in Ideas-Backlog.md self-managing database
+- **Development Workflow**: Feeds prioritized ideas to `/ctxk:plan:1-spec` for specification
+- **Session Management**: Supports session-based priority reassessment and context changes
+- **Source Tracking**: Preserves source attribution throughout prioritization process
 
 ════════════════════════════════════════════════════════════════════════════════
 👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION
@@ -90,14 +233,14 @@ All idea prioritization automatically considers:
 This section is preserved during ContextKit migrations and updates.
 Add project-specific instructions, examples, and overrides below.
 
-## Project-Specific Instructions
+## Custom Priority Factors
 
-<!-- Add project-specific guidance here -->
+<!-- Add project-specific priority weighting rules -->
 
-## Additional Examples
+## Binary Search Customization
 
-<!-- Add examples specific to your project here -->
+<!-- Modify reference idea selection or positioning logic -->
 
-## Override Behaviors
+## Database Operation Overrides
 
-<!-- Document any project-specific overrides here -->
+<!-- Override specific database operations if needed for project -->

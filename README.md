@@ -74,6 +74,9 @@ claude
 
 ContextKit creates structured feature directories, maintains context between sessions, and guides you through quality checkpoints that prevent common AI development pitfalls.
 
+> [!NOTE]
+> **Early Development**: ContextKit is actively evolving with iterative improvements. While production-ready (I use it daily for all my projects), expect some rough edges as commands and agents are refined. Updates are delivered automatically - keep sending feedback to help iron out issues faster.
+
 ## 🏛️ Core philosophy
 
 ContextKit is built on non-negotiable development principles embedded throughout all templates and workflows:
@@ -191,7 +194,10 @@ ContextKit automatically checks for newer versions when you start a new session 
 ### ⚙️ Partial Control (customization sections preserved)
 - **Commands & Agents** - Core logic updates, but your additions in "👩‍💻 DEVELOPER CUSTOMIZATIONS" sections are preserved
 - **Guidelines** - Reference content updates, but your project-specific customizations are preserved
-- **Backlog Templates** (`Context/Backlog/*.md`) - Evaluation frameworks update, but your ideas, bugs, and custom sections are preserved
+
+### 📝 Backlog File Management
+- **Inbox Files** (`Ideas-Inbox.md`, `Bugs-Inbox.md`) - **✅ COMPLETELY USER-EDITABLE**: Edit manually, copy/paste between projects, add entries freely
+- **Backlog Files** (`Ideas-Backlog.md`, `Bugs-Backlog.md`) - **❌ AI-MANAGED DATABASES**: Never edit directly! Request changes through `/ctxk:impl:start-working` sessions
 
 **Bottom Line**: Your formatter configs, project context, features, and backlog content are completely yours. ContextKit only updates core frameworks and logic while preserving all your customizations.
 
@@ -208,6 +214,8 @@ ContextKit automatically checks for newer versions when you start a new session 
 ### Backlog & Team Management
 - **Idea capture**: `/ctxk:bckl:add-idea` with evaluation framework
 - **Bug reporting**: `/ctxk:bckl:add-bug` with impact assessment
+- **Prioritization**: `/ctxk:bckl:prioritize-ideas` and `/ctxk:bckl:prioritize-bugs` with binary search evaluation
+- **Completion**: `/ctxk:bckl:remove-idea` and `/ctxk:bckl:remove-bug` for cleaning backlog
 - **Workspace setup**: `/ctxk:proj:init-workspace` for client/team standards
 
 <details>
@@ -234,6 +242,8 @@ ContextKit automatically checks for newer versions when you start a new session 
 - `/ctxk:bckl:add-bug` - Report bugs with impact assessment and reproduction steps
 - `/ctxk:bckl:prioritize-ideas` - Prioritize ideas through strategic organization
 - `/ctxk:bckl:prioritize-bugs` - Triage bugs with severity-based prioritization
+- `/ctxk:bckl:remove-idea` - Remove completed or cancelled ideas from backlog
+- `/ctxk:bckl:remove-bug` - Remove fixed or resolved bugs from backlog
 
 </details>
 

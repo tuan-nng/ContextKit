@@ -1,5 +1,5 @@
-# Report Bug
-<!-- Template Version: 0 | ContextKit: 0.0.0 | Updated: 2025-09-13 -->
+# Capture Bug Reports with Quick Dump
+<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-15 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -8,309 +8,77 @@
 >
 > Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
-**Purpose**: Capture bug reports with impact assessment and reproduction steps following ContextKit's spec-kit methodology with constitutional principles and effort estimation.
+## Description
+Quick bug capture with minimal overhead. Takes description as parameter and dumps to inbox immediately with source extraction if mentioned.
 
-## Template Variables
-
-- `{{bug_title}}` - Short descriptive title for the bug
-- `{{bug_description}}` - Detailed description from user input
-- `{{reporter_name}}` - Name of person reporting the bug
-- `{{timestamp}}` - ISO 8601 timestamp when bug was reported
-- `{{project_name}}` - Current project name from Context.md
-- `{{project_type}}` - Project type (ios-app, swift-package, vapor-server)
+## Parameters
+- `description` (required): The bug description (e.g., "Login crashes on iOS 18" or "Customer reported export button broken")
 
 ## Execution Flow (main)
 
-1. **Parse Input Description**
-   → If empty: ERROR "No bug description provided"
-   → Extract key elements: symptoms, context, expected behavior
-   
-2. **Impact Assessment Gate**
-   → Analyze user-facing impact and technical severity
-   → If impact unclear: WARN "Impact assessment incomplete"
-   → Mark critical path features with HIGH priority
-   
-3. **Reproduction Analysis**
-   → For each unclear reproduction step:
-   → Mark with [NEEDS CLARIFICATION: specific question]
-   → If no reproduction steps: ERROR "Cannot determine reproduction steps"
-   
-4. **Constitutional Compliance Check**
-   → Validate against accessibility, localization, privacy principles
-   → Mark constitutional principle violations with CRITICAL priority
-   
-5. **Effort Estimation**
-   → Calculate complexity based on affected systems
-   → If estimation uncertain: Mark with [NEEDS ESTIMATION: technical assessment required]
-   
-6. **Validation Gates**
-   → Run Bug Report Completeness checklist
-   → If any critical gaps: ERROR "Bug report incomplete"
-   → If uncertainties remain: WARN "Bug has unclear aspects"
-   
-7. **File Creation**
-   → Generate bug file in Context/Backlog/Bugs/
-   → Update Bugs-Inbox.md with new entry
-   → Return: SUCCESS (bug captured and prioritized)
+### Phase 1: Setup Validation
 
-## Bug Report Template Structure
+1. **Check Bug Infrastructure**
+   - Use `Glob` tool to verify: `Glob Context/Backlog Bugs-Inbox.md`
+   - If Bugs-Inbox.md missing:
+     ```
+     ❌ Bug infrastructure not found!
+     Run /ctxk:proj:init to setup ContextKit backlog system.
+     ```
+     → END (exit with error)
 
-```markdown
-# Bug Report: {{bug_title}}
+### Phase 2: Quick Processing
 
-**Reporter**: {{reporter_name}}  
-**Date**: {{timestamp}}  
-**Project**: {{project_name}} ({{project_type}})  
-**Status**: New  
+2. **Parse Description and Extract Source**
+   - Take description from command parameter
+   - If no description provided: ERROR "Description required: /ctxk:bckl:add-bug 'Bug description here'"
+   - **Extract source if mentioned**: Look for patterns like:
+     - "Customer reported...", "User said...", "QA found..."
+     - "Support ticket...", "Jack mentioned...", "Sarah noticed..."
+     - If found: Extract as source, clean description
+     - If not found: Source = "Me"
 
-## Summary
-{{bug_description}}
+3. **Generate ID and Create Entry**
+   - Use `Read` tool to read Bugs-Inbox.md: `Read Context/Backlog/Bugs-Inbox.md`
+   - Generate next sequential ID: BUG-001, BUG-002, etc.
+   - Create title from description (fix obvious typos, keep intent)
+   - Generate current date
 
-## Impact Assessment
-### User Impact
-- [ ] **Critical**: App crashes or data loss
-- [ ] **High**: Core functionality broken
-- [ ] **Medium**: Feature degraded but usable
-- [ ] **Low**: Minor UI/UX issue
+4. **Add to Bug Inbox**
+   - Use `Edit` tool to add entry at top of "Bugs Awaiting Triage" section:
+     ```markdown
+     ## [BUG-###] [Title from description]
+     **Added**: YYYY-MM-DD
+     **Source**: [Extracted source or "Me"]
+     **Context**: [Full description if longer than title]
+     ```
 
-### Technical Severity
-- [ ] **Critical**: Security/privacy vulnerability
-- [ ] **High**: Performance degradation >20%
-- [ ] **Medium**: Isolated feature issue
-- [ ] **Low**: Cosmetic/polish issue
-
-### Constitutional Compliance
-- [ ] **Accessibility**: Violates accessibility standards
-- [ ] **Localization**: Breaks i18n/l10n functionality  
-- [ ] **Privacy**: Privacy principle violation
-- [ ] **Performance**: Violates 60fps/launch time standards
-
-## Reproduction Steps
-1. [NEEDS CLARIFICATION: specific environment/device?]
-2. [Step-by-step reproduction]
-3. [Expected vs actual behavior]
-
-### Environment
-- **iOS Version**: [NEEDS CLARIFICATION: specific version?]
-- **Device**: [NEEDS CLARIFICATION: specific model?]
-- **App Version**: {{app_version}}
-- **Configuration**: [NEEDS CLARIFICATION: specific settings?]
-
-## Expected Behavior
-[Clear description of what should happen]
-
-## Actual Behavior
-[Clear description of what actually happens]
-
-## Error Messages/Logs
-```
-[Include any console output, crash logs, or error messages]
-```
-
-## Screenshots/Videos
-- [ ] Screenshot of issue attached
-- [ ] Screen recording if needed
-- [ ] Console logs captured
-
-## Effort Estimation
-### Complexity Assessment
-- [ ] **Simple** (1-2 hours): UI fix, text change
-- [ ] **Medium** (0.5-2 days): Logic fix, single component
-- [ ] **Complex** (3-7 days): Architecture change, multiple systems
-- [ ] **Major** (1-2 weeks): Core system redesign
-
-### Risk Factors
-- [ ] Affects multiple platforms (iOS/macOS)
-- [ ] Requires database migration
-- [ ] Impacts existing user data
-- [ ] Needs extensive testing
-- [ ] [NEEDS ESTIMATION: technical assessment required]
-
-## Investigation Notes
-### Root Cause Analysis
-- [ ] **UI Layer**: SwiftUI view or layout issue
-- [ ] **Business Logic**: Service or model layer bug
-- [ ] **Data Layer**: Core Data or persistence issue
-- [ ] **Integration**: External API or service issue
-- [ ] **Infrastructure**: Build, deployment, or configuration
-
-### Dependencies
-- [ ] Requires investigation of related systems
-- [ ] May affect multiple features
-- [ ] Depends on external library/service fixes
-- [ ] Blocked by other bugs: [List blocking bug IDs]
-
-## Solution Approach
-### Immediate Actions
-- [ ] Quick workaround available
-- [ ] Hotfix required for production
-- [ ] Can wait for next regular release
-
-### Implementation Strategy
-- [ ] **Package-First**: Create/modify Swift package
-- [ ] **Direct Fix**: Modify app code directly
-- [ ] **Configuration**: Settings or environment change
-- [ ] **Third-Party**: Update dependency or external service
-
-## Testing Requirements
-### Validation Checklist
-- [ ] Fix verified in development environment
-- [ ] Regression testing completed
-- [ ] Accessibility testing if UI-related
-- [ ] Performance testing if performance-related
-- [ ] Works across all supported iOS versions
-
-### Test Cases to Add
-- [ ] Unit tests for bug scenario
-- [ ] UI tests for user-facing bugs
-- [ ] Integration tests for system bugs
-- [ ] Performance tests for performance bugs
-
-## Release Considerations
-### Priority Classification
-- [ ] **P0**: Stop-ship, blocks release
-- [ ] **P1**: Must fix before next release
-- [ ] **P2**: Should fix in next few releases  
-- [ ] **P3**: Fix when convenient
-
-### Release Impact
-- [ ] Requires immediate hotfix
-- [ ] Can wait for scheduled release
-- [ ] Needs App Store review
-- [ ] Breaking change requiring version bump
-
-## Related Issues
-- **Similar Bugs**: [Link to related bug reports]
-- **Related Features**: [Link to feature specs that might be affected]
-- **Blocking Issues**: [List issues that must be resolved first]
-- **Blocked Issues**: [List issues blocked by this bug]
-```
-
-## Constitutional Validation (iOS/Swift-Specific)
-
-### Swift Package Gate
-- [ ] Bug affects package boundary or API?
-- [ ] Fix maintains clean package separation?
-- [ ] No architectural violations introduced?
-
-### Performance Gate (iOS Standards)
-- [ ] Fix maintains 60fps UI performance?
-- [ ] Memory usage impact assessed?
-- [ ] App launch time impact considered?
-
-### App Store Gate (Release Readiness)
-- [ ] Fix doesn't violate App Store guidelines?
-- [ ] Privacy manifest updated if data handling changes?
-- [ ] Accessibility maintained or improved?
-
-### Code Quality Gate
-- [ ] Fix follows 3-space indentation standard?
-- [ ] Uses ErrorKit for proper error handling?
-- [ ] Follows established architectural patterns?
+5. **Show Success Message**
+   ```
+   🐛 Bug captured: [BUG-###] [Title]
+   📁 Added to Context/Backlog/Bugs-Inbox.md
+   🔄 Run /ctxk:bckl:prioritize-bugs to triage and prioritize
+   ```
 
 ## Error Conditions
 
-### Critical Errors (Block Execution)
-- **ERROR "No bug description provided"**: User must provide basic bug information
-- **ERROR "Cannot determine reproduction steps"**: Must have some path to reproduce
-- **ERROR "Bug report incomplete"**: Critical sections missing or invalid
+- **"No description provided"** → Show usage: `/ctxk:bckl:add-bug "Bug description"`
+- **"Bugs-Inbox.md missing"** → Run `/ctxk:proj:init` to setup infrastructure
+- **"File write failed"** → Check permissions and disk space
 
-### Warning Conditions (Allow with Caution)
-- **WARN "Impact assessment incomplete"**: Impact unclear but bug can be filed
-- **WARN "Bug has unclear aspects"**: Some details missing but actionable
+## Source Extraction Patterns
 
-## Validation Checklist (Auto-executed)
-
-### Bug Report Completeness
-- [ ] Bug title is descriptive and searchable?
-- [ ] Impact assessment completed for user and technical severity?
-- [ ] Reproduction steps provided (even if incomplete)?
-- [ ] Expected vs actual behavior clearly described?
-- [ ] Environment information captured?
-
-### Constitutional Compliance
-- [ ] Accessibility impact assessed if UI-related?
-- [ ] Localization impact assessed if text-related?
-- [ ] Privacy impact assessed if data-related?
-- [ ] Performance impact estimated if performance-related?
-
-### Actionability Requirements
-- [ ] Bug is specific enough to investigate?
-- [ ] Effort estimation provides reasonable bounds?
-- [ ] Solution approach identified or investigatable?
-- [ ] Clear success criteria for verification?
-
-## File Generation Rules
-
-### Bug File Naming
-- **Format**: `BUG-YYYY-MM-DD-{sequential-id}-{kebab-case-title}.md`
-- **Example**: `BUG-2025-01-15-001-user-profile-crash.md`
-- **Location**: `Context/Backlog/Bugs/BUG-YYYY-MM-DD-{sequential-id}-{kebab-case-title}.md`
-
-### Inbox Integration
-**Add to Context/Backlog/Bugs-Inbox.md**:
-```markdown
-## [{{timestamp}}] {{bug_title}}
-- **Priority**: {{calculated_priority}}
-- **Impact**: {{impact_level}}
-- **Effort**: {{effort_estimate}}
-- **Status**: New
-- **File**: [BUG-{{file_id}}](./Bugs/{{bug_filename}})
-
-{{bug_summary}}
-```
-
-## AI Generation Guidelines
-
-When creating bug reports from user prompts:
-
-1. **Mark all ambiguities**: Use [NEEDS CLARIFICATION: specific question]
-2. **Don't speculate**: If user doesn't provide details, mark as unclear
-3. **Assess realistically**: Don't downplay impact or inflate effort estimates
-
-### Common Underspecified Areas
-- Device and iOS version information
-- Exact reproduction steps and timing
-- Data state and user configuration  
-- Performance benchmarks and targets
-- Integration points and dependencies
-
-### iOS-Specific Considerations
-- **Device Compatibility**: Different behavior across iPhone/iPad
-- **iOS Version Differences**: API availability and behavior changes  
-- **App States**: Foreground/background, memory pressure, network conditions
-- **Permissions**: Location, notifications, camera, etc.
-- **Accessibility**: VoiceOver, Dynamic Type, Reduce Motion
+Look for these patterns in description and extract as source:
+- "Customer reported login crashes" → Source: "Customer", Description: "Login crashes"
+- "QA found export button broken" → Source: "QA team", Description: "Export button broken"
+- "Jack mentioned dark mode issues" → Source: "Jack", Description: "Dark mode issues"
+- "Login crashes on iOS 18" → Source: "Me", Description: "Login crashes on iOS 18"
 
 ## Integration Points
 
-### With Other Commands
-- **`/Plan/create-spec`**: Convert high-priority bugs to feature specs
-- **`/Backlog/prioritize-backlog`**: Bulk triage and prioritization
-- **`/Implement/start-working`**: Pick up bugs from work queue
-
-### With Agents
-- **`check-accessibility`**: Validate accessibility-related bug fixes
-- **`check-localization`**: Validate i18n-related bug fixes
-- **`check-error-handling`**: Validate error handling improvements
-- **`build-project`**: Verify fixes don't break compilation
-
-### With Hooks
-- **PostToolUse**: Auto-format any code files edited during bug fix
-- **SessionStart**: Show critical bugs in status display
-
-## Success Metrics
-
-The add-bug template should achieve:
-- **100% actionability**: Every generated bug report is investigatable
-- **95% completeness**: Critical information captured in first pass
-- **Accurate impact assessment**: Priority matches actual user/business impact
-- **Constitutional compliance**: All fixes uphold architectural principles
-- **Effort accuracy**: Estimates within 50% of actual implementation time
-
----
-
-*This template follows ContextKit's spec-kit methodology with execution flows, validation gates, constitutional compliance, and systematic quality assurance for iOS/macOS development workflows.*
+- **Quick capture**: Minimal questions, fast entry
+- **Triage later**: `/ctxk:bckl:prioritize-bugs` handles all impact assessment
+- **Source tracking**: Basic attribution for follow-up
 
 ════════════════════════════════════════════════════════════════════════════════
 👩‍💻 DEVELOPER CUSTOMIZATIONS - EDITABLE SECTION
@@ -319,14 +87,10 @@ The add-bug template should achieve:
 This section is preserved during ContextKit migrations and updates.
 Add project-specific instructions, examples, and overrides below.
 
-## Project-Specific Instructions
+## Custom Source Patterns
 
-<!-- Add project-specific guidance here -->
+<!-- Add project-specific source extraction patterns -->
 
-## Additional Examples
+## Quick Capture Rules
 
-<!-- Add examples specific to your project here -->
-
-## Override Behaviors
-
-<!-- Document any project-specific overrides here -->
+<!-- Add project-specific rapid entry customizations -->
