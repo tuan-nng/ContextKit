@@ -9,7 +9,13 @@
 > Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
 ## Description
-Update ContextKit templates to latest versions while preserving user customizations
+Update ContextKit templates to latest versions while preserving user customizations.
+
+Updates both:
+- **Global project management commands** (proj/) in ~/.claude/commands/ctxk/proj/
+- **Local project templates** (plan/, impl/, bckl/, agents, scripts, etc.) in current project
+
+All updates preserve user customizations in "👩‍💻 DEVELOPER CUSTOMIZATIONS" sections.
 
 ## Reference
 
@@ -37,11 +43,27 @@ Update ContextKit templates to latest versions while preserving user customizati
    - Use Bash tool: cd ~/.ContextKit/ && git pull origin main --quiet
    - If pull fails: WARN "Could not check for updates (no internet)" and continue
 
-### Phase 2: Scan Project Templates
+### Phase 2: Update Global Proj Commands
 
-1. Define file mappings for all template types:
+1. **Update Global Project Management Commands**
+   - Check if ~/.claude/commands/ctxk/proj/ directory exists
+   - For each proj command file (init.md, init-workspace.md, migrate.md):
+     - Use Bash tool: sed -n '2p' file | grep "Template Version" to check versions
+     - Use Read tool to examine both global template and user's global command files
+     - If version different and file has customizations:
+       - Use Grep tool to find "👩‍💻 DEVELOPER CUSTOMIZATIONS" line number in both files
+       - Use Edit tool to merge: template content above + user content below separator
+       - If separator missing: Use Bash tool cp to replace entirely with warning
+     - If version different and file has no customizations: Use Bash tool cp to replace entirely
+     - Track results in UPDATED_GLOBAL_FILES
+
+### Phase 3: Scan Local Project Templates
+
+1. Define file mappings for local project templates (proj commands updated in Phase 2):
    - Templates/Guidelines/*.md → Context/Guidelines/
-   - Templates/Commands/**/*.md → .claude/commands/ctxk/
+   - Templates/Commands/plan/*.md → .claude/commands/ctxk/plan/
+   - Templates/Commands/impl/*.md → .claude/commands/ctxk/impl/
+   - Templates/Commands/bckl/*.md → .claude/commands/ctxk/bckl/
    - Templates/Agents/*.md → .claude/agents/ctxk/
    - Templates/Scripts/*.sh → Context/Scripts/ (team sharing, hooks via settings.json)
    - Templates/settings.json → .claude/settings.json (intelligent merge only)
@@ -52,9 +74,9 @@ Update ContextKit templates to latest versions while preserving user customizati
    - Use Read tool to examine project files if they exist
    - Compare versions and add to update list if versions differ or file missing
 
-### Phase 3: Update Files Preserving Customizations
+### Phase 4: Update Local Project Files Preserving Customizations
 
-#### Phase 3.1: Intelligent Settings.json Merge
+#### Phase 4.1: Intelligent Settings.json Merge
 
 1. Use Read tool to examine current .claude/settings.json
 2. Use Read tool to read ~/.ContextKit/Templates/settings.json for latest template
@@ -90,7 +112,7 @@ Update ContextKit templates to latest versions while preserving user customizati
    - Add to UPDATED_FILES if any changes made
    - Add to WARNINGS if merge had issues
 
-### Phase 3.2: Other Files
+#### Phase 4.2: Other Local Project Files
 
 1. For each file needing update:
    - If new file: Use Bash tool cp to copy directly to project location
@@ -107,11 +129,12 @@ Update ContextKit templates to latest versions while preserving user customizati
    - UPDATED_FILES: List of files merged with version info
    - WARNINGS: List of files skipped or issues encountered
 
-### Phase 4: Summary Report
+### Phase 5: Summary Report
 
 Display results organized by:
+- Global proj commands updated (count and version changes)
+- Local project files updated (count and version changes)
 - New files added (count and list)
-- Files updated (count and version changes)
 - Settings.json merge results (if applicable)
 - Warnings (count and descriptions)
 - Overall status (complete/no updates needed)
@@ -127,10 +150,12 @@ Display results organized by:
 ## Success Criteria
 
 - [ ] Global ContextKit repository updated (or warning issued)
-- [ ] All template files scanned for version differences
-- [ ] Files with version differences updated preserving customizations
-- [ ] New template files copied to project
-- [ ] Summary report shows updated/new files and warnings
+- [ ] Global proj commands updated preserving customizations
+- [ ] All local project template files scanned for version differences
+- [ ] Local workflow commands (plan/, impl/, bckl/) updated preserving customizations
+- [ ] Agents, scripts, guidelines, and backlog templates updated
+- [ ] Settings.json intelligently merged
+- [ ] Summary report shows both global and local updates with warnings
 
 ---
 

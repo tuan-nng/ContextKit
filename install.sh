@@ -118,43 +118,28 @@ install_global_commands() {
       fi
    fi
    
-   # Remove existing ContextKit commands directory if it exists (legacy cleanup)
-   local contextkit_commands_dir="$claude_commands_dir/ContextKit"
-   if [[ -d "$contextkit_commands_dir" ]]; then
-      if [[ "$contextkit_commands_dir" == *"ContextKit"* ]]; then
-         rm -rf "$contextkit_commands_dir"  # Safe: only removes ContextKit directories
-      fi
-   fi
-   
-   # Create ctxk commands directory and copy Commands contents
+   # Create ctxk commands directory and copy ONLY proj commands globally
    local commands_dir="$CONTEXTKIT_DIR/Templates/Commands"
    local ctxk_commands_dir="$claude_commands_dir/ctxk"
-   
-   if [[ ! -d "$commands_dir" ]]; then
-      print_error "Commands directory not found: $commands_dir"
+
+   if [[ ! -d "$commands_dir/proj" ]]; then
+      print_error "Proj commands directory not found: $commands_dir/proj"
       exit 1
    fi
-   
-   # Remove existing ctxk commands directory if it exists
-   if [[ -d "$ctxk_commands_dir" ]]; then
-      if [[ "$ctxk_commands_dir" == *"ctxk"* ]]; then
-         rm -rf "$ctxk_commands_dir"  # Safe: only removes ctxk directories
-      fi
-   fi
-   
-   # Create ctxk directory and copy contents
+
+   # Create ctxk directory structure
    if ! mkdir -p "$ctxk_commands_dir"; then
       print_error "Failed to create ctxk commands directory"
       exit 1
    fi
-   
-   if ! cp -R "$commands_dir"/* "$ctxk_commands_dir"/; then
-      print_error "Failed to copy commands contents"
+
+   if ! cp -R "$commands_dir/proj" "$ctxk_commands_dir"/; then
+      print_error "Failed to copy proj commands"
       exit 1
    fi
    
-   print_success "Global ContextKit commands installed"
-   print_info "Commands available in Claude Code"
+   print_success "Global ContextKit project management commands installed"
+   print_info "Project commands (/ctxk:proj:*) available in Claude Code globally"
 }
 
 ## Step 3: Display success message and next steps
@@ -172,7 +157,7 @@ display_completion() {
    print_status "$WHITE" "Next steps:"
    print_info "1. Navigate to your project directory"
    print_info "2. Run 'claude' to start Claude Code "
-   print_info "3. Run '/ctxk:proj:init' to initialize ContextKit in your project"
+   print_info "3. Run '/ctxk:proj:init' to initialize ContextKit workflow commands in your project"
    echo
    print_status "$GREEN" "🚀 Ready for intelligent development workflows!"
    echo

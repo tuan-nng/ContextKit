@@ -57,12 +57,15 @@ Initialize current project with ContextKit development workflow system. Sets up 
    mkdir -p .claude/commands/ctxk .claude/agents/ctxk Context/Features Context/Backlog Context/Scripts
    ```
 
-6. **Copy Command Templates**
+6. **Copy Workflow Command Templates (Local Only)**
    ```bash
-   cp -r ~/.ContextKit/Templates/Commands/* .claude/commands/ctxk/
-   echo "✅ Copied command templates (proj/, plan/, impl/, bckl/)"
+   cp -r ~/.ContextKit/Templates/Commands/plan .claude/commands/ctxk/
+   cp -r ~/.ContextKit/Templates/Commands/impl .claude/commands/ctxk/
+   cp -r ~/.ContextKit/Templates/Commands/bckl .claude/commands/ctxk/
+   echo "✅ Copied workflow command templates (plan/, impl/, bckl/)"
+   echo "ℹ️ Project commands (proj/) remain global and auto-update"
    ```
-   > **Note**: `/*` means copy ALL files and directories from Commands/, not execute with literal asterisk
+   > **Note**: Only workflow commands are copied locally. Project management commands (proj/) stay global for auto-updates.
 
 7. **Copy Agent Templates**
    ```bash
@@ -259,7 +262,8 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 23. **Verify Installation**
     - Use `Read` tool to confirm `Context.md` exists and contains project-specific content
-    - Use `Glob` tool to verify `.claude/commands/ctxk/plan/1-spec.md` exists
+    - Use `Glob` tool to verify workflow commands exist: `.claude/commands/ctxk/plan/1-spec.md`, `.claude/commands/ctxk/impl/start-working.md`, `.claude/commands/ctxk/bckl/add-idea.md`
+    - Use `Bash` tool to verify global proj commands accessible: `ls ~/.claude/commands/ctxk/proj/init.md`
     - Use `Bash` tool to check `Context/Scripts/AutoFormat.sh` is executable: `ls -la Context/Scripts/AutoFormat.sh`
     - Use `Glob` tool to validate at least 3 agent files exist in `.claude/agents/ctxk/`: `Glob .claude/agents/ctxk *`
     - Use `Bash` tool to verify status line configured with plan: `grep "CustomStatusline.sh --plan" .claude/settings.json`
@@ -296,7 +300,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
    ✓ Context/Backlog/ - Ideas and bugs with evaluation frameworks
    ✓ Context/Guidelines/ - Development standards and constitutional principles
    ✓ Context/Scripts/ - Code formatting and status automation
-   ✓ .claude/commands/ctxk/ - Development workflow commands
+   ✓ .claude/commands/ctxk/ - Workflow commands (plan/, impl/, bckl/) - global proj/ commands remain global
    ✓ .claude/agents/ctxk/ - Quality assurance specialists
    ✓ .claude/settings.json - ContextKit permissions, hooks, and model configuration
    ✓ Status line configured - 5h-usage tracking with colored progress bars

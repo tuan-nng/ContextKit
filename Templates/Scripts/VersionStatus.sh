@@ -54,7 +54,7 @@ update_global_contextkit() {
 
         if [ "$old_version" != "$new_version" ] && [ "$new_version" != "unknown" ]; then
             echo "  🎉 ContextKit updated: v$old_version → v$new_version"
-            echo "     💡 Update your project: /ctxk:proj:migrate"
+            echo "     💡 Update your project templates: /ctxk:proj:migrate"
             return 0
         else
             echo "  ✅ ContextKit: Up to date (v$new_version)"
@@ -129,18 +129,28 @@ check_template_updates() {
 
     local updates_needed=0
 
-    # File mappings from migrate command
-    local mappings=(
-        "Guidelines:Context/Guidelines:$CONTEXTKIT_DIR/Templates/Guidelines"
-        "Commands:.claude/commands/ctxk:$CONTEXTKIT_DIR/Templates/Commands"
-        "Agents:.claude/agents/ctxk:$CONTEXTKIT_DIR/Templates/Agents"
-        "Scripts:Context/Scripts:$CONTEXTKIT_DIR/Templates/Scripts"
+    # Check local project template versions (proj commands are global and auto-updated)
+    local project_dirs=(
+        "Context/Guidelines"
+        ".claude/commands/ctxk/plan"
+        ".claude/commands/ctxk/impl"
+        ".claude/commands/ctxk/bckl"
+        ".claude/agents/ctxk"
+        "Context/Scripts"
     )
 
-    for mapping in "${mappings[@]}"; do
-        local name=$(echo "$mapping" | cut -d: -f1)
-        local local_dir=$(echo "$mapping" | cut -d: -f2)
-        local source_dir=$(echo "$mapping" | cut -d: -f3)
+    local source_dirs=(
+        "$CONTEXTKIT_DIR/Templates/Guidelines"
+        "$CONTEXTKIT_DIR/Templates/Commands/plan"
+        "$CONTEXTKIT_DIR/Templates/Commands/impl"
+        "$CONTEXTKIT_DIR/Templates/Commands/bckl"
+        "$CONTEXTKIT_DIR/Templates/Agents"
+        "$CONTEXTKIT_DIR/Templates/Scripts"
+    )
+
+    for i in "${!project_dirs[@]}"; do
+        local local_dir="${project_dirs[i]}"
+        local source_dir="${source_dirs[i]}"
 
         if [ -d "$local_dir" ] && [ -d "$source_dir" ]; then
             local outdated=$(count_outdated_templates "$local_dir" "$source_dir")
@@ -149,8 +159,8 @@ check_template_updates() {
     done
 
     if [ "$updates_needed" -gt 0 ]; then
-        echo "  ⚠️  Template updates available: $updates_needed files"
-        echo "     💡 Update: /ctxk:proj:migrate when ready"
+        echo "  ⚠️  Project template updates available: $updates_needed files"
+        echo "     💡 Run: /ctxk:proj:migrate"
         return 1
     fi
     return 0
@@ -161,13 +171,19 @@ count_outdated_templates() {
     local source_dir="$2"
     local count=0
 
-    # Find all template files and compare versions
-    find "$local_dir" -name "*.md" -o -name "*.sh" 2>/dev/null | while read -r local_file; do
+    if [ ! -d "$local_dir" ] || [ ! -d "$source_dir" ]; then
+        echo "0"
+        return
+    fi
+
+    # Compare template versions for all .md and .sh files
+    for local_file in "$local_dir"/*.{md,sh} "$local_dir"/**/*.{md,sh} 2>/dev/null; do
+        [ -f "$local_file" ] || continue
+
         local rel_path="${local_file#$local_dir/}"
         local source_file="$source_dir/$rel_path"
 
         if [ -f "$source_file" ]; then
-            # Extract template versions from line 2
             local local_version=$(sed -n '2p' "$local_file" 2>/dev/null | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*" || echo "0")
             local source_version=$(sed -n '2p' "$source_file" 2>/dev/null | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*" || echo "0")
 
@@ -175,7 +191,7 @@ count_outdated_templates() {
                 count=$((count + 1))
             fi
         fi
-    done 2>/dev/null
+    done
 
     echo "$count"
 }
