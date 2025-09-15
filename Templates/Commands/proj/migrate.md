@@ -62,8 +62,10 @@ Update ContextKit templates to latest versions while preserving user customizati
 3. StatusLine Configuration:
    - If user has statusLine setting with path containing "CustomStatusline.sh":
      - Check if path is correct (should be "./Context/Scripts/CustomStatusline.sh")
+     - Check if command includes plan parameter (should have "--plan Pro|Max5|Max20")
+     - If missing plan parameter: Ask user for their Claude plan and update command
      - If path incorrect: Update path to correct location using Edit tool
-     - If path correct: No change needed
+     - If both correct: No change needed
    - If user has no statusLine setting or different script: Skip (user opted out)
 
 4. Model Setting:

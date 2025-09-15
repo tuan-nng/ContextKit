@@ -114,7 +114,15 @@ Initialize current project with ContextKit development workflow system. Sets up 
 14. **Configure Status Line**
     - Check current statusLine configuration in settings.json
     - If missing or different from "./Context/Scripts/CustomStatusline.sh", ask user: "Current statusline: [current/none]. Set to ContextKit statusline? Provides real-time monitoring: '5h-Usage: 73% (1.4h left) | Chat: ▓▓▓▓▓▓░░░░ 64% (128k/200k)' with colored progress bars (Light Gray <50%, Yellow 50-80%, Red >80%) for context awareness. (recommended Y/N)"
-    - If user agrees or no current setting: Use `Edit` tool to set complete statusLine configuration from template
+    - If user agrees or no current setting:
+      - Ask user: "What Claude plan do you have?"
+        1. Pro ($20/month)
+        2. Max 5x ($100/month)
+        3. Max 20x ($200/month)
+      - Based on selection, set statusLine configuration with correct plan parameter:
+        - Pro: `"command": "./Context/Scripts/CustomStatusline.sh --plan Pro"`
+        - Max 5x: `"command": "./Context/Scripts/CustomStatusline.sh --plan Max5"`
+        - Max 20x: `"command": "./Context/Scripts/CustomStatusline.sh --plan Max20"`
 
 15. **Merge Permissions**
     - If no existing permissions: Use `Edit` tool to set complete permissions from template
@@ -254,7 +262,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
     - Use `Glob` tool to verify `.claude/commands/ctxk/plan/1-spec.md` exists
     - Use `Bash` tool to check `Context/Scripts/AutoFormat.sh` is executable: `ls -la Context/Scripts/AutoFormat.sh`
     - Use `Glob` tool to validate at least 3 agent files exist in `.claude/agents/ctxk/`: `Glob .claude/agents/ctxk *`
-    - Use `Bash` tool to verify status line configured: `grep "CustomStatusline.sh" .claude/settings.json`
+    - Use `Bash` tool to verify status line configured with plan: `grep "CustomStatusline.sh --plan" .claude/settings.json`
     - Use `Read` tool to confirm `.claude/settings.json` contains ContextKit configuration
 
 24. **Update Workspace Context (if applicable)**
@@ -337,7 +345,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
 - Agent templates copied to .claude/agents/ctxk/?
 - Script templates copied to Context/Scripts/?
 - Backlog templates copied to Context/Backlog/?
-- Status line configured to use local CustomStatusline.sh script?
+- Status line configured to use local CustomStatusline.sh script with plan parameter?
 - Claude Code settings.json configured with ContextKit preferences?
 
 **Deep Project Investigation Validation:**

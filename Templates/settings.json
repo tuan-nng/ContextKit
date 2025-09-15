@@ -94,7 +94,7 @@
   "model": "sonnet",
   "statusLine": {
     "type": "command",
-    "command": "~/.claude/CustomStatusline.sh",
+    "command": "./Context/Scripts/CustomStatusline.sh --plan Max5",
     "padding": 5
   },
   "hooks": {
