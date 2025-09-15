@@ -128,38 +128,128 @@ Initialize current project with ContextKit development workflow system. Sets up 
     - If no existing hooks: Use `Edit` tool to set complete hooks configuration from template
     - If existing hooks: Preserve existing hooks, add ContextKit hooks alongside them
 
-### Phase 3: Context Integration & Project Investigation
+### Phase 3: Deep Project Investigation & Build Validation
 
-17. **Discover Workspace Context**
+17. **Discover Project Components & Repositories**
+    - Use `Bash` command to find ALL git repositories within project: `find . -name ".git" -type d`
+    - For each .git directory found, identify the repository root and purpose
+    - Use `Read` tool to examine `.gitmodules` files to understand submodule structure
+    - Create hierarchical map of all components/repositories within this project
+    - **CRITICAL**: Every single component must be analyzed individually for development commands
+
+18. **Deep Component Analysis for Each Repository/Component**
+    For EVERY component found, perform comprehensive analysis:
+
+    **A. Component Identity & Purpose Analysis**
+    - Use `Read` tool on README.md, README.txt, or similar files to understand component purpose
+    - Use `Bash` to check component type: app, server, package, documentation, tool, etc.
+    - Use `Bash` to check git remote origins to understand component relationships
+    - Determine component role within the larger project
+
+    **B. Build System Detection & Command Discovery**
+    - **Swift Projects**:
+      - Use `Glob` for Package.swift, *.xcodeproj, *.xcworkspace files
+      - For Xcode projects: Use `Bash` to list available schemes: `xcodebuild -list -project *.xcodeproj` or `xcodebuild -list -workspace *.xcworkspace`
+      - For Package.swift: Use `Read` to detect executable products and dependencies
+      - Detect if it's Vapor server: `Grep "import Vapor" --glob "*.swift"`
+      - Detect if it's DocC documentation: `Glob` for *.docc folders
+    - **JavaScript/Node Projects**:
+      - Use `Glob` for package.json, yarn.lock, npm-shrinkwrap.json
+      - Use `Read` on package.json to detect build scripts and dependencies
+    - **Python Projects**:
+      - Use `Glob` for requirements.txt, pyproject.toml, setup.py, Pipfile
+      - Use `Read` to detect build and test configurations
+
+    **C. Build Command Discovery & Validation**
+    - **For Xcode Projects**: Construct and test build commands:
+      ```bash
+      # Test build command with 10-second timeout
+      timeout 10s xcodebuild -project [ProjectName].xcodeproj -scheme [MainScheme] -destination 'platform=iOS Simulator,name=iPhone 17' build
+      ```
+      - Try multiple destinations if first fails: macOS, iOS Simulator, etc.
+      - Document the working command format
+    - **For Swift Packages**: Test `swift build` with timeout
+    - **For Node Projects**: Test `npm run build` or detected build script with timeout
+    - **For Python Projects**: Test detected build command with timeout
+    - **IMPORTANT**: Document exact working commands, not generic templates
+
+    **D. Test Command Discovery & Validation**
+    - **For Xcode Projects**: Construct and test test commands:
+      ```bash
+      # Test command with 10-second timeout
+      timeout 10s xcodebuild -project [ProjectName].xcodeproj -scheme [MainScheme] -destination 'platform=iOS Simulator,name=iPhone 17' test
+      ```
+    - **For Swift Packages**: Test `swift test` with timeout
+    - **For Node Projects**: Test `npm test` or detected test script with timeout
+    - **For Python Projects**: Test `pytest`, `python -m unittest`, or detected test command
+    - **IMPORTANT**: Document exact working commands, verify test targets exist
+
+    **E. Dependency & Version Analysis**
+    - For Swift: Parse Package.swift dependencies and version constraints
+    - For Node: Parse package.json dependencies and versions
+    - For Python: Parse requirements.txt or pyproject.toml dependencies
+    - Document critical dependencies and version requirements
+    - Note any local/workspace dependencies between components
+
+    **F. File Structure Mapping**
+    - Use `Bash` to map key directory structure: `find . -type d -name "Sources" -o -name "Tests" -o -name "src" -o -name "test" -o -name "docs" | head -20`
+    - Document source directories, test directories, resource folders
+    - Note configuration files, documentation directories
+
+    **G. Code Style Detection**
+    ONLY report what is ACTUALLY FOUND, never guess or assume:
+    - Use `Read` on formatter config files: .swift-format, .swiftformat, .prettierrc, .eslintrc
+    - Use `Bash` to detect actual indentation in source files: `head -10 Sources/**/*.swift | sed 's/\t/<TAB>/g'` (for Swift)
+    - Use `Read` on .editorconfig files if present
+    - Check for consistent patterns across source files in component
+
+### Phase 4: Context Integration & Workspace Discovery
+
+19. **Discover Workspace Context**
     - Use `Bash` tool to traverse parent directories: `cd .. && pwd` then check for Context.md
     - Continue checking parent directories until reaching root `/` or finding workspace Context.md
     - If workspace Context.md found: note the workspace name and inheritance rules
     - If multiple workspace contexts found in path: ask user which to inherit from
 
-18. **Handle Existing CLAUDE.md**
-    - If `CLAUDE.md` exists: append `@Context.md` reference if not already present using `Edit` tool
-    - If no `CLAUDE.md`: create minimal one with `@Context.md` reference using `Write` tool
-    - Include workspace context reference if discovered
+20. **Create/Update CLAUDE.md with Context References**
+    - Check if `CLAUDE.md` exists using `Read` tool
+    - If `CLAUDE.md` exists:
+      - Use `Read` to check current content
+      - Use `Edit` to ensure `@Context.md` reference is present
+      - If workspace Context.md discovered: ensure workspace reference is present (e.g., `@../Context.md`)
+    - If no `CLAUDE.md`: Use `Write` tool to create new one with:
+      ```markdown
+      # Project Development Context
 
-19. **Copy Project-Specific Formatters** (should be done before Context.md investigation)
-    - For Swift projects (swift-package, ios-app, vapor-server):
+      @Context.md
+      [If workspace discovered: @../Context.md]
+      ```
+    - **CRITICAL**: Ensure both project Context.md AND workspace Context.md (if found) are referenced
+
+21. **Copy Project-Specific Formatters** (for Swift projects only)
+    - For Swift projects detected during investigation:
       ```bash
       cp ~/.ContextKit/Templates/Formatters/.swift-format .
       cp ~/.ContextKit/Templates/Formatters/.swiftformat .
       echo "✅ Copied Swift formatter configurations"
       ```
 
-20. **Execute Context.md Template Instructions**
+22. **Execute Context.md Template Instructions**
     - Use `Read` tool to read the copied `Context.md` file
     - Follow the **system instructions** section (boxed area) step by step
-    - The template contains project detection logic (Package.swift → swift-package, etc.)
-    - Systematically investigate project structure, dependencies, architecture
-    - Generate proper Context.md content based on findings using `Edit` tool
+    - **CRITICAL**: Use the comprehensive findings from Phase 3 investigation:
+      - Component hierarchy and relationships discovered
+      - Validated build commands for each component
+      - Validated test commands for each component
+      - Actual dependencies and versions found
+      - File structure mappings created
+      - Code style patterns detected from actual files
+    - Generate Context.md content based on ACTUAL FINDINGS, not assumptions
     - **At completion**: Use `Edit` tool to remove the system instructions section entirely
 
-### Phase 4: Verification & Completion
+### Phase 5: Verification & Completion
 
-21. **Verify Installation**
+23. **Verify Installation**
     - Use `Read` tool to confirm `Context.md` exists and contains project-specific content
     - Use `Glob` tool to verify `.claude/commands/ctxk/plan/1-spec.md` exists
     - Use `Bash` tool to check `Context/Scripts/AutoFormat.sh` is executable: `ls -la Context/Scripts/AutoFormat.sh`
@@ -167,26 +257,33 @@ Initialize current project with ContextKit development workflow system. Sets up 
     - Use `Bash` tool to verify status line configured: `grep "CustomStatusline.sh" .claude/settings.json`
     - Use `Read` tool to confirm `.claude/settings.json` contains ContextKit configuration
 
-22. **Update Workspace Context (if applicable)**
-    - If workspace Context.md was discovered in step 17:
+24. **Update Workspace Context (if applicable)**
+    - If workspace Context.md was discovered in step 19:
       - Use `Read` tool to read the workspace Context.md file
-      - Look for current project name in the "Discovered Projects" or "Project Inventory" section
+      - Look for current project name in the "Repository Structure" or "Project Inventory" section
       - If project is listed with status "not setup yet":
         - Use `Edit` tool to change status from "not setup yet" to "ContextKit-enabled"
-        - Update the setup status count (e.g., "2 of 5 projects have ContextKit enabled" → "3 of 5 projects have ContextKit enabled")
-      - If project not listed in workspace: Use `Edit` tool to add project to the discovered projects list with "ContextKit-enabled" status
+        - Update the setup status count (e.g., "2 of 21 projects have ContextKit enabled" → "3 of 21 projects have ContextKit enabled")
+      - If project not listed in workspace: Use `Edit` tool to add project to the repository structure with "ContextKit-enabled" status and detected component details
 
-23. **Display Completion**
+25. **Display Completion**
     - Display success message using template below
-    - Suggest next steps based on project state (new vs existing project)
+    - Include summary of components discovered and validated
+    - Suggest next steps based on project analysis findings
 
 ## Success Message Template
 
 ```
 🎉 ContextKit initialization complete!
 
+📊 Project Analysis Results:
+   • [X] components/repositories discovered and analyzed
+   • [Y] validated build commands documented
+   • [Z] validated test commands documented
+   • [W] dependencies analyzed across components
+
 📁 Project configured with:
-   ✓ Context.md - Project configuration and development context
+   ✓ Context.md - Comprehensive project analysis with validated build/test commands
    ✓ Context/Features/ - Systematic feature development
    ✓ Context/Backlog/ - Ideas and bugs with evaluation frameworks
    ✓ Context/Guidelines/ - Development standards and constitutional principles
@@ -203,13 +300,16 @@ Initialize current project with ContextKit development workflow system. Sets up 
    Auto-compact triggers at ~85% context, often interrupting when you're nearly finished.
    Better workflow: Start fresh chats when needed and resume with /ctxk:impl:start-working.
 
-[NEW PROJECT DETECTED]:
-   🎯 Begin with: /ctxk:plan:1-spec
+🎯 **Next Steps**:
+   • **Recommended**: Start a fresh Claude session for optimal context
+   • All build/test commands are documented and validated in Context.md
+   • Begin your first feature with: /ctxk:plan:1-spec
+   • The systematic workflow: plan → implement → iterate
 
-[EXISTING PROJECT DETECTED]:
-   🎯 Begin with: /ctxk:plan:1-spec
-
-💡 Available commands: /ctxk:plan:*, /ctxk:impl:*, /ctxk:bckl:*
+💡 **Available Commands**:
+   • Feature Planning: /ctxk:plan:1-spec → /ctxk:plan:2-tech → /ctxk:plan:3-steps
+   • Development: /ctxk:impl:start-working
+   • Backlog: /ctxk:bckl:add-idea, /ctxk:bckl:add-bug
 ```
 
 ## Error Conditions
@@ -240,10 +340,22 @@ Initialize current project with ContextKit development workflow system. Sets up 
 - Status line configured to use local CustomStatusline.sh script?
 - Claude Code settings.json configured with ContextKit preferences?
 
+**Deep Project Investigation Validation:**
+- All project components/repositories discovered recursively?
+- Each component analyzed for purpose, tech stack, and build system?
+- Build commands discovered and validated with timeout for each component?
+- Test commands discovered and validated with timeout for each component?
+- Dependencies analyzed and documented for each component?
+- File structure mapped for each component?
+- Code style patterns detected from actual source files?
+- Component hierarchy and relationships documented?
+
 **Context Integration Validation:**
 - Workspace context discovered and integrated?
-- CLAUDE.md properly references Context.md?
-- Project Context.md generated with project-specific content?
+- CLAUDE.md exists and references both project Context.md AND workspace Context.md (if found)?
+- Project Context.md generated with comprehensive component analysis?
+- All findings based on actual investigation, not assumptions?
+- Validated build/test commands documented for each component?
 - Project-specific formatters copied (if applicable)?
 
 **Final Verification:**
