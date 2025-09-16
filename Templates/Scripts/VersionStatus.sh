@@ -1,5 +1,5 @@
 #!/bin/bash
-# Template Version: 5 | ContextKit: 0.0.0 | Updated: 2025-09-16
+# Template Version: 6 | ContextKit: 0.0.0 | Updated: 2025-09-16
 
 # version-status.sh - ContextKit version management and project status
 # Called by SessionStart hook when Claude Code starts a new session
@@ -188,7 +188,7 @@ count_outdated_templates() {
         return
     fi
 
-    # Compare template versions for all .md and .sh files
+    # Compare template versions for existing files
     for local_file in "$local_dir"/*.md "$local_dir"/*.sh; do
         [ -f "$local_file" ] || continue
 
@@ -205,11 +205,21 @@ count_outdated_templates() {
                     echo "OUTDATED:$source_file:$local_file" >&2
                 fi
             fi
-        else
-            # New file in template
-            local target_file="$local_dir/$rel_path"
+        fi
+    done
+
+    # Check for new files in source directory (files that don't exist locally yet)
+    for source_file in "$source_dir"/*.md "$source_dir"/*.sh; do
+        [ -f "$source_file" ] || continue
+
+        local rel_path="${source_file#$source_dir/}"
+        local local_file="$local_dir/$rel_path"
+
+        if [ ! -f "$local_file" ]; then
+            # New file that doesn't exist in local directory
+            count=$((count + 1))
             if [ "$VERBOSE_MODE" = true ]; then
-                echo "NEW:$source_file:$target_file" >&2
+                echo "NEW:$source_file:$local_file" >&2
             fi
         fi
     done
