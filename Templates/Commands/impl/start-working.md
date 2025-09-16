@@ -1,5 +1,5 @@
 # Begin Development with Context
-<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14 -->
+<!-- Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -43,8 +43,8 @@ Begin systematic development with context-aware setup, task analysis, and guided
    git branch --show-current || echo "⚠️ Not in git repository or no current branch"
    ```
    - If branch format is `feature/[kebab-case-name]`:
-     - Convert kebab-case to PascalCase (e.g., `feature/custom-model-selection` → `CustomModelSelection`)
-     - Set FEATURE_NAME variable for subsequent steps
+     - Extract kebab-case name from branch (e.g., `feature/visionos26-modernization` → `visionos26-modernization`)
+     - Set FEATURE_KEBAB variable for directory matching
    - If not on feature branch:
      ```
      ⚠️ Not on a feature branch!
@@ -61,7 +61,21 @@ Begin systematic development with context-aware setup, task analysis, and guided
      - If "y": Ask user to specify feature name manually
 
 3. **Validate Feature Planning Completion**
-   - Use `Glob` tool to find numbered feature directory: `Glob Context/Features/???-[FEATURE_NAME]`
+   - Use `Bash` tool to find numbered feature directory with flexible matching:
+     ```bash
+     # Try exact kebab-case match first
+     FEATURE_DIR=$(ls -d Context/Features/*/ | grep -i "[FEATURE_KEBAB]" | head -1)
+     # If no match, try word-based matching (split on hyphens, match key words)
+     if [[ -z "$FEATURE_DIR" ]]; then
+       KEYWORDS=$(echo "[FEATURE_KEBAB]" | sed 's/-/ /g')
+       for KEYWORD in $KEYWORDS; do
+         FEATURE_DIR=$(ls -d Context/Features/*/ | grep -i "$KEYWORD" | head -1)
+         if [[ -n "$FEATURE_DIR" ]]; then break; fi
+       done
+     fi
+     ```
+   - Expected format: `Context/Features/###-FeatureName/` (e.g., `001-VisionOS26Modernization/`)
+   - Handles variations between kebab-case branch names and PascalCase directory names
    - Use `Read` tool to check each required file exists and has content:
      ```bash
      ls -la [numbered-feature-directory]/Spec.md && echo "✅ Spec.md exists"
@@ -114,52 +128,128 @@ Begin systematic development with context-aware setup, task analysis, and guided
      - If "y": Continue with warning
 
 
-### Phase 3: Task Analysis & Selection
+### Phase 3: Task Analysis & Sequential Execution
 
-6. **Load Implementation Plan**
-   - Use `Read` tool to read Steps.md: `Read [numbered-feature-directory]/Steps.md`
-   - Parse task list for pending items (unchecked boxes)
-   - Extract S001-S999 numbered tasks with [P] parallel markers
-   - Identify dependencies and logical execution order
-
-7. **Select Next Task**
-   - If multiple pending tasks available:
+6. **Load Complete Feature Context**
+   - Use `Read` tool to read all planning files for full context:
      ```
-     ═══════════════════════════════════════════════════
-     ║ ❓ TASK SELECTION REQUIRED
-     ═══════════════════════════════════════════════════
-     ║
-     ║ Multiple tasks available for implementation:
-     ║ [List 3-5 next available tasks with S### numbers]
-     ║
-     ║ Which task would you like to work on?
-     ║ Enter task number (e.g., S001) or 'auto' for first available:
+     Read [numbered-feature-directory]/Spec.md     # Business requirements and user stories
+     Read [numbered-feature-directory]/Tech.md     # Technical architecture and decisions
+     Read [numbered-feature-directory]/Steps.md    # Implementation task breakdown
      ```
-     - Wait for user input
-     - Validate task selection for context
-   - If only one available: Auto-select and continue
-   - If no pending tasks: Display completion status and next steps
+   - Extract key information:
+     - **From Spec.md**: Feature purpose, user stories, acceptance criteria
+     - **From Tech.md**: Architecture decisions, technology choices, constraints
+     - **From Steps.md**: Task list, dependencies, S001-S999 numbered tasks with [P] parallel markers
+   - Parse task completion status (checked/unchecked boxes)
 
-8. **Load Task Context**
-   - Extract task details: file paths, acceptance criteria, dependencies
-   - Use `Read` tool to examine target files if they exist
-   - Identify constitutional principles relevant to task type (UI, models, services, etc.)
+7. **Determine Next Sequential Task**
+   - Find the **first uncompleted task** in S001, S002, S003... sequence
+   - Do NOT skip tasks based on complexity or manual requirements
+   - Check dependencies are satisfied:
+     - Extract "Dependencies: S001, S002" from task description
+     - Verify all dependency tasks are completed (checked boxes)
+     - If dependencies not met: Display which tasks need completion first
+   - **CRITICAL**: Follow the planned sequence, don't auto-select "easier" tasks
+   - If no valid next task: Display completion status and next steps
 
-### Phase 4: Development Initiation
+8. **Handle Task Execution Based on Type**
 
-9. **Display Development Guidance**
-    - Show current task description and acceptance criteria
-    - Display relevant file paths and expected changes
-    - Reference appropriate guidelines based on project type:
-      - iOS/macOS App projects → `Context/Guidelines/Swift.md` and `Context/Guidelines/SwiftUI.md`
-      - Swift Package projects → `Context/Guidelines/Swift.md`
+   **For MANUAL REQUIRED Tasks** (marked with ⚠️ MANUAL REQUIRED):
+   ```
+   ═══════════════════════════════════════════════════
+   ║ 👤 MANUAL TASK REQUIRED - [TaskNumber]
+   ═══════════════════════════════════════════════════
+   ║
+   ║ 📋 TASK: [TaskDescription]
+   ║ 📂 Files: [file_paths]
+   ║ 🛠️ Manual steps required:
+   ║ [Extract manual instructions from task notes]
+   ║
+   ║ 📝 CONTEXT:
+   ║ • Feature: [brief_spec_summary]
+   ║ • Why needed: [brief_reason_from_tech_context]
+   ║ • Current progress: [completed_tasks]/[total_tasks] tasks done
+   ║
+   ║ Please complete this manual task, then return here.
+   ║
+   ║ Options:
+   ║ ✅ 'done' - I completed the manual task
+   ║ ⏭️  'skip' - Skip this task for now (breaks sequence)
+   ║ ❓ 'help' - Show detailed instructions
+   ║ 🔙 'back' - Return to task selection
+   ║
+   ║ Status:
+   ```
+   - Wait for user response
+   - If "done": Mark task as completed in Steps.md, continue to next task
+   - If "skip": Ask for confirmation, mark with 🚧 SKIPPED marker, continue
+   - If "help": Display full manual instructions, return to status prompt
+   - If "back": Return to task analysis phase
 
-10. **Initialize Task Execution**
-    - Display constitutional reminders for current task type
-    - Provide starting guidance based on project patterns
-    - Begin implementation work
+   **For AUTOMATED Tasks** (no manual markers):
+   ```
+   ═══════════════════════════════════════════════════
+   ║ 🚀 AUTOMATED TASK - [TaskNumber]
+   ═══════════════════════════════════════════════════
+   ║
+   ║ 📋 TASK: [TaskDescription]
+   ║ 📂 Files to modify: [file_paths]
+   ║ 🎯 Acceptance criteria: [criteria_summary]
+   ║
+   ║ 📝 CONTEXT SUMMARY:
+   ║ • Feature: [brief_spec_summary]
+   ║ • Architecture: [brief_tech_summary]
+   ║ • Current progress: [completed_tasks]/[total_tasks] tasks done
+   ║
+   ║ 🔧 IMPLEMENTATION APPROACH:
+   ║ [Brief description of what will be implemented]
+   ║
+   ║ Ready to implement automatically? (Y/n):
+   ```
+   - Wait for user confirmation
+   - If "n": Ask for alternative approach or skip
+   - If "Y": Continue to automated implementation
 
-11. **Quality Assurance Integration with Targeted Context**
+### Phase 4: Task Execution & Progress Tracking
+
+9. **Execute Task Implementation**
+   - **For Manual Tasks**: User delegation complete, mark as done
+   - **For Automated Tasks**: Proceed with implementation:
+     - Extract detailed task information: file paths, acceptance criteria, dependencies
+     - Use `Read` tool to examine target files if they exist
+     - Identify constitutional principles relevant to task type (UI, models, services, etc.)
+     - Show current task description and acceptance criteria
+     - Display relevant file paths and expected changes
+     - Reference appropriate guidelines based on project type:
+       - iOS/macOS App projects → `Context/Guidelines/Swift.md` and `Context/Guidelines/SwiftUI.md`
+       - Swift Package projects → `Context/Guidelines/Swift.md`
+     - Display constitutional reminders for current task type
+     - Provide starting guidance based on project patterns
+     - Begin implementation work
+
+10. **Update Progress Tracking**
+    - Mark completed task as checked in Steps.md: `- [x] **S001**...`
+    - Add completion timestamp in task notes if desired
+    - Save progress to maintain state
+
+11. **Continue Sequential Execution**
+    - After task completion, automatically check for next sequential task
+    - **Do not exit** - continue with next task in sequence
+    - Display progress update:
+    ```
+    ✅ Task [TaskNumber] completed successfully!
+
+    📊 Progress: [completed_tasks+1]/[total_tasks] tasks done
+    🔄 Checking next sequential task...
+    ```
+    - Return to Phase 3, Step 7 to determine next task
+    - **Only exit when**:
+      - All tasks completed
+      - Dependency blocking (cannot proceed)
+      - User explicitly requests to stop
+
+12. **Quality Assurance Integration with Targeted Context**
     - **After completing any step or significant changes**: Run systematic quality validation with targeted file analysis
     - **Context Passing**: Provide recently modified files and line ranges to focus agent analysis
 
@@ -241,6 +331,7 @@ Begin systematic development with context-aware setup, task analysis, and guided
 - Quality assurance hooks enabled?
 - Relevant guidelines referenced for task type?
 - Development guidance displayed and ready to proceed?
+- User confirmation received for selected task and approach?
 
 ## Integration Points
 
