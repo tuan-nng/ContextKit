@@ -1,5 +1,5 @@
 #!/bin/bash
-# Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14
+# Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16
 
 # auto-format.sh - Auto-format edited files
 # Called by PostToolUse hook after Claude Code edits files
@@ -14,30 +14,7 @@
 
 set -e
 
-# Extract file path from Claude Code hook JSON input
-FILE_PATH=$(jq -r '.tool_input.file_path' 2>/dev/null)
-
-# Exit early if no file path or jq failed
-if [ -z "$FILE_PATH" ] || [ "$FILE_PATH" = "null" ]; then
-    exit 0
-fi
-
-# Skip if file doesn't exist (might have been deleted)
-if [ ! -f "$FILE_PATH" ]; then
-    exit 0
-fi
-
-# Only format Swift files
-case "$FILE_PATH" in
-    *.swift)
-        format_swift_file "$FILE_PATH"
-        ;;
-    *)
-        # Skip non-Swift files silently
-        exit 0
-        ;;
-esac
-
+# Define function BEFORE it's called
 format_swift_file() {
     local file="$1"
 
@@ -67,3 +44,27 @@ format_swift_file() {
         echo "  ⚠️  swift-format not found - install Xcode Command Line Tools with: xcode-select --install"
     fi
 }
+
+# Extract file path from Claude Code hook JSON input
+FILE_PATH=$(jq -r '.tool_input.file_path' 2>/dev/null)
+
+# Exit early if no file path or jq failed
+if [ -z "$FILE_PATH" ] || [ "$FILE_PATH" = "null" ]; then
+    exit 0
+fi
+
+# Skip if file doesn't exist (might have been deleted)
+if [ ! -f "$FILE_PATH" ]; then
+    exit 0
+fi
+
+# Only format Swift files
+case "$FILE_PATH" in
+    *.swift)
+        format_swift_file "$FILE_PATH"
+        ;;
+    *)
+        # Skip non-Swift files silently
+        exit 0
+        ;;
+esac
