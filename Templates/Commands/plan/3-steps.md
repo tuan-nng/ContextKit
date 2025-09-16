@@ -50,11 +50,11 @@ Generate implementation task breakdown by detecting current feature, validating 
    - Use `Bash` tool to check current git branch: `git branch --show-current`
    - If on feature/[name] branch: Extract feature name from branch
    - If not on feature branch: Ask user which feature to work on using consistent format
-   - Verify feature directory exists: `Glob Context/Features/[FeatureName] .`
+   - Use `Glob` tool to find numbered feature directory: `Glob Context/Features/???-[FeatureName]`
 
 4. **Validate Prerequisites**
-   - Use `Read` tool to check Spec.md exists: `Read Context/Features/[FeatureName]/Spec.md`
-   - Use `Read` tool to check Tech.md exists: `Read Context/Features/[FeatureName]/Tech.md`
+   - Use `Read` tool to check Spec.md exists in the found numbered directory: `Read [numbered-feature-directory]/Spec.md`
+   - Use `Read` tool to check Tech.md exists in the found numbered directory: `Read [numbered-feature-directory]/Tech.md`
    - If either missing:
      ```
      ❌ Prerequisites not complete!
@@ -73,12 +73,12 @@ Generate implementation task breakdown by detecting current feature, validating 
 
 5. **Copy Steps Template**
    ```bash
-   cp ~/.ContextKit/Templates/Features/Steps.md Context/Features/[FeatureName]/Steps.md
+   cp ~/.ContextKit/Templates/Features/Steps.md [numbered-feature-directory]/Steps.md
    echo "✅ Copied implementation steps template"
    ```
 
 6. **Execute Steps Template**
-   - Use `Read` tool to read the copied Steps.md: `Read Context/Features/[FeatureName]/Steps.md`
+   - Use `Read` tool to read the copied Steps.md: `Read [numbered-feature-directory]/Steps.md`
    - Follow the **system instructions** section (boxed area) step by step
    - The template contains task generation logic with S### enumeration and parallel markers
    - Use tools (`Read`, `Edit`) as directed by the template instructions
@@ -124,7 +124,7 @@ Generate implementation task breakdown by detecting current feature, validating 
 ```
 🎉 Implementation task breakdown created successfully!
 
-✅ Created: Context/Features/[Name]/Steps.md
+✅ Created: [numbered-feature-directory]/Steps.md
 ✅ Generated S### task enumeration with parallel execution markers
 ✅ All mandatory phases completed with dependency analysis
 
@@ -133,7 +133,7 @@ Generate implementation task breakdown by detecting current feature, validating 
 • [Template will list specific implementation questions that need answers]
 
 🔗 Next Steps:
-1. Review Context/Features/[Name]/Steps.md to ensure task breakdown is comprehensive
+1. Review [numbered-feature-directory]/Steps.md to ensure task breakdown is comprehensive
 2. [If clarifications needed:] Edit the steps file to resolve marked implementation questions
 3. When satisfied with the implementation plan: commit your changes with git
 4. Run /ctxk:impl:start-working (in a new chat) to begin systematic development execution

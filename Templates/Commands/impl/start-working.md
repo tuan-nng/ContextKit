@@ -61,12 +61,12 @@ Begin systematic development with context-aware setup, task analysis, and guided
      - If "y": Ask user to specify feature name manually
 
 3. **Validate Feature Planning Completion**
-   - Use `Glob` tool to find feature directory: `Glob Context/Features [FEATURE_NAME]*`
+   - Use `Glob` tool to find numbered feature directory: `Glob Context/Features/???-[FEATURE_NAME]`
    - Use `Read` tool to check each required file exists and has content:
      ```bash
-     ls -la Context/Features/[FEATURE_NAME]/Spec.md && echo "✅ Spec.md exists"
-     ls -la Context/Features/[FEATURE_NAME]/Tech.md && echo "✅ Tech.md exists"
-     ls -la Context/Features/[FEATURE_NAME]/Steps.md && echo "✅ Steps.md exists"
+     ls -la [numbered-feature-directory]/Spec.md && echo "✅ Spec.md exists"
+     ls -la [numbered-feature-directory]/Tech.md && echo "✅ Tech.md exists"
+     ls -la [numbered-feature-directory]/Steps.md && echo "✅ Steps.md exists"
      ```
    - Use `Read` tool to verify Steps.md contains task breakdown (not empty placeholder)
    - If any file missing or empty:
@@ -117,7 +117,7 @@ Begin systematic development with context-aware setup, task analysis, and guided
 ### Phase 3: Task Analysis & Selection
 
 6. **Load Implementation Plan**
-   - Use `Read` tool to read Steps.md: `Read Context/Features/[FEATURE_NAME]/Steps.md`
+   - Use `Read` tool to read Steps.md: `Read [numbered-feature-directory]/Steps.md`
    - Parse task list for pending items (unchecked boxes)
    - Extract S001-S999 numbered tasks with [P] parallel markers
    - Identify dependencies and logical execution order

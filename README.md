@@ -110,7 +110,7 @@ ContextKit configures Claude Code with optimized settings for systematic develop
 >
 > Type `/config` in Claude and set "Auto-compact" to **false**. Auto-compact triggers at ~85% context usage, often interrupting you when nearly finished with a task and plenty of relevant context available.
 >
-> **Better workflow**: Start fresh chats when needed and resume with `/ctxk:impl:start-working` – ContextKit's structured approach makes this seamless. Manual `/compact` loses unpredictable amounts of context, while fresh starts preserve your systematic progress.
+> **Better workflow**: Start fresh chats when needed and resume with `/ctxk:impl:start-working` (within feature branches after planning) – ContextKit's structured approach makes this seamless. Manual `/compact` loses unpredictable amounts of context, while fresh starts preserve your systematic progress.
 
 ## 🏗️ How it works
 
@@ -138,7 +138,7 @@ Break down **execution** into trackable work:
 - Test-driven development task ordering
 
 ### Phase 4: Development (`/ctxk:impl:start-working`)
-Execute with supervised autonomy and specialized quality agents:
+Execute with supervised autonomy and specialized quality agents (requires feature branch + completed planning phases):
 - AI implements within your approved technical framework
 - Specialized agents handle quality checks (accessibility, localization, modern code)
 - Automatic cleanup of AI artifacts (leftover comments, temporary code)

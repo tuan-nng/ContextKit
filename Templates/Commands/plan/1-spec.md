@@ -68,7 +68,7 @@ Initialize feature specification by validating setup, confirming feature naming,
 4. **Get Feature or App Description from User**
    - Ask user for feature/app description using consistent format (see User Input Format section)
    - Wait for user input
-   - Store description for naming and generation
+   - **CRITICAL**: Store description exactly verbatim for specification Input field - do NOT summarize or paraphrase
    - Continue with description-based processing
 
 5. **Generate Names**
@@ -78,35 +78,49 @@ Initialize feature specification by validating setup, confirming feature naming,
    - Focus on user value, not implementation details
 
 6. **Interactive Name Confirmation**
-   - Ask user for name confirmation using consistent format (see User Input Format section)
+   - Display generated names to user for confirmation:
+     ```
+     ═══════════════════════════════════════════════════
+     ║ ❓ FEATURE NAMING CONFIRMATION
+     ═══════════════════════════════════════════════════
+     ║
+     ║ Generated names based on your description:
+     ║ • Feature folder: [XXX]-[PascalCaseName] (XXX = next sequential number)
+     ║ • Git branch: feature/[kebab-case-name]
+     ║
+     ║ Are these names correct? (y/N) or provide alternative description:
+     ```
    - Wait for user confirmation or alternative description
    - If alternative provided: regenerate names and ask again
    - Continue only after user approval
+   - Store confirmed names for subsequent steps
 
 ### Phase 3: Template Setup & Execution
 
-7. **Create Feature Workspace**
+7. **Generate Sequential Feature Number & Create Workspace**
    ```bash
-   mkdir -p Context/Features/[ConfirmedFeatureName]
-   echo "✅ Created feature directory"
+   # Find next sequential number by counting existing feature directories
+   NEXT_NUM=$(printf "%03d" $(($(ls -1d Context/Features/???-* 2>/dev/null | wc -l) + 1)))
+   NUMBERED_FEATURE_NAME="${NEXT_NUM}-[ConfirmedFeatureName]"
+   mkdir -p Context/Features/${NUMBERED_FEATURE_NAME}
+   echo "✅ Created feature directory: Context/Features/${NUMBERED_FEATURE_NAME}"
+   ```
+   - Store the numbered directory name for use in subsequent steps and success message
+
+8. **Copy Feature Template**
+   ```bash
+   cp ~/.ContextKit/Templates/Features/Spec.md Context/Features/[numbered-feature-directory]/Spec.md
+   echo "✅ Copied specification template"
    ```
 
-6. **Copy Feature Template**
+9. **Create Git Branch**
    ```bash
-   cp ~/.ContextKit/Templates/Features/Spec.md Context/Features/[FeatureName]/Spec.md
-   touch Context/Features/[FeatureName]/Tech.md
-   touch Context/Features/[FeatureName]/Steps.md
-   echo "✅ Copied specification template with placeholders for next phases"
-   ```
-
-7. **Create Git Branch**
-   ```bash
-   git checkout -b feature/[kebab-case-name] || echo "⚠️ Git branch creation failed - continuing without branch"
-   echo "✅ Created git branch: feature/[kebab-case-name]"
+   git checkout -b feature/[confirmed-kebab-case-name] || echo "⚠️ Git branch creation failed - continuing without branch"
+   echo "✅ Created git branch: feature/[confirmed-kebab-case-name]"
    ```
 
 10. **Execute Specification Template**
-    - Use `Read` tool to read the copied Spec.md: `Read Context/Features/[FeatureName]/Spec.md`
+    - Use `Read` tool to read the copied Spec.md: `Read Context/Features/[numbered-feature-directory]/Spec.md`
     - Follow the **system instructions** section (boxed area) step by step
     - The template contains specification generation logic and progress tracking
     - Use tools (`Read`, `Edit`) as directed by the template instructions
@@ -151,8 +165,9 @@ Initialize feature specification by validating setup, confirming feature naming,
 ```
 🎉 Specification created successfully!
 
-✅ Created: Context/Features/[Name]/Spec.md
-✅ Git branch: feature/[branch-name]
+📁 Feature: [numbered-feature-directory-name]
+✅ Created: [numbered-feature-directory]/Spec.md
+✅ Git branch: feature/[confirmed-kebab-case-name]
 ✅ Applied constitutional principles from project guidelines
 ✅ All mandatory sections completed with project-specific content
 
@@ -161,7 +176,7 @@ Initialize feature specification by validating setup, confirming feature naming,
 • [Template will list specific questions that need user answers]
 
 🔗 Next Steps:
-1. Review Context/Features/[Name]/Spec.md to ensure it matches your intent
+1. Review [numbered-feature-directory]/Spec.md to ensure it matches your intent
 2. [If clarifications needed:] Edit the spec file to answer marked questions
 3. When satisfied with the spec: commit your changes with git
 4. Run /ctxk:plan:2-tech to proceed with technical architecture planning

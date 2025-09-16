@@ -50,10 +50,11 @@ Generate technical architecture plan by detecting current feature, validating pr
    - Use `Bash` tool to check current git branch: `git branch --show-current`
    - If on feature/[name] branch: Extract feature name from branch
    - If not on feature branch: Ask user which feature to work on using consistent format
-   - Verify feature directory exists: `Glob Context/Features/[FeatureName] .`
+   - Use `Glob` tool to find numbered feature directory: `Glob Context/Features/???-[FeatureName]`
+   - Store the found directory path for use in subsequent steps
 
 4. **Validate Prerequisites**
-   - Use `Read` tool to check Spec.md exists: `Read Context/Features/[FeatureName]/Spec.md`
+   - Use `Read` tool to check Spec.md exists in the found numbered directory: `Read [numbered-feature-directory]/Spec.md`
    - If Spec.md missing:
      ```
      ❌ Feature specification not found!
@@ -69,12 +70,12 @@ Generate technical architecture plan by detecting current feature, validating pr
 
 5. **Copy Research Template**
    ```bash
-   cp ~/.ContextKit/Templates/Features/Research.md Context/Features/[FeatureName]/Research.md
+   cp ~/.ContextKit/Templates/Features/Research.md [numbered-feature-directory]/Research.md
    echo "✅ Copied technical research template"
    ```
 
 6. **Execute Research Template**
-   - Use `Read` tool to read the copied Research.md: `Read Context/Features/[FeatureName]/Research.md`
+   - Use `Read` tool to read the copied Research.md: `Read [numbered-feature-directory]/Research.md`
    - Follow the **system instructions** section (boxed area) step by step
    - The template handles knowledge acquisition via WebFetch/WebSearch for technologies mentioned in specification
    - Use tools (`Read`, `Edit`, `WebFetch`, `WebSearch`) as directed by the template instructions
@@ -82,7 +83,7 @@ Generate technical architecture plan by detecting current feature, validating pr
    - **Progress tracking**: User can see research checkboxes being completed in the copied file
 
 7. **Validate Research Completion**
-   - Use `Read` tool to verify research completion: `Read Context/Features/[FeatureName]/Research.md`
+   - Use `Read` tool to verify research completion: `Read [numbered-feature-directory]/Research.md`
    - Ensure all technologies mentioned in specification have been researched
    - Verify research findings are documented with decisions and rationale
    - If research incomplete: WARN user to complete research before proceeding
@@ -91,12 +92,12 @@ Generate technical architecture plan by detecting current feature, validating pr
 
 8. **Copy Technical Architecture Template**
    ```bash
-   cp ~/.ContextKit/Templates/Features/Tech.md Context/Features/[FeatureName]/Tech.md
+   cp ~/.ContextKit/Templates/Features/Tech.md [numbered-feature-directory]/Tech.md
    echo "✅ Copied technical architecture template"
    ```
 
 9. **Execute Technical Architecture Template**
-   - Use `Read` tool to read the copied Tech.md: `Read Context/Features/[FeatureName]/Tech.md`
+   - Use `Read` tool to read the copied Tech.md: `Read [numbered-feature-directory]/Tech.md`
    - Follow the **system instructions** section (boxed area) step by step
    - The template contains technical architecture generation logic informed by research results
    - Use tools (`Read`, `Edit`) as directed by the template instructions

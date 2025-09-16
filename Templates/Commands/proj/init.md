@@ -61,6 +61,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
        3. Max 20x ($200/month)
    - **Workspace Discovery**: Use `Bash` tool to traverse parent directories: `cd .. && pwd` then check for Context.md
      - Continue checking parent directories until reaching root `/` or finding workspace Context.md
+     - **CRITICAL**: Calculate correct relative path to workspace Context.md (count levels up: 1 level = `../Context.md`, 2 levels = `../../Context.md`, etc.)
      - If multiple workspace contexts found in path: ask user which to inherit from
 
 6. **Configuration Summary**
@@ -226,13 +227,13 @@ Initialize current project with ContextKit development workflow system. Sets up 
     - If `CLAUDE.md` exists:
       - Use `Read` to check current content
       - Use `Edit` to ensure `@Context.md` reference is present
-      - If workspace Context.md discovered in Phase 1: ensure workspace reference is present (e.g., `@../Context.md`)
+      - If workspace Context.md discovered in Phase 1: ensure workspace reference is present using calculated relative path
     - If no `CLAUDE.md`: Use `Write` tool to create new one with:
       ```markdown
       # Project Development Context
 
       @Context.md
-      [If workspace discovered in Phase 1: @../Context.md]
+      [If workspace discovered in Phase 1: @[calculated-relative-path]/Context.md]
       ```
     - **CRITICAL**: Ensure both project Context.md AND workspace Context.md (if found in Phase 1) are referenced
 
@@ -309,7 +310,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 💡 **Tip**: Disable Auto-Compact for better control! Type `/config` and set "Auto-compact" to **false**.
    Auto-compact triggers at ~85% context, often interrupting when you're nearly finished.
-   Better workflow: Start fresh chats when needed and resume with /ctxk:impl:start-working.
+   Better workflow: Start fresh chats when needed and resume with /ctxk:impl:start-working (within feature branches).
 
 🎯 **Next Steps**:
    • **Recommended**: Start a fresh Claude session for optimal context
@@ -319,7 +320,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 💡 **Available Commands**:
    • Feature Planning: /ctxk:plan:1-spec → /ctxk:plan:2-tech → /ctxk:plan:3-steps
-   • Development: /ctxk:impl:start-working
+   • Development: /ctxk:impl:start-working (after completing planning phases on feature branch)
    • Backlog: /ctxk:bckl:add-idea, /ctxk:bckl:add-bug
 ```
 

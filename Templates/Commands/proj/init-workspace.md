@@ -42,7 +42,7 @@ Initialize workspace-level context configuration. Copies workspace template and 
      🔗 Next Steps:
      • Navigate to a project directory within this workspace
      • Run /ctxk:proj:init to setup ContextKit in that project (inherits workspace config)
-     • Or run /ctxk:impl:start-working in any ContextKit-enabled project to begin development
+     • Begin your first feature with /ctxk:plan:1-spec
      ```
      → END (exit successfully)
 
@@ -107,7 +107,7 @@ Initialize workspace-level context configuration. Copies workspace template and 
    🔗 Next Steps:
    • Navigate to individual project directories to run /ctxk:proj:init
    • Each project will inherit these workspace standards
-   • Or run /ctxk:impl:start-working in any ContextKit-enabled project
+   • Begin your first feature with /ctxk:plan:1-spec
 
    💡 Commit Context.md to version control for team collaboration.
 

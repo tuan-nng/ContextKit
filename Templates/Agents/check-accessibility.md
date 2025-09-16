@@ -45,7 +45,7 @@ FILES:
    → **If FILES provided**: Use Read to examine only specified files and line ranges
    → **If no FILES provided**:
      - WARN "No FILES specified - scanning uncommitted changes instead"
-     - WARN "Consider running /ctxk:impl:start-working for proper targeted analysis"
+     - WARN "Run accessibility checks during feature development for targeted analysis"
      - Use Bash to get uncommitted files: `git diff --name-only HEAD`
      - If git not available: ERROR "Git repository required for automatic file detection"
      - If no uncommitted files: INFO "No uncommitted changes found - nothing to analyze"

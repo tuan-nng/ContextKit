@@ -38,7 +38,9 @@ Feature specification template providing systematic business requirements genera
 ║      - Feature Branch: `feature/[kebab-case-name]` (from parent command)
 ║      - Created: [Current Date]
 ║      - Status: Draft
-║      - Input: [Original user description]
+║      - Input: [Original user description - preserve exactly verbatim, do NOT summarize]
+║        Format as: **Input**:\n"""\n[user description]\n"""
+║        Use triple quotes (""") not backticks - user input is quoted text, not code
 ║
 ║ 5. **Create Primary User Story**
 ║    - Generate "As a [User Type], I want to [User Goal] so that [User Benefit]"
@@ -66,12 +68,12 @@ Feature specification template providing systematic business requirements genera
 ║    - Document what users need, not how to build it
 ║
 ║ 9. **Feature Justification & Scope Definition**
-║    - Fill Value Validation section: user problem, success metrics, cost/benefit
-║    - Define clear scope boundaries:
+║    - Apply Value Validation checks: user problem, success metrics, cost/benefit (internal validation)
+║    - Generate clear scope boundaries for final specification:
 ║      - IN SCOPE: Specific features with clear user value
 ║      - OUT OF SCOPE: Exclude unnecessary features
-║      - FUTURE CONSIDERATIONS: Ideas for later phases
-║    - Apply anti-speculation enforcement (check all relevant boxes)
+║    - Note future considerations internally (do not include in final spec)
+║    - Apply anti-speculation enforcement (internal validation only)
 ║
 ║ 10. **Mark Clarification Needs**
 ║     - For any ambiguous or underspecified requirements, mark with:
@@ -106,9 +108,17 @@ Feature specification template providing systematic business requirements genera
 ║       - Template self-validation completed
 ║       - Review checklist passed
 ║
-║ 14. **COMPLETION**
+║ 14. **Internal Validation Framework (DO NOT INCLUDE IN FINAL SPEC)**
+║     - Value Validation: Feature solves specific user problem? Success metrics defined?
+║     - Scope Boundaries: Clear IN SCOPE/OUT OF SCOPE/FUTURE CONSIDERATIONS?
+║     - Anti-Speculation Enforcement: No speculative features? Tied to current needs?
+║     - Implementation cost estimated? Maintenance burden acceptable?
+║
+║ 15. **COMPLETION**
 ║     - Use `Edit` tool to remove this entire boxed system instructions section
+║     - Use `Edit` tool to remove the validation framework instructions box at the end of the file
 ║     - Leave only the clean feature specification content for team use
+║     - Final document should end after the Scope Boundaries section
 ║     - Final document focused on business requirements, not generation process
 ║
 ║ ## Success Criteria
@@ -119,7 +129,7 @@ Feature specification template providing systematic business requirements genera
 ║ - User value clearly articulated without technical implementation details
 ║ - All validation gates passed and checkboxes marked appropriately
 ║ - [NEEDS CLARIFICATION] markers used for genuine ambiguities only
-║ - System instructions completely removed from final specification document
+║ - System instructions AND validation framework completely removed from final specification
 ║
 ════════════════════════════════════════════════════════════════════════════════
 
@@ -128,7 +138,10 @@ Feature specification template providing systematic business requirements genera
 **Feature Branch**: `feature/[ai-generated-branch-name]`
 **Created**: [AI Generated Current Date]
 **Status**: Draft
-**Input**: [AI Populated Original User Description]
+**Input**:
+"""
+[Original User Description - Preserve Exactly Verbatim - Can be multiple paragraphs]
+"""
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -173,33 +186,37 @@ Feature specification template providing systematic business requirements genera
 - *Focused on user value and business needs*
 - *Free of technical implementation details*
 
+## Scope Boundaries *(mandatory)*
 
-## Feature Justification Required
-*Every proposed feature must pass these criteria*
-
-### Value Validation
-- [ ] Feature solves specific user problem (not "might be useful")?
-- [ ] Success metrics defined and measurable?
-- [ ] User research or feedback validates need?
-- [ ] Implementation cost estimated and approved?
-- [ ] Maintenance burden considered and acceptable?
-
-### Scope Boundaries
 - **IN SCOPE**: [AI Generated specific features with clear user value]
 - **OUT OF SCOPE**: [AI Generated explicitly excluded tempting but unnecessary features]
-- **FUTURE CONSIDERATIONS**: [AI Generated ideas for later that shouldn't be implemented now]
-
-### Anti-Speculation Enforcement
-- [ ] No speculative or "future-proofing" features included?
-- [ ] Each feature tied to current user needs, not hypothetical scenarios?
-- [ ] Feature set focused on core value proposition?
-- [ ] Complexity intentionally constrained to essential functionality?
 
 ---
 
 ════════════════════════════════════════════════════════════════════════════════
-║ 🤖 VALIDATION & EXECUTION STATUS - AI WORKFLOW INSTRUCTIONS
+║ 🤖 VALIDATION FRAMEWORK & EXECUTION STATUS - AI WORKFLOW INSTRUCTIONS
 ════════════════════════════════════════════════════════════════════════════════
+║
+║ ## Feature Validation Framework (Internal Use Only)
+║ *Apply these criteria during generation - do not include in final specification*
+║
+║ ### Value Validation
+║ - [ ] Feature solves specific user problem (not "might be useful")?
+║ - [ ] Success metrics defined and measurable?
+║ - [ ] User research or feedback validates need?
+║ - [ ] Implementation cost estimated and approved?
+║ - [ ] Maintenance burden considered and acceptable?
+║
+║ ### Future Considerations (For Validation Only - Do Not Include in Final)
+║ - **FUTURE CONSIDERATIONS**: [AI Generated ideas for later that shouldn't be implemented now]
+║ - Use this internally to avoid scope creep, but do not include in final specification
+║
+║ ### Anti-Speculation Enforcement
+║ - [ ] No speculative or "future-proofing" features included?
+║ - [ ] Each feature tied to current user needs, not hypothetical scenarios?
+║ - [ ] Feature set focused on core value proposition?
+║ - [ ] Complexity intentionally constrained to essential functionality?
+║
 ║
 ║ ## Business Validation Gates (Auto-executed)
 ║ *Checked by execution flow before returning SUCCESS*
