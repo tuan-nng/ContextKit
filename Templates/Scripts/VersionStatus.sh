@@ -1,5 +1,5 @@
 #!/bin/bash
-# Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14
+# Template Version: 5 | ContextKit: 0.0.0 | Updated: 2025-09-16
 
 # version-status.sh - ContextKit version management and project status
 # Called by SessionStart hook when Claude Code starts a new session
@@ -11,20 +11,30 @@
 # - Auto-update global ContextKit installation via git pull on session startup
 # - Check project/workspace ContextKit compatibility and suggest migration when needed
 # - Only runs on startup sessions - silent for resume/clear/compact sessions
+# - Supports --verbose flag for detailed migration reports
 
 set -e
+
+# Parse command line arguments
+VERBOSE_MODE=false
+if [ "$1" = "--verbose" ]; then
+    VERBOSE_MODE=true
+fi
 
 # Parse session context from Claude Code hook JSON input
 SESSION_SOURCE=$(jq -r '.source' 2>/dev/null || echo "startup")
 PROJECT_DIR=${CLAUDE_PROJECT_DIR:-$(pwd)}
 CONTEXTKIT_DIR="$HOME/.ContextKit"
 
-# Only run on startup sessions - exit silently for all others
-if [ "$SESSION_SOURCE" != "startup" ]; then
+# Only run on startup sessions - exit silently for all others (unless --verbose flag is used)
+if [ "$SESSION_SOURCE" != "startup" ] && [ "$VERBOSE_MODE" = false ]; then
     exit 0
 fi
 
-echo "🧠 ContextKit: Checking for updates..."
+if [ "$VERBOSE_MODE" = false ]; then
+    echo "🧠 ContextKit: Checking for updates..."
+fi
+
 
 ###########################################
 # Global ContextKit Auto-Update
@@ -129,8 +139,9 @@ check_template_updates() {
 
     local updates_needed=0
 
-    # Check local project template versions (proj commands are global and auto-updated)
+    # Check both local project templates AND global proj commands
     local project_dirs=(
+        "$HOME/.claude/commands/ctxk/proj"
         "Context/Guidelines"
         ".claude/commands/ctxk/plan"
         ".claude/commands/ctxk/impl"
@@ -140,6 +151,7 @@ check_template_updates() {
     )
 
     local source_dirs=(
+        "$CONTEXTKIT_DIR/Templates/Commands/proj"
         "$CONTEXTKIT_DIR/Templates/Guidelines"
         "$CONTEXTKIT_DIR/Templates/Commands/plan"
         "$CONTEXTKIT_DIR/Templates/Commands/impl"
@@ -189,6 +201,15 @@ count_outdated_templates() {
 
             if [ "$local_version" -lt "$source_version" ] 2>/dev/null; then
                 count=$((count + 1))
+                if [ "$VERBOSE_MODE" = true ]; then
+                    echo "OUTDATED:$source_file:$local_file" >&2
+                fi
+            fi
+        else
+            # New file in template
+            local target_file="$local_dir/$rel_path"
+            if [ "$VERBOSE_MODE" = true ]; then
+                echo "NEW:$source_file:$target_file" >&2
             fi
         fi
     done

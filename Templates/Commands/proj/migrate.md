@@ -1,5 +1,5 @@
 # Upgrade to Latest
-<!-- Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 11 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -39,57 +39,30 @@ All updates preserve user customizations in "👩‍💻 DEVELOPER CUSTOMIZATION
 
 ## Execution Flow (main)
 
-### Phase 1: Update Global ContextKit
+### Phase 1: Automated Global Update & Version Scanning
 
-1. Check if ~/.ContextKit/ directory exists
-   - Use Bash tool: ls -la ~/.ContextKit/
-   - If missing: ERROR "Run global installation first"
+1. **Comprehensive ContextKit Update & Analysis**
+   - Use Bash tool: `Context/Scripts/VersionStatus.sh --verbose`
+   - Capture stderr output to see OUTDATED and NEW file listings
+   - Status messages go to stdout, file data goes to stderr
 
-2. Update global repository with git pull
-   - Use Bash tool: cd ~/.ContextKit/ && git pull origin main --quiet
-   - If pull fails: WARN "Could not check for updates (no internet)" and continue
+2. **Automated File Updates**
+   - Parse captured stderr output from VersionStatus.sh
+   - For each line with format `OUTDATED:source_path:target_path` or `NEW:source_path:target_path`:
+   - Use Bash tool: `Context/Scripts/MergePreserve.sh source_path target_path`
+   - **Handles automatically**:
+     - ✅ ContextKit global installation check
+     - ✅ Global repository update (git pull)
+     - ✅ Version comparison for ALL template categories
+     - ✅ Project compatibility validation
+     - ✅ Automated file updates with customization preservation
+   - **Handles both**: Global proj commands (~/.claude/commands/ctxk/proj/) AND local project templates
+   - **Performance**: All previous Phase 1-3 work in ~35 seconds total
+   - **Intelligence**: Script detects boilerplate vs real customizations automatically
 
-### Phase 2: Update Global Proj Commands
+### Phase 2: Manual LLM Processing (Complex Cases Only)
 
-1. **Parallel Version Checking** (launch multiple Task agents simultaneously)
-   - Check ~/.claude/commands/ctxk/proj/ directory exists
-   - Launch separate Task tool agents in parallel for each proj command file:
-     - **Task Agent 1**: Check init.md (template vs user version comparison)
-     - **Task Agent 2**: Check init-workspace.md (template vs user version comparison)
-     - **Task Agent 3**: Check migrate.md (template vs user version comparison)
-   - Each agent extracts versions using sed -n '2p' and reports if update needed
-   - Collect results from all parallel agents to get list of files requiring updates
-
-2. **Sequential File Updates** (only for files identified in step 1)
-   - For each file needing update:
-     - Use Read tool to examine both global template and user's global command files
-     - Use Grep tool to find "👩‍💻 DEVELOPER CUSTOMIZATIONS" line number in user file
-     - If separator found:
-       - Check if user has added actual content below separator (beyond template boilerplate)
-       - Count non-empty lines after separator that aren't just comments or template text
-       - If meaningful user content exists: Use Edit tool to merge (template above + user content below)
-       - If no meaningful user content: Use Bash tool cp to replace entirely (faster)
-     - If separator missing: Use Bash tool cp to replace entirely
-     - Track results in UPDATED_GLOBAL_FILES
-
-### Phase 3: Scan Local Project Templates
-
-1. **Parallel Version Scanning** (launch multiple Task agents simultaneously)
-   - Launch separate Task tool agents in parallel for each template category:
-     - **Task Agent A**: Guidelines (Templates/Guidelines/*.md → Context/Guidelines/)
-     - **Task Agent B**: Plan Commands (Templates/Commands/plan/*.md → .claude/commands/ctxk/plan/)
-     - **Task Agent C**: Impl Commands (Templates/Commands/impl/*.md → .claude/commands/ctxk/impl/)
-     - **Task Agent D**: Backlog Commands (Templates/Commands/bckl/*.md → .claude/commands/ctxk/bckl/)
-     - **Task Agent E**: Agents (Templates/Agents/*.md → .claude/agents/ctxk/)
-     - **Task Agent F**: Scripts (Templates/Scripts/*.sh → Context/Scripts/)
-     - **Task Agent G**: Settings (Templates/settings.json → .claude/settings.json)
-     - **Task Agent H**: Backlog Templates (Templates/Backlog/*.md → Context/Backlog/)
-   - Each agent extracts template versions using sed -n '2p', checks project files, compares versions
-   - Collect results from all parallel agents to get comprehensive list of files requiring updates
-
-### Phase 4: Update Local Project Files Preserving Customizations
-
-#### Phase 4.1: Intelligent Settings.json Merge
+#### Phase 2.1: Intelligent Settings.json Merge
 
 1. Use Read tool to examine current .claude/settings.json
 2. Use Read tool to read ~/.ContextKit/Templates/settings.json for latest template
@@ -125,7 +98,7 @@ All updates preserve user customizations in "👩‍💻 DEVELOPER CUSTOMIZATION
    - Add to UPDATED_FILES if any changes made
    - Add to WARNINGS if merge had issues
 
-#### Phase 4.2: Other Local Project Files
+#### Phase 2.2: Other Complex Merge Cases
 
 1. For each file needing update:
    - If new file: Use Bash tool cp to copy directly to project location
@@ -138,14 +111,14 @@ All updates preserve user customizations in "👩‍💻 DEVELOPER CUSTOMIZATION
        - If meaningful user content exists: Use Edit tool to merge (template above + user content below)
        - If no meaningful user content: Use Bash tool cp to replace entirely (faster)
      - If separator missing: Use Bash tool cp to replace entirely
-   - If settings.json: Use intelligent merge logic (see Phase 4.1)
+   - If settings.json: Use intelligent merge logic (see Phase 2.1)
 
 2. Track results:
    - NEW_FILES: List of files copied
    - UPDATED_FILES: List of files merged with version info
    - WARNINGS: List of files skipped or issues encountered
 
-### Phase 5: Summary Report
+### Phase 3: Summary Report
 
 Display results organized by:
 - Global proj commands updated (count and version changes)

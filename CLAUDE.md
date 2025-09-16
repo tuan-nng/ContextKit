@@ -30,32 +30,32 @@ ContextKit/
     ├── Guidelines/                  # → GLOBAL CODING STANDARDS (copied by install.sh)
     │   ├── Swift.md                 # Swift patterns
     │   └── SwiftUI.md               # SwiftUI patterns
-    ├── Commands/                    # → CLAUDE CODE COMMANDS (get copied during /ContextKit/setup)
-    │   ├── Global/                  # Global ContextKit management commands
-    │   │   ├── setup.md             # Project initialization
-    │   │   ├── setup-workspace.md   # Workspace configuration
+    ├── Commands/                    # → CLAUDE CODE COMMANDS (get copied during /ctxk:proj:init)
+    │   ├── proj/                    # Project management commands
+    │   │   ├── init.md              # Project initialization
+    │   │   ├── init-workspace.md    # Workspace configuration
     │   │   └── migrate.md           # Version updates
-    │   ├── Plan/                    # Feature planning workflow
+    │   ├── plan/                    # Feature planning workflow
     │   │   ├── 1-spec.md            # Business requirements
     │   │   ├── 2-research-tech.md   # Technical research and architecture
     │   │   └── 3-steps.md           # Implementation breakdown
-    │   ├── Implement/               # Development workflow
+    │   ├── impl/                    # Development workflow
     │   │   ├── start-working.md     # Context-aware development start
     │   │   ├── commit-changes.md    # Smart commit message generation
     │   │   ├── release-app.md       # iOS/macOS App Store releases
     │   │   └── release-package.md   # Swift Package releases
-    │   └── Backlog/                 # Idea and issue management
+    │   └── bckl/                    # Backlog management
     │       ├── add-idea.md          # Capture new ideas with evaluation
     │       ├── add-bug.md           # Bug report with impact assessment
     │       ├── prioritize-ideas.md  # Organize ideas backlog
     │       ├── prioritize-bugs.md   # Triage bugs backlog
     │       ├── remove-idea.md       # Remove completed ideas from backlog
     │       └── remove-bug.md        # Remove fixed bugs from backlog
-    ├── Scripts/                     # → ALL SCRIPTS (hooks & standalone, get copied during /ContextKit/setup)
+    ├── Scripts/                     # → ALL SCRIPTS (hooks & standalone, get copied during /ctxk:proj:init)
     │   ├── AutoFormat.sh           # Auto-format edited Swift files (PostToolUse hook)
     │   ├── VersionStatus.sh        # Version checking and status display (SessionStart hook)
     │   └── CustomStatusline.sh     # Complete statusline script with 5h-usage tracking and colored progress bars
-    ├── Agents/                      # → AI ASSISTANTS (get copied during /ContextKit/setup)
+    ├── Agents/                      # → AI ASSISTANTS (get copied during /ctxk:proj:init)
     │   ├── build-project.md         # Execute builds with constitutional compliance checking
     │   ├── check-accessibility.md   # Accessibility compliance validation (VoiceOver, contrast, etc.)
     │   ├── check-localization.md    # Localization readiness audit (String Catalog, cultural adaptation)
@@ -64,19 +64,19 @@ ContextKit/
     │   ├── check-code-debt.md       # Technical debt cleanup and code consolidation
     │   ├── run-test-suite.md        # Execute complete test suite with build validation and structured failure reporting
     │   └── run-specific-test.md     # Execute specific test with build validation and focused failure analysis
-    ├── Features/                    # → FEATURE TEMPLATES (used by /Plan/create-spec, etc.)
+    ├── Features/                    # → FEATURE TEMPLATES (used by /ctxk:plan:1-spec, etc.)
     │   ├── Spec.md                  # Business requirements and user stories (spec-kit methodology)
     │   ├── Tech.md                  # Technical architecture and constitutional compliance
     │   └── Steps.md                 # Implementation task breakdown with parallel markers [P]
-    ├── Contexts/                    # → CONTEXT TEMPLATES (used by /ContextKit/setup and /ContextKit/setup-workspace)
+    ├── Contexts/                    # → CONTEXT TEMPLATES (used by /ctxk:proj:init and /ctxk:proj:init-workspace)
     │   ├── Project.md               # Project-level Context.md with ContextKit configuration
     │   └── Workspace.md             # Workspace-level Context.md with client/company overrides
-    ├── Backlog/                     # → BACKLOG TEMPLATES (used by /Backlog/add-idea and /Backlog/add-bug)
+    ├── Backlog/                     # → BACKLOG TEMPLATES (used by /ctxk:bckl:add-idea and /ctxk:bckl:add-bug)
     │   ├── Ideas-Inbox.md           # New idea capture template with evaluation framework
     │   ├── Ideas-Backlog.md         # Prioritized idea backlog template with strategic organization
     │   ├── Bugs-Inbox.md            # Bug report intake template with impact assessment
     │   └── Bugs-Backlog.md          # Triaged bug backlog template with severity-based organization
-    ├── Formatters/                  # → CODE STYLE CONFIGS (get copied during /ContextKit/setup)
+    ├── Formatters/                  # → CODE STYLE CONFIGS (get copied during /ctxk:proj:init)
     │   ├── .swift-format            # Apple swift-format configuration
     │   └── .swiftformat             # SwiftFormat (Nick Lockwood) configuration
     └── settings.json                # → CLAUDE CODE SETTINGS TEMPLATE
@@ -105,7 +105,7 @@ cp -R ~/.ContextKit/Templates/Commands/* ~/.claude/commands/ctxk/
 
 **All Commands Available After Install**:
 - `/ctxk:proj:init` - Initialize project with ContextKit
-- `/ctxk:proj:init-workspce` - Configure workspace-level settings
+- `/ctxk:proj:init-workspace` - Configure workspace-level settings
 - `/ctxk:proj:migrate` - Update existing project to newer ContextKit version
 - `/ctxk:plan:1-spec` - Create feature specification (prompts for description interactively)
 - `/ctxk:plan:2-research-tech` - Create technical research and architecture plan
@@ -312,7 +312,7 @@ AGENT_LATEST_VERSION=$(sed -n '2p' ~/.ContextKit/Templates/Agents/check-modern-c
 **Variables**: **NONE** - Commands read `Context.md` dynamically when executed
 
 **Directory Structure in Templates/Commands/**:
-- `proj/` - Project management (init, init-workspce, migrate)
+- `proj/` - Project management (init, init-workspace, migrate)
 - `plan/` - Feature planning (1-spec, 2-research-tech, 3-steps) 
 - `impl/` - Implementation (start-working, commit-changes, release-app, release-package)
 - `bckl/` - Backlog management (add-idea, add-bug, prioritize-ideas, prioritize-bugs, remove-idea, remove-bug)
@@ -415,7 +415,7 @@ Every command template must implement **executable workflows with built-in quali
 1. Parse user input and validate
    → If empty/invalid: ERROR "Specific guidance on fixing"
 2. Load Context.md and detect project type
-   → If missing: ERROR "Run /ContextKit/setup first"
+   → If missing: ERROR "Run /ctxk:proj:init first"
 3. Apply constitutional principles
    → Check: accessibility, privacy, localizability, maintainability
 4. Mark uncertainties explicitly
@@ -702,7 +702,7 @@ All commands, agents, and guidelines that get copied to user projects MUST inclu
 **Purpose**: Detailed issue detection in **existing code during development phases**
 
 **Usage Phases**:
-- `/Implement/commit-changes` - Pre-commit quality validation
+- `/ctxk:impl:commit-changes` - Pre-commit quality validation
 - Quality gate enforcement during development
 - Code review and cleanup phases
 
