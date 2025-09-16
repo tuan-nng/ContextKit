@@ -1,8 +1,9 @@
 ---
-meta: "Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14"
+meta: "Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16"
 name: check-localization
 description: Detect and automatically fix localization issues in source code, applying framework-specific localization patterns
 tools: Read, Edit, MultiEdit, Grep, Glob, Task
+color: cyan
 ---
 
 > [!WARNING]

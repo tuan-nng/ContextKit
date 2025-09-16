@@ -1,8 +1,9 @@
 ---
-meta: "Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14"
+meta: "Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16"
 name: build-project
 description: Execute project builds and provide clean error reporting with filtered output
 tools: Bash, Read, Grep, Glob
+color: blue
 ---
 
 # Agent: build-project

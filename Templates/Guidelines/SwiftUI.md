@@ -1,5 +1,5 @@
 # SwiftUI Development Guidelines
-<!-- Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 5 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -161,6 +161,28 @@ When Xcode UI actions are required, use the standardized user instruction format
 ```
 
 **Planning Integration**: Include manual Xcode actions as explicit steps in `Steps.md` implementation planning with clear user action markers.
+
+### AI Testing Capabilities & Limitations
+
+**What AI can validate automatically:**
+- ✅ **Build validation**: Compile code, resolve build errors, check dependencies
+- ✅ **Unit/integration tests**: Execute automated test suites and analyze results
+- ✅ **Static code analysis**: Use ContextKit agents for pattern validation, accessibility code checks
+- ✅ **File modifications**: Update Info.plist, privacy manifests, String Catalogs
+- ✅ **Code quality**: ErrorKit patterns, modern API usage, architectural compliance
+
+**What requires manual user testing:**
+- 🧪 **Running app interactions**: Any task involving launching and using the actual app
+- 🧪 **User experience validation**: Navigation flows, visual design, interaction feedback
+- 🧪 **Device-specific testing**: Restart behavior, network conditions, multi-device scenarios
+- 🧪 **All accessibility verification**: VoiceOver navigation, Dynamic Type scaling, contrast testing, real accessibility usage
+- 🧪 **Performance validation**: Animation smoothness, memory usage, battery impact under real usage
+- 🧪 **Integration testing**: Third-party services, in-app purchases, platform-specific features
+
+**Implementation in Steps.md:**
+- **Phase 5**: Automated integration (AI executes builds, tests, agents)
+- **Phase 6**: Manual user testing (structured instructions with standardized response format)
+- **Phase 7**: Release preparation (mix of automated file updates and manual external processes)
 
 ---
 

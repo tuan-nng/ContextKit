@@ -1,5 +1,5 @@
 # Implementation Steps: [Feature from Tech.md]
-<!-- Template Version: 4 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 6 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 ## Description
 Implementation task breakdown template providing systematic S001-S999 task enumeration with parallel execution markers and dependency analysis for iOS/macOS development workflows.
@@ -62,8 +62,9 @@ Implementation task breakdown template providing systematic S001-S999 task enume
 ║    - Model tasks: Data layer implementation with TDD approach (S011-S020)
 ║    - Service tasks: Business logic and API integration (S021-S030)
 ║    - UI tasks: SwiftUI views, navigation, user interaction (S031-S040)
-║    - Integration tasks: End-to-end flows and validation (S041-S050)
-║    - Polish tasks: Performance, compliance, release prep (S051-S060)
+║    - Integration tasks: **Automated testing only** - builds, unit tests, agents (S041-S050)
+║    - Manual validation tasks: **User testing required** - running apps, interactions (S051-S060)
+║    - Polish tasks: Performance, compliance, release prep (S061-S070)
 ║
 ║ 7. **Apply Parallel Execution Markers [P]**
 ║    - Different files = [P] parallel safe
@@ -108,8 +109,9 @@ Implementation task breakdown template providing systematic S001-S999 task enume
 ║     - Model Layer with TDD approach and parallel markers
 ║     - Service Layer with dependency tracking
 ║     - UI Layer with SwiftUI implementation tasks
-║     - Integration & Quality Assurance with validation tasks
-║     - Polish & Release Preparation with compliance tasks
+║     - **Automated Integration phase**: Only tasks AI can execute (builds, tests, agents)
+║     - **Manual User Testing phase**: Tasks requiring human app interaction with standardized box format
+║     - Polish & Release Preparation with compliance tasks and external process guidance
 ║
 ║ 12. **Generate Dependency Analysis with External Constraints**
 ║     - Include external service dependencies and rate limits from research
@@ -243,28 +245,130 @@ Implementation task breakdown template providing systematic S001-S999 task enume
 **🏁 MILESTONE: User Interface Complete**
 *Consider commit: "Implement [feature] user interface and navigation"*
 
-### Phase 5: Integration & Validation
-*End-to-end functionality, error scenarios, edge cases*
+### Phase 5: Automated Integration & Build Validation
+*Automated testing, builds, and code quality checks that AI can execute*
 
-- [ ] **S019** [P] [AI Generated: Happy path integration testing]
-- [ ] **S020** [P] [AI Generated: Error scenario testing]
-- [ ] **S021** [P] [AI Generated: Edge case validation]
-- [ ] **S022** [AI Generated: Performance testing and optimization]
+- [ ] **S019** [P] [AI Generated: Unit/integration test execution for feature]
+  - **Path**: Run test suite with build validation
+  - **Dependencies**: [Previous implementation tasks]
+  - **Notes**: Execute automated tests, validate build success, check code compilation
 
-**🏁 MILESTONE: Feature Integration**
-*Consider commit: "Complete [feature] integration and validation"*
+- [ ] **S020** [P] [AI Generated: Code quality agent validation]
+  - **Path**: Use ContextKit agents (check-modern-code, check-accessibility, etc.)
+  - **Dependencies**: [Implementation tasks]
+  - **Notes**: Automated code pattern validation, no manual app interaction required
 
-### Phase 6: Quality & Compliance
-*Code quality, platform compliance, release preparation*
+- [ ] **S021** [P] [AI Generated: Error handling pattern validation]
+  - **Path**: ErrorKit pattern compliance checking via agents
+  - **Dependencies**: [Service layer tasks]
+  - **Notes**: Validate error types, user-friendly messages, typed throws patterns
 
-- [ ] **S023** [P] [AI Generated: Accessibility validation tasks]
-- [ ] **S024** [P] [AI Generated: Localization validation tasks]
-- [ ] **S025** [P] [AI Generated: Code quality and modernization tasks]
-- [ ] **S026** [AI Generated: Privacy and compliance updates if needed]
-- [ ] **S027** [AI Generated: Documentation and release preparation]
+- [ ] **S022** [AI Generated: Build performance and warnings audit]
+  - **Path**: Build system validation and compiler warning analysis
+  - **Dependencies**: [All implementation tasks]
+  - **Notes**: Check build times, resolve compiler warnings, validate dependencies
+
+**🏁 MILESTONE: Automated Validation Complete**
+*Consider commit: "Complete [feature] automated testing and quality validation"*
+
+### Phase 6: Manual User Testing & Validation
+*Tasks requiring human interaction with running application*
+
+- [ ] **S023** [AI Generated: Manual happy path testing instructions]
+  ```
+  ═══════════════════════════════════════════════════
+  ║ 🧪 MANUAL USER TESTING REQUIRED
+  ═══════════════════════════════════════════════════
+  ║
+  ║ 1. Build and run the app
+  ║ 2. [AI Generated: Specific user interaction steps]
+  ║ 3. [AI Generated: Expected behavior to verify]
+  ║ 4. [AI Generated: Success criteria checklist]
+  ║
+  ║ Reply "✅ Passed" or "❌ Issues: [description]"
+  ```
+
+- [ ] **S024** [AI Generated: Manual error scenario testing instructions]
+  ```
+  ═══════════════════════════════════════════════════
+  ║ 🧪 MANUAL ERROR TESTING REQUIRED
+  ═══════════════════════════════════════════════════
+  ║
+  ║ 1. [AI Generated: Steps to trigger error conditions]
+  ║ 2. [AI Generated: Expected error handling behavior]
+  ║ 3. [AI Generated: Recovery mechanisms to verify]
+  ║
+  ║ Reply "✅ Passed" or "❌ Issues: [description]"
+  ```
+
+- [ ] **S025** [AI Generated: Manual accessibility testing instructions]
+  ```
+  ═══════════════════════════════════════════════════
+  ║ 🧪 MANUAL ACCESSIBILITY TESTING REQUIRED
+  ═══════════════════════════════════════════════════
+  ║
+  ║ 1. Enable VoiceOver in System Settings > Accessibility
+  ║ 2. [AI Generated: Navigation testing steps]
+  ║ 3. Test Dynamic Type with larger text sizes
+  ║ 4. [AI Generated: Specific accessibility scenarios]
+  ║
+  ║ Reply "✅ Passed" or "❌ Issues: [description]"
+  ```
+
+- [ ] **S026** [AI Generated: Accessibility Inspector comprehensive audit]
+  ```
+  ═══════════════════════════════════════════════════
+  ║ 🔍 ACCESSIBILITY INSPECTOR AUDIT REQUIRED
+  ═══════════════════════════════════════════════════
+  ║
+  ║ 1. Launch Xcode → Open Developer Tool → Accessibility Inspector
+  ║ 2. Build and run your app (⌘+R) in Simulator or on device
+  ║ 3. In Inspector, select your app target from dropdown
+  ║ 4. Click "Audit" tab → "Run Audit" button
+  ║ 5. Review all reported issues (missing labels, contrast, hit regions)
+  ║ 6. Navigate through your [AI Generated: feature-specific screens]
+  ║
+  ║ If issues found:
+  ║ • Copy issue descriptions with element locations
+  ║ • Start new Claude session with: "Fix accessibility issues from Inspector"
+  ║ • Paste the issue details for AI assistance in resolving them
+  ║
+  ║ Reply "✅ No issues" or "✅ Fixed [X] issues with AI assistance"
+  ```
+
+**🏁 MILESTONE: User Testing Complete**
+*All manual validation scenarios verified by human testing*
+
+### Phase 7: Release Preparation & Compliance
+*Final automated tasks and external process preparation*
+
+- [ ] **S027** [P] [AI Generated: Privacy manifest updates]
+  - **Path**: `App/PrivacyInfo.xcprivacy` file updates
+  - **Dependencies**: [Feature completion]
+  - **Notes**: Document new data usage, API calls, background activities
+
+- [ ] **S028** [P] [AI Generated: String Catalog validation]
+  - **Path**: Automated localization completeness check
+  - **Dependencies**: [UI implementation tasks]
+  - **Notes**: Verify all user-facing strings have localization entries
+
+- [ ] **S029** [AI Generated: App Store metadata preparation instructions]
+  ```
+  ═══════════════════════════════════════════════════
+  ║ 📱 APP STORE PREPARATION REQUIRED
+  ═══════════════════════════════════════════════════
+  ║
+  ║ 1. Update App Store Connect metadata:
+  ║    - [AI Generated: Feature description updates]
+  ║    - [AI Generated: Version notes content]
+  ║ 2. Prepare screenshots if UI changed significantly
+  ║ 3. Update minimum OS requirements if needed
+  ║
+  ║ Reply "✅ Ready for submission" when complete
+  ```
 
 **🏁 MILESTONE: Release Ready**
-*Consider commit: "Finalize [feature] - quality gates and compliance"*
+*Consider commit: "Finalize [feature] - ready for App Store submission"*
 
 ## AI-Assisted Development Time Estimation *(Claude Code + Human Review)*
 
@@ -411,6 +515,13 @@ For complex Xcode operations (target creation, scheme setup), use standardized f
 ║ - [ ] Service layer tasks handle all business logic requirements?
 ║ - [ ] Testing tasks provide adequate coverage for all components?
 ║ - [ ] Platform compliance tasks address App Store and guideline requirements?
+║
+║ ### Automated vs Manual Task Validation
+║ - [ ] **Phase 5 tasks** are truly automated (builds, tests, agents only)?
+║ - [ ] **Phase 6 tasks** requiring app interaction use standardized manual testing format?
+║ - [ ] No manual testing tasks marked as automated AI execution?
+║ - [ ] Manual testing tasks include clear success/failure response instructions?
+║ - [ ] External processes (App Store) clearly marked as manual user actions?
 ║
 ║ ### Implementation Completeness
 ║ - [ ] All user scenarios from specification have implementation tasks?

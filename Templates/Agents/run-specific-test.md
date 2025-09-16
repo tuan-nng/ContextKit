@@ -1,8 +1,9 @@
 ---
-meta: "Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14"
+meta: "Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-16"
 name: run-specific-test
 description: Execute specific test with build validation and focused failure analysis
-tools: Bash, Read, Grep
+tools: Bash, Read, Grep, Glob
+color: yellow
 ---
 
 # Agent: run-specific-test

@@ -1,8 +1,9 @@
 ---
-meta: "Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14"
+meta: "Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-16"
 name: check-modern-code
 description: Detect and automatically replace outdated APIs and patterns with modern alternatives, applying framework-specific modernization fixes
-tools: Read, Edit, MultiEdit, Bash, Glob, Task
+tools: Read, Edit, MultiEdit, Grep, Glob, Bash, Task
+color: cyan
 ---
 
 > [!WARNING]

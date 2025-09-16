@@ -1,8 +1,9 @@
 ---
-meta: "Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-14"
+meta: "Template Version: 5 | ContextKit: 0.0.0 | Updated: 2025-09-16"
 name: check-accessibility
 description: Detect and automatically fix accessibility issues in UI code, applying universal principles with framework-specific improvements
 tools: Read, Edit, MultiEdit, Grep, Glob, Task
+color: cyan
 ---
 
 # Agent: check-accessibility
@@ -16,6 +17,9 @@ tools: Read, Edit, MultiEdit, Grep, Glob, Task
 
 ## Purpose
 Detect and automatically fix accessibility issues in UI code including missing screen reader labels, text scaling gaps, and keyboard navigation problems. Applies universal accessibility principles with automatic framework-specific fixes.
+
+**⚡ AI Capabilities**: Static code analysis, automatic label insertion, Dynamic Type support detection, missing accessibility label detection, color contrast pattern validation (code-level)
+**🧪 Requires Manual Testing**: VoiceOver navigation, actual device testing, user experience validation, all real app interaction and accessibility verification
 
 ## Recent Work Input Format
 
@@ -144,7 +148,7 @@ Build validated: SUCCESS
 
 Manual review needed:
 - StatusView.swift:67 - Color-only status indicator (add text/icon)
-- CustomTabView.swift:45 - Complex gesture needs VoiceOver testing
+- CustomTabView.swift:45 - Complex gesture needs **manual VoiceOver testing by user**
 
 Files modified: LoginView.swift, ProfileView.swift, HeaderView.swift, FormView.swift
 ```
