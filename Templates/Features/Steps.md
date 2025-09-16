@@ -1,5 +1,5 @@
 # Implementation Steps: [Feature from Tech.md]
-<!-- Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 4 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 ## Description
 Implementation task breakdown template providing systematic S001-S999 task enumeration with parallel execution markers and dependency analysis for iOS/macOS development workflows.
@@ -51,6 +51,11 @@ Implementation task breakdown template providing systematic S001-S999 task enume
 ║    - One task per data model definition
 ║    - One task per significant UI component
 ║    - TDD approach: tests before implementation
+║    - **Xcode Project Management**: Manual user actions required for complex Xcode project changes
+║      - Target creation/deletion = Manual user action with standardized box format
+║      - Scheme modifications = Manual user action when complex
+║      - Simple Info.plist updates = Automated task (allowed)
+║      - Build setting changes = Automated task when straightforward
 ║
 ║ 6. **Generate Tasks with S### Enumeration (S001, S002...)**
 ║    - Setup tasks: Project structure, dependencies, configuration (S001-S010)
@@ -317,6 +322,19 @@ Implementation task breakdown template providing systematic S001-S999 task enume
 - **Independent components** = `[P]` parallel safe
 - **Shared resources** = Sequential only
 - **Tests with implementation** = Can run `[P]` parallel
+
+### Manual User Action Format
+For complex Xcode operations (target creation, scheme setup), use standardized format:
+```
+═══════════════════════════════════════════════════
+║ 🎯 MANUAL XCODE ACTION REQUIRED
+═══════════════════════════════════════════════════
+║
+║ [Step-by-step Xcode UI instructions]
+║ [Specific menu paths and actions]
+║
+║ Reply "Done" when completed to continue.
+```
 
 ### Quality Integration
 *Built into implementation phases, not separate agent tasks*

@@ -1,5 +1,5 @@
 # SwiftUI Development Guidelines
-<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -135,6 +135,32 @@ FlineDev frameworks provide SwiftUI-specific tools (find all at https://github.c
 ### Common UI Strings
 - ✅ **Prefer**: `Button(TK.Action.save) { }` for common actions (TranslateKitSDK)
 - ✅ **Prefer**: `Text(TK.Label.settings)` for common labels (TranslateKitSDK)
+
+---
+
+## Xcode Project Management
+
+### Target and Project Configuration
+- ✅ **Manual target creation**: Guide developers to create new targets manually through Xcode UI
+- ✅ **Simple modifications**: Allow automated changes to Info.plist entries and known entitlements
+- ✅ **Build settings**: Allow automated updates to straightforward build configuration settings
+- ❌ **Avoid**: Direct .xcodeproj file editing for complex structural changes (targets, schemes, groups)
+- ❌ **Avoid**: Automated target dependency management through project file modification
+
+### Manual User Action Protocol
+When Xcode UI actions are required, use the standardized user instruction format:
+```
+═══════════════════════════════════════════════════
+║ 🎯 MANUAL XCODE ACTION REQUIRED
+═══════════════════════════════════════════════════
+║
+║ [Clear step-by-step instructions for Xcode UI]
+║ [Specific menu paths and button clicks]
+║
+║ Reply "Done" when completed to continue.
+```
+
+**Planning Integration**: Include manual Xcode actions as explicit steps in `Steps.md` implementation planning with clear user action markers.
 
 ---
 
