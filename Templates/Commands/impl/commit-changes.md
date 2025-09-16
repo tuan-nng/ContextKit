@@ -1,5 +1,5 @@
 # Commit Changes
-<!-- Template Version: 6 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 7 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -14,14 +14,25 @@ Delegate to specialized commit-changes agent for intelligent git analysis, commi
 ## Execution Flow (main)
 
 1. **Launch Commit Agent**
-   - Use `Task` tool to launch `commit-changes` agent
+   - Use `Task` tool to launch `commit-changes` agent with no additional parameters
    - Agent handles all git analysis, formatting, message generation, and commit execution
    - Agent provides structured summary of committed changes
 
-2. **Display Agent Response**
-   - Show the agent's success summary directly to user
-   - Includes commit hash, message, file count, and change explanation
-   - No additional processing needed
+2. **Forward Agent Response Exactly**
+   - **CRITICAL**: Display the agent's response exactly as received, without any modification or interpretation
+   - **Do NOT**: Add your own summary, interpretation, or additional text
+   - **Do NOT**: Reformat or restructure the agent's output
+   - The agent already provides the complete structured response in the correct format:
+     ```
+     ✅ Successfully committed changes
+
+     📝 Commit: [commit_hash]
+     💬 Message: "[commit_message]"
+     📂 Files: [number] files modified
+     📊 Changes: +[lines_added] -[lines_deleted]
+
+     🎯 Summary: [Brief explanation of what was accomplished and why]
+     ```
 
 ## Error Conditions
 
