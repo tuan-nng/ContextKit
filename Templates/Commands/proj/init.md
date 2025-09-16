@@ -1,5 +1,5 @@
 # Initialize Project with ContextKit
-<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14 -->
+<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -94,11 +94,11 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 10. **Copy Script Templates**
    ```bash
-   cp ~/.ContextKit/Templates/Scripts/* Context/Scripts/
+   cp -p ~/.ContextKit/Templates/Scripts/* Context/Scripts/
    chmod +x Context/Scripts/*.sh
    echo "✅ Copied script templates (AutoFormat.sh, VersionStatus.sh, etc.)"
    ```
-   > **Note**: First `/*` copies all files, then `/*.sh` applies executable permissions to all .sh files
+   > **Note**: `-p` preserves permissions during copy, `chmod +x` ensures all .sh files are executable
 
 11. **Copy Development Guidelines**
    ```bash
