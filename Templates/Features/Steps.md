@@ -1,5 +1,5 @@
 # Implementation Steps: [Feature from Tech.md]
-<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 ## Description
 Implementation task breakdown template providing systematic S001-S999 task enumeration with parallel execution markers and dependency analysis for iOS/macOS development workflows.
@@ -33,6 +33,10 @@ Implementation task breakdown template providing systematic S001-S999 task enume
 ║ 4. **Analyze Implementation Complexity and Scope**
 ║    - Count: new files, modified files, new APIs, tests needed
 ║    - If scope > 25 tasks: WARN "Consider breaking into smaller features"
+║    - **Knowledge Gap Assessment**: Evaluate API documentation quality and newness
+║      - Well-documented Apple APIs = Low Risk
+║      - Community-documented technologies = Medium Risk
+║      - New/niche/poorly documented APIs = High Risk
 ║    - Identify critical path and parallel opportunities
 ║
 ║ ### Phase 2: Task Generation & Organization
@@ -41,6 +45,7 @@ Implementation task breakdown template providing systematic S001-S999 task enume
 ║    - Apply technology limitations from research (version requirements, rate limits, API constraints)
 ║    - Include integration patterns discovered in codebase analysis
 ║    - Consider performance implications documented in architectural pattern research
+║    - **AI-Assisted Development Considerations**: Factor in knowledge gaps and documentation quality for realistic time estimates
 ║    - One task per file creation/modification
 ║    - One task per API endpoint implementation
 ║    - One task per data model definition
@@ -111,6 +116,11 @@ Implementation task breakdown template providing systematic S001-S999 task enume
 ║ 13. **Create Completion Verification Checklist with Research Validation**
 ║     - Include technology implementation validation based on research best practices
 ║     - Add performance verification criteria from architectural pattern research
+║     - **AI-Assisted Time Estimation**: Generate realistic review and testing time estimates based on:
+║       - Claude Code execution speed (fast implementation)
+║       - Human review time requirements (reading, understanding, testing)
+║       - Knowledge gap risk factors (API documentation quality impact)
+║       - Expected correction cycles based on technology maturity
 ║     - iOS feature completeness requirements
 ║     - Quality gate validation criteria
 ║     - App Store readiness verification
@@ -251,6 +261,48 @@ Implementation task breakdown template providing systematic S001-S999 task enume
 **🏁 MILESTONE: Release Ready**
 *Consider commit: "Finalize [feature] - quality gates and compliance"*
 
+## AI-Assisted Development Time Estimation *(Claude Code + Human Review)*
+
+> **⚠️ ESTIMATION BASIS**: These estimates assume development with Claude Code (AI) executing implementation tasks with human review and guidance. Times reflect AI execution + human review cycles, not manual coding.
+
+### Phase-by-Phase Review Time
+**Setup & Configuration**: [AI Generated human review time]
+- *AI executes quickly, human reviews project structure and dependencies*
+
+**Data Layer**: [AI Generated human review time]
+- *AI implements models/tests, human validates business logic and data relationships*
+
+**Service Layer**: [AI Generated human review time]
+- *AI builds services, human reviews integration patterns and error handling*
+
+**User Interface**: [AI Generated human review time]
+- *AI creates UI components, human tests user experience and visual design*
+
+**Integration & Quality**: [AI Generated human review time]
+- *AI runs quality checks, human performs acceptance testing and validates workflows*
+
+### Knowledge Gap Risk Factors
+**🟢 Low Risk** (Well-documented Apple APIs): Minimal correction cycles expected
+**🟡 Medium Risk** (Community-documented technologies): Some refinement iterations likely
+**🔴 High Risk** (New/niche APIs with limited documentation): Multiple correction cycles expected
+
+**API Documentation Quality Impact**:
+- **Excellent docs** (Apple frameworks): ~10% additional review time
+- **Good community docs**: ~25% additional review time
+- **Poor/sparse docs**: ~50-100% additional review time
+- **Brand new/beta APIs**: ~100%+ additional review time
+
+### Total Estimated Review Time
+**Core Development**: [AI Generated base time for human review]
+**Risk-Adjusted Time**: [AI Generated time with knowledge gap factors]
+**Manual Testing Allocation**: [AI Generated testing time estimate]
+
+> **💡 TIME COMPOSITION**:
+> - AI Implementation: ~10-20% (Claude Code executes quickly)
+> - Human Review: ~40-50% (reading, understanding, testing)
+> - Correction Cycles: ~20-30% (refinements and fixes)
+> - Manual Testing: ~20-30% (validation and acceptance)
+
 ## Implementation Structure *(AI guidance)*
 
 ### Task Numbering Convention
@@ -278,10 +330,10 @@ Implementation task breakdown template providing systematic S001-S999 task enume
 ## Dependency Analysis *(AI generated)*
 
 ### Critical Path
-[AI Generated: Longest dependency chain through phases]
+[AI Generated: Longest dependency chain through phases with AI-assisted time estimates]
 
 ### Parallel Opportunities
-[AI Generated: Tasks that can execute concurrently with [P] markers]
+[AI Generated: Tasks that can execute concurrently with [P] markers - AI can work on multiple independent files simultaneously while human reviews completed work]
 
 ### Platform Dependencies
 [AI Generated: iOS/macOS specific requirements and dependencies]

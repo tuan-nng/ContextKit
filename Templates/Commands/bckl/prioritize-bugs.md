@@ -1,5 +1,5 @@
 # Triage Bugs with Severity-Based Prioritization
-<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-15 -->
+<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -85,16 +85,17 @@ Process bugs from inbox through systematic 5-step triage with severity-based bin
    **Step 2: Effort Estimation**
    ```
    ────────────────────────────────────────────────────────────────
-   **⏱️ EFFORT: How complex would this fix be?**
+   **⏱️ EFFORT: How much human review/testing time would this fix require with AI assistance?**
+   > *Note: Estimate AI-assisted development time (Claude Code implements fix + human reviews/tests), not manual coding time.*
    ────────────────────────────────────────────────────────────────
 
    **Bug:** [Bug Title]
    **Severity:** [Determined severity level]
 
-   A) Simple - 1-3 hours (UI fix, text change, obvious bug)
-   B) Medium - 4-12 hours (logic fix, single component)
-   C) Complex - 1-3 days (architecture issue, multiple systems)
-   D) Major - 1+ weeks (fundamental redesign required)
+   A) Simple - 1-3 hours *(AI-assisted)* (UI fix, text change, obvious bug)
+   B) Medium - 4-12 hours *(AI-assisted)* (logic fix, single component)
+   C) Complex - 1-3 days *(AI-assisted)* (architecture issue, multiple systems)
+   D) Major - 1+ weeks *(AI-assisted)* (fundamental redesign required)
 
    Choose A, B, C, or D:
    ────────────────────────────────────────────────────────────────

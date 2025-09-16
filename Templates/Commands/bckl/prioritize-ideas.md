@@ -1,5 +1,5 @@
 # Prioritize Ideas with Binary Search Evaluation
-<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-15 -->
+<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -65,7 +65,8 @@ Process ideas from inbox through systematic 5-step evaluation with binary search
    **Step 1: Effort Assessment**
    ```
    ────────────────────────────────────────────────────────────────
-   **⏱️ EFFORT: How many hours would this task take to complete?**
+   **⏱️ EFFORT: How many hours of human review/testing time with AI assistance?**
+   > *Note: Estimate AI-assisted development time (Claude Code implements + human reviews), not manual coding time.*
    ────────────────────────────────────────────────────────────────
 
    **Idea:** [Idea Title]
@@ -84,7 +85,7 @@ Process ideas from inbox through systematic 5-step evaluation with binary search
    ────────────────────────────────────────────────────────────────
 
    **Idea:** [Idea Title]
-   **Effort:** ~[X] hours
+   **Effort:** ~[X] hours *(AI-assisted)*
 
    ────────────────────────────────────────────────────────────────
    ```
