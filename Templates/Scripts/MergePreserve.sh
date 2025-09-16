@@ -1,5 +1,5 @@
 #!/bin/bash
-# Template Version: 7 | ContextKit: 0.0.0 | Updated: 2025-09-16
+# Template Version: 8 | ContextKit: 0.0.0 | Updated: 2025-09-16
 
 # MergePreserve.sh - Intelligent template merging with customization preservation
 # Automatically merges template updates while preserving user customizations
@@ -14,6 +14,19 @@
 # - Create backups before any modification
 
 set -e
+
+###########################################
+# Executable Permission Helper
+###########################################
+ensure_executable_permissions() {
+    local file="$1"
+
+    # Make shell scripts executable
+    if [[ "$file" == *.sh ]]; then
+        chmod +x "$file"
+        echo "  🔧 Made executable: $(basename "$file")"
+    fi
+}
 
 # Usage: ./MergePreserve.sh <template_file> <target_file>
 if [ $# -ne 2 ]; then
@@ -38,6 +51,7 @@ if [ ! -f "$TARGET_FILE" ]; then
     # Create parent directories if they don't exist
     mkdir -p "$(dirname "$TARGET_FILE")"
     cp "$TEMPLATE_FILE" "$TARGET_FILE"
+    ensure_executable_permissions "$TARGET_FILE"
     exit 0
 fi
 
@@ -83,6 +97,7 @@ merge_with_preservation() {
     if [ "$target_separator" -eq 0 ]; then
         echo "🔄 REPLACE: No customization section found"
         cp "$template" "$target"
+        ensure_executable_permissions "$target"
         return 0
     fi
 
@@ -90,6 +105,7 @@ merge_with_preservation() {
     if ! has_meaningful_customizations "$target" "$target_separator"; then
         echo "🔄 REPLACE: Only boilerplate customizations found"
         cp "$template" "$target"
+        ensure_executable_permissions "$target"
         return 0
     fi
 
@@ -108,12 +124,14 @@ merge_with_preservation() {
             echo "════════════════════════════════════════════════════════════════════════════════"
             tail -n +$((target_separator + 1)) "$target"
         } > "$target.tmp" && mv "$target.tmp" "$target"
+        ensure_executable_permissions "$target"
     else
         # Both have customization sections - standard merge
         {
             head -n "$template_separator" "$template"
             tail -n +$((target_separator + 1)) "$target"
         } > "$target.tmp" && mv "$target.tmp" "$target"
+        ensure_executable_permissions "$target"
     fi
 }
 

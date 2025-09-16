@@ -1,5 +1,5 @@
 # Commit Changes
-<!-- Template Version: 8 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 9 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -18,10 +18,12 @@ Delegate to specialized commit-changes agent for intelligent git analysis, commi
    - Agent handles all git analysis, formatting, message generation, and commit execution
    - Agent provides structured summary of committed changes
 
-2. **Forward Agent Response Exactly**
+2. **Forward Agent Response Exactly - NO ADDITIONAL TEXT**
    - **CRITICAL**: Display the agent's response exactly as received, without any modification or interpretation
-   - **Do NOT**: Add your own summary, interpretation, or additional text
-   - **Do NOT**: Reformat or restructure the agent's output
+   - **FORBIDDEN**: Do NOT add your own summary, interpretation, preamble, or postamble
+   - **FORBIDDEN**: Do NOT add phrases like "Here's the commit result:" or "The agent completed successfully"
+   - **FORBIDDEN**: Do NOT reformat or restructure the agent's output in any way
+   - **OUTPUT ONLY**: The agent's raw response and nothing else
    - The agent already provides the complete structured response in the correct format:
      ```
      ✅ Successfully committed changes

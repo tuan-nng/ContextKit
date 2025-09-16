@@ -1,5 +1,5 @@
 ---
-meta: "Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-16"
+meta: "Template Version: 4 | ContextKit: 0.0.0 | Updated: 2025-09-16"
 name: commit-changes
 description: Intelligent git analysis, commit message generation, and commit execution with comprehensive format validation
 tools: Read, Bash, Grep, Glob
@@ -139,8 +139,10 @@ Avoid these patterns:
 
 ## Response Format
 
+**CRITICAL**: Output ONLY the format below. Do NOT add any additional text, explanations, summaries, or commentary before or after this format.
+
 ### Success Response
-Provide a concise summary in this exact format:
+Output EXACTLY this format with NO additional text:
 
 ```
 ✅ Successfully committed changes
@@ -152,13 +154,15 @@ Provide a concise summary in this exact format:
 ```
 
 ### Error Response
-For errors, provide clear guidance:
+Output EXACTLY this format with NO additional text:
 
 ```
 ❌ Commit failed: [reason]
 
 🔧 Resolution: [specific steps to fix the issue]
 ```
+
+**FORBIDDEN**: Do NOT add preamble like "I'll commit these changes" or postamble like "The commit has been completed successfully"
 
 ## Error Handling
 
