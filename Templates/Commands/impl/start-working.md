@@ -1,5 +1,5 @@
 # Begin Development with Context
-<!-- Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 4 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -156,15 +156,18 @@ Begin systematic development with context-aware setup, task analysis, and guided
 8. **Handle Task Execution Based on Type**
 
    **For MANUAL REQUIRED Tasks** (marked with ⚠️ MANUAL REQUIRED):
+
+   **CRITICAL**: Always use the standardized user input box format below - never use custom formatting for manual tasks:
+
    ```
    ═══════════════════════════════════════════════════
    ║ 👤 MANUAL TASK REQUIRED - [TaskNumber]
    ═══════════════════════════════════════════════════
    ║
    ║ 📋 TASK: [TaskDescription]
-   ║ 📂 Files: [file_paths]
+   ║ 📂 Files: [file_paths or "Xcode project settings" for Xcode tasks]
    ║ 🛠️ Manual steps required:
-   ║ [Extract manual instructions from task notes]
+   ║ [Extract detailed manual instructions from task notes]
    ║
    ║ 📝 CONTEXT:
    ║ • Feature: [brief_spec_summary]
@@ -181,13 +184,16 @@ Begin systematic development with context-aware setup, task analysis, and guided
    ║
    ║ Status:
    ```
-   - Wait for user response
-   - If "done": Mark task as completed in Steps.md, continue to next task
-   - If "skip": Ask for confirmation, mark with 🚧 SKIPPED marker, continue
-   - If "help": Display full manual instructions, return to status prompt
+
+   **IMPORTANT**:
+   - Do NOT use custom formats like "⏺ Starting with..." or "⚠️ Manual Xcode Configuration Required"
+   - Always use the exact user input box format above with ║ line prefixes
+   - All manual task communication must follow this standardized format
    - If "back": Return to task analysis phase
 
    **For AUTOMATED Tasks** (no manual markers):
+
+   **CRITICAL**: Always use the standardized user input box format below - never use custom formatting:
    ```
    ═══════════════════════════════════════════════════
    ║ 🚀 AUTOMATED TASK - [TaskNumber]
@@ -207,6 +213,11 @@ Begin systematic development with context-aware setup, task analysis, and guided
    ║
    ║ Ready to implement automatically? (Y/n):
    ```
+
+   **IMPORTANT**:
+   - Do NOT use custom formats like "⏺ Starting with..."
+   - Always use the exact user input box format above with ║ line prefixes
+   - All automated task communication must follow this standardized format
    - Wait for user confirmation
    - If "n": Ask for alternative approach or skip
    - If "Y": Continue to automated implementation
