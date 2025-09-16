@@ -1,5 +1,5 @@
 ---
-meta: "Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-16"
+meta: "Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16"
 name: commit-changes
 description: Intelligent git analysis, commit message generation, and commit execution with comprehensive format validation
 tools: Read, Bash, Grep, Glob
@@ -101,41 +101,35 @@ Avoid these patterns:
 
 ## Execution Flow (agent)
 
-1. **Repository State Check**
+1. **Single Git Analysis**
    ```bash
-   git status --porcelain
+   git diff HEAD  # Get ALL changes (staged + unstaged) with full context
    ```
-   - Exit with error if no changes or merge conflicts exist
-
-2. **Comprehensive Change Analysis**
-   ```bash
-   git diff --name-status  # Get change types (A/M/D)
-   git diff --stat         # Get change statistics
-   git diff                # Get full diff content for context analysis
-   ```
-   - Analyze the semantic meaning of changes
+   - If no output: Exit with error "No changes to commit"
+   - If merge conflict markers detected: Exit with error "Resolve merge conflicts first"
+   - Analyze the semantic meaning of changes from full diff content
    - Understand the purpose and scope of modifications
    - Identify primary change theme (feature, fix, refactor, etc.)
 
-3. **Optional Formatting**
+2. **Optional Formatting**
    ```bash
    test -f .swiftformat && swiftformat . --config .swiftformat
    test -f .swift-format && swift-format --in-place --recursive Sources/
    ```
 
-4. **Commit Message Generation**
+3. **Commit Message Generation**
    - Apply context-driven analysis to understand WHY changes were made
    - Select appropriate action verb based on change type and purpose
    - Craft message following all format requirements
    - Ensure message captures both WHAT and WHY of the changes
 
-5. **Commit Execution**
+4. **Commit Execution**
    ```bash
    git add .
    git commit -m "[GENERATED_MESSAGE]"
    ```
 
-6. **Post-Commit Validation**
+5. **Post-Commit Validation**
    ```bash
    git log -1 --format="%s%n%b"
    ```
