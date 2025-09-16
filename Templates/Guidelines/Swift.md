@@ -1,5 +1,5 @@
 # Swift Development Guidelines
-<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-13 -->
+<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -165,6 +165,41 @@ Quality validation is handled by specialized agents:
 - **`check-localization`**: Verifies string externalization
 - **`check-error-handling`**: Confirms ErrorKit patterns
 - **`check-code-debt`**: Removes AI artifacts and cleans up code
+
+---
+
+## Official Apple Resources
+
+### Swift Language Documentation
+- **Swift Language Guide**: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/
+- **Swift API Design Guidelines**: https://swift.org/documentation/api-design-guidelines/
+- **Swift Evolution**: https://apple.github.io/swift-evolution/ - Track upcoming language features
+- **Swift Package Manager**: https://swift.org/getting-started/#using-the-package-manager
+
+### Apple Developer Documentation
+- **Foundation Framework**: https://developer.apple.com/documentation/foundation
+- **Swift Concurrency**: https://developer.apple.com/documentation/swift/concurrency
+- **Testing in Xcode**: https://developer.apple.com/documentation/xcode/testing-your-apps-in-xcode
+- **App Store Connect**: https://developer.apple.com/documentation/appstoreconnectapi
+
+### Community-Trusted Domains
+- **wwdcnotes.com** - Community WWDC session summaries with practical examples
+- **swiftbysundell.com** - Modern Swift patterns, best practices, and architectural guidance
+- **avanderlee.com** - Practical iOS development, debugging, and performance insights
+- **hackingwithswift.com** - Swift tutorials, project-based learning, and reference materials
+- **swiftwithmajid.com** - SwiftUI and iOS development insights with regular WWDC coverage
+- **fatbobman.com** - In-depth Swift and SwiftData analysis with WWDC technical breakdowns
+- **swiftwithvincent.com** - Swift development tutorials and WWDC highlights
+- **donnywals.com** - Practical iOS development guides and Apple platform updates
+- **kodeco.com** - Comprehensive iOS tutorials and WWDC recaps (formerly Ray Wenderlich)
+- **elkraneo.com** - WWDC session resources and practical development insights
+- **natasharobot.com** - Swift community insights and development practices
+- **pointfree.co** - Advanced Swift concepts, functional programming, and architecture
+
+### Performance and Debugging
+- **Xcode Instruments**: https://developer.apple.com/documentation/instruments
+- **Swift Performance**: https://github.com/apple/swift/blob/main/docs/OptimizationTips.rst
+- **Memory Management**: https://developer.apple.com/documentation/swift/automaticreferencecounting
 
 ---
 

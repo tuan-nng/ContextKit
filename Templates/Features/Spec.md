@@ -1,5 +1,5 @@
 # Feature Specification Template
-<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14 -->
+<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 ## Description
 Feature specification template providing systematic business requirements generation with progress tracking and quality validation.
@@ -77,7 +77,7 @@ Feature specification template providing systematic business requirements genera
 ║
 ║ 10. **Mark Clarification Needs**
 ║     - For any ambiguous or underspecified requirements, mark with:
-║       [NEEDS CLARIFICATION: specific question]
+║       🚨 [NEEDS CLARIFICATION: specific question]
 ║     - Common areas: authentication methods, data persistence, target platforms,
 ║       performance targets, user flows, business requirements
 ║
@@ -100,7 +100,7 @@ Feature specification template providing systematic business requirements genera
 ║       - User description parsed
 ║       - Development guidelines applied
 ║       - Key concepts extracted
-║       - Ambiguities marked with [NEEDS CLARIFICATION]
+║       - Ambiguities marked with 🚨 [NEEDS CLARIFICATION]
 ║       - Platform-specific user scenarios defined
 ║       - Platform-specific requirements generated
 ║       - Anti-speculation enforcement applied
@@ -128,7 +128,7 @@ Feature specification template providing systematic business requirements genera
 ║ - Platform considerations (iOS/macOS) integrated throughout specification
 ║ - User value clearly articulated without technical implementation details
 ║ - All validation gates passed and checkboxes marked appropriately
-║ - [NEEDS CLARIFICATION] markers used for genuine ambiguities only
+║ - 🚨 [NEEDS CLARIFICATION] markers used for genuine ambiguities only
 ║ - System instructions AND validation framework completely removed from final specification
 ║
 ════════════════════════════════════════════════════════════════════════════════
@@ -225,7 +225,7 @@ Feature specification template providing systematic business requirements genera
 ║ - [ ] All user flows have Happy Path + Error Path scenarios?
 ║ - [ ] Edge cases documented with expected behaviors?
 ║ - [ ] Success criteria are measurable with specific metrics?
-║ - [ ] No [NEEDS CLARIFICATION] markers remain unresolved?
+║ - [ ] No 🚨 [NEEDS CLARIFICATION] markers remain unresolved?
 ║
 ║ ### Business Value
 ║ - [ ] Clear user problems identified and documented?
@@ -244,7 +244,7 @@ Feature specification template providing systematic business requirements genera
 ║ - [ ] Platform-specific considerations integrated throughout
 ║
 ║ ### Requirement Completeness
-║ - [ ] No [NEEDS CLARIFICATION] markers remain
+║ - [ ] No 🚨 [NEEDS CLARIFICATION] markers remain
 ║ - [ ] Requirements are testable and unambiguous
 ║ - [ ] Success criteria are measurable
 ║ - [ ] Scope is clearly bounded with IN/OUT/FUTURE sections
@@ -265,7 +265,7 @@ Feature specification template providing systematic business requirements genera
 ║ - [ ] User description parsed
 ║ - [ ] Development guidelines applied
 ║ - [ ] Key concepts extracted
-║ - [ ] Ambiguities marked with [NEEDS CLARIFICATION]
+║ - [ ] Ambiguities marked with 🚨 [NEEDS CLARIFICATION]
 ║ - [ ] iOS/macOS user scenarios defined
 ║ - [ ] Platform-specific requirements generated
 ║ - [ ] Anti-speculation enforcement applied
@@ -299,7 +299,7 @@ Feature specification template providing systematic business requirements genera
 ║ ### Phase 3: Business Validation & Scope Definition
 ║ - [ ] Business value and user problems clearly documented
 ║ - [ ] Feature justification and scope boundaries defined
-║ - [ ] Clarification needs marked with [NEEDS CLARIFICATION] format
+║ - [ ] Clarification needs marked with 🚨 [NEEDS CLARIFICATION] format
 ║ - [ ] All validation gates executed and boxes checked
 ║
 ║ ### Phase 4: Final Validation & Completion

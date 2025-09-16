@@ -1,5 +1,5 @@
 # Create Task List
-<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-13 -->
+<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -55,18 +55,19 @@ Generate implementation task breakdown by detecting current feature, validating 
 4. **Validate Prerequisites**
    - Use `Read` tool to check Spec.md exists in the found numbered directory: `Read [numbered-feature-directory]/Spec.md`
    - Use `Read` tool to check Tech.md exists in the found numbered directory: `Read [numbered-feature-directory]/Tech.md`
-   - If either missing:
+   - Use `Read` tool to check Research.md exists in the found numbered directory: `Read [numbered-feature-directory]/Research.md`
+   - If any missing:
      ```
      ❌ Prerequisites not complete!
 
-     Both business specification and technical architecture are required:
+     All planning phases are required for implementation:
      - Run /ctxk:plan:1-spec if Spec.md is missing
-     - Run /ctxk:plan:2-tech if Tech.md is missing
+     - Run /ctxk:plan:2-tech if Tech.md is missing (includes Research.md creation)
 
-     Implementation planning requires both completed phases as input.
+     Implementation planning requires completed specification, research, and architecture.
      ```
      → END (exit with error)
-   - Check for [NEEDS CLARIFICATION] markers in both files
+   - Check for 🚨 [NEEDS CLARIFICATION] markers in all three files
    - If clarifications exist: WARN user to resolve them first
 
 ### Phase 3: Template Setup & Execution
@@ -101,8 +102,8 @@ Generate implementation task breakdown by detecting current feature, validating 
 
 - ContextKit globally installed and accessible?
 - Project Context.md exists (ContextKit project setup complete)?
-- Both Spec.md and Tech.md prerequisites exist and are complete?
-- No unresolved [NEEDS CLARIFICATION] markers in prerequisite files?
+- All prerequisites (Spec.md, Tech.md, Research.md) exist and are complete?
+- No unresolved 🚨 [NEEDS CLARIFICATION] markers in all prerequisite files (Spec.md, Tech.md, Research.md)?
 - Steps template copied to feature directory successfully?
 - Template system instructions executed successfully?
 - System instructions section removed from final Steps.md?
@@ -128,7 +129,7 @@ Generate implementation task breakdown by detecting current feature, validating 
 ✅ Generated S### task enumeration with parallel execution markers
 ✅ All mandatory phases completed with dependency analysis
 
-[If NEEDS CLARIFICATION items exist in steps:]
+[If 🚨 [NEEDS CLARIFICATION] items exist in steps:]
 ⚠️  Implementation clarifications needed for:
 • [Template will list specific implementation questions that need answers]
 

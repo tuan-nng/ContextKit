@@ -1,5 +1,5 @@
 # Design Architecture
-<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-13 -->
+<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -63,7 +63,7 @@ Generate technical architecture plan by detecting current feature, validating pr
      Technical planning requires completed specification as input.
      ```
      → END (exit with error)
-   - Check for [NEEDS CLARIFICATION] markers in specification
+   - Check for 🚨 [NEEDS CLARIFICATION] markers in specification
    - If clarifications exist: WARN user to resolve them first
 
 ### Phase 3: Research Phase Execution
@@ -148,7 +148,7 @@ Generate technical architecture plan by detecting current feature, validating pr
 ✅ Applied Context/Guidelines/Swift.md and SwiftUI.md standards
 ✅ All mandatory sections completed with research-informed decisions
 
-[If NEEDS CLARIFICATION items exist in plans:]
+[If 🚨 [NEEDS CLARIFICATION] items exist in plans:]
 ⚠️  Technical clarifications needed for:
 • [Templates will list specific questions that need answers]
 

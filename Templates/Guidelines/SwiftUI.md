@@ -1,5 +1,5 @@
 # SwiftUI Development Guidelines
-<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-13 -->
+<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -240,6 +240,41 @@ All SwiftUI development must support:
 - Prefer self-explaining code/components naming & structure over comments
 - Comment only complex logic / calculations explaining the WHY
 - Keep it simple wherever possible, avoiding boilerplate code
+
+---
+
+## Trusted Research Sources
+
+### Apple Official Domains
+- **developer.apple.com** - SwiftUI framework docs, tutorials, HIG, design resources, accessibility guidelines
+- **SF Symbols, sample code, platform-specific guidelines, performance documentation**
+
+### Community-Trusted Domains
+- **wwdcnotes.com** - Community WWDC session summaries, especially SwiftUI-focused content
+- **swiftui-lab.com** - Advanced SwiftUI techniques, performance insights, and deep technical analysis
+- **hackingwithswift.com** - Practical SwiftUI tutorials, project-based learning, quick reference guides
+- **avanderlee.com** - SwiftUI debugging, performance optimization, and practical development insights
+- **swiftbysundell.com** - SwiftUI architecture patterns, best practices, and modern development approaches
+- **swiftwithmajid.com** - SwiftUI development insights and comprehensive WWDC coverage
+- **fatbobman.com** - SwiftUI and SwiftData technical analysis with detailed WWDC breakdowns
+- **swiftwithvincent.com** - SwiftUI tutorials and developer-focused WWDC highlights
+- **donnywals.com** - Practical SwiftUI guides and Apple platform development insights
+- **kodeco.com** - Comprehensive SwiftUI tutorials and educational content
+- **elkraneo.com** - SwiftUI development resources and WWDC session insights
+- **natasharobot.com** - SwiftUI community perspectives and development experiences
+
+### Indie Developer Perspectives
+- **fline.dev** - Independent SwiftUI developer insights and real-world implementation experiences
+- **Other established indie blogs** - Look for consistent SwiftUI content with practical examples
+
+### Research Best Practices
+- **Official First**: Start with developer.apple.com for authoritative guidance
+- **Dual Search Strategy**: Use both WebSearch AND iosfeeds.com/archive search for SwiftUI community articles
+- **iosfeeds.com Usage**: Search iosfeeds.com/archive?query=SwiftUI to find recent blog posts across the iOS community
+- **Community Validation**: Cross-reference patterns across multiple trusted SwiftUI sources
+- **Platform Considerations**: Check multiple sources for iOS/macOS/visionOS specific guidance
+- **Domain-Limited Searches**: Use `site:wwdcnotes.com SwiftUI` for WWDC-specific content
+- **WWDC Coverage**: Look for WWDC-specific SwiftUI coverage on active community blogs for latest API insights
 
 ---
 

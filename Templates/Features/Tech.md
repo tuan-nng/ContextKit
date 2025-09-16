@@ -1,5 +1,5 @@
 # Technical Architecture: [Feature from Spec.md]
-<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14 -->
+<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 ## Description
 Technical architecture template providing systematic iOS/macOS implementation planning with Context/Guidelines compliance validation and architectural decision documentation.
@@ -53,7 +53,7 @@ Technical architecture template providing systematic iOS/macOS implementation pl
 ║ 7. **Generate Implementation Complexity Assessment"
 ║    - Estimate development time and effort requirements
 ║    - Identify potential risks and mitigation strategies
-║    - Mark uncertain areas with [NEEDS CLARIFICATION: specific technical question]
+║    - Mark uncertain areas with 🚨 [NEEDS CLARIFICATION: specific technical question]
 ║
 ║ ### Phase 3: Technical Plan Generation
 ║
@@ -91,7 +91,7 @@ Technical architecture template providing systematic iOS/macOS implementation pl
 ║
 ║ 13. **Update Technical Plan Status"
 ║     - Check off all completed technical planning items
-║     - Mark any remaining [NEEDS CLARIFICATION] areas
+║     - Mark any remaining 🚨 [NEEDS CLARIFICATION] areas
 ║     - Validate all mandatory sections completed
 ║
 ║ 14. **COMPLETION"
@@ -106,7 +106,7 @@ Technical architecture template providing systematic iOS/macOS implementation pl
 ║ - Platform considerations (iOS/macOS) integrated throughout plan
 ║ - Technical decisions clearly documented with rationale
 ║ - All validation gates passed and dependencies identified
-║ - [NEEDS CLARIFICATION] markers used for genuine technical uncertainties only
+║ - 🚨 [NEEDS CLARIFICATION] markers used for genuine technical uncertainties only
 ║ - System instructions completely removed from final technical plan document
 ║
 ════════════════════════════════════════════════════════════════════════════════
@@ -257,8 +257,8 @@ struct [Secondary Model] {
 ### Areas Requiring Resolution
 [AI Generated: Mark any uncertain technical aspects requiring resolution before implementation]
 
-- [NEEDS CLARIFICATION: [AI Generated specific technical question]]
-- [NEEDS CLARIFICATION: [AI Generated specific technical question]]
+- 🚨 [NEEDS CLARIFICATION: [AI Generated specific technical question]]
+- 🚨 [NEEDS CLARIFICATION: [AI Generated specific technical question]]
 
 ### Research Requirements
 **Technology Investigations**:
@@ -302,7 +302,7 @@ struct [Secondary Model] {
 ║ - [ ] Architecture sufficiently detailed for task breakdown?
 ║ - [ ] Dependencies identified and availability confirmed?
 ║ - [ ] Risk areas identified with mitigation plans?
-║ - [ ] No blocking [NEEDS CLARIFICATION] items remain?
+║ - [ ] No blocking 🚨 [NEEDS CLARIFICATION] items remain?
 ║
 ║ ## Project Type Specific Validation
 ║ *Applied automatically based on detected project type*
@@ -339,7 +339,7 @@ struct [Secondary Model] {
 ║ - [ ] Context/Guidelines compliance gates validated
 ║ - [ ] iOS/macOS architecture designed with rationale
 ║ - [ ] Implementation complexity assessed
-║ - [ ] Technical uncertainties marked with [NEEDS CLARIFICATION]
+║ - [ ] Technical uncertainties marked with 🚨 [NEEDS CLARIFICATION]
 ║
 ║ ### Phase 3: Technical Plan Generation
 ║ - [ ] Technical architecture content generated

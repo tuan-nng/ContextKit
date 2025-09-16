@@ -1,5 +1,5 @@
 # Create Feature Specification
-<!-- Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-14 -->
+<!-- Template Version: 4 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -171,7 +171,7 @@ Initialize feature specification by validating setup, confirming feature naming,
 ✅ Applied constitutional principles from project guidelines
 ✅ All mandatory sections completed with project-specific content
 
-[If NEEDS CLARIFICATION items exist in spec:]
+[If 🚨 [NEEDS CLARIFICATION] items exist in spec:]
 ⚠️  Clarification needed for:
 • [Template will list specific questions that need user answers]
 

@@ -95,7 +95,7 @@
   "statusLine": {
     "type": "command",
     "command": "./Context/Scripts/CustomStatusline.sh --plan Max5",
-    "padding": 5
+    "padding": 0
   },
   "hooks": {
     "PostToolUse": [

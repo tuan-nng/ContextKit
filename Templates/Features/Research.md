@@ -1,5 +1,5 @@
 # Technical Research: [Feature from Spec.md]
-<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14 -->
+<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 ## Description
 Technical research template providing systematic knowledge acquisition for technologies, frameworks, APIs, and integration patterns mentioned in feature specifications.
@@ -50,18 +50,29 @@ Technical research template providing systematic knowledge acquisition for techn
 ║      - Agent: "research-cloudkit" with context: "CloudKit sync capabilities and limitations for feature"
 ║      - Agent: "research-swiftui" with context: "SwiftUI patterns and best practices for [feature area]"
 ║      - Each agent receives technology context and feature requirements
-║      - Agents use WebFetch for official docs, return: versions, capabilities, limitations, integration approaches
+║      - **Apple Platform Priority Domains**: For iOS/macOS technologies, agents MUST prioritize these domains:
+║        - **developer.apple.com** - Official Apple documentation, HIG, sample code
+║        - **wwdcnotes.com** - Community WWDC session summaries and best practices
+║        - **Active iOS/Swift Community**: swiftbysundell.com, avanderlee.com, hackingwithswift.com, natasharobot.com, swiftwithmajid.com, fatbobman.com, swiftwithvincent.com, donnywals.com, kodeco.com, elkraneo.com
+║        - **Indie Developer Insights**: fline.dev and other established Swift developer blogs
+║        - **Domain-Limited Searches**: Use `site:developer.apple.com` or `site:wwdcnotes.com` when researching specific topics
+║      - **Apple Technology Search Strategy**: For iOS/macOS/Swift technologies, agents use BOTH WebSearch AND iosfeeds.com/archive search for community articles
+║      - **iosfeeds.com Usage**: ONLY for Apple platform technologies - Search iosfeeds.com/archive?query=[AppleTechnologyName] to find recent iOS/Swift blog posts
+║      - **Non-Apple Technologies**: Use only WebSearch and official documentation for Android, Web, Backend, or other non-Apple technologies
+║      - Agents use WebFetch for official docs, return: versions, capabilities, limitations, integration approaches WITH SPECIFIC URLs of key sources that informed findings
 ║    - Launch technology agents concurrently for parallel research execution
-║    - Consolidate agent findings into technology decision matrix with version compatibility
+║    - Consolidate agent findings into technology decision matrix with version compatibility and source documentation
 ║
 ║ 6. **Launch API Research Agents**
 ║    - Create API research agent tasks for each external service:
 ║      - Agent: "research-api-service" with context: "[Service Name] API documentation, rate limits, pricing analysis"
 ║      - Agent: "research-auth-methods" with context: "[Service] authentication, data formats, iOS SDK analysis"
 ║      - Each agent receives service context and integration requirements
-║      - Agents use WebFetch for API docs, return: capabilities, constraints, costs, integration complexity
+║      - Agents use WebFetch for API docs, return: capabilities, constraints, costs, integration complexity WITH SPECIFIC URLs of key documentation that informed findings
+║      - **CRITICAL**: All agents must document SPECIFIC ARTICLES/DOCS that informed findings with exact URLs, version numbers, and last-updated dates
+║      - **Key Source Focus**: Document only the most relevant sources that directly informed the documented findings
 ║    - Execute API research agents concurrently for parallel service evaluation
-║    - Consolidate findings into service integration assessment with cost and complexity analysis
+║    - Consolidate findings into service integration assessment with cost and complexity analysis and complete source documentation
 ║
 ║ 7. **Launch Architecture Pattern Research Agents**
 ║    - Create pattern research agent tasks for complex architectural needs:
@@ -69,9 +80,14 @@ Technical research template providing systematic knowledge acquisition for techn
 ║      - Agent: "research-error-patterns" with context: "Modern Swift error handling integration patterns"
 ║      - Agent: "research-state-management" with context: "SwiftUI state management patterns for [feature complexity]"
 ║      - Each agent receives pattern context and feature complexity requirements
-║      - Agents use WebSearch for best practices, return: implementation approaches, benefits, drawbacks, case studies
+║      - **Source Documentation Requirement**: Agents use WebSearch for best practices and MUST return: implementation approaches, benefits, drawbacks, case studies WITH SPECIFIC URLs of articles that informed findings
+║      - **Apple Pattern Priority**: For iOS/macOS patterns, prioritize official Apple guidance and use iosfeeds.com for community articles
+║      - **Non-Apple Patterns**: Use WebSearch and official documentation for non-Apple architectural patterns
+║      - **Key Source Documentation**: Document SPECIFIC ARTICLES that informed architectural decisions with exact URLs
+║      - **iosfeeds.com Article Discovery**: Use iosfeeds.com/archive?query=[PatternName] to find recent iOS community articles on architectural patterns
+║      - **Comprehensive Coverage**: Combine WebSearch results with iosfeeds.com findings for complete community perspective
 ║    - Launch pattern research agents in parallel for concurrent architectural evaluation
-║    - Consolidate architectural insights into implementation strategy recommendations
+║    - Consolidate architectural insights into implementation strategy recommendations with comprehensive source documentation
 ║
 ║ ### Phase 3: Research Consolidation & Decision Making
 ║
@@ -86,11 +102,13 @@ Technical research template providing systematic knowledge acquisition for techn
 ║    - For each researched technology: Decision, rationale, alternatives, limitations
 ║    - Include version information and compatibility requirements
 ║    - Note integration approaches and potential issues
+║    - **MANDATORY**: Document SPECIFIC ARTICLES/DOCS that informed findings with exact URLs, dates, and version numbers
 ║
 ║ 10. **Document API & Service Research Results**
 ║    - For each external service: capabilities, limitations, costs, alternatives
 ║    - Include authentication requirements and rate limiting information
 ║    - Document data formats and SDK availability
+║    - **MANDATORY**: Include SPECIFIC DOCUMENTATION URLs that informed findings, with version numbers and last-updated dates
 ║
 ║ 11. **Document Codebase Integration Analysis**
 ║     - Document existing code patterns and architecture that feature will follow
@@ -102,6 +120,7 @@ Technical research template providing systematic knowledge acquisition for techn
 ║     - For each pattern researched: approach, benefits, drawbacks, complexity
 ║     - Include performance implications and maintenance considerations
 ║     - Note proven implementations and case studies
+║     - **MANDATORY**: Document SPECIFIC ARTICLES, documentation pages, WWDC sessions, and case studies that informed findings with exact URLs and dates
 ║
 ║ ### Phase 4: Knowledge Validation & Completion
 ║
@@ -173,8 +192,10 @@ Technical research template providing systematic knowledge acquisition for techn
 
 ### [Technology Name]
 **Version Researched**: [AI Generated current version]
-**Documentation Source**: [AI Generated official docs URL]
+**Documentation Source**: [AI Generated primary domain - e.g., developer.apple.com]
 **Last Updated**: [AI Generated date]
+**Research Date**: [AI Generated date when research was conducted]
+**Community Sources**: [AI Generated: Trusted domains consulted - e.g., wwdcnotes.com, avanderlee.com, hackingwithswift.com]
 
 **Key Capabilities**:
 - [AI Generated: Core features and capabilities]
@@ -199,8 +220,11 @@ Technical research template providing systematic knowledge acquisition for techn
 ## API & Service Research
 
 ### [Service/API Name]
-**Documentation Source**: [AI Generated official API docs URL]
+**Documentation Source**: [AI Generated primary domain - e.g., api.service.com]
 **Last Updated**: [AI Generated date]
+**Research Date**: [AI Generated date when research was conducted]
+**API Version**: [AI Generated current API version]
+**Community Sources**: [AI Generated: Relevant community domains consulted for integration patterns]
 
 **Capabilities**:
 - [AI Generated: Available endpoints/features]
@@ -225,7 +249,12 @@ Technical research template providing systematic knowledge acquisition for techn
 ## Architecture Pattern Research
 
 ### [Pattern Name] (e.g., Offline-First Architecture)
-**Research Sources**: [AI Generated: authoritative sources consulted]
+**Research Sources**: [AI Generated: authoritative domains consulted]
+**Research Date**: [AI Generated date when research was conducted]
+**Key Sources by Domain**:
+- **developer.apple.com**: [AI Generated: Apple docs consulted] - [Brief description]
+- **wwdcnotes.com**: [AI Generated: WWDC sessions referenced] - [Brief description]
+- **Community**: [AI Generated: swiftbysundell.com, avanderlee.com, fline.dev, etc.] - [Brief description]
 
 **Approach**:
 - [AI Generated: How this pattern works]
@@ -272,6 +301,32 @@ Technical research template providing systematic knowledge acquisition for techn
 2. [AI Generated: Secondary priorities with flexibility]
 3. [AI Generated: Nice-to-have features that could be deferred]
 
+## Sources and References
+
+### Apple Developer Resources
+**Primary Domain**: developer.apple.com - [AI Generated: Framework/API areas researched]
+**WWDC Sessions**: wwdcnotes.com - [AI Generated: Relevant WWDC years and topics referenced]
+**Sample Code**: [AI Generated: Official sample projects referenced by name]
+**Human Interface Guidelines**: [AI Generated: HIG sections consulted by topic area]
+
+### Third-Party APIs and Services
+**Service Documentation**: [AI Generated: Primary domains for third-party APIs researched]
+**SDK References**: [AI Generated: SDK documentation domains consulted]
+**Integration Guides**: [AI Generated: Official integration domains and community sources used]
+
+### Architecture and Best Practices
+**Key Community Articles**: [AI Generated: Specific blog post URLs that informed architectural decisions]
+**Technical Deep Dives**: [AI Generated: Specific technical article URLs that provided implementation insights]
+**Case Studies**: [AI Generated: Specific case study URLs with implementation examples]
+**Apple Technology Focus**: [AI Generated: For iOS/Swift topics - specific articles found via iosfeeds.com search with URLs]
+**Platform-Specific Insights**: [AI Generated: For non-Apple technologies - specific articles from WebSearch with URLs]
+
+### Version Information
+**Research Conducted**: [AI Generated current date]
+**iOS/macOS Target**: [AI Generated: Target platform versions researched]
+**Swift Version**: [AI Generated: Swift version compatibility researched]
+**Dependencies**: [AI Generated: Package/framework versions researched]
+
 ---
 
 **Next Phase**: This research provides the technical knowledge foundation for architectural planning in Tech.md.
@@ -290,6 +345,7 @@ Technical research template providing systematic knowledge acquisition for techn
 ║ - [ ] Integration patterns evaluated with trade-offs documented?
 ║ - [ ] Best practices identified from authoritative sources?
 ║ - [ ] Limitations and constraints clearly documented for each technology?
+║ - [ ] **SOURCE DOCUMENTATION**: All research sources documented with URLs and dates?
 ║
 ║ ### Research Quality
 ║ - [ ] Documentation sources are official and current?
@@ -297,6 +353,9 @@ Technical research template providing systematic knowledge acquisition for techn
 ║ - [ ] Rate limits and pricing information accurate (where applicable)?
 ║ - [ ] Performance characteristics documented with specific metrics?
 ║ - [ ] Alternative approaches considered and compared?
+║ - [ ] **APPLE PLATFORM PRIORITY**: For iOS/macOS research, prioritized Apple Developer Documentation and wwdcnotes.com?
+║ - [ ] **COMPLETE SOURCE TRACKING**: Every research finding includes source URL and access date?
+║ - [ ] **REFERENCE SECTION**: Comprehensive "Sources and References" section populated with all URLs?
 ║
 ║ ### Decision Readiness
 ║ - [ ] Clear recommendations provided for technology choices?

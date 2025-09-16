@@ -366,7 +366,7 @@ AGENT_LATEST_VERSION=$(sed -n '2p' ~/.ContextKit/Templates/Agents/check-modern-c
 **Variables**: **NONE** - Templates contain dynamic logic, no static substitution
 
 **Templates & AI Implementation Focus**:
-- `Spec.md` - Business requirements with forced uncertainty marking `[NEEDS CLARIFICATION: X]`
+- `Spec.md` - Business requirements with forced uncertainty marking `🚨 [NEEDS CLARIFICATION: X]`
 - `Tech.md` - Technical architecture with constitutional compliance gates  
 - `Steps.md` - Implementation breakdown with parallel markers `[P]` and S001-S999 numbering
 
@@ -419,7 +419,7 @@ Every command template must implement **executable workflows with built-in quali
 3. Apply constitutional principles
    → Check: accessibility, privacy, localizability, maintainability
 4. Mark uncertainties explicitly
-   → Use: [NEEDS CLARIFICATION: specific question]
+   → Use: 🚨 [NEEDS CLARIFICATION: specific question]
 5. Validate against quality gates
    → If fails: Document in Complexity Tracking, require justification
 6. Execute phase-specific logic
