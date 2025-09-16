@@ -1,5 +1,5 @@
 # Commit Changes
-<!-- Template Version: 7 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 8 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -30,8 +30,6 @@ Delegate to specialized commit-changes agent for intelligent git analysis, commi
      💬 Message: "[commit_message]"
      📂 Files: [number] files modified
      📊 Changes: +[lines_added] -[lines_deleted]
-
-     🎯 Summary: [Brief explanation of what was accomplished and why]
      ```
 
 ## Error Conditions

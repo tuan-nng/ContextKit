@@ -1,5 +1,5 @@
 ---
-meta: "Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16"
+meta: "Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-16"
 name: commit-changes
 description: Intelligent git analysis, commit message generation, and commit execution with comprehensive format validation
 tools: Read, Bash, Grep, Glob
@@ -149,8 +149,6 @@ Provide a concise summary in this exact format:
 💬 Message: "[commit_message]"
 📂 Files: [number] files modified
 📊 Changes: +[lines_added] -[lines_deleted]
-
-🎯 Summary: [Brief explanation of what was accomplished and why]
 ```
 
 ### Error Response
