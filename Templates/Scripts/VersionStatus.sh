@@ -79,9 +79,9 @@ check_project_compatibility() {
         global_version=$(sed -n '2p' "$CONTEXTKIT_DIR/CHANGELOG.md" 2>/dev/null | grep -o "ContextKit: [^|]*" | sed 's/ContextKit: *//' | sed 's/ *$//' || echo "unknown")
     fi
 
-    # Check project version from installed migrate command
-    if [ -f ".claude/commands/ctxk/proj/migrate.md" ]; then
-        local project_version=$(sed -n '2p' ".claude/commands/ctxk/proj/migrate.md" 2>/dev/null | grep -o "ContextKit: [^|]*" | sed 's/ContextKit: *//' | sed 's/ *$//' || echo "unknown")
+    # Check project version from installed plan command
+    if [ -f ".claude/commands/ctxk/plan/1-spec.md" ]; then
+        local project_version=$(sed -n '2p' ".claude/commands/ctxk/plan/1-spec.md" 2>/dev/null | grep -o "ContextKit: [^|]*" | sed 's/ContextKit: *//' | sed 's/ *$//' || echo "unknown")
 
         if [ "$project_version" != "$global_version" ] && [ "$project_version" != "unknown" ] && [ "$global_version" != "unknown" ]; then
             echo "  ⚠️  Updates available: v$project_version → v$global_version"
@@ -177,7 +177,7 @@ count_outdated_templates() {
     fi
 
     # Compare template versions for all .md and .sh files
-    for local_file in "$local_dir"/*.{md,sh} "$local_dir"/**/*.{md,sh} 2>/dev/null; do
+    for local_file in "$local_dir"/*.md "$local_dir"/*.sh; do
         [ -f "$local_file" ] || continue
 
         local rel_path="${local_file#$local_dir/}"
