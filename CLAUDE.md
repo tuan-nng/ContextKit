@@ -266,6 +266,26 @@ tools: Read, Edit, Grep
 4. **Migration Tracking**: `/ctxk:proj:migrate` compares versions to determine update needs
 5. **Changelog Integration**: All version changes must be documented in CHANGELOG.md
 
+### 🚨 CRITICAL: Version Update Requirements
+
+**MANDATORY when editing any template file with versioning header:**
+
+1. **Always increment Template Version** - Even for minor changes, typo fixes, or behavioral adjustments
+2. **Always update the Updated date** - Set to current date (YYYY-MM-DD format)
+3. **Both updates are required together** - Never update one without the other
+
+**Example required change pattern:**
+```markdown
+<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14 -->
+↓ becomes ↓
+<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+```
+
+**Why this is critical:**
+- Migration detection relies on version numbers to identify outdated files
+- Users need accurate update tracking for their customizations
+- Automated updates fail without proper version increments
+
 **Example Migration Detection**:
 ```bash
 # Check if user's template is outdated (all files use line 2)

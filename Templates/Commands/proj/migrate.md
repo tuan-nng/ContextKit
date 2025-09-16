@@ -1,5 +1,5 @@
 # Upgrade to Latest
-<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14 -->
+<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -50,11 +50,14 @@ All updates preserve user customizations in "👩‍💻 DEVELOPER CUSTOMIZATION
    - For each proj command file (init.md, init-workspace.md, migrate.md):
      - Use Bash tool: sed -n '2p' file | grep "Template Version" to check versions
      - Use Read tool to examine both global template and user's global command files
-     - If version different and file has customizations:
-       - Use Grep tool to find "👩‍💻 DEVELOPER CUSTOMIZATIONS" line number in both files
-       - Use Edit tool to merge: template content above + user content below separator
-       - If separator missing: Use Bash tool cp to replace entirely with warning
-     - If version different and file has no customizations: Use Bash tool cp to replace entirely
+     - If version different:
+       - Use Grep tool to find "👩‍💻 DEVELOPER CUSTOMIZATIONS" line number in user file
+       - If separator found:
+         - Check if user has added actual content below separator (beyond template boilerplate)
+         - Count non-empty lines after separator that aren't just comments or template text
+         - If meaningful user content exists: Use Edit tool to merge (template above + user content below)
+         - If no meaningful user content: Use Bash tool cp to replace entirely (faster)
+       - If separator missing: Use Bash tool cp to replace entirely
      - Track results in UPDATED_GLOBAL_FILES
 
 ### Phase 3: Scan Local Project Templates
@@ -116,13 +119,16 @@ All updates preserve user customizations in "👩‍💻 DEVELOPER CUSTOMIZATION
 
 1. For each file needing update:
    - If new file: Use Bash tool cp to copy directly to project location
-   - If existing file with customizations:
-     - Use Read tool to examine both template and project files
-     - Use Grep tool to find "👩‍💻 DEVELOPER CUSTOMIZATIONS" line number in both files
-     - Use Edit tool to merge: template content above + user content below separator
-     - If separator missing: SKIP with warning
-   - If existing file without customizations (Scripts): Use Bash tool cp to replace entirely
-   - If settings.json: Use intelligent merge logic (see Phase 3.1)
+   - If existing file:
+     - Use Read tool to examine project file
+     - Use Grep tool to find "👩‍💻 DEVELOPER CUSTOMIZATIONS" line number
+     - If separator found:
+       - Check if user has added actual content below separator (beyond template boilerplate)
+       - Count non-empty lines after separator that aren't just comments or template text
+       - If meaningful user content exists: Use Edit tool to merge (template above + user content below)
+       - If no meaningful user content: Use Bash tool cp to replace entirely (faster)
+     - If separator missing: Use Bash tool cp to replace entirely
+   - If settings.json: Use intelligent merge logic (see Phase 4.1)
 
 2. Track results:
    - NEW_FILES: List of files copied

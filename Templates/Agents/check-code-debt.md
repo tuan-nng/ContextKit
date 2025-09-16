@@ -1,5 +1,5 @@
 ---
-meta: "Template Version: 1 | ContextKit: 0.1.0 | Updated: 2025-09-14"
+meta: "Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14"
 name: check-code-debt
 description: Clean up technical debt from AI-generated code by removing artifacts, consolidating patterns, and improving maintainability
 tools: Read, Edit, Grep, Glob, Task
