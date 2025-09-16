@@ -1,5 +1,5 @@
 # Upgrade to Latest
-<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -10,6 +10,12 @@
 
 ## Description
 Update ContextKit templates to latest versions while preserving user customizations.
+
+**Key Features:**
+- **Parallel Version Checking**: Uses Task tool with subagents to check all template versions simultaneously for maximum speed
+- **Smart Merge Logic**: Only processes files that actually need updates (newer template versions)
+- **Efficient Content Detection**: Skips complex merges when user customization sections contain no meaningful content
+- **Comprehensive Preservation**: Maintains all user content below "👩‍💻 DEVELOPER CUSTOMIZATIONS" sections
 
 Updates both:
 - **Global project management commands** (proj/) in ~/.claude/commands/ctxk/proj/
@@ -45,37 +51,41 @@ All updates preserve user customizations in "👩‍💻 DEVELOPER CUSTOMIZATION
 
 ### Phase 2: Update Global Proj Commands
 
-1. **Update Global Project Management Commands**
-   - Check if ~/.claude/commands/ctxk/proj/ directory exists
-   - For each proj command file (init.md, init-workspace.md, migrate.md):
-     - Use Bash tool: sed -n '2p' file | grep "Template Version" to check versions
+1. **Parallel Version Checking** (launch multiple Task agents simultaneously)
+   - Check ~/.claude/commands/ctxk/proj/ directory exists
+   - Launch separate Task tool agents in parallel for each proj command file:
+     - **Task Agent 1**: Check init.md (template vs user version comparison)
+     - **Task Agent 2**: Check init-workspace.md (template vs user version comparison)
+     - **Task Agent 3**: Check migrate.md (template vs user version comparison)
+   - Each agent extracts versions using sed -n '2p' and reports if update needed
+   - Collect results from all parallel agents to get list of files requiring updates
+
+2. **Sequential File Updates** (only for files identified in step 1)
+   - For each file needing update:
      - Use Read tool to examine both global template and user's global command files
-     - If version different:
-       - Use Grep tool to find "👩‍💻 DEVELOPER CUSTOMIZATIONS" line number in user file
-       - If separator found:
-         - Check if user has added actual content below separator (beyond template boilerplate)
-         - Count non-empty lines after separator that aren't just comments or template text
-         - If meaningful user content exists: Use Edit tool to merge (template above + user content below)
-         - If no meaningful user content: Use Bash tool cp to replace entirely (faster)
-       - If separator missing: Use Bash tool cp to replace entirely
+     - Use Grep tool to find "👩‍💻 DEVELOPER CUSTOMIZATIONS" line number in user file
+     - If separator found:
+       - Check if user has added actual content below separator (beyond template boilerplate)
+       - Count non-empty lines after separator that aren't just comments or template text
+       - If meaningful user content exists: Use Edit tool to merge (template above + user content below)
+       - If no meaningful user content: Use Bash tool cp to replace entirely (faster)
+     - If separator missing: Use Bash tool cp to replace entirely
      - Track results in UPDATED_GLOBAL_FILES
 
 ### Phase 3: Scan Local Project Templates
 
-1. Define file mappings for local project templates (proj commands updated in Phase 2):
-   - Templates/Guidelines/*.md → Context/Guidelines/
-   - Templates/Commands/plan/*.md → .claude/commands/ctxk/plan/
-   - Templates/Commands/impl/*.md → .claude/commands/ctxk/impl/
-   - Templates/Commands/bckl/*.md → .claude/commands/ctxk/bckl/
-   - Templates/Agents/*.md → .claude/agents/ctxk/
-   - Templates/Scripts/*.sh → Context/Scripts/ (team sharing, hooks via settings.json)
-   - Templates/settings.json → .claude/settings.json (intelligent merge only)
-   - Templates/Backlog/*.md → Context/Backlog/ (preserving user content via customization sections)
-
-2. For each mapping:
-   - Use Bash tool: sed -n '2p' file | grep "Template Version" to check template versions
-   - Use Read tool to examine project files if they exist
-   - Compare versions and add to update list if versions differ or file missing
+1. **Parallel Version Scanning** (launch multiple Task agents simultaneously)
+   - Launch separate Task tool agents in parallel for each template category:
+     - **Task Agent A**: Guidelines (Templates/Guidelines/*.md → Context/Guidelines/)
+     - **Task Agent B**: Plan Commands (Templates/Commands/plan/*.md → .claude/commands/ctxk/plan/)
+     - **Task Agent C**: Impl Commands (Templates/Commands/impl/*.md → .claude/commands/ctxk/impl/)
+     - **Task Agent D**: Backlog Commands (Templates/Commands/bckl/*.md → .claude/commands/ctxk/bckl/)
+     - **Task Agent E**: Agents (Templates/Agents/*.md → .claude/agents/ctxk/)
+     - **Task Agent F**: Scripts (Templates/Scripts/*.sh → Context/Scripts/)
+     - **Task Agent G**: Settings (Templates/settings.json → .claude/settings.json)
+     - **Task Agent H**: Backlog Templates (Templates/Backlog/*.md → Context/Backlog/)
+   - Each agent extracts template versions using sed -n '2p', checks project files, compares versions
+   - Collect results from all parallel agents to get comprehensive list of files requiring updates
 
 ### Phase 4: Update Local Project Files Preserving Customizations
 

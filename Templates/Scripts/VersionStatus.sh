@@ -160,7 +160,7 @@ check_template_updates() {
 
     if [ "$updates_needed" -gt 0 ]; then
         echo "  ⚠️  Project template updates available: $updates_needed files"
-        echo "     💡 Run: /ctxk:proj:migrate"
+        echo "     💡 Run: /ctxk:proj:migrate to update"
         return 1
     fi
     return 0
