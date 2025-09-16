@@ -319,7 +319,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
    • The systematic workflow: plan → implement → iterate
 
 💡 **Available Commands**:
-   • Feature Planning: /ctxk:plan:1-spec → /ctxk:plan:2-tech → /ctxk:plan:3-steps
+   • Feature Planning: /ctxk:plan:1-spec → /ctxk:plan:2-research-tech → /ctxk:plan:3-steps
    • Development: /ctxk:impl:start-working (after completing planning phases on feature branch)
    • Backlog: /ctxk:bckl:add-idea, /ctxk:bckl:add-bug
 ```

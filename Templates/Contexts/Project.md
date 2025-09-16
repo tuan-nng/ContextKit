@@ -188,7 +188,7 @@ Project-level Context.md template providing project-specific investigation, deve
 
 **Systematic Feature Development**:
 - `/ctxk:plan:1-spec` - Create business requirements specification (prompts interactively)
-- `/ctxk:plan:2-tech` - Define technical architecture and implementation approach
+- `/ctxk:plan:2-research-tech` - Define technical research, architecture and implementation approach
 - `/ctxk:plan:3-steps` - Break down into executable implementation tasks
 
 **Development Execution**:

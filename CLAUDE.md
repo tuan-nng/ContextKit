@@ -36,9 +36,9 @@ ContextKit/
     │   │   ├── setup-workspace.md   # Workspace configuration
     │   │   └── migrate.md           # Version updates
     │   ├── Plan/                    # Feature planning workflow
-    │   │   ├── create-spec.md       # Business requirements
-    │   │   ├── define-tech.md       # Technical architecture
-    │   │   └── plan-steps.md        # Implementation breakdown
+    │   │   ├── 1-spec.md            # Business requirements
+    │   │   ├── 2-research-tech.md   # Technical research and architecture
+    │   │   └── 3-steps.md           # Implementation breakdown
     │   ├── Implement/               # Development workflow
     │   │   ├── start-working.md     # Context-aware development start
     │   │   ├── commit-changes.md    # Smart commit message generation
@@ -108,7 +108,7 @@ cp -R ~/.ContextKit/Templates/Commands/* ~/.claude/commands/ctxk/
 - `/ctxk:proj:init-workspce` - Configure workspace-level settings
 - `/ctxk:proj:migrate` - Update existing project to newer ContextKit version
 - `/ctxk:plan:1-spec` - Create feature specification (prompts for description interactively)
-- `/ctxk:plan:2-tech` - Create technical architecture plan
+- `/ctxk:plan:2-research-tech` - Create technical research and architecture plan
 - `/ctxk:plan:3-steps` - Break down implementation steps
 - `/ctxk:impl:start-working` - Begin development with context
 - `/ctxk:impl:commit-changes` - Commit with proper message formatting
@@ -313,7 +313,7 @@ AGENT_LATEST_VERSION=$(sed -n '2p' ~/.ContextKit/Templates/Agents/check-modern-c
 
 **Directory Structure in Templates/Commands/**:
 - `proj/` - Project management (init, init-workspce, migrate)
-- `plan/` - Feature planning (1-spec, 2-tech, 3-steps) 
+- `plan/` - Feature planning (1-spec, 2-research-tech, 3-steps) 
 - `impl/` - Implementation (start-working, commit-changes, release-app, release-package)
 - `bckl/` - Backlog management (add-idea, add-bug, prioritize-ideas, prioritize-bugs, remove-idea, remove-bug)
 
@@ -361,7 +361,7 @@ AGENT_LATEST_VERSION=$(sed -n '2p' ~/.ContextKit/Templates/Agents/check-modern-c
 
 ### 📝 **Templates/Features/** - Feature Development Templates
 **Purpose**: Templates copied during feature planning commands  
-**Copy Destination**: `Context/Features/[FeatureName]/` during `/Plan/create-spec`  
+**Copy Destination**: `Context/Features/[FeatureName]/` during `/ctxk:plan:1-spec`  
 **Format**: Markdown with spec-kit execution flows  
 **Variables**: **NONE** - Templates contain dynamic logic, no static substitution
 
@@ -488,7 +488,7 @@ claude  # Start Claude Code
 
 # 4. Test workflow commands function properly
 /ctxk:plan:1-spec
-/ctxk:plan:2-tech
+/ctxk:plan:2-research-tech
 /ctxk:plan:3-steps
 /ctxk:impl:start-working
 ```
@@ -672,8 +672,8 @@ All commands, agents, and guidelines that get copied to user projects MUST inclu
 **Purpose**: High-level guidance for AI assistants during **planning and architecture phases**
 
 **Usage Phases**:
-- `/Plan/define-tech` - Architecture and framework decisions
-- `/Plan/create-spec` - Technology stack selection
+- `/ctxk:plan:2-research-tech` - Architecture and framework decisions
+- `/ctxk:plan:1-spec` - Technology stack selection
 - Command planning and API selection phases
 
 **Content Focus**:
@@ -749,8 +749,8 @@ Planning Phase               Development Phase
 │   └── Architecture rules  │   └── Quality gates
 │                           │
 ▼                           ▼
-/Plan/define-tech           /Implement/commit-changes
-/Plan/create-spec           Quality validation
+/ctxk:plan:2-research-tech  /ctxk:impl:commit-changes
+/ctxk:plan:1-spec           Quality validation
 Framework selection         Code review
 ```
 

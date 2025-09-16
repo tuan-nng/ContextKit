@@ -62,7 +62,7 @@ Generate implementation task breakdown by detecting current feature, validating 
 
      All planning phases are required for implementation:
      - Run /ctxk:plan:1-spec if Spec.md is missing
-     - Run /ctxk:plan:2-tech if Tech.md is missing (includes Research.md creation)
+     - Run /ctxk:plan:2-research-tech if Tech.md is missing (includes Research.md creation)
 
      Implementation planning requires completed specification, research, and architecture.
      ```
@@ -92,7 +92,7 @@ Generate implementation task breakdown by detecting current feature, validating 
 
 - **"Context.md not found"** → User must run `/ctxk:proj:init` to initialize ContextKit
 - **"ContextKit not installed globally"** → Run installation: `curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | sh`
-- **"Prerequisites not complete"** → Must run `/ctxk:plan:1-spec` and `/ctxk:plan:2-tech` first
+- **"Prerequisites not complete"** → Must run `/ctxk:plan:1-spec` and `/ctxk:plan:2-research-tech` first
 - **"Steps template not found"** → Check global ContextKit installation integrity
 - **"Unresolved clarifications exist"** → Resolve [NEEDS CLARIFICATION] markers in Spec.md and Tech.md first
 - **"Template execution failed"** → Verify Steps.md template contains system instructions section

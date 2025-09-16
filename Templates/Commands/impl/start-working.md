@@ -78,7 +78,7 @@ Begin systematic development with context-aware setup, task analysis, and guided
 
      Complete the planning phases first:
      1. /ctxk:plan:1-spec - Business requirements
-     2. /ctxk:plan:2-tech - Technical architecture
+     2. /ctxk:plan:2-research-tech - Technical research and architecture
      3. /ctxk:plan:3-steps - Implementation tasks
 
      Cannot proceed with development until planning is complete.
@@ -213,7 +213,7 @@ Begin systematic development with context-aware setup, task analysis, and guided
 
 - **"Context.md not found"** → User must run `/ctxk:proj:init` to initialize ContextKit
 - **"Not on feature branch"** → Create feature branch with `/ctxk:plan:1-spec` or switch to existing one
-- **"Planning phases incomplete"** → Complete `/ctxk:plan:1-spec`, `/ctxk:plan:2-tech`, `/ctxk:plan:3-steps` sequence
+- **"Planning phases incomplete"** → Complete `/ctxk:plan:1-spec`, `/ctxk:plan:2-research-tech`, `/ctxk:plan:3-steps` sequence
 - **"No feature directory found"** → Feature name detection failed, verify branch name format
 - **"Steps.md empty"** → Run `/ctxk:plan:3-steps` to create implementation breakdown
 - **"Build environment broken"** → Resolve dependency issues before starting development
@@ -244,7 +244,7 @@ Begin systematic development with context-aware setup, task analysis, and guided
 
 ## Integration Points
 
-- **Planning Commands**: Requires completed `/ctxk:plan:1-spec`, `/ctxk:plan:2-tech`, `/ctxk:plan:3-steps` workflow
+- **Planning Commands**: Requires completed `/ctxk:plan:1-spec`, `/ctxk:plan:2-research-tech`, `/ctxk:plan:3-steps` workflow
 - **Project Setup**: Uses Context.md from `/ctxk:proj:init` for project type detection and standards
 - **Quality Agents**: Integrates with `/run check-*` agents for autonomous quality validation
 - **Workspace Context**: Inherits client-specific requirements from workspace-level Context.md files

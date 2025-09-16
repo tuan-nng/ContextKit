@@ -1,4 +1,4 @@
-# Design Architecture
+# Research and Design Architecture
 <!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
@@ -9,7 +9,7 @@
 > Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
 ## Description
-Generate technical architecture plan by detecting current feature, validating prerequisites, copying technical template, and executing template workflow with constitutional compliance validation.
+Generate technical research and architecture plan by detecting current feature, validating prerequisites, executing integrated research phase, and creating comprehensive research and architectural documentation.
 
 ## User Input Format
 

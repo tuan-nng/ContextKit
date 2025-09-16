@@ -154,7 +154,7 @@ Initialize feature specification by validating setup, confirming feature naming,
 - **Global ContextKit**: Uses Templates/Features/Spec.md template for specification generation
 - **Project Setup**: Requires Context.md created by /ctxk:proj:init for project detection and context
 - **Template Execution**: Delegates all specification logic to copied Spec.md template (follows init-workspace pattern)
-- **Development Workflow**: Creates foundation for /ctxk:plan:2-tech technical planning phase
+- **Development Workflow**: Creates foundation for /ctxk:plan:2-research-tech technical planning phase
 - **Team Collaboration**: Creates committed specification for team review and stakeholder validation
 - **Git Integration**: Establishes feature branch for systematic development workflow
 - **Workspace Integration**: Template inherits coding standards and constitutional overrides from workspace Context.md
@@ -179,7 +179,7 @@ Initialize feature specification by validating setup, confirming feature naming,
 1. Review [numbered-feature-directory]/Spec.md to ensure it matches your intent
 2. [If clarifications needed:] Edit the spec file to answer marked questions
 3. When satisfied with the spec: commit your changes with git
-4. Run /ctxk:plan:2-tech to proceed with technical architecture planning
+4. Run /ctxk:plan:2-research-tech to proceed with technical research and architecture planning
 
 💡 Specification ready for your review and approval before technical planning!
 ```

@@ -63,7 +63,7 @@ claude
 /ctxk:plan:1-spec
 
 # Step 2: Plan the technical architecture
-/ctxk:plan:2-tech
+/ctxk:plan:2-research-tech
 
 # Step 3: Break down into executable tasks
 /ctxk:plan:3-steps
@@ -123,7 +123,7 @@ Define **what** you're building and **why**, without technical details:
 - Explicit uncertainty marking (no AI guessing)
 - Scope boundaries (what's included, what's not)
 
-### Phase 2: Technical Architecture (`/ctxk:plan:2-tech`)
+### Phase 2: Technical Architecture (`/ctxk:plan:2-research-tech`)
 Plan **how** you'll build it, with constitutional compliance:
 - Technology choices with rationale
 - Swift/SwiftUI patterns and architectural decisions
@@ -207,7 +207,7 @@ ContextKit automatically checks for newer versions when you start a new session 
 - **`/ctxk:proj:init`** - One-command project initialization with auto-detection
 
 ### Systematic Feature Development
-- **Planning workflow**: `/ctxk:plan:1-spec` → `/ctxk:plan:2-tech` → `/ctxk:plan:3-steps`
+- **Planning workflow**: `/ctxk:plan:1-spec` → `/ctxk:plan:2-research-tech` → `/ctxk:plan:3-steps`
 - **Development**: `/ctxk:impl:start-working` with autonomous quality checks
 - **Release**: `/ctxk:impl:release-app` for iOS/macOS, `/ctxk:impl:release-package` for Swift packages
 
@@ -228,7 +228,7 @@ ContextKit automatically checks for newer versions when you start a new session 
 
 ### Systematic Feature Planning
 - `/ctxk:plan:1-spec` - Define requirements with business specifications and user stories (prompts interactively)
-- `/ctxk:plan:2-tech` - Design architecture with technical planning and constitutional compliance
+- `/ctxk:plan:2-research-tech` - Design architecture with technical planning and constitutional compliance
 - `/ctxk:plan:3-steps` - Create numbered, trackable implementation tasks
 
 ### Quality-Driven Implementation

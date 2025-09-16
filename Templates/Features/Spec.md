@@ -308,6 +308,6 @@ Feature specification template providing systematic business requirements genera
 ║ - [ ] Execution status fully updated
 ║ - [ ] System instructions removed from final document
 ║
-║ **Next Phase**: After this specification is approved, proceed to `/ctxk:plan:2-tech` for technical architecture planning and implementation design.
+║ **Next Phase**: After this specification is approved, proceed to `/ctxk:plan:2-research-tech` for technical research, architecture planning and implementation design.
 ║
 ════════════════════════════════════════════════════════════════════════════════

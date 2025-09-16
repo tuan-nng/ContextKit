@@ -14,13 +14,13 @@ Implementation task breakdown template providing systematic S001-S999 task enume
 ║
 ║ 1. **Load Technical Research Results**
 ║    - Use `Read` tool to read current feature directory Research.md: `Read Context/Features/[FeatureName]/Research.md`
-║    - If missing: ERROR "Technical research required - run /ctxk:plan:2-tech first (includes research phase)"
+║    - If missing: ERROR "Technical research required - run /ctxk:plan:2-research-tech first (includes research phase)"
 ║    - Extract: technology decisions, API constraints, integration patterns, version requirements
 ║    - Document technology limitations and best practices for implementation guidance
 ║
 ║ 2. **Load Technical Architecture Plan**
 ║    - Use `Read` tool to read current feature directory Tech.md: `Read Context/Features/[FeatureName]/Tech.md`
-║    - If missing: ERROR "Technical plan required - run /ctxk:plan:2-tech first"
+║    - If missing: ERROR "Technical plan required - run /ctxk:plan:2-research-tech first"
 ║    - Extract: architecture decisions, component structure, dependencies
 ║    - Cross-reference with research findings for implementation constraints
 ║    - If 🚨 [NEEDS CLARIFICATION] markers exist: ERROR "Resolve technical uncertainties first"
