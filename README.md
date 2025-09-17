@@ -8,7 +8,7 @@
 
 <p align="center" style="color: #666;">
     <strong>Quick Navigation</strong><br>
-    <a href="#-get-started">Get started</a> • <a href="#-how-it-works">How it works</a> • <a href="#-commands-overview">Commands</a> • <a href="#-universal-but-opinionated">Universal platform support</a>
+    <a href="#-get-started">Get started</a> • <a href="#-how-it-works">How it works</a> • <a href="#-commands-overview">Commands</a> • <a href="#-universal-but-opinionated">Universal platform support</a> • <a href="#contributing">Contributing</a>
 </p>
 
 
@@ -271,13 +271,22 @@ The result: **You build features with fewer iterations, less manual cleanup, and
 
 ## Contributing
 
-### Template Versioning
+ContextKit thrives as a **community effort** to make AI development better for everyone. Whether you're fixing bugs, adding platform support, or sharing improvements - your contributions help developers worldwide build better software with AI.
+
+### 🤝 **Ways to Contribute**
+- **Platform Guidelines**: Add `React.md`, `Kotlin.md`, `Python.md`, etc. for your favorite tech stacks
+- **Formatter Configs**: Share your platform's code formatting configurations
+- **Bug Reports**: Help us identify and fix issues in templates and workflows
+- **Feature Improvements**: Enhance existing commands and agents based on real usage
+- **Documentation**: Improve examples, clarify instructions, fix typos
+
+### 📋 **Template Versioning**
 
 For behavioral changes (not typos), update the line 2 header in each modified file:
 - Increment **Template Version** number
 - Update **Updated** date to current date
 
-For releases, update **ContextKit** version in all template files.
+**Note**: Don't modify the ContextKit version numbers - I'll handle that during releases.
 
 ## Showcase
 
