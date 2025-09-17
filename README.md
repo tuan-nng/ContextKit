@@ -1,7 +1,4 @@
-<div align="center">
-    <h1>🧠 ContextKit</h1>
-    <h3><em>Systematic AI development workflows that actually work</em></h3>
-</div>
+![ContextKit Logo](https://github.com/FlineDev/ContextKit/blob/main/Logo.png?raw=true)
 
 <p align="center">
     <strong>Stop fighting context limits. Stop losing work between sessions. Start building features systematically with Claude Code while it understands your project, your patterns, and your standards.</strong>
