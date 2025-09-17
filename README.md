@@ -4,7 +4,7 @@
 </div>
 
 <p align="center">
-    <strong>Stop fighting context limits. Stop losing work between sessions. Start building features systematically with AI assistants that understand your project, your patterns, and your standards.</strong>
+    <strong>Stop fighting context limits. Stop losing work between sessions. Start building features systematically with Claude Code while it understands your project, your patterns, and your standards.</strong>
 </p>
 
 ---
@@ -13,7 +13,6 @@
 
 - [🤔 Why ContextKit exists](#-why-contextkit-exists)
 - [⚡ Get started](#-get-started)
-- [🏛️ Core philosophy](#-core-philosophy)
 - [⚙️ Optimized Configuration](#-optimized-configuration)
 - [🏗️ How it works](#-how-it-works)
 - [🤖 Built-in Quality Agents](#-built-in-quality-agents)
@@ -75,24 +74,8 @@ claude
 ContextKit creates structured feature directories, maintains context between sessions, and guides you through quality checkpoints that prevent common AI development pitfalls.
 
 > [!NOTE]
-> **Early Development**: ContextKit is actively evolving with iterative improvements. While production-ready (I use it daily for all my projects), expect some rough edges as commands and agents are refined. Updates are delivered automatically - keep sending feedback to help iron out issues faster.
+> **Early Development**: ContextKit is actively evolving with iterative improvements. While production-ready (I use it daily for all my projects), expect some rough edges as commands and agents are refined. ContextKit updates itself globally when you start new chats, and the `/ctxk:proj:migrate` command makes updating your project files easy - keep sending feedback to help iron out issues faster.
 
-## 🏛️ Core philosophy
-
-ContextKit is built on non-negotiable development principles embedded throughout all templates and workflows:
-
-### Quality Gates
-- **Accessibility-first**: VoiceOver support, dynamic type, color contrast built into every UI component
-- **Privacy by design**: Privacy impact assessment, minimal data collection, user consent patterns
-- **Localizability from day one**: String Catalog integration, cultural adaptation, region formatters
-- **Platform-appropriate UX**: iOS/macOS Human Interface Guidelines, native patterns, platform conventions
-- **Code maintainability**: Modern Swift practices, clean architecture, typed error handling
-
-### Development Standards
-- **Constitutional compliance**: All templates enforce these principles through validation gates
-- **Quality over speed**: Built-in checks prevent technical debt and accessibility issues
-- **Systematic approach**: Structured phases with explicit validation prevent common AI mistakes
-- **Context preservation**: Smart agents keep sessions focused without verbose build output
 
 ## ⚙️ Optimized Configuration
 
@@ -158,19 +141,9 @@ ContextKit includes specialized sub-agents that automatically ensure code qualit
 - **`run-specific-test`** - Execute specific test with build validation and focused failure analysis
 - ... more to be added over time with updates!
 
-These agents activate automatically during development phases, ensuring consistent quality without manual oversight.
+These agents activate automatically during development phases, **adapting to your detected tech stack** for consistent quality without manual oversight.
 
-## 🔧 Project-Specific Customization
-
-ContextKit commands and quality agents can be tailored to your project's needs through **developer customization sections** in each template file:
-
-- **Project-specific examples**: Add architectural patterns that work with your codebase
-- **Language/framework overrides**: Customize behavior for Python, React, or other tech stacks
-- **Team workflow adjustments**: Modify processes for your development practices
-
-Customizations are preserved during ContextKit updates, ensuring your project-specific improvements persist while core templates stay current.
-
-### 🔄 Seamless Updates
+## 🔄 Seamless Updates
 
 ContextKit automatically checks for newer versions when you start a new session and displays update notifications if available – but **never interrupts your workflow**. When you're ready to update:
 
@@ -188,7 +161,7 @@ ContextKit automatically checks for newer versions when you start a new session 
 ### ✅ Complete User Control (modify freely)
 - **Formatter Config Files** (`.swift-format`, `.swiftformat`) - Your coding style preferences, never overwritten
 - **Project Context** (`Context.md`) - Your project configuration, completely customizable
-- **Feature Specifications** (`Context/Features/*/`) - Feature specs, tech plans, and steps are yours to edit
+- **Feature Specifications** (`Context/Features/*/`) - Feature specs, research, tech plans, and steps are yours to edit
 - **Workspace Context** (`[Workspace]/Context.md`) - Your workspace overrides, never touched
 
 ### ⚙️ Partial Control (customization sections preserved)
@@ -260,19 +233,46 @@ Rather than abstracting across multiple tools, ContextKit leverages Claude Code'
 
 ## 🌍 Universal but opinionated
 
-ContextKit follows **convention over configuration** with smart defaults for Swift/iOS development, but adapts to any technology stack through its hierarchical system:
+ContextKit is **genuinely platform-agnostic** through intelligent project detection and adaptive workflows:
 
-### Swift/iOS Projects (Default Experience)
-- Constitutional principles: 3-space indentation, ErrorKit patterns, accessibility-first design
-- Quality gates: Accessibility compliance, localization readiness, App Store guidelines
-- Release workflows: Xcode Cloud integration, App Store Connect automation
-- Code formatting: swift-format + SwiftFormat with consistent style
+### 🔍 **Automatic Platform Detection**
+When you run `/ctxk:proj:init`, ContextKit analyzes your project and documents everything in `Context.md`:
+- **Technology stack**: React/TypeScript, Swift/SwiftUI, Kotlin/Android, Python/Django, etc.
+- **Build system**: npm scripts, Xcode, Gradle, Maven, etc.
+- **Dependencies**: package.json, Podfile, build.gradle, requirements.txt
+- **Project structure**: Monorepo, multi-module, single-app architecture
 
-### Other Technologies (Workspace Overrides)
-- **Python/Django**: Override global guidelines with Python-specific patterns
-- **React/TypeScript**: Add TypeScript guidelines, ESLint/Prettier configs
-- **Client Projects**: Workspace-level overrides for different coding standards
-- **Universal Core**: Planning methodology and quality framework work everywhere
+This `Context.md` becomes the source of truth that **every ContextKit command reads** to understand your specific setup.
+
+### 🎯 **Adaptive Command Execution**
+Commands automatically adapt to your detected platform:
+- **`build-project` agent**: Uses `xcodebuild` for iOS, `gradle build` for Android, `npm run build` for web
+- **Quality checks**: Runs `swift-format` for Swift (with included configs), or your platform's linters
+- **Release workflows**: App Store for iOS, Play Store for Android, Vercel/Netlify for web
+
+### 📋 **Platform-Specific Guidelines & Configs**
+- **Currently available**: `Swift.md`, `SwiftUI.md` guidelines + Swift formatting configs (battle-tested from production apps)
+- **Community contributions welcome**: `React.md`, `Kotlin.md`, `Python.md` guidelines + your platform's formatter configs
+- **Project customization**: All commands/agents/templates include a "👩‍💻 DEVELOPER CUSTOMIZATIONS" section for project-specific overrides (preserved during updates)
+
+**The result**: ContextKit feels native to YOUR tech stack while maintaining systematic development methodology across all platforms.
+
+### Example: Cross-Platform Feature Development
+```bash
+# Same commands, different execution based on your Context.md:
+
+# React Project:
+/ctxk:plan:2-research-tech  # Suggests React patterns, considers Next.js/Vite
+/ctxk:impl:start-working    # Reads React.md guidelines, runs npm commands
+
+# Android Project:
+/ctxk:plan:2-research-tech  # Suggests Kotlin patterns, considers Jetpack Compose
+/ctxk:impl:start-working    # Reads Kotlin.md guidelines, runs gradle commands
+
+# Swift Project:
+/ctxk:plan:2-research-tech  # Suggests SwiftUI patterns, considers iOS guidelines
+/ctxk:impl:start-working    # Reads Swift.md guidelines, runs xcodebuild
+```
 
 The **hierarchical context system** (Global → Workspace → Project) lets you maintain consistency across all projects while adapting to client requirements or technology differences.
 
