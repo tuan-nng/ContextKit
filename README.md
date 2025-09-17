@@ -6,19 +6,10 @@
 
 ---
 
-## Table of Contents
-
-- [🤔 Why ContextKit exists](#-why-contextkit-exists)
-- [⚡ Get started](#-get-started)
-- [⚙️ Optimized Configuration](#-optimized-configuration)
-- [🏗️ How it works](#-how-it-works)
-- [🤖 Built-in Quality Agents](#-built-in-quality-agents)
-- [🔧 Project-Specific Customization](#-project-specific-customization)
-- [📋 Commands overview](#-commands-overview)
-- [🎯 Why Claude Code](#-why-claude-code)
-- [🌍 Universal but opinionated](#-universal-but-opinionated)
-- [🧪 Built from real experience](#-built-from-real-experience)
-- [Contributing](#contributing)
+<p align="center" style="color: #666;">
+    <strong>Quick Navigation</strong><br>
+    <a href="#-get-started">Get started</a> • <a href="#-how-it-works">How it works</a> • <a href="#-commands-overview">Commands</a> • <a href="#-universal-but-opinionated">Universal platform support</a>
+</p>
 
 
 ## 🤔 Why ContextKit exists
