@@ -1,5 +1,5 @@
 # Begin Development with Context
-<!-- Template Version: 4 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 5 | ContextKit: 0.0.0 | Updated: 2025-09-17 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -42,16 +42,16 @@ Begin systematic development with context-aware setup, task analysis, and guided
    ```bash
    git branch --show-current || echo "⚠️ Not in git repository or no current branch"
    ```
-   - If branch format is `feature/[kebab-case-name]`:
-     - Extract kebab-case name from branch (e.g., `feature/visionos26-modernization` → `visionos26-modernization`)
-     - Set FEATURE_KEBAB variable for directory matching
+   - If branch format is `feature/[prefix]-[kebab-case-name]`:
+     - Extract full name from branch (e.g., `feature/001-visionos26-modernization` → `001-visionos26-modernization`)
+     - Set FEATURE_NAME variable for directory matching
    - If not on feature branch:
      ```
      ⚠️ Not on a feature branch!
 
      Current branch: [current_branch_name]
 
-     Expected: feature/[feature-name] branch from /ctxk:plan:1-spec
+     Expected: feature/[prefix]-[feature-name] branch from /ctxk:plan:1-spec
 
      Switch to feature branch or create one with /ctxk:plan:1-spec
      Continue anyway? (y/N):
@@ -63,19 +63,16 @@ Begin systematic development with context-aware setup, task analysis, and guided
 3. **Validate Feature Planning Completion**
    - Use `Bash` tool to find numbered feature directory with flexible matching:
      ```bash
-     # Try exact kebab-case match first
-     FEATURE_DIR=$(ls -d Context/Features/*/ | grep -i "[FEATURE_KEBAB]" | head -1)
-     # If no match, try word-based matching (split on hyphens, match key words)
+     # Try exact full name match first
+     FEATURE_DIR=$(ls -d Context/Features/*/ | grep -i "[FEATURE_NAME]" | head -1)
+     # If no match, try number-based matching (extract prefix number)
      if [[ -z "$FEATURE_DIR" ]]; then
-       KEYWORDS=$(echo "[FEATURE_KEBAB]" | sed 's/-/ /g')
-       for KEYWORD in $KEYWORDS; do
-         FEATURE_DIR=$(ls -d Context/Features/*/ | grep -i "$KEYWORD" | head -1)
-         if [[ -n "$FEATURE_DIR" ]]; then break; fi
-       done
+       PREFIX=$(echo "[FEATURE_NAME]" | cut -d'-' -f1)
+       FEATURE_DIR=$(ls -d Context/Features/${PREFIX}-*/ 2>/dev/null | head -1)
      fi
      ```
    - Expected format: `Context/Features/###-FeatureName/` (e.g., `001-VisionOS26Modernization/`)
-   - Handles variations between kebab-case branch names and PascalCase directory names
+   - Handles variations between prefixed kebab-case branch names and numbered PascalCase directory names
    - Use `Read` tool to check each required file exists and has content:
      ```bash
      ls -la [numbered-feature-directory]/Spec.md && echo "✅ Spec.md exists"

@@ -1,5 +1,5 @@
 # SwiftUI Development Guidelines
-<!-- Template Version: 5 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 10 | ContextKit: 0.0.0 | Updated: 2025-09-17 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -48,6 +48,11 @@ These guidelines provide strategic direction for SwiftUI development in ContextK
 - ✅ **`.rect()` shorthand**: For final shape calls over `RoundedRectangle()`
 - ✅ **Built-in formatters**: `Text(value, format: .percent)` over manual formatting
 - ✅ **Navigation Stack**: Over legacy `NavigationView` for iOS 16+
+
+### Modern Logging Patterns
+- ✅ **`Logger()`**: Use `Logger().info("message")` instead of `print()` (available via FlineDevKit)
+- ✅ **Log levels**: `.info()`, `.debug()`, `.error()` for appropriate context
+- ❌ **Avoid**: `print()` statements for logging
 
 ### Button and Interaction Patterns
 - ✅ **Trailing closure syntax**: `Button { action } label: { CustomView() }`
@@ -234,9 +239,9 @@ When Xcode UI actions are required, use the standardized user instruction format
 
 ### User Feedback Collection
 - ✅ **Feedback buttons**: Use `.mailComposer()` modifier with `ErrorKit.logAttachment()`
-- ✅ **Automatic log collection**: Include system logs from last 10-30 minutes for context
+- ✅ **Automatic log collection**: Include system logs from last 10-30 minutes for context via Logger()
 - ✅ **Device context**: Include device model, iOS version, and app version in reports
-- ✅ **Structured logging**: Use `Logger()` instead of `print()` for proper log collection
+- ✅ **Structured logging**: Use Logger() instead of print() for proper log collection
 
 ---
 
@@ -323,6 +328,204 @@ All SwiftUI development must support:
 - **Platform Considerations**: Check multiple sources for iOS/macOS/visionOS specific guidance
 - **Domain-Limited Searches**: Use `site:wwdcnotes.com SwiftUI` for WWDC-specific content
 - **WWDC Coverage**: Look for WWDC-specific SwiftUI coverage on active community blogs for latest API insights
+
+---
+
+## AI Target Membership Investigation & Repair
+
+### Detecting Target Membership Issues from Build Errors
+
+**Common Error Patterns Indicating Target Membership Problems**:
+
+**"Cannot find type 'TypeName' in scope"**:
+- Most common when source files aren't included in the building target
+- Often occurs after AI creates new files or renames existing ones
+- Type exists in codebase but isn't accessible to the failing target
+
+**"No such module 'ModuleName'"**:
+- Framework/dependency not linked to the target
+- Module available to app target but not to extension targets
+- Swift Package Manager modules not properly configured for all targets
+
+**Duplicate symbol errors**:
+- Same file accidentally included in multiple targets
+- Shared code included when it should be target-specific
+
+### Automated Target Membership Investigation
+
+**Step 1: Parse Project Structure**
+```bash
+# Ensure cleanup of temporary files on exit
+trap 'rm -f project.json' EXIT
+
+# Convert pbxproj to readable format for analysis
+plutil -convert json *.xcodeproj/project.pbxproj -o project.json
+
+# Find all targets in the project
+grep -E '"isa"\s*:\s*"PBXNativeTarget"' project.json -A 10
+
+# Identify project uses modern File System Synchronized Groups (Xcode 16+)
+grep -q "PBXFileSystemSynchronizedRootGroup" *.xcodeproj/project.pbxproj && echo "Modern sync groups detected"
+
+# Clean up temporary file (trap ensures this happens even on script failure)
+rm -f project.json
+```
+
+**Step 2: Analyze Target Membership for Failing Files**
+```bash
+# For modern Xcode 16+ projects with synchronized groups
+# Check if file exists in membershipExceptions
+FILE_PATH="Sources/Models/UserModel.swift"
+grep -A 20 "PBXFileSystemSynchronizedBuildFileExceptionSet" *.xcodeproj/project.pbxproj | grep -q "$FILE_PATH"
+
+# For legacy projects, check if file is in target's sources build phase
+TARGET_NAME="WidgetExtension"
+TARGET_ID=$(grep -B 2 -A 5 "name = $TARGET_NAME" *.xcodeproj/project.pbxproj | grep -o "[A-F0-9]\{24\}")
+```
+
+**Step 3: Identify Missing Dependencies**
+```bash
+# Check what frameworks/modules are linked to each target
+grep -A 50 "\"$TARGET_ID\" /\* PBXFrameworksBuildPhase \*/" *.xcodeproj/project.pbxproj
+
+# Compare import statements in failing files vs available modules
+grep -h "^import " "$FILE_PATH" | sort | uniq
+```
+
+### Safe pbxproj Modification Strategy
+
+**CRITICAL SAFETY PROTOCOL**: Always backup and validate immediately after any pbxproj modification:
+
+```bash
+# 1. Create backup before any changes
+cp *.xcodeproj/project.pbxproj *.xcodeproj/project.pbxproj.backup
+
+# 2. Make targeted modification (see specific fixes below)
+# ... modification commands ...
+
+# 3. IMMEDIATELY test project integrity
+xcodebuild -list > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    echo "❌ pbxproj corrupted - reverting changes"
+    mv *.xcodeproj/project.pbxproj.backup *.xcodeproj/project.pbxproj
+    exit 1
+fi
+
+# 4. Test build for affected target
+xcodebuild -scheme "$TARGET_NAME" -destination "platform=iOS Simulator,name=iPhone 15" build
+if [ $? -ne 0 ]; then
+    echo "⚠️ Build failed - analyzing errors before deciding on revert"
+fi
+```
+
+### Fixing Target Membership Issues
+
+**Modern Projects (Xcode 16+ with PBXFileSystemSynchronizedRootGroup)**:
+
+Add file to additional target by creating membership exception:
+```bash
+# Find the target ID that needs the file
+TARGET_ID=$(grep -B 2 -A 5 "name = $TARGET_NAME" *.xcodeproj/project.pbxproj | grep -o "[A-F0-9]\{24\}")
+
+# Create or update PBXFileSystemSynchronizedBuildFileExceptionSet
+# This requires careful text manipulation of the pbxproj file
+# Use sed or awk to add the file path to membershipExceptions array
+
+# Example structure to add:
+# membershipExceptions = (
+#     "Sources/Models/UserModel.swift",
+# );
+```
+
+**Legacy Projects (Traditional PBXGroup structure)**:
+
+Add file to target's sources build phase:
+```bash
+# Find sources build phase for target
+SOURCES_PHASE_ID=$(grep -A 20 "\"$TARGET_ID\" /\* PBXSourcesBuildPhase \*/" *.xcodeproj/project.pbxproj | grep -o "[A-F0-9]\{24\}")
+
+# Add file reference to the sources build phase files array
+# This requires precise insertion into the files = ( ... ); section
+```
+
+### Validation and Rollback Protocol
+
+**After Each Modification**:
+1. **Immediate syntax check**: `xcodebuild -list` validates pbxproj structure
+2. **Build test**: Attempt to build the affected target
+3. **Error analysis**: If build fails, determine if it's the intended error fix or a new issue
+4. **Rollback decision**: Revert if new errors introduced, keep if original error resolved
+
+**Common pbxproj Corruption Signs**:
+- `xcodebuild -list` returns error
+- Xcode refuses to open project
+- Missing target references
+- Malformed object references
+
+### Automated Investigation Workflow
+
+```bash
+# Complete investigation sequence for "Cannot find type" errors:
+
+# Ensure cleanup of any temporary files
+trap 'rm -f project.json target_analysis.tmp' EXIT
+
+# 1. Identify the missing type and its source file
+MISSING_TYPE="UserModel"
+SOURCE_FILE=$(find . -name "*.swift" -exec grep -l "struct $MISSING_TYPE\|class $MISSING_TYPE\|enum $MISSING_TYPE" {} \;)
+
+# 2. Check if source file exists in filesystem but not in failing target
+if [ -f "$SOURCE_FILE" ]; then
+    echo "✅ Source file exists: $SOURCE_FILE"
+
+    # 3. Create temporary JSON for analysis
+    plutil -convert json *.xcodeproj/project.pbxproj -o project.json
+
+    # 4. Check current target membership
+    RELATIVE_PATH=${SOURCE_FILE#./}
+    grep -q "$RELATIVE_PATH" *.xcodeproj/project.pbxproj && echo "File referenced in pbxproj"
+
+    # 5. Determine which targets include this file
+    # ... target membership analysis using project.json ...
+
+    # 6. Add to missing target if needed
+    # ... safe modification with rollback ...
+
+    # Cleanup handled by trap
+else
+    echo "❌ Source file missing from filesystem - different issue"
+fi
+```
+
+### Best Practices for AI Target Membership Management
+
+**Prevention Strategies**:
+- ✅ **Template-based file creation**: When creating new shared files, use patterns that automatically include appropriate target membership
+- ✅ **Post-creation validation**: Always build all targets after creating new files
+- ✅ **Shared folder conventions**: Place truly shared code in `Shared/` folders with clear naming
+
+**Repair Strategies**:
+- ✅ **Conservative modifications**: Make minimal changes to pbxproj structure
+- ✅ **Immediate validation**: Test every change before proceeding
+- ✅ **Rollback readiness**: Keep backups and be prepared to revert
+- ✅ **Target-specific analysis**: Understand why each target needs (or doesn't need) specific files
+
+**Emergency Recovery**:
+If pbxproj becomes corrupted and backups fail, the safest approach is to request manual user intervention:
+```
+═══════════════════════════════════════════════════
+║ 🚨 PBXPROJ CORRUPTION DETECTED
+═══════════════════════════════════════════════════
+║
+║ Automated target membership repair has corrupted the
+║ project file. Manual intervention required:
+║
+║ 1. Restore from git: git checkout -- *.xcodeproj/project.pbxproj
+║ 2. Or use Xcode to manually add [filename] to [target] target
+║ 3. Check "Target Membership" in File Inspector
+║
+║ This prevents further damage to the project structure.
+```
 
 ---
 

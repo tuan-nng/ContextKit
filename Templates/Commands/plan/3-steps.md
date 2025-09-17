@@ -1,5 +1,5 @@
 # Create Task List
-<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-17 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -48,7 +48,7 @@ Generate implementation task breakdown by detecting current feature, validating 
 
 3. **Detect Current Feature**
    - Use `Bash` tool to check current git branch: `git branch --show-current`
-   - If on feature/[name] branch: Extract feature name from branch
+   - If on feature/[prefix]-[name] branch: Extract feature name from branch
    - If not on feature branch: Ask user which feature to work on using consistent format
    - Use `Glob` tool to find numbered feature directory: `Glob Context/Features/???-[FeatureName]`
 

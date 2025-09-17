@@ -1,5 +1,5 @@
 # Feature Specification Template
-<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-17 -->
 
 ## Description
 Feature specification template providing systematic business requirements generation with progress tracking and quality validation.
@@ -35,7 +35,7 @@ Feature specification template providing systematic business requirements genera
 ║ 4. **Generate Feature Information**
 ║    - Use `Edit` tool to replace template header with specific feature information:
 ║      - Title: "# Feature Specification: [Feature Name]"
-║      - Feature Branch: `feature/[kebab-case-name]` (from parent command)
+║      - Feature Branch: `feature/[prefix]-[kebab-case-name]` (from parent command)
 ║      - Created: [Current Date]
 ║      - Status: Draft
 ║      - Input: [Original user description - preserve exactly verbatim, do NOT summarize]
@@ -135,7 +135,7 @@ Feature specification template providing systematic business requirements genera
 
 # Feature Specification: [AI Generated Feature Name]
 
-**Feature Branch**: `feature/[ai-generated-branch-name]`
+**Feature Branch**: `feature/[prefix]-[ai-generated-branch-name]`
 **Created**: [AI Generated Current Date]
 **Status**: Draft
 **Input**:

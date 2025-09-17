@@ -1,5 +1,5 @@
 # Create Feature Specification
-<!-- Template Version: 4 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 5 | ContextKit: 0.0.0 | Updated: 2025-09-17 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -74,7 +74,7 @@ Initialize feature specification by validating setup, confirming feature naming,
 5. **Generate Names**
    - Parse user description for key concepts
    - Create PascalCase name (e.g., "user authentication" → "UserAuthentication", "recipe app" → "RecipeApp")
-   - Create kebab-case branch name (e.g., "feature/user-authentication", "feature/recipe-app")
+   - Create kebab-case name for branch suffix (e.g., "user-authentication", "recipe-app")
    - Focus on user value, not implementation details
 
 6. **Interactive Name Confirmation**
@@ -86,7 +86,7 @@ Initialize feature specification by validating setup, confirming feature naming,
      ║
      ║ Generated names based on your description:
      ║ • Feature folder: [XXX]-[PascalCaseName] (XXX = next sequential number)
-     ║ • Git branch: feature/[kebab-case-name]
+     ║ • Git branch: feature/[XXX]-[kebab-case-name]
      ║
      ║ Are these names correct? (y/N) or provide alternative description:
      ```
@@ -115,8 +115,8 @@ Initialize feature specification by validating setup, confirming feature naming,
 
 9. **Create Git Branch**
    ```bash
-   git checkout -b feature/[confirmed-kebab-case-name] || echo "⚠️ Git branch creation failed - continuing without branch"
-   echo "✅ Created git branch: feature/[confirmed-kebab-case-name]"
+   git checkout -b feature/${NEXT_NUM}-[confirmed-kebab-case-name] || echo "⚠️ Git branch creation failed - continuing without branch"
+   echo "✅ Created git branch: feature/${NEXT_NUM}-[confirmed-kebab-case-name]"
    ```
 
 10. **Execute Specification Template**
@@ -167,7 +167,7 @@ Initialize feature specification by validating setup, confirming feature naming,
 
 📁 Feature: [numbered-feature-directory-name]
 ✅ Created: [numbered-feature-directory]/Spec.md
-✅ Git branch: feature/[confirmed-kebab-case-name]
+✅ Git branch: feature/[XXX]-[confirmed-kebab-case-name]
 ✅ Applied constitutional principles from project guidelines
 ✅ All mandatory sections completed with project-specific content
 
