@@ -130,11 +130,14 @@ Execute with supervised autonomy and specialized quality agents (requires featur
 - **Release**: `/ctxk:impl:release-app` for iOS/macOS, `/ctxk:impl:release-package` for Swift packages
 
 ### Backlog & Team Management
+
+**Note**: `/ctxk/bckl:*` commands are relatively new and might get major refinements very soon
+
 - **Idea capture**: `/ctxk:bckl:add-idea` with evaluation framework
 - **Bug reporting**: `/ctxk:bckl:add-bug` with impact assessment
 - **Prioritization**: `/ctxk:bckl:prioritize-ideas` and `/ctxk:bckl:prioritize-bugs` with binary search evaluation
 - **Completion**: `/ctxk:bckl:remove-idea` and `/ctxk:bckl:remove-bug` for cleaning backlog
-- **Workspace setup**: `/ctxk:proj:init-workspace` for client/team standards
+- **Workspace setup**: `/ctxk:proj:init-workspace` for client/team standards (to run in parent folder containing multiple projects)
 
 <details>
 <summary><strong>📋 Complete Command Reference</strong></summary>
