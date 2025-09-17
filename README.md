@@ -23,6 +23,7 @@
 - [🧪 Built from real experience](#-built-from-real-experience)
 - [Contributing](#contributing)
 
+
 ## 🤔 Why ContextKit exists
 
 **The real problem**: AI assistants are reactive, not proactive. You have to spoon-feed them every single step: "Now create the model", "Now add the service", "Don't forget tests", "Now wire up the UI". They wait for instructions instead of understanding the bigger picture and driving the process forward.
@@ -34,6 +35,7 @@
 **And you stay in control**: ContextKit enables AI autonomy at the right moments while keeping you in strategic control. You review and approve the spec, tech decisions, and implementation plan at key checkpoints. The AI then executes with specialized quality agents (accessibility, localization, code cleanup) working autonomously within your approved framework.
 
 **The key insight**: By helping AI understand your intent clearly upfront, it can work longer and more effectively without constant corrections. You spend time on strategic decisions, not fixing misunderstood implementations.
+
 
 ## ⚡ Get started
 
@@ -95,6 +97,7 @@ ContextKit configures Claude Code with optimized settings for systematic develop
 >
 > **Better workflow**: Start fresh chats when needed and resume with `/ctxk:impl:start-working` (within feature branches after planning) – ContextKit's structured approach makes this seamless. Manual `/compact` loses unpredictable amounts of context, while fresh starts preserve your systematic progress.
 
+
 ## 🏗️ How it works
 
 ContextKit implements a proven 4-phase methodology that prevents the chaos of unstructured AI development:
@@ -127,52 +130,6 @@ Execute with supervised autonomy and specialized quality agents (requires featur
 - Automatic cleanup of AI artifacts (leftover comments, temporary code)
 - You maintain strategic oversight while AI handles tactical execution
 
-## 🤖 Built-in Quality Agents
-
-ContextKit includes specialized sub-agents that automatically ensure code quality at the right moments:
-
-- **`check-accessibility`** - VoiceOver labels, color contrast, keyboard navigation, inclusive design patterns
-- **`check-localization`** - String Catalog validation, cultural adaptation, region formatters, pluralization
-- **`check-error-handling`** - ErrorKit patterns, typed throws, user-friendly error messages
-- **`check-modern-code`** - Replace outdated APIs (Date() → Date.now, TimeInterval → Duration, async/await patterns)
-- **`check-code-debt`** - Remove AI artifacts, consolidate patterns, extract reusable components
-- **`build-project`** - Execute builds and report results without filling context with verbose output
-- **`run-test-suite`** - Execute complete test suite with build validation and structured failure reporting
-- **`run-specific-test`** - Execute specific test with build validation and focused failure analysis
-- ... more to be added over time with updates!
-
-These agents activate automatically during development phases, **adapting to your detected tech stack** for consistent quality without manual oversight.
-
-## 🔄 Seamless Updates
-
-ContextKit automatically checks for newer versions when you start a new session and displays update notifications if available – but **never interrupts your workflow**. When you're ready to update:
-
-- Simply type `/ctxk:proj:migrate` and ContextKit handles everything
-- Your project customizations are preserved automatically
-- Core templates update to the latest improvements
-- New commands and agents are automatically added to your project
-- Review all changes in Git before committing – full transparency
-- You stay in full control of when updates happen
-
-## 🔒 Files Safe to Customize
-
-**These files are NEVER updated by `/ctxk:proj:migrate` once created:**
-
-### ✅ Complete User Control (modify freely)
-- **Formatter Config Files** (`.swift-format`, `.swiftformat`) - Your coding style preferences, never overwritten
-- **Project Context** (`Context.md`) - Your project configuration, completely customizable
-- **Feature Specifications** (`Context/Features/*/`) - Feature specs, research, tech plans, and steps are yours to edit
-- **Workspace Context** (`[Workspace]/Context.md`) - Your workspace overrides, never touched
-
-### ⚙️ Partial Control (customization sections preserved)
-- **Commands & Agents** - Core logic updates, but your additions in "👩‍💻 DEVELOPER CUSTOMIZATIONS" sections are preserved
-- **Guidelines** - Reference content updates, but your project-specific customizations are preserved
-
-### 📝 Backlog File Management
-- **Inbox Files** (`Ideas-Inbox.md`, `Bugs-Inbox.md`) - **✅ COMPLETELY USER-EDITABLE**: Edit manually, copy/paste between projects, add entries freely
-- **Backlog Files** (`Ideas-Backlog.md`, `Bugs-Backlog.md`) - **❌ AI-MANAGED DATABASES**: Never edit directly! Request changes through `/ctxk:impl:start-working` sessions
-
-**Bottom Line**: Your formatter configs, project context, features, and backlog content are completely yours. ContextKit only updates core frameworks and logic while preserving all your customizations.
 
 ## 📋 Commands overview
 
@@ -220,6 +177,57 @@ ContextKit automatically checks for newer versions when you start a new session 
 
 </details>
 
+
+## 🤖 Built-in Quality Agents
+
+ContextKit includes specialized sub-agents that automatically ensure code quality at the right moments while preventing your context from getting overloaded:
+
+- **`build-project`** - Execute builds and report results without filling context with verbose output
+- **`run-test-suite`** - Execute complete test suite with build validation and structured failure reporting
+- **`run-specific-test`** - Execute specific test with build validation and focused failure analysis
+- [NEEDS REWORK] **`check-accessibility`** - VoiceOver labels, color contrast, keyboard navigation, inclusive design patterns
+- [NEEDS REWORK] **`check-localization`** - String Catalog validation, cultural adaptation, region formatters, pluralization
+- [NEEDS REWORK] **`check-error-handling`** - ErrorKit patterns, typed throws, user-friendly error messages
+- [NEEDS REWORK] **`check-modern-code`** - Replace outdated APIs (Date() → Date.now, TimeInterval → Duration, async/await patterns)
+- [NEEDS REWORK] **`check-code-debt`** - Remove AI artifacts, consolidate patterns, extract reusable components
+
+- ... more to be added over time with updates!
+
+These agents activate automatically during development phases, **adapting to your detected tech stack** for consistent quality without manual oversight.
+
+
+## 🔄 Seamless Updates
+
+ContextKit automatically checks for newer versions when you start a new Claude session and displays update notifications if available – but **never interrupts your workflow**. When you're ready to update:
+
+- Simply type `/ctxk:proj:migrate` and ContextKit handles everything
+- Your project customizations are preserved automatically
+- Core templates update to the latest improvements
+- New commands and agents are automatically added to your project
+- Review all changes in Git before committing – full transparency
+- You stay in full control of when updates happen
+
+
+## 🔒 Files Safe to Customize
+
+**These files are NEVER updated by `/ctxk:proj:migrate` once created:**
+
+### ✅ Complete User Control (modify freely)
+- **Formatter Config Files** (`.swift-format`, `.swiftformat`) - Your coding style preferences, never overwritten
+- **Project Context** (`Context.md`) - Your project configuration, completely customizable
+- **Feature Specifications** (`Context/Features/*/`) - Feature specs, research, tech plans, and steps are yours to edit
+
+### ⚙️ Partial Control (customization sections preserved)
+- **Commands & Agents** - Core logic updates, but your additions in "👩‍💻 DEVELOPER CUSTOMIZATIONS" sections are preserved
+- **Guidelines** - Reference content updates, but your project-specific customizations are preserved
+
+### 📝 Backlog File Management
+- **Inbox Files** (`Ideas-Inbox.md`, `Bugs-Inbox.md`) - **✅ COMPLETELY USER-EDITABLE**: Edit manually, copy/paste between projects, add entries freely
+- **Backlog Files** (`Ideas-Backlog.md`, `Bugs-Backlog.md`) - **❌ AI-MANAGED DATABASES**: Never edit directly! Use `/ctxk:bckl:prioritize-*` and `/ctxk:bckl:remove-*` commands
+
+**Bottom Line**: Your formatter configs, project context, features, and backlog content are completely yours. ContextKit only updates core frameworks and logic while preserving all your customizations.
+
+
 ## 🎯 Why Claude Code
 
 ContextKit is built exclusively for Claude Code because it's currently the most advanced and mature agentic development system available. While other tools exist (Gemini CLI, OpenAI Codex), Claude Code pioneered this space and offers unique features that make ContextKit possible:
@@ -230,6 +238,7 @@ ContextKit is built exclusively for Claude Code because it's currently the most 
 - **Mature ecosystem**: Proven, stable platform for serious development work
 
 Rather than abstracting across multiple tools, ContextKit leverages Claude Code's full feature set to deliver maximum productivity and reliability. But ContextKit could easily be forked and adjusted to the needs of other systems, given they also support commands, hooks, and agents.
+
 
 ## 🌍 Universal but opinionated
 
@@ -242,13 +251,7 @@ When you run `/ctxk:proj:init`, ContextKit analyzes your project and documents e
 - **Dependencies**: package.json, Podfile, build.gradle, requirements.txt
 - **Project structure**: Monorepo, multi-module, single-app architecture
 
-This `Context.md` becomes the source of truth that **every ContextKit command reads** to understand your specific setup.
-
-### 🎯 **Adaptive Command Execution**
-Commands automatically adapt to your detected platform:
-- **`build-project` agent**: Uses `xcodebuild` for iOS, `gradle build` for Android, `npm run build` for web
-- **Quality checks**: Runs `swift-format` for Swift (with included configs), or your platform's linters
-- **Release workflows**: App Store for iOS, Play Store for Android, Vercel/Netlify for web
+This `Context.md` becomes the source of truth that **every ContextKit command reads** to understand your specific setup. It's also automatically included in your `CLAUDE.md` file (or creates one if missing) to ensure every new chat starts with full project context.
 
 ### 📋 **Platform-Specific Guidelines & Configs**
 - **Currently available**: `Swift.md`, `SwiftUI.md` guidelines + Swift formatting configs (battle-tested from production apps)
@@ -256,25 +259,6 @@ Commands automatically adapt to your detected platform:
 - **Project customization**: All commands/agents/templates include a "👩‍💻 DEVELOPER CUSTOMIZATIONS" section for project-specific overrides (preserved during updates)
 
 **The result**: ContextKit feels native to YOUR tech stack while maintaining systematic development methodology across all platforms.
-
-### Example: Cross-Platform Feature Development
-```bash
-# Same commands, different execution based on your Context.md:
-
-# React Project:
-/ctxk:plan:2-research-tech  # Suggests React patterns, considers Next.js/Vite
-/ctxk:impl:start-working    # Reads React.md guidelines, runs npm commands
-
-# Android Project:
-/ctxk:plan:2-research-tech  # Suggests Kotlin patterns, considers Jetpack Compose
-/ctxk:impl:start-working    # Reads Kotlin.md guidelines, runs gradle commands
-
-# Swift Project:
-/ctxk:plan:2-research-tech  # Suggests SwiftUI patterns, considers iOS guidelines
-/ctxk:impl:start-working    # Reads Swift.md guidelines, runs xcodebuild
-```
-
-The **hierarchical context system** (Global → Workspace → Project) lets you maintain consistency across all projects while adapting to client requirements or technology differences.
 
 ## 🧪 Built from real experience
 
@@ -295,7 +279,7 @@ ContextKit isn't theoretical - it's built from hundreds of hours developing iOS 
 ### Why It Works
 ContextKit transforms AI from a powerful but unpredictable tool into a systematic development partner that **consistently** produces high-quality, maintainable code following your patterns and standards.
 
-The result: **You build features faster, with fewer bugs, that follow your architecture, and work correctly the first time.**
+The result: **You build features with fewer iterations, less manual cleanup, and better alignment with your architecture.**
 
 ## Contributing
 
@@ -307,13 +291,9 @@ For behavioral changes (not typos), update the line 2 header in each modified fi
 
 For releases, update **ContextKit** version in all template files.
 
-### Custom Development Standards
-
-ContextKit is opinionated about coding style (3-space indentation, explicit `self.`) and framework choices (FlineDevKit ecosystem with ErrorKit, HandySwift, etc.). If the developer customization sections aren't enough for your needs, fork this repository, modify the guidelines and templates, and update the migrate command in `Templates/Commands/proj/migrate.md` to point to your custom repo URL.
-
 ## Showcase
 
-I created this framework for my own Indie app work (rate my apps to support my work):
+I created this to ship features faster in my own Indie apps (rate them to support my work!):
 
 <table>
   <tr>
