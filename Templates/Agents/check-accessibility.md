@@ -1,7 +1,7 @@
 ---
-meta: "Template Version: 5 | ContextKit: 0.0.0 | Updated: 2025-09-16"
+meta: "Template Version: 7 | ContextKit: 0.0.0 | Updated: 2025-09-17"
 name: check-accessibility
-description: Detect and automatically fix accessibility issues in UI code, applying universal principles with framework-specific improvements
+description: [INCOMPLETE] Detect and fix accessibility issues in UI code - needs rework for read-only reporting
 tools: Read, Edit, MultiEdit, Grep, Glob, Task
 color: cyan
 ---

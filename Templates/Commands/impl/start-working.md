@@ -1,5 +1,5 @@
 # Begin Development with Context
-<!-- Template Version: 5 | ContextKit: 0.0.0 | Updated: 2025-09-17 -->
+<!-- Template Version: 7 | ContextKit: 0.0.0 | Updated: 2025-09-17 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -266,6 +266,7 @@ Begin systematic development with context-aware setup, task analysis, and guided
     Use Task tool with build-project:
     "Execute project build and report status."
 
+    <!-- TODO: check-* agents currently disabled (untested, need rework to read-only)
     Use Task tool with check-modern-code:
     "Check for outdated patterns in recent code.
 
@@ -284,15 +285,18 @@ Begin systematic development with context-aware setup, task analysis, and guided
     - Sources/Components/CustomButton.swift
 
     Focus analysis on these specific areas only."
+    -->
     ```
 
     - **Execution Order** (run sequentially, stop and fix if any fail):
       1. `build-project` - Verify compilation (project-wide)
-      2. `check-modern-code` - Modernize APIs (recent files only)
-      3. `check-error-handling` - Validate error patterns (recent files only)
-      4. `check-accessibility` - Check UI accessibility (recent UI files only)
-      5. `check-localization` - Verify localization (recent UI files only)
-      6. `check-code-debt` - Clean up artifacts (recent files only)
+      <!-- TODO: check-* agents incomplete - need rework to read-only reporting
+      2. `check-modern-code` - Modernize APIs (recent files only) [INCOMPLETE]
+      3. `check-error-handling` - Validate error patterns (recent files only) [INCOMPLETE]
+      4. `check-accessibility` - Check UI accessibility (recent UI files only) [INCOMPLETE]
+      5. `check-localization` - Verify localization (recent UI files only) [INCOMPLETE]
+      6. `check-code-debt` - Clean up artifacts (recent files only) [INCOMPLETE]
+      -->
 
     - **Optional Testing Agents** (use when working on tests or before releases):
       - `run-specific-test` - When debugging a failing test or validating new test code
@@ -345,7 +349,7 @@ Begin systematic development with context-aware setup, task analysis, and guided
 
 - **Planning Commands**: Requires completed `/ctxk:plan:1-spec`, `/ctxk:plan:2-research-tech`, `/ctxk:plan:3-steps` workflow
 - **Project Setup**: Uses Context.md from `/ctxk:proj:init` for project type detection and standards
-- **Quality Agents**: Integrates with `/run check-*` agents for autonomous quality validation
+- **Quality Agents**: Integrates with `build-project`, `run-test-*` agents (ready). `/run check-*` agents incomplete - pending rework
 - **Workspace Context**: Inherits client-specific requirements from workspace-level Context.md files
 - **Git Workflow**: Works within feature branch structure established by planning commands
 - **Development Hooks**: Enables PostToolUse formatting and SessionStart version checking
@@ -362,7 +366,7 @@ Begin systematic development with context-aware setup, task analysis, and guided
 📖 Guidelines: Context/Guidelines/[RelevantGuideline].md
 
 ⚡ Quality validation runs automatically after substantial changes:
-   build-project → check-modern-code → check-error-handling → check-accessibility → check-localization
+   build-project → [check-* agents incomplete pending rework]
 
 💡 Ready to implement!
 ```

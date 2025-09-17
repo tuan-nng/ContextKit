@@ -56,14 +56,14 @@ ContextKit/
     │   ├── VersionStatus.sh        # Version checking and status display (SessionStart hook)
     │   └── CustomStatusline.sh     # Complete statusline script with 5h-usage tracking and colored progress bars
     ├── Agents/                      # → AI ASSISTANTS (get copied during /ctxk:proj:init)
-    │   ├── build-project.md         # Execute builds with constitutional compliance checking
-    │   ├── check-accessibility.md   # Accessibility compliance validation (VoiceOver, contrast, etc.)
-    │   ├── check-localization.md    # Localization readiness audit (String Catalog, cultural adaptation)
-    │   ├── check-error-handling.md  # ErrorKit pattern validation and typed throws
-    │   ├── check-modern-code.md     # API modernization (Date.now, Duration, async/await)
-    │   ├── check-code-debt.md       # Technical debt cleanup and code consolidation
-    │   ├── run-test-suite.md        # Execute complete test suite with build validation and structured failure reporting
-    │   └── run-specific-test.md     # Execute specific test with build validation and focused failure analysis
+    │   ├── build-project.md         # [READY] Execute builds with constitutional compliance checking
+    │   ├── check-accessibility.md   # [INCOMPLETE] Accessibility compliance validation (VoiceOver, contrast, etc.)
+    │   ├── check-localization.md    # [INCOMPLETE] Localization readiness audit (String Catalog, cultural adaptation)
+    │   ├── check-error-handling.md  # [INCOMPLETE] ErrorKit pattern validation and typed throws
+    │   ├── check-modern-code.md     # [INCOMPLETE] API modernization (Date.now, Duration, async/await)
+    │   ├── check-code-debt.md       # [INCOMPLETE] Technical debt cleanup and code consolidation
+    │   ├── run-test-suite.md        # [READY] Execute complete test suite with build validation and structured failure reporting
+    │   └── run-specific-test.md     # [READY] Execute specific test with build validation and focused failure analysis
     ├── Features/                    # → FEATURE TEMPLATES (used by /ctxk:plan:1-spec, etc.)
     │   ├── Spec.md                  # Business requirements and user stories (spec-kit methodology)
     │   ├── Tech.md                  # Technical architecture and constitutional compliance
@@ -349,15 +349,25 @@ AGENT_LATEST_VERSION=$(sed -n '2p' ~/.ContextKit/Templates/Agents/check-modern-c
 **Format**: Markdown with YAML frontmatter (proper Claude Code agent format)
 **Variables**: **NONE** - Dynamic context reading
 
-**Agents & AI Implementation Focus**:
+**Agent Status & Implementation Focus**:
+
+**Ready Agents**:
 - `build-project.md` - Execute builds, filter developer comments, report errors/warnings
+- `run-test-suite.md` - Execute complete test suite with build validation and structured failure reporting
+- `run-specific-test.md` - Execute specific test with build validation and focused failure analysis
+
+**Incomplete Agents** (need rework for read-only reporting):
 - `check-accessibility.md` - VoiceOver labels, color contrast, dynamic type validation
 - `check-localization.md` - String Catalog analysis, cultural adaptation, region formatters
 - `check-error-handling.md` - ErrorKit patterns, typed throws, user-friendly error messages
 - `check-modern-code.md` - Replace Date() → Date.now, TimeInterval → Duration, async/await
 - `check-code-debt.md` - Remove AI artifacts, consolidate patterns, extract components
-- `run-test-suite.md` - Execute complete test suite with build validation and structured failure reporting
-- `run-specific-test.md` - Execute specific test with build validation and focused failure analysis
+
+**Rework Requirements for check-* agents**:
+- Convert from automatic fixing to read-only reporting
+- Provide structured output for manual fixing
+- Enable parallel execution (no write conflicts)
+- Clear actionable guidance for each issue type
 
 ### 📝 **Templates/Features/** - Feature Development Templates
 **Purpose**: Templates copied during feature planning commands  
