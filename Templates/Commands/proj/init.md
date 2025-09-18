@@ -1,5 +1,5 @@
 # Initialize Project with ContextKit
-<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 5 | ContextKit: 0.0.0 | Updated: 2025-09-18 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -313,10 +313,15 @@ Initialize current project with ContextKit development workflow system. Sets up 
    Better workflow: Start fresh chats when needed and resume with /ctxk:impl:start-working (within feature branches).
 
 🎯 **Next Steps**:
-   • **Recommended**: Start a fresh Claude session for optimal context
    • All build/test commands are documented and validated in Context.md
    • Begin your first feature with: /ctxk:plan:1-spec
    • The systematic workflow: plan → implement → iterate
+
+> [!IMPORTANT]
+> **🔄 RESTART REQUIRED**: You must restart Claude Code for all commands to be available:
+>
+> 1. Type `/exit` to close this session
+> 2. Type `claude` to start a new session
 
 💡 **Available Commands**:
    • Feature Planning: /ctxk:plan:1-spec → /ctxk:plan:2-research-tech → /ctxk:plan:3-steps
