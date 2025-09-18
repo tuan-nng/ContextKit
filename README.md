@@ -1,14 +1,14 @@
 ![ContextKit Logo](https://github.com/FlineDev/ContextKit/blob/main/Logo.png?raw=true)
 
 <p align="center">
-    <strong>Stop fighting context limits. Stop losing work between sessions. Start building features systematically with Claude Code while it understands your project, your patterns, and your standards.</strong>
+    <strong>Stop fighting context limits. Stop micro-managing Claude Code. Start building features systematically and make AI produce closer to production-ready code on first try.</strong>
 </p>
 
 ---
 
 <p align="center" style="color: #666;">
     <strong>Quick Navigation</strong><br>
-    <a href="#-get-started">Get started</a> • <a href="#-how-it-works">How it works</a> • <a href="#-commands-overview">Commands</a> • <a href="#-universal-but-opinionated">Universal platform support</a> • <a href="#-comparison-with-other-ai-systems">Comparison</a>
+    <a href="#-get-started">Get started</a> • <a href="#%EF%B8%8F-how-it-works">How it works</a> • <a href="#-commands-overview">Commands</a> • <a href="#-universal-but-opinionated">Universal platform support</a> • <a href="#%EF%B8%8F-comparison-with-other-ai-systems">Comparison</a>
 </p>
 
 
