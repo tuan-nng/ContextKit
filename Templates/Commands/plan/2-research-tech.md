@@ -1,5 +1,5 @@
 # Research and Design Architecture
-<!-- Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-17 -->
+<!-- Template Version: 4 | ContextKit: 0.0.0 | Updated: 2025-09-18 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -104,7 +104,19 @@ Generate technical research and architecture plan by detecting current feature, 
    - **Template execution**: The copied Tech.md handles architecture decisions, Context/Guidelines compliance, and complexity assessment
    - **Progress tracking**: User can see architectural planning checkboxes being completed in the copied file
 
-10. **Display Success Message** (see Success Messages section)
+10. **Validate Research Cleanup**
+    - Use `Read` tool to check if Research.md still contains system instructions: `Read [numbered-feature-directory]/Research.md`
+    - Search for "🤖 EXECUTION FLOW" or "VALIDATION & EXECUTION STATUS" sections
+    - If system instructions remain: Use `Edit` tool to remove all boxed instruction sections
+    - Ensure final Research.md contains only clean research results
+
+11. **Validate Technical Architecture Cleanup**
+    - Use `Read` tool to check if Tech.md still contains system instructions: `Read [numbered-feature-directory]/Tech.md`
+    - Search for "🤖 EXECUTION FLOW" or "VALIDATION & EXECUTION STATUS" sections
+    - If system instructions remain: Use `Edit` tool to remove all boxed instruction sections
+    - Ensure final Tech.md contains only clean technical architecture content
+
+12. **Display Success Message** (see Success Messages section)
 
 ## Error Conditions
 
@@ -113,7 +125,8 @@ Generate technical research and architecture plan by detecting current feature, 
 - **"Feature specification not found"** → Must run `/ctxk:plan:1-spec` first
 - **"Technical template not found"** → Check global ContextKit installation integrity
 - **"Specification has unresolved clarifications"** → Resolve [NEEDS CLARIFICATION] markers in Spec.md first
-- **"Template execution failed"** → Verify Tech.md template contains system instructions section
+- **"Template execution failed"** → Verify Research.md and Tech.md templates contain system instructions sections
+- **"Cleanup validation failed"** → System instruction sections remain after template execution - manual cleanup required
 
 ## Validation Gates
 
@@ -123,7 +136,7 @@ Generate technical research and architecture plan by detecting current feature, 
 - No unresolved [NEEDS CLARIFICATION] markers in specification?
 - Technical template copied to feature directory successfully?
 - Template system instructions executed successfully?
-- System instructions section removed from final Tech.md?
+- System instructions sections removed from both Research.md and Tech.md?
 - User informed to review and commit technical plan before proceeding?
 
 ## Integration Points
@@ -147,6 +160,7 @@ Generate technical research and architecture plan by detecting current feature, 
 ✅ Researched all technologies mentioned in specification
 ✅ Applied Context/Guidelines/Swift.md and SwiftUI.md standards
 ✅ All mandatory sections completed with research-informed decisions
+✅ System instruction sections cleaned up from both files
 
 [If 🚨 [NEEDS CLARIFICATION] items exist in plans:]
 ⚠️  Technical clarifications needed for:
