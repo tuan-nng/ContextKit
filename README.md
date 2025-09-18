@@ -8,7 +8,7 @@
 
 <p align="center" style="color: #666;">
     <strong>Quick Navigation</strong><br>
-    <a href="#-get-started">Get started</a> • <a href="#-how-it-works">How it works</a> • <a href="#-commands-overview">Commands</a> • <a href="#-universal-but-opinionated">Universal platform support</a> • <a href="#contributing">Contributing</a>
+    <a href="#-get-started">Get started</a> • <a href="#-how-it-works">How it works</a> • <a href="#-commands-overview">Commands</a> • <a href="#-universal-but-opinionated">Universal platform support</a> • <a href="#-comparison-with-other-ai-systems">Comparison</a>
 </p>
 
 
@@ -271,6 +271,14 @@ ContextKit isn't theoretical - it's built from hundreds of hours developing iOS 
 ContextKit transforms AI from a powerful but unpredictable tool into a systematic development partner that **consistently** produces high-quality, maintainable code following your patterns and standards.
 
 The result: **You build features with fewer iterations, less manual cleanup, and better alignment with your architecture.**
+
+## ⚖️ Comparison with other AI systems
+
+[Spec Kit](https://github.com/github/spec-kit) was actually the inspiration for the planning part of ContextKit and focuses more on team-based workflows and the idea is to make specification files "executable" with consitutional compliance gates which can slow down rapid prototyping. It's optimized for larger companies to let server farms run various implementations in parallel to then choose the best one, rather than improving single-developer workflows, which ContextKit focuses on.
+
+[BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) is simulating a compleate team coordination with specialized roles handling different aspects (PM creates PRDs, Architect designs systems, QA does comprehensive review), making it powerful for complet projects but overwhelming for solo work. ContextKit focuses on individual productivity with easy-to-learn and adjust planning commands, agents, and more.
+
+[Serena](https://github.com/oraios/serena) enhances AI workflows with semantic understanding and excels at refactoring existing code but won't help with planning or architecture decisions. ContextKit has some semantic understanding, too, but is more like an "overall" system that doesn't focus only on this one aspect. Serena could probably be used to enhance refactoring capabilities if combined with ContextKit.
 
 ## Contributing
 
