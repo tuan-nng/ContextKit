@@ -1,5 +1,5 @@
 # Initialize Workspace Context
-<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-14 -->
+<!-- Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-18 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -66,7 +66,7 @@ Initialize workspace-level context configuration. Copies workspace template and 
      3. Enterprise/Company
      4. Open Source Project
    - **Follow-up Details**: Based on selection, ask follow-up questions:
-     - Client/Enterprise: Ask for company name and contract identifier
+     - Client/Enterprise: Ask for company name
      - All types: Ask for brief workspace description
    - **Coding Standards**: Ask user: "Override indentation preference for this workspace?"
      1. Keep current/detected patterns
