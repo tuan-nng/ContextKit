@@ -1,5 +1,5 @@
 # Technical Research: [Feature from Spec.md]
-<!-- Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 4 | ContextKit: 0.0.0 | Updated: 2025-09-19 -->
 
 ## Description
 Technical research template providing systematic knowledge acquisition for technologies, frameworks, APIs, and integration patterns mentioned in feature specifications.
@@ -50,6 +50,7 @@ Technical research template providing systematic knowledge acquisition for techn
 ║      - Agent: "research-cloudkit" with context: "CloudKit sync capabilities and limitations for feature"
 ║      - Agent: "research-swiftui" with context: "SwiftUI patterns and best practices for [feature area]"
 ║      - Each agent receives technology context and feature requirements
+║      - **CRITICAL**: Instruct agents to RETURN findings as text response, NOT create markdown files
 ║      - **Apple Platform Priority Domains**: For iOS/macOS technologies, agents MUST prioritize these domains:
 ║        - **developer.apple.com** - Official Apple documentation, HIG, sample code
 ║        - **wwdcnotes.com** - Community WWDC session summaries and best practices
@@ -68,6 +69,7 @@ Technical research template providing systematic knowledge acquisition for techn
 ║      - Agent: "research-api-service" with context: "[Service Name] API documentation, rate limits, pricing analysis"
 ║      - Agent: "research-auth-methods" with context: "[Service] authentication, data formats, iOS SDK analysis"
 ║      - Each agent receives service context and integration requirements
+║      - **CRITICAL**: Instruct agents to RETURN findings as text response, NOT create markdown files
 ║      - Agents use WebFetch for API docs, return: capabilities, constraints, costs, integration complexity WITH SPECIFIC URLs of key documentation that informed findings
 ║      - **CRITICAL**: All agents must document SPECIFIC ARTICLES/DOCS that informed findings with exact URLs, version numbers, and last-updated dates
 ║      - **Key Source Focus**: Document only the most relevant sources that directly informed the documented findings
@@ -80,6 +82,7 @@ Technical research template providing systematic knowledge acquisition for techn
 ║      - Agent: "research-error-patterns" with context: "Modern Swift error handling integration patterns"
 ║      - Agent: "research-state-management" with context: "SwiftUI state management patterns for [feature complexity]"
 ║      - Each agent receives pattern context and feature complexity requirements
+║      - **CRITICAL**: Instruct agents to RETURN findings as text response, NOT create markdown files
 ║      - **Source Documentation Requirement**: Agents use WebSearch for best practices and MUST return: implementation approaches, benefits, drawbacks, case studies WITH SPECIFIC URLs of articles that informed findings
 ║      - **Apple Pattern Priority**: For iOS/macOS patterns, prioritize official Apple guidance and use iosfeeds.com for community articles
 ║      - **Non-Apple Patterns**: Use WebSearch and official documentation for non-Apple architectural patterns

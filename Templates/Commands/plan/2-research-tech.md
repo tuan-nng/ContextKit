@@ -1,5 +1,5 @@
 # Research and Design Architecture
-<!-- Template Version: 5 | ContextKit: 0.0.0 | Updated: 2025-09-19 -->
+<!-- Template Version: 6 | ContextKit: 0.0.0 | Updated: 2025-09-19 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -88,6 +88,7 @@ Generate technical research and architecture plan by detecting current feature, 
    - Launch technology research agents using `Task` tool for each mentioned technology
    - Launch API research agents for external services using `Task` tool
    - Launch architecture pattern research agents using `Task` tool
+   - **CRITICAL**: Instruct ALL agents to RETURN findings as text responses, NOT create markdown files
    - **Wait for ALL agents to complete** before proceeding
 
    **Phase 3: Research Consolidation** (Steps 8-12 in Research.md)
