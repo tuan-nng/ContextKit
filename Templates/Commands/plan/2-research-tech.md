@@ -1,5 +1,5 @@
 # Research and Design Architecture
-<!-- Template Version: 4 | ContextKit: 0.0.0 | Updated: 2025-09-18 -->
+<!-- Template Version: 5 | ContextKit: 0.0.0 | Updated: 2025-09-19 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -74,13 +74,35 @@ Generate technical research and architecture plan by detecting current feature, 
    echo "✅ Copied technical research template"
    ```
 
-6. **Execute Research Template**
-   - Use `Read` tool to read the copied Research.md: `Read [numbered-feature-directory]/Research.md`
-   - Follow the **system instructions** section (boxed area) step by step
-   - The template handles knowledge acquisition via WebFetch/WebSearch for technologies mentioned in specification
-   - Use tools (`Read`, `Edit`, `WebFetch`, `WebSearch`) as directed by the template instructions
-   - **Research execution**: The copied Research.md handles technology research, API investigation, and pattern analysis
-   - **Progress tracking**: User can see research checkboxes being completed in the copied file
+6. **Execute Research Template System Instructions**
+   - Use `Read` tool to read the **ENTIRE** copied Research.md template: `Read [numbered-feature-directory]/Research.md`
+   - **CRITICAL**: The template contains 300+ lines with detailed system instructions - read it completely to understand all phases
+   - **CRITICAL**: Follow the Research.md template's **🤖 EXECUTION FLOW** instructions step by step:
+
+   **Phase 1: Knowledge Gap Identification** (Steps 1-4 in Research.md)
+   - Load feature specification and project context
+   - Identify all research targets from specification
+   - Launch comprehensive codebase integration agent if needed
+
+   **Phase 2: Active Knowledge Acquisition** (Steps 5-7 in Research.md)
+   - Launch technology research agents using `Task` tool for each mentioned technology
+   - Launch API research agents for external services using `Task` tool
+   - Launch architecture pattern research agents using `Task` tool
+   - **Wait for ALL agents to complete** before proceeding
+
+   **Phase 3: Research Consolidation** (Steps 8-12 in Research.md)
+   - Use `Edit` tool to replace template header with specific feature information
+   - Use `Edit` tool to document ALL technology research results from completed agents
+   - Use `Edit` tool to document ALL API & service research results from completed agents
+   - Use `Edit` tool to document codebase integration analysis from completed agents
+   - Use `Edit` tool to document ALL architectural pattern research from completed agents
+
+   **Phase 4: Completion** (Steps 13-15 in Research.md)
+   - Validate research completeness against specification
+   - Generate research summary with key decisions
+   - Use `Edit` tool to **remove the entire boxed system instructions section** from Research.md
+
+   **Research execution**: You must populate the Research.md file with actual findings, not leave it as a template
 
 7. **Validate Research Completion**
    - Use `Read` tool to verify research completion: `Read [numbered-feature-directory]/Research.md`
@@ -126,6 +148,7 @@ Generate technical research and architecture plan by detecting current feature, 
 - **"Technical template not found"** → Check global ContextKit installation integrity
 - **"Specification has unresolved clarifications"** → Resolve [NEEDS CLARIFICATION] markers in Spec.md first
 - **"Template execution failed"** → Verify Research.md and Tech.md templates contain system instructions sections
+- **"Research.md not populated"** → Research agents completed but findings not documented in Research.md - must execute template's Phase 3 consolidation steps
 - **"Cleanup validation failed"** → System instruction sections remain after template execution - manual cleanup required
 
 ## Validation Gates
