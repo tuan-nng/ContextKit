@@ -213,6 +213,6 @@ main() {
 }
 
 # Only execute main if script is run directly (not sourced)
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]] || [[ "${0}" == "bash" ]] || [[ "${0}" == "sh" ]]; then
    main "$@"
 fi

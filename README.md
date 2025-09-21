@@ -30,7 +30,7 @@
 ### 1. Install ContextKit globally
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | bash
 ```
 
 ### 2. Setup your project
