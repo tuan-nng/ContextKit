@@ -1,5 +1,5 @@
 # Initialize Project with ContextKit
-<!-- Template Version: 6 | ContextKit: 0.0.0 | Updated: 2025-09-21 -->
+<!-- Template Version: 7 | ContextKit: 0.1.0 | Updated: 2025-09-22 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -185,20 +185,48 @@ Initialize current project with ContextKit development workflow system. Sets up 
    ```
    > **Note**: `-p` preserves permissions during copy, `chmod +x` ensures all .sh files are executable
 
-15. **Copy Development Guidelines**
+15. **Detect Relevant Guidelines**
+   - Based on comprehensive project investigation findings from Phase 4:
+     - Analyze detected file types (.swift, .py, .js, .ts, .java, .go, etc.)
+     - Examine framework imports found (SwiftUI, UIKit, Django, React, Spring, etc.)
+     - Review package managers discovered (Package.swift, package.json, requirements.txt, etc.)
+     - Consider project structure patterns (Sources/, src/, app/, etc.)
+   - Determine which guidelines are relevant for this specific project:
+     - Swift projects with Package.swift or .xcodeproj → ["Swift"]
+     - Swift projects importing SwiftUI → ["Swift", "SwiftUI"]
+     - Python projects with requirements.txt/pyproject.toml → ["Python"] (if exists)
+     - JavaScript/Node projects with package.json → ["JavaScript"] (if exists)
+     - Multi-language projects → combine relevant guidelines
+   - Store selected guidelines array for copying phase
+
+16. **Copy Relevant Guidelines Only**
    ```bash
    mkdir -p Context/Guidelines
-   cp ~/.ContextKit/Templates/Guidelines/* Context/Guidelines/
-   echo "✅ Copied development guidelines (Swift.md, SwiftUI.md, etc.)"
+   # Copy only guidelines relevant to detected project type
+   # Guidelines array determined by project analysis above
+   SELECTED_GUIDELINES=(Swift SwiftUI)  # Example - actual array based on detection
+
+   for guideline in "${SELECTED_GUIDELINES[@]}"; do
+       if [[ -f "$HOME/.ContextKit/Templates/Guidelines/${guideline}.md" ]]; then
+           cp "$HOME/.ContextKit/Templates/Guidelines/${guideline}.md" Context/Guidelines/
+           echo "✅ Copied guideline: ${guideline}.md"
+       else
+           echo "⚠️ Guideline not found: ${guideline}.md (skipping)"
+       fi
+   done
+
+   if [ ${#SELECTED_GUIDELINES[@]} -eq 0 ]; then
+       echo "✅ No specific guidelines needed for this project type"
+   fi
    ```
 
-16. **Copy Backlog Templates**
+17. **Copy Backlog Templates**
    ```bash
    cp ~/.ContextKit/Templates/Backlog/* Context/Backlog/
    echo "✅ Copied backlog templates (Ideas-Inbox.md, Bugs-Backlog.md, etc.)"
    ```
 
-17. **Copy Project Context Template**
+18. **Copy Project Context Template**
     ```bash
     cp ~/.ContextKit/Templates/Contexts/Project.md Context.md
     echo "✅ Copied project context template"
@@ -206,14 +234,14 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 ### Phase 4: Deep Project Investigation & Build Validation
 
-18. **Discover Project Components & Repositories**
+19. **Discover Project Components & Repositories**
     - Use `Bash` command to find ALL git repositories within project: `find . -name ".git" -type d`
     - For each .git directory found, identify the repository root and purpose
     - Use `Read` tool to examine `.gitmodules` files to understand submodule structure
     - Create hierarchical map of all components/repositories within this project
     - **CRITICAL**: Every single component must be analyzed individually for development commands
 
-19. **Deep Component Analysis for Each Repository/Component**
+20. **Deep Component Analysis for Each Repository/Component**
     For EVERY component found, perform comprehensive analysis:
 
     **A. Component Identity & Purpose Analysis**
@@ -281,7 +309,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 ### Phase 5: Context Integration & Final Setup
 
-20. **Create/Update CLAUDE.md with Context References**
+21. **Create/Update CLAUDE.md with Context References**
     - Check if `CLAUDE.md` exists using `Read` tool
     - If `CLAUDE.md` exists:
       - Use `Read` to check current content
@@ -296,7 +324,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
       ```
     - **CRITICAL**: Ensure both project Context.md AND workspace Context.md (if found in Phase 1) are referenced
 
-21. **Copy Project-Specific Formatters** (for Swift projects only)
+22. **Copy Project-Specific Formatters** (for Swift projects only)
     - For Swift projects detected during investigation:
       ```bash
       cp ~/.ContextKit/Templates/Formatters/.swift-format .
@@ -304,7 +332,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
       echo "✅ Copied Swift formatter configurations"
       ```
 
-22. **Execute Context.md Template Instructions**
+23. **Execute Context.md Template Instructions**
     - Use `Read` tool to read the copied `Context.md` file
     - Follow the **system instructions** section (boxed area) step by step
     - **CRITICAL**: Use the comprehensive findings from Phase 3 investigation:
@@ -319,7 +347,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 ### Phase 6: Verification & Completion
 
-23. **Verify Installation**
+24. **Verify Installation**
     - Use `Read` tool to confirm `Context.md` exists and contains project-specific content
     - Use `Glob` tool to verify workflow commands exist: `.claude/commands/ctxk/plan/1-spec.md`, `.claude/commands/ctxk/impl/start-working.md`, `.claude/commands/ctxk/bckl/add-idea.md`
     - Use `Bash` tool to verify global proj commands accessible: `ls ~/.claude/commands/ctxk/proj/init.md`
@@ -328,7 +356,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
     - Use `Bash` tool to verify status line configured with plan: `grep "CustomStatusline.sh --plan" .claude/settings.json`
     - Use `Read` tool to confirm `.claude/settings.json` contains ContextKit configuration
 
-24. **Update Workspace Context (if applicable)**
+25. **Update Workspace Context (if applicable)**
     - If workspace Context.md was discovered in Phase 1:
       - Use `Read` tool to read the workspace Context.md file
       - Look for current project name in the "Repository Structure" or "Project Inventory" section
@@ -337,7 +365,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
         - Update the setup status count (e.g., "2 of 21 projects have ContextKit enabled" → "3 of 21 projects have ContextKit enabled")
       - If project not listed in workspace: Use `Edit` tool to add project to the repository structure with "ContextKit-enabled" status and detected component details
 
-25. **Display Completion**
+26. **Display Completion**
     - Display success message using template below
     - Include summary of components discovered and validated
     - Suggest next steps based on project analysis findings
@@ -357,7 +385,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
    ✓ Context.md - Comprehensive project analysis with validated build/test commands
    ✓ Context/Features/ - Systematic feature development
    ✓ Context/Backlog/ - Ideas and bugs with evaluation frameworks
-   ✓ Context/Guidelines/ - Development standards and constitutional principles
+   ✓ Context/Guidelines/ - Development standards relevant to project type
    ✓ Context/Scripts/ - Code formatting and status automation
    ✓ .claude/commands/ctxk/ - Workflow commands (plan/, impl/, bckl/) - global proj/ commands remain global
    ✓ .claude/agents/ctxk/ - Quality assurance specialists
@@ -423,7 +451,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
 - Agent templates copied to .claude/agents/ctxk/?
 - Script templates copied to Context/Scripts/?
 - Backlog templates copied to Context/Backlog/?
-- Development guidelines copied to Context/Guidelines/?
+- Relevant development guidelines copied to Context/Guidelines/?
 
 **Deep Project Investigation Validation:**
 - All project components/repositories discovered recursively?

@@ -1,5 +1,5 @@
 # Technical Architecture: [Feature from Spec.md]
-<!-- Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 4 | ContextKit: 0.1.0 | Updated: 2025-09-22 -->
 
 ## Description
 Technical architecture template providing systematic iOS/macOS implementation planning with Context/Guidelines compliance validation and architectural decision documentation.
@@ -29,11 +29,12 @@ Technical architecture template providing systematic iOS/macOS implementation pl
 ║    - Extract project type, existing architecture, tech stack preferences
 ║    - For workspace projects: Use `Read` tool on workspace Context.md for overrides
 ║
-║ 4. **Load Development Guidelines**
-║    - Based on project type detected:
-║      - If Swift detected: Use `Read` tool: `Read Context/Guidelines/Swift.md`
-║      - If SwiftUI detected: Use `Read` tool: `Read Context/Guidelines/SwiftUI.md`
-║    - Document loaded guidelines for architectural compliance validation
+║ 4. **Load All Available Development Guidelines**
+║    - Use `Glob` tool to discover available guidelines: `Glob Context/Guidelines *.md`
+║    - For each found guideline file:
+║      - Use `Read` tool: `Read Context/Guidelines/[GuidelineName].md`
+║      - Extract architectural patterns, framework preferences, compliance requirements
+║    - Document all loaded guidelines for comprehensive architectural compliance validation
 ║
 ║ ### Phase 2: Architecture Design & Validation
 ║

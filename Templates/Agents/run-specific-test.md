@@ -1,5 +1,5 @@
 ---
-meta: "Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-16"
+meta: "Template Version: 3 | ContextKit: 0.1.0 | Updated: 2025-09-16"
 name: run-specific-test
 description: Execute specific test with build validation and focused failure analysis
 tools: Bash, Read, Grep, Glob

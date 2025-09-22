@@ -1,5 +1,5 @@
 ---
-meta: "Template Version: 4 | ContextKit: 0.0.0 | Updated: 2025-09-17"
+meta: "Template Version: 4 | ContextKit: 0.1.0 | Updated: 2025-09-17"
 name: check-localization
 description: [INCOMPLETE] Detect and fix localization issues - needs rework for read-only reporting
 tools: Read, Edit, MultiEdit, Grep, Glob, Task

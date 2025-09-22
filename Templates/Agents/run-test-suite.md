@@ -1,5 +1,5 @@
 ---
-meta: "Template Version: 2 | ContextKit: 0.0.0 | Updated: 2025-09-16"
+meta: "Template Version: 2 | ContextKit: 0.1.0 | Updated: 2025-09-16"
 name: run-test-suite
 description: Execute complete test suite with build validation and structured failure reporting
 tools: Bash, Read, Grep, Glob

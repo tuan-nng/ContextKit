@@ -1,5 +1,5 @@
 # Feature Specification Template
-<!-- Template Version: 3 | ContextKit: 0.0.0 | Updated: 2025-09-17 -->
+<!-- Template Version: 4 | ContextKit: 0.1.0 | Updated: 2025-09-22 -->
 
 ## Description
 Feature specification template providing systematic business requirements generation with progress tracking and quality validation.
@@ -17,13 +17,13 @@ Feature specification template providing systematic business requirements genera
 ║    - Extract project type, tech stack, development patterns, workspace reference
 ║    - Document project context for specification customization
 ║
-║ 2. **Load Development Guidelines**
-║    - Based on project type detected from Context.md:
-║      - If Swift detected: Use `Read` tool: `Read Context/Guidelines/Swift.md`
-║      - If SwiftUI detected: Use `Read` tool: `Read Context/Guidelines/SwiftUI.md`
-║      - If other languages detected: Look for workspace-specific guidelines in Context/Guidelines/
+║ 2. **Load All Available Development Guidelines**
+║    - Use `Glob` tool to discover available guidelines: `Glob Context/Guidelines *.md`
+║    - For each found guideline file:
+║      - Use `Read` tool: `Read Context/Guidelines/[GuidelineName].md`
+║      - Extract framework preferences, architectural patterns, API choices
 ║    - For workspace projects: Use `Read` tool on workspace Context.md for additional standards
-║    - Document loaded guidelines for development pattern application
+║    - Document all loaded guidelines for comprehensive development pattern application
 ║
 ║ 3. **Extract User Requirements from Original Input**
 ║    - Parse original feature description provided by user

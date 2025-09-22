@@ -1,5 +1,5 @@
 # Begin Development with Context
-<!-- Template Version: 7 | ContextKit: 0.0.0 | Updated: 2025-09-17 -->
+<!-- Template Version: 8 | ContextKit: 0.1.0 | Updated: 2025-09-22 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -229,9 +229,8 @@ Begin systematic development with context-aware setup, task analysis, and guided
      - Identify constitutional principles relevant to task type (UI, models, services, etc.)
      - Show current task description and acceptance criteria
      - Display relevant file paths and expected changes
-     - Reference appropriate guidelines based on project type:
-       - iOS/macOS App projects → `Context/Guidelines/Swift.md` and `Context/Guidelines/SwiftUI.md`
-       - Swift Package projects → `Context/Guidelines/Swift.md`
+     - Use `Glob` tool to discover available guidelines: `Glob Context/Guidelines *.md`
+     - For each found guideline file, use `Read` tool to load and apply content
      - Display constitutional reminders for current task type
      - Provide starting guidance based on project patterns
      - Begin implementation work
@@ -363,7 +362,7 @@ Begin systematic development with context-aware setup, task analysis, and guided
 
 📋 Current Task: [TaskNumber] [TaskDescription]
 📂 Files to modify: [file_paths]
-📖 Guidelines: Context/Guidelines/[RelevantGuideline].md
+📖 Guidelines: [List of available guidelines from Context/Guidelines/]
 
 ⚡ Quality validation runs automatically after substantial changes:
    build-project → [check-* agents incomplete pending rework]

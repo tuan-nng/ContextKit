@@ -1,5 +1,5 @@
 #!/bin/bash
-# Template Version: 6 | ContextKit: 0.0.0 | Updated: 2025-09-16
+# Template Version: 7 | ContextKit: 0.1.0 | Updated: 2025-09-22
 
 # version-status.sh - ContextKit version management and project status
 # Called by SessionStart hook when Claude Code starts a new session
@@ -142,7 +142,6 @@ check_template_updates() {
     # Check both local project templates AND global proj commands
     local project_dirs=(
         "$HOME/.claude/commands/ctxk/proj"
-        "Context/Guidelines"
         ".claude/commands/ctxk/plan"
         ".claude/commands/ctxk/impl"
         ".claude/commands/ctxk/bckl"
@@ -152,7 +151,6 @@ check_template_updates() {
 
     local source_dirs=(
         "$CONTEXTKIT_DIR/Templates/Commands/proj"
-        "$CONTEXTKIT_DIR/Templates/Guidelines"
         "$CONTEXTKIT_DIR/Templates/Commands/plan"
         "$CONTEXTKIT_DIR/Templates/Commands/impl"
         "$CONTEXTKIT_DIR/Templates/Commands/bckl"
@@ -169,6 +167,12 @@ check_template_updates() {
             updates_needed=$((updates_needed + outdated))
         fi
     done
+
+    # Check guidelines separately - only guidelines that exist in project
+    if [ -d "Context/Guidelines" ]; then
+        local guidelines_outdated=$(check_project_guidelines_updates)
+        updates_needed=$((updates_needed + guidelines_outdated))
+    fi
 
     if [ "$updates_needed" -gt 0 ]; then
         echo "  ⚠️  Project template updates available: $updates_needed files"
@@ -220,6 +224,37 @@ count_outdated_templates() {
             count=$((count + 1))
             if [ "$VERBOSE_MODE" = true ]; then
                 echo "NEW:$source_file:$local_file" >&2
+            fi
+        fi
+    done
+
+    echo "$count"
+}
+
+check_project_guidelines_updates() {
+    local count=0
+
+    if [ ! -d "Context/Guidelines" ]; then
+        echo "0"
+        return
+    fi
+
+    # Only check guidelines that exist in project
+    for project_guideline in Context/Guidelines/*.md; do
+        [ -f "$project_guideline" ] || continue
+
+        local guideline_name=$(basename "$project_guideline")
+        local source_guideline="$CONTEXTKIT_DIR/Templates/Guidelines/$guideline_name"
+
+        if [ -f "$source_guideline" ]; then
+            local project_version=$(sed -n '2p' "$project_guideline" 2>/dev/null | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*" || echo "0")
+            local source_version=$(sed -n '2p' "$source_guideline" 2>/dev/null | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*" || echo "0")
+
+            if [ "$project_version" -lt "$source_version" ] 2>/dev/null; then
+                count=$((count + 1))
+                if [ "$VERBOSE_MODE" = true ]; then
+                    echo "OUTDATED:$source_guideline:$project_guideline" >&2
+                fi
             fi
         fi
     done

@@ -1,5 +1,5 @@
 # Project Context Template
-<!-- Template Version: 1 | ContextKit: 0.0.0 | Updated: 2025-09-15 -->
+<!-- Template Version: 2 | ContextKit: 0.1.0 | Updated: 2025-09-22 -->
 
 ## Description
 Project-level Context.md template providing project-specific investigation, development commands, project structure analysis, and ContextKit workflow configuration.
@@ -98,6 +98,7 @@ Project-level Context.md template providing project-specific investigation, deve
 - **Components**: [X] components discovered and analyzed
 - **Workspace**: [Workspace Name from Investigation or "None (standalone project)"]
 - **Primary Tech Stack**: [Most Common Language/Framework from Analysis]
+- **Development Guidelines**: [List of copied guidelines based on project type detection]
 
 ## Component Architecture
 
@@ -172,6 +173,18 @@ Project-level Context.md template providing project-specific investigation, deve
 
 **Formatters** (configured):
 [Formatter configurations found and their settings]
+
+## Development Guidelines
+
+**Applied Guidelines**: [List guidelines copied during project setup]
+- Guidelines automatically loaded by all planning commands (`/ctxk:plan:*`)
+- Implementation commands apply guideline standards during development
+- Quality agents validate against guideline requirements
+
+**Guidelines Integration**:
+- All planning phases reference active guidelines for architecture decisions
+- Implementation phases apply guideline patterns and API preferences
+- Migration only updates guidelines that exist in project
 
 ## Constitutional Principles
 
