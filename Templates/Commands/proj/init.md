@@ -1,5 +1,5 @@
 # Initialize Project with ContextKit
-<!-- Template Version: 7 | ContextKit: 0.1.0 | Updated: 2025-09-22 -->
+<!-- Template Version: 8 | ContextKit: 0.1.0 | Updated: 2025-09-24 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -27,30 +27,47 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 ### Phase 1: Pre-Flight Checks & Critical Setup
 
-1. **Check Git Repository Status**
+1. **Verify Project Root Path**
+   ```bash
+   echo "Working in project: $(pwd)"
+   ```
+   - **CRITICAL**: Working directory persists between bash calls in Claude Code
+   - Use `$(pwd)` when absolute paths are needed, avoid relying on stored variables
+
+2. **Check Git Repository Status**
    ```bash
    git status --porcelain
    ```
    - If uncommitted changes exist: WARN user and ask for confirmation to continue
    - If not a git repository: WARN user and ask for confirmation to continue
 
-2. **Check Current Project Structure**
+3. **Initialize Git Submodules (if present)**
+   ```bash
+   if [ -f .gitmodules ]; then
+       git submodule update --init --recursive
+       echo "✅ Initialized git submodules"
+   fi
+   ```
+   - Important for projects with submodule dependencies
+   - Must be done early before component analysis
+
+4. **Check Current Project Structure**
    - Use `Glob` tool to list project files: `Glob . *` to see all files and directories
    - Use `Glob . **/*.md` to find all markdown files in subdirectories
 
-3. **Detect Existing ContextKit Installation**
+5. **Detect Existing ContextKit Installation**
    - Look for `Context.md` in project root
    - Check for `Context/` directory with subdirectories using `Glob Context *`
    - Check for `.claude/commands/ctxk/` directory using `Glob .claude/commands/ctxk *`
    - Check for `.claude/agents/ctxk/` directory using `Glob .claude/agents/ctxk *`
    - **If MOST exist**: ERROR "Project already initialized with ContextKit. Use `/ctxk:proj:migrate` for updates instead."
 
-4. **Verify ContextKit Global Installation**
+6. **Verify ContextKit Global Installation**
    ```bash
    ls -la ~/.ContextKit/Templates/ || echo "❌ ContextKit not installed globally. Run: curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | sh"
    ```
 
-5. **CRITICAL: Configure Settings for Permissions (HIGHEST PRIORITY)**
+7. **CRITICAL: Configure Settings for Permissions (HIGHEST PRIORITY)**
    - Use `Read` tool to check if `.claude/settings.json` exists
    - If doesn't exist: Copy complete template to get immediate permissions
    ```bash
@@ -123,9 +140,24 @@ Initialize current project with ContextKit development workflow system. Sets up 
    - Store plan selection for status line configuration
 
 9. **Workspace Discovery**
-   - Use `Bash` tool to traverse parent directories: `cd .. && pwd` then check for Context.md
+   - Start from current directory and traverse parent directories
+   - Use absolute paths for checking: `ls "$(pwd)/../Context.md" 2>/dev/null`
    - Continue checking parent directories until reaching root `/` or finding workspace Context.md
    - **CRITICAL**: Calculate correct relative path to workspace Context.md (count levels up: 1 level = `../Context.md`, 2 levels = `../../Context.md`, etc.)
+   - Example traversal:
+     ```bash
+     PROJECT_ROOT=$(pwd)
+     CURRENT_DIR="$PROJECT_ROOT"
+     while [ "$CURRENT_DIR" != "/" ]; do
+         PARENT_DIR=$(dirname "$CURRENT_DIR")
+         if [ -f "$PARENT_DIR/Context.md" ]; then
+             # Found workspace Context.md
+             LEVELS=$(echo "$PROJECT_ROOT" | sed "s|$PARENT_DIR/||" | tr '/' '\n' | wc -l)
+             # Calculate relative path with correct number of ../
+         fi
+         CURRENT_DIR="$PARENT_DIR"
+     done
+     ```
    - If workspace context found:
      ```
      ═══════════════════════════════════════════════════
@@ -222,6 +254,8 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 17. **Copy Backlog Templates**
    ```bash
+   # Ensure directory exists before copying
+   mkdir -p Context/Backlog
    cp ~/.ContextKit/Templates/Backlog/* Context/Backlog/
    echo "✅ Copied backlog templates (Ideas-Inbox.md, Bugs-Backlog.md, etc.)"
    ```
@@ -235,10 +269,13 @@ Initialize current project with ContextKit development workflow system. Sets up 
 ### Phase 4: Deep Project Investigation & Build Validation
 
 19. **Discover Project Components & Repositories**
-    - Use `Bash` command to find ALL git repositories within project: `find . -name ".git" -type d`
+    - Use `Bash` command to find ALL git repositories within project: `find "$(pwd)" -name ".git" -type d`
     - For each .git directory found, identify the repository root and purpose
     - Use `Read` tool to examine `.gitmodules` files to understand submodule structure
     - Create hierarchical map of all components/repositories within this project
+    - **IMPORTANT**: Determine project structure:
+      - **Single-component project** (e.g., just an app): Work directly in PROJECT_ROOT, no `cd` needed
+      - **Multi-component project** (e.g., App/ and Server/): Must `cd` into each component directory and return to project root after analysis
     - **CRITICAL**: Every single component must be analyzed individually for development commands
 
 20. **Deep Component Analysis for Each Repository/Component**
@@ -267,26 +304,46 @@ Initialize current project with ContextKit development workflow system. Sets up 
     **C. Build Command Discovery & Validation**
     - **For Xcode Projects**: Construct and test build commands:
       ```bash
-      # Test build command with 10-second timeout
-      timeout 10s xcodebuild -project [ProjectName].xcodeproj -scheme [MainScheme] -destination 'platform=iOS Simulator,name=iPhone 17' build
+      # Single-component: Use project file in current directory
+      xcodebuild -project [ProjectName].xcodeproj -scheme [MainScheme] -destination 'platform=iOS Simulator,name=iPhone 17' -dry-run build
+
+      # Multi-component: Use full path from project root
+      xcodebuild -project "$(pwd)/[ComponentPath]/[ProjectName].xcodeproj" -scheme [MainScheme] -destination 'platform=macOS' -dry-run build
       ```
       - Try multiple destinations if first fails: macOS, iOS Simulator, etc.
       - Document the working command format
-    - **For Swift Packages**: Test `swift build` with timeout
-    - **For Node Projects**: Test `npm run build` or detected build script with timeout
-    - **For Python Projects**: Test detected build command with timeout
-    - **IMPORTANT**: Document exact working commands, not generic templates
+    - **For Swift Packages**: Validate with:
+      ```bash
+      # Single-component: Run from current directory
+      swift build --help >/dev/null 2>&1 && echo "✅ Swift build available"
+
+      # Multi-component: Change directory and return (only if needed)
+      cd "[ComponentPath]" && swift build --help >/dev/null 2>&1 && echo "✅ Swift build available" && cd "$(dirname "$(pwd)")"
+      ```
+    - **For Node Projects**: Test `npm run build` or detected build script with `--dry-run` if available
+    - **For Python Projects**: Test detected build command validation
+    - **IMPORTANT**: Use simple paths for single-component projects, full paths only for multi-component
 
     **D. Test Command Discovery & Validation**
     - **For Xcode Projects**: Construct and test test commands:
       ```bash
-      # Test command with 10-second timeout
-      timeout 10s xcodebuild -project [ProjectName].xcodeproj -scheme [MainScheme] -destination 'platform=iOS Simulator,name=iPhone 17' test
+      # Single-component: Use project file in current directory
+      xcodebuild -project [ProjectName].xcodeproj -scheme [MainScheme] -showTestPlans
+
+      # Multi-component: Use full path from project root
+      xcodebuild -project "$(pwd)/[ComponentPath]/[ProjectName].xcodeproj" -scheme [MainScheme] -showTestPlans
       ```
-    - **For Swift Packages**: Test `swift test` with timeout
-    - **For Node Projects**: Test `npm test` or detected test script with timeout
-    - **For Python Projects**: Test `pytest`, `python -m unittest`, or detected test command
-    - **IMPORTANT**: Document exact working commands, verify test targets exist
+    - **For Swift Packages**: Validate tests with:
+      ```bash
+      # Single-component: Run from current directory
+      swift test --list-tests 2>/dev/null && echo "✅ Tests available"
+
+      # Multi-component: Change directory and return (only if needed)
+      cd "[ComponentPath]" && swift test --list-tests 2>/dev/null && echo "✅ Tests available" && cd "$(dirname "$(pwd)")"
+      ```
+    - **For Node Projects**: Test `npm test` or detected test script availability
+    - **For Python Projects**: Check for `pytest`, `python -m unittest`, or detected test command
+    - **IMPORTANT**: Use simple commands for single-component projects, directory changes only for multi-component
 
     **E. Dependency & Version Analysis**
     - For Swift: Parse Package.swift dependencies and version constraints
@@ -296,7 +353,14 @@ Initialize current project with ContextKit development workflow system. Sets up 
     - Note any local/workspace dependencies between components
 
     **F. File Structure Mapping**
-    - Use `Bash` to map key directory structure: `find . -type d -name "Sources" -o -name "Tests" -o -name "src" -o -name "test" -o -name "docs" | head -20`
+    - Use `Bash` to map key directory structure:
+      ```bash
+      # Single-component: Search from current directory
+      find . -type d \( -name "Sources" -o -name "Tests" -o -name "src" -o -name "test" -o -name "docs" \) | head -20
+
+      # Multi-component: Search specific component directory
+      find "$(pwd)/[ComponentPath]" -type d \( -name "Sources" -o -name "Tests" -o -name "src" -o -name "test" -o -name "docs" \) | head -20
+      ```
     - Document source directories, test directories, resource folders
     - Note configuration files, documentation directories
 
@@ -333,9 +397,10 @@ Initialize current project with ContextKit development workflow system. Sets up 
       ```
 
 23. **Execute Context.md Template Instructions**
-    - Use `Read` tool to read the copied `Context.md` file
+    - Use `Read` tool to read the copied `Context.md` file from `$(pwd)/Context.md`
     - Follow the **system instructions** section (boxed area) step by step
-    - **CRITICAL**: Use the comprehensive findings from Phase 3 investigation:
+    - **CRITICAL**: Always work from project root when executing template instructions
+    - **CRITICAL**: Use the comprehensive findings from Phase 4 investigation:
       - Component hierarchy and relationships discovered
       - Validated build commands for each component
       - Validated test commands for each component
