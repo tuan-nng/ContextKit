@@ -1,5 +1,5 @@
 # Initialize Project with ContextKit
-<!-- Template Version: 8 | ContextKit: 0.1.0 | Updated: 2025-09-24 -->
+<!-- Template Version: 9 | ContextKit: 0.1.0 | Updated: 2025-09-24 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -218,11 +218,15 @@ Initialize current project with ContextKit development workflow system. Sets up 
    > **Note**: `-p` preserves permissions during copy, `chmod +x` ensures all .sh files are executable
 
 15. **Detect Relevant Guidelines**
-   - Based on comprehensive project investigation findings from Phase 4:
-     - Analyze detected file types (.swift, .py, .js, .ts, .java, .go, etc.)
-     - Examine framework imports found (SwiftUI, UIKit, Django, React, Spring, etc.)
-     - Review package managers discovered (Package.swift, package.json, requirements.txt, etc.)
-     - Consider project structure patterns (Sources/, src/, app/, etc.)
+   ```bash
+   # Ensure we're in project root before detection
+   echo "Detecting guidelines from project root: $(pwd)"
+   ```
+   - Use simple file detection to determine project type (no deep component analysis needed):
+     - Look for Package.swift or *.xcodeproj → Swift project
+     - Look for SwiftUI imports in Swift files → SwiftUI project
+     - Look for package.json → JavaScript project (if exists)
+     - Look for requirements.txt/pyproject.toml → Python project (if exists)
    - Determine which guidelines are relevant for this specific project:
      - Swift projects with Package.swift or .xcodeproj → ["Swift"]
      - Swift projects importing SwiftUI → ["Swift", "SwiftUI"]
@@ -233,6 +237,8 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 16. **Copy Relevant Guidelines Only**
    ```bash
+   # CRITICAL: Verify we're in project root before copying
+   echo "Copying guidelines from project root: $(pwd)"
    mkdir -p Context/Guidelines
    # Copy only guidelines relevant to detected project type
    # Guidelines array determined by project analysis above
@@ -254,7 +260,8 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 17. **Copy Backlog Templates**
    ```bash
-   # Ensure directory exists before copying
+   # CRITICAL: Verify we're in project root before copying
+   echo "Copying backlog from project root: $(pwd)"
    mkdir -p Context/Backlog
    cp ~/.ContextKit/Templates/Backlog/* Context/Backlog/
    echo "✅ Copied backlog templates (Ideas-Inbox.md, Bugs-Backlog.md, etc.)"
@@ -262,6 +269,8 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 18. **Copy Project Context Template**
     ```bash
+    # CRITICAL: Verify we're in project root before copying
+    echo "Copying Context.md to project root: $(pwd)"
     cp ~/.ContextKit/Templates/Contexts/Project.md Context.md
     echo "✅ Copied project context template"
     ```
@@ -274,9 +283,10 @@ Initialize current project with ContextKit development workflow system. Sets up 
     - Use `Read` tool to examine `.gitmodules` files to understand submodule structure
     - Create hierarchical map of all components/repositories within this project
     - **IMPORTANT**: Determine project structure:
-      - **Single-component project** (e.g., just an app): Work directly in PROJECT_ROOT, no `cd` needed
-      - **Multi-component project** (e.g., App/ and Server/): Must `cd` into each component directory and return to project root after analysis
+      - **Single-component project** (e.g., just an app): Work directly in project root, no `cd` needed
+      - **Multi-component project** (e.g., App/ and Server/): Use subshells `(cd ComponentPath && command)` to avoid changing working directory
     - **CRITICAL**: Every single component must be analyzed individually for development commands
+    - **CRITICAL**: NEVER use bare `cd` commands - always use subshells to prevent persistent directory changes
 
 20. **Deep Component Analysis for Each Repository/Component**
     For EVERY component found, perform comprehensive analysis:
@@ -317,8 +327,8 @@ Initialize current project with ContextKit development workflow system. Sets up 
       # Single-component: Run from current directory
       swift build --help >/dev/null 2>&1 && echo "✅ Swift build available"
 
-      # Multi-component: Change directory and return (only if needed)
-      cd "[ComponentPath]" && swift build --help >/dev/null 2>&1 && echo "✅ Swift build available" && cd "$(dirname "$(pwd)")"
+      # Multi-component: Use subshell to avoid changing working directory
+      (cd "[ComponentPath]" && swift build --help >/dev/null 2>&1 && echo "✅ Swift build available")
       ```
     - **For Node Projects**: Test `npm run build` or detected build script with `--dry-run` if available
     - **For Python Projects**: Test detected build command validation
@@ -338,8 +348,8 @@ Initialize current project with ContextKit development workflow system. Sets up 
       # Single-component: Run from current directory
       swift test --list-tests 2>/dev/null && echo "✅ Tests available"
 
-      # Multi-component: Change directory and return (only if needed)
-      cd "[ComponentPath]" && swift test --list-tests 2>/dev/null && echo "✅ Tests available" && cd "$(dirname "$(pwd)")"
+      # Multi-component: Use subshell to avoid changing working directory
+      (cd "[ComponentPath]" && swift test --list-tests 2>/dev/null && echo "✅ Tests available")
       ```
     - **For Node Projects**: Test `npm test` or detected test script availability
     - **For Python Projects**: Check for `pytest`, `python -m unittest`, or detected test command
