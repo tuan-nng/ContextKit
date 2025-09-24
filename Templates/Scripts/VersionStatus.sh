@@ -1,5 +1,5 @@
 #!/bin/bash
-# Template Version: 7 | ContextKit: 0.1.0 | Updated: 2025-09-22
+# Template Version: 8 | ContextKit: 0.1.0 | Updated: 2025-09-24
 
 # version-status.sh - ContextKit version management and project status
 # Called by SessionStart hook when Claude Code starts a new session
@@ -192,7 +192,7 @@ count_outdated_templates() {
         return
     fi
 
-    # Compare template versions for existing files
+    # Compare template versions AND ContextKit versions for existing files
     for local_file in "$local_dir"/*.md "$local_dir"/*.sh; do
         [ -f "$local_file" ] || continue
 
@@ -200,10 +200,21 @@ count_outdated_templates() {
         local source_file="$source_dir/$rel_path"
 
         if [ -f "$source_file" ]; then
-            local local_version=$(sed -n '2p' "$local_file" 2>/dev/null | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*" || echo "0")
-            local source_version=$(sed -n '2p' "$source_file" 2>/dev/null | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*" || echo "0")
+            local local_template_version=$(sed -n '2p' "$local_file" 2>/dev/null | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*" || echo "0")
+            local source_template_version=$(sed -n '2p' "$source_file" 2>/dev/null | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*" || echo "0")
 
-            if [ "$local_version" -lt "$source_version" ] 2>/dev/null; then
+            local local_contextkit_version=$(sed -n '2p' "$local_file" 2>/dev/null | grep -o "ContextKit: [^|]*" | sed 's/ContextKit: *//' | sed 's/ *$//' || echo "unknown")
+            local source_contextkit_version=$(sed -n '2p' "$source_file" 2>/dev/null | grep -o "ContextKit: [^|]*" | sed 's/ContextKit: *//' | sed 's/ *$//' || echo "unknown")
+
+            # File is outdated if template version is lower OR ContextKit version differs
+            local is_outdated=false
+            if [ "$local_template_version" -lt "$source_template_version" ] 2>/dev/null; then
+                is_outdated=true
+            elif [ "$local_contextkit_version" != "$source_contextkit_version" ] && [ "$local_contextkit_version" != "unknown" ] && [ "$source_contextkit_version" != "unknown" ]; then
+                is_outdated=true
+            fi
+
+            if [ "$is_outdated" = true ]; then
                 count=$((count + 1))
                 if [ "$VERBOSE_MODE" = true ]; then
                     echo "OUTDATED:$source_file:$local_file" >&2
@@ -247,10 +258,21 @@ check_project_guidelines_updates() {
         local source_guideline="$CONTEXTKIT_DIR/Templates/Guidelines/$guideline_name"
 
         if [ -f "$source_guideline" ]; then
-            local project_version=$(sed -n '2p' "$project_guideline" 2>/dev/null | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*" || echo "0")
-            local source_version=$(sed -n '2p' "$source_guideline" 2>/dev/null | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*" || echo "0")
+            local project_template_version=$(sed -n '2p' "$project_guideline" 2>/dev/null | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*" || echo "0")
+            local source_template_version=$(sed -n '2p' "$source_guideline" 2>/dev/null | grep -o "Template Version: [0-9]*" | grep -o "[0-9]*" || echo "0")
 
-            if [ "$project_version" -lt "$source_version" ] 2>/dev/null; then
+            local project_contextkit_version=$(sed -n '2p' "$project_guideline" 2>/dev/null | grep -o "ContextKit: [^|]*" | sed 's/ContextKit: *//' | sed 's/ *$//' || echo "unknown")
+            local source_contextkit_version=$(sed -n '2p' "$source_guideline" 2>/dev/null | grep -o "ContextKit: [^|]*" | sed 's/ContextKit: *//' | sed 's/ *$//' || echo "unknown")
+
+            # File is outdated if template version is lower OR ContextKit version differs
+            local is_outdated=false
+            if [ "$project_template_version" -lt "$source_template_version" ] 2>/dev/null; then
+                is_outdated=true
+            elif [ "$project_contextkit_version" != "$source_contextkit_version" ] && [ "$project_contextkit_version" != "unknown" ] && [ "$source_contextkit_version" != "unknown" ]; then
+                is_outdated=true
+            fi
+
+            if [ "$is_outdated" = true ]; then
                 count=$((count + 1))
                 if [ "$VERBOSE_MODE" = true ]; then
                     echo "OUTDATED:$source_guideline:$project_guideline" >&2
