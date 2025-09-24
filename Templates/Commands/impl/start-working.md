@@ -1,5 +1,5 @@
 # Begin Development with Context
-<!-- Template Version: 8 | ContextKit: 0.1.0 | Updated: 2025-09-22 -->
+<!-- Template Version: 9 | ContextKit: 0.1.0 | Updated: 2025-09-24 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -76,6 +76,7 @@ Begin systematic development with context-aware setup, task analysis, and guided
    - Use `Read` tool to check each required file exists and has content:
      ```bash
      ls -la [numbered-feature-directory]/Spec.md && echo "✅ Spec.md exists"
+     ls -la [numbered-feature-directory]/Research.md && echo "✅ Research.md exists"
      ls -la [numbered-feature-directory]/Tech.md && echo "✅ Tech.md exists"
      ls -la [numbered-feature-directory]/Steps.md && echo "✅ Steps.md exists"
      ```
@@ -88,9 +89,9 @@ Begin systematic development with context-aware setup, task analysis, and guided
      [List missing files]
 
      Complete the planning phases first:
-     1. /ctxk:plan:1-spec - Business requirements
-     2. /ctxk:plan:2-research-tech - Technical research and architecture
-     3. /ctxk:plan:3-steps - Implementation tasks
+     1. /ctxk:plan:1-spec - Business requirements (creates Spec.md)
+     2. /ctxk:plan:2-research-tech - Technical research and architecture (creates Research.md and Tech.md)
+     3. /ctxk:plan:3-steps - Implementation tasks (creates Steps.md)
 
      Cannot proceed with development until planning is complete.
      ```
@@ -130,12 +131,14 @@ Begin systematic development with context-aware setup, task analysis, and guided
 6. **Load Complete Feature Context**
    - Use `Read` tool to read all planning files for full context:
      ```
-     Read [numbered-feature-directory]/Spec.md     # Business requirements and user stories
-     Read [numbered-feature-directory]/Tech.md     # Technical architecture and decisions
-     Read [numbered-feature-directory]/Steps.md    # Implementation task breakdown
+     Read [numbered-feature-directory]/Spec.md       # Business requirements and user stories
+     Read [numbered-feature-directory]/Research.md   # Technical research findings and decisions
+     Read [numbered-feature-directory]/Tech.md       # Technical architecture and decisions
+     Read [numbered-feature-directory]/Steps.md      # Implementation task breakdown
      ```
    - Extract key information:
      - **From Spec.md**: Feature purpose, user stories, acceptance criteria
+     - **From Research.md**: Technology research findings, API constraints, integration patterns
      - **From Tech.md**: Architecture decisions, technology choices, constraints
      - **From Steps.md**: Task list, dependencies, S001-S999 numbered tasks with [P] parallel markers
    - Parse task completion status (checked/unchecked boxes)
@@ -314,7 +317,7 @@ Begin systematic development with context-aware setup, task analysis, and guided
 
 - **"Context.md not found"** → User must run `/ctxk:proj:init` to initialize ContextKit
 - **"Not on feature branch"** → Create feature branch with `/ctxk:plan:1-spec` or switch to existing one
-- **"Planning phases incomplete"** → Complete `/ctxk:plan:1-spec`, `/ctxk:plan:2-research-tech`, `/ctxk:plan:3-steps` sequence
+- **"Planning phases incomplete"** → Complete `/ctxk:plan:1-spec` (creates Spec.md), `/ctxk:plan:2-research-tech` (creates Research.md + Tech.md), `/ctxk:plan:3-steps` (creates Steps.md) sequence
 - **"No feature directory found"** → Feature name detection failed, verify branch name format
 - **"Steps.md empty"** → Run `/ctxk:plan:3-steps` to create implementation breakdown
 - **"Build environment broken"** → Resolve dependency issues before starting development
@@ -325,7 +328,7 @@ Begin systematic development with context-aware setup, task analysis, and guided
 **Prerequisites:**
 - ContextKit project setup complete?
 - Git repository with feature branch active?
-- All planning phases completed (Spec.md, Tech.md, Steps.md)?
+- All planning phases completed (Spec.md, Research.md, Tech.md, Steps.md)?
 - Development environment verified and functional?
 
 **Context Loading:**
@@ -346,7 +349,7 @@ Begin systematic development with context-aware setup, task analysis, and guided
 
 ## Integration Points
 
-- **Planning Commands**: Requires completed `/ctxk:plan:1-spec`, `/ctxk:plan:2-research-tech`, `/ctxk:plan:3-steps` workflow
+- **Planning Commands**: Requires completed `/ctxk:plan:1-spec` (Spec.md), `/ctxk:plan:2-research-tech` (Research.md + Tech.md), `/ctxk:plan:3-steps` (Steps.md) workflow
 - **Project Setup**: Uses Context.md from `/ctxk:proj:init` for project type detection and standards
 - **Quality Agents**: Integrates with `build-project`, `run-test-*` agents (ready). `/run check-*` agents incomplete - pending rework
 - **Workspace Context**: Inherits client-specific requirements from workspace-level Context.md files
