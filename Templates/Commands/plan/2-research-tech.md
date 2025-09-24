@@ -1,5 +1,5 @@
 # Research and Design Architecture
-<!-- Template Version: 6 | ContextKit: 0.1.0 | Updated: 2025-09-19 -->
+<!-- Template Version: 7 | ContextKit: 0.1.0 | Updated: 2025-09-24 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -105,7 +105,13 @@ Generate technical research and architecture plan by detecting current feature, 
 
    **Research execution**: You must populate the Research.md file with actual findings, not leave it as a template
 
-7. **Validate Research Completion**
+7. **Clean Up Research Template**
+   - Use `Read` tool to check if Research.md still contains system instructions: `Read [numbered-feature-directory]/Research.md`
+   - Search for "🤖 EXECUTION FLOW" or "VALIDATION & EXECUTION STATUS" sections
+   - If system instructions remain: Use `Edit` tool to remove all boxed instruction sections
+   - Ensure final Research.md contains only clean research results
+
+8. **Validate Research Completion**
    - Use `Read` tool to verify research completion: `Read [numbered-feature-directory]/Research.md`
    - Ensure all technologies mentioned in specification have been researched
    - Verify research findings are documented with decisions and rationale
@@ -113,27 +119,21 @@ Generate technical research and architecture plan by detecting current feature, 
 
 ### Phase 4: Technical Architecture Planning
 
-8. **Copy Technical Architecture Template**
+9. **Copy Technical Architecture Template**
    ```bash
    cp ~/.ContextKit/Templates/Features/Tech.md [numbered-feature-directory]/Tech.md
    echo "✅ Copied technical architecture template"
    ```
 
-9. **Execute Technical Architecture Template**
-   - Use `Read` tool to read the copied Tech.md: `Read [numbered-feature-directory]/Tech.md`
-   - Follow the **system instructions** section (boxed area) step by step
-   - The template contains technical architecture generation logic informed by research results
-   - Use tools (`Read`, `Edit`) as directed by the template instructions
-   - **Template execution**: The copied Tech.md handles architecture decisions, Context/Guidelines compliance, and complexity assessment
-   - **Progress tracking**: User can see architectural planning checkboxes being completed in the copied file
+10. **Execute Technical Architecture Template**
+    - Use `Read` tool to read the copied Tech.md: `Read [numbered-feature-directory]/Tech.md`
+    - Follow the **system instructions** section (boxed area) step by step
+    - The template contains technical architecture generation logic informed by research results
+    - Use tools (`Read`, `Edit`) as directed by the template instructions
+    - **Template execution**: The copied Tech.md handles architecture decisions, Context/Guidelines compliance, and complexity assessment
+    - **Progress tracking**: User can see architectural planning checkboxes being completed in the copied file
 
-10. **Validate Research Cleanup**
-    - Use `Read` tool to check if Research.md still contains system instructions: `Read [numbered-feature-directory]/Research.md`
-    - Search for "🤖 EXECUTION FLOW" or "VALIDATION & EXECUTION STATUS" sections
-    - If system instructions remain: Use `Edit` tool to remove all boxed instruction sections
-    - Ensure final Research.md contains only clean research results
-
-11. **Validate Technical Architecture Cleanup**
+11. **Clean Up Technical Architecture Template**
     - Use `Read` tool to check if Tech.md still contains system instructions: `Read [numbered-feature-directory]/Tech.md`
     - Search for "🤖 EXECUTION FLOW" or "VALIDATION & EXECUTION STATUS" sections
     - If system instructions remain: Use `Edit` tool to remove all boxed instruction sections
@@ -158,9 +158,10 @@ Generate technical research and architecture plan by detecting current feature, 
 - Project Context.md exists (ContextKit project setup complete)?
 - Feature specification exists and is complete?
 - No unresolved [NEEDS CLARIFICATION] markers in specification?
-- Technical template copied to feature directory successfully?
-- Template system instructions executed successfully?
-- System instructions sections removed from both Research.md and Tech.md?
+- Research template copied and executed successfully?
+- Research.md system instructions cleaned up immediately after completion?
+- Technical template copied and executed successfully?
+- Tech.md system instructions cleaned up immediately after completion?
 - User informed to review and commit technical plan before proceeding?
 
 ## Integration Points
@@ -184,7 +185,8 @@ Generate technical research and architecture plan by detecting current feature, 
 ✅ Researched all technologies mentioned in specification
 ✅ Applied Context/Guidelines/Swift.md and SwiftUI.md standards
 ✅ All mandatory sections completed with research-informed decisions
-✅ System instruction sections cleaned up from both files
+✅ Research template system instructions cleaned up immediately after completion
+✅ Technical template system instructions cleaned up immediately after completion
 
 [If 🚨 [NEEDS CLARIFICATION] items exist in plans:]
 ⚠️  Technical clarifications needed for:
