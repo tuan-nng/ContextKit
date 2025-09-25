@@ -57,7 +57,6 @@ All updates preserve user customizations in "👩‍💻 DEVELOPER CUSTOMIZATION
    - For each line with format `OUTDATED:source_path:target_path` or `NEW:source_path:target_path`:
    - Use Bash tool: `Context/Scripts/MergePreserve.sh source_path target_path`
    - **Handles automatically**:
-     - ✅ ContextKit global installation check
      - ✅ Global repository update (git pull)
      - ✅ Version comparison for ALL template categories
      - ✅ Project compatibility validation
@@ -139,10 +138,9 @@ Display results organized by:
 
 ## Error Conditions
 
-- **"ContextKit not installed globally"** → Run global installation first
 - **"Could not check for updates"** → No internet connection (continues with cached version)
 - **"Missing customization section"** → User file corrupted, skipped with warning
-- **"Template file not found"** → Global ContextKit installation incomplete
+- **"Template file not found"** → Template files not available
 
 ## Success Criteria
 

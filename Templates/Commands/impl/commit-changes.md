@@ -36,7 +36,7 @@ Delegate to specialized commit-changes agent for intelligent git analysis, commi
 
 ## Error Conditions
 
-- **Agent not available** → Ensure ContextKit agents are installed with `/ctxk:proj:init`
+- **Agent not available** → Ensure ContextKit agents are set up with `/ctxk:proj:init`
 - **Git repository issues** → Agent will handle and report git-related errors
 - **Permission problems** → Agent will diagnose and suggest solutions
 

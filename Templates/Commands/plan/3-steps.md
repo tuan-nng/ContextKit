@@ -39,20 +39,15 @@ Generate implementation task breakdown by detecting current feature, validating 
      ```
      → END (exit with error)
 
-2. **Verify ContextKit Global Installation**
-   ```bash
-   ls -la ~/.ContextKit/Templates/Features/Steps.md || echo "❌ ContextKit not installed globally. Run: curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | sh"
-   ```
-
 ### Phase 2: Feature Detection & Validation
 
-3. **Detect Current Feature**
+2. **Detect Current Feature**
    - Use `Bash` tool to check current git branch: `git branch --show-current`
    - If on feature/[prefix]-[name] branch: Extract feature name from branch
    - If not on feature branch: Ask user which feature to work on using consistent format
    - Use `Glob` tool to find numbered feature directory: `Glob Context/Features/???-[FeatureName]`
 
-4. **Validate Prerequisites**
+3. **Validate Prerequisites**
    - Use `Read` tool to check Spec.md exists in the found numbered directory: `Read [numbered-feature-directory]/Spec.md`
    - Use `Read` tool to check Tech.md exists in the found numbered directory: `Read [numbered-feature-directory]/Tech.md`
    - Use `Read` tool to check Research.md exists in the found numbered directory: `Read [numbered-feature-directory]/Research.md`
@@ -72,13 +67,13 @@ Generate implementation task breakdown by detecting current feature, validating 
 
 ### Phase 3: Template Setup & Execution
 
-5. **Copy Steps Template**
+4. **Copy Steps Template**
    ```bash
    cp ~/.ContextKit/Templates/Features/Steps.md [numbered-feature-directory]/Steps.md
    echo "✅ Copied implementation steps template"
    ```
 
-6. **Execute Steps Template**
+5. **Execute Steps Template**
    - Use `Read` tool to read the copied Steps.md: `Read [numbered-feature-directory]/Steps.md`
    - Follow the **system instructions** section (boxed area) step by step
    - The template contains task generation logic with S### enumeration and parallel markers
@@ -86,21 +81,19 @@ Generate implementation task breakdown by detecting current feature, validating 
    - **Template execution**: The copied Steps.md handles all task breakdown, dependency analysis, and parallel execution planning
    - **Progress tracking**: User can see checkboxes being completed in the copied file
 
-7. **Display Success Message** (see Success Messages section)
+6. **Display Success Message** (see Success Messages section)
 
 ## Error Conditions
 
 - **"Context.md not found"** → User must run `/ctxk:proj:init` to initialize ContextKit
-- **"ContextKit not installed globally"** → Run installation: `curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | sh`
 - **"Prerequisites not complete"** → Must run `/ctxk:plan:1-spec` and `/ctxk:plan:2-research-tech` first
-- **"Steps template not found"** → Check global ContextKit installation integrity
+- **"Steps template not found"** → Ensure template files are available
 - **"Unresolved clarifications exist"** → Resolve [NEEDS CLARIFICATION] markers in Spec.md and Tech.md first
 - **"Template execution failed"** → Verify Steps.md template contains system instructions section
 
 
 ## Validation Gates
 
-- ContextKit globally installed and accessible?
 - Project Context.md exists (ContextKit project setup complete)?
 - All prerequisites (Spec.md, Tech.md, Research.md) exist and are complete?
 - No unresolved 🚨 [NEEDS CLARIFICATION] markers in all prerequisite files (Spec.md, Tech.md, Research.md)?

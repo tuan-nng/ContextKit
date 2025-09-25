@@ -39,21 +39,16 @@ Generate technical research and architecture plan by detecting current feature, 
      ```
      → END (exit with error)
 
-2. **Verify ContextKit Global Installation**
-   ```bash
-   ls -la ~/.ContextKit/Templates/Features/Tech.md || echo "❌ ContextKit not installed globally. Run: curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | sh"
-   ```
-
 ### Phase 2: Feature Detection & Validation
 
-3. **Detect Current Feature**
+2. **Detect Current Feature**
    - Use `Bash` tool to check current git branch: `git branch --show-current`
    - If on feature/[prefix]-[name] branch: Extract feature name from branch
    - If not on feature branch: Ask user which feature to work on using consistent format
    - Use `Glob` tool to find numbered feature directory: `Glob Context/Features/???-[FeatureName]`
    - Store the found directory path for use in subsequent steps
 
-4. **Validate Prerequisites**
+3. **Validate Prerequisites**
    - Use `Read` tool to check Spec.md exists in the found numbered directory: `Read [numbered-feature-directory]/Spec.md`
    - If Spec.md missing:
      ```
@@ -68,13 +63,13 @@ Generate technical research and architecture plan by detecting current feature, 
 
 ### Phase 3: Research Phase Execution
 
-5. **Copy Research Template**
+4. **Copy Research Template**
    ```bash
    cp ~/.ContextKit/Templates/Features/Research.md [numbered-feature-directory]/Research.md
    echo "✅ Copied technical research template"
    ```
 
-6. **Execute Research Template System Instructions**
+5. **Execute Research Template System Instructions**
    - Use `Read` tool to read the **ENTIRE** copied Research.md template: `Read [numbered-feature-directory]/Research.md`
    - **CRITICAL**: The template contains 300+ lines with detailed system instructions - read it completely to understand all phases
    - **CRITICAL**: Follow the Research.md template's **🤖 EXECUTION FLOW** instructions step by step:
@@ -105,13 +100,13 @@ Generate technical research and architecture plan by detecting current feature, 
 
    **Research execution**: You must populate the Research.md file with actual findings, not leave it as a template
 
-7. **Clean Up Research Template**
+6. **Clean Up Research Template**
    - Use `Read` tool to check if Research.md still contains system instructions: `Read [numbered-feature-directory]/Research.md`
    - Search for "🤖 EXECUTION FLOW" or "VALIDATION & EXECUTION STATUS" sections
    - If system instructions remain: Use `Edit` tool to remove all boxed instruction sections
    - Ensure final Research.md contains only clean research results
 
-8. **Validate Research Completion**
+7. **Validate Research Completion**
    - Use `Read` tool to verify research completion: `Read [numbered-feature-directory]/Research.md`
    - Ensure all technologies mentioned in specification have been researched
    - Verify research findings are documented with decisions and rationale
@@ -119,13 +114,13 @@ Generate technical research and architecture plan by detecting current feature, 
 
 ### Phase 4: Technical Architecture Planning
 
-9. **Copy Technical Architecture Template**
+8. **Copy Technical Architecture Template**
    ```bash
    cp ~/.ContextKit/Templates/Features/Tech.md [numbered-feature-directory]/Tech.md
    echo "✅ Copied technical architecture template"
    ```
 
-10. **Execute Technical Architecture Template**
+9. **Execute Technical Architecture Template**
     - Use `Read` tool to read the copied Tech.md: `Read [numbered-feature-directory]/Tech.md`
     - Follow the **system instructions** section (boxed area) step by step
     - The template contains technical architecture generation logic informed by research results
@@ -133,20 +128,19 @@ Generate technical research and architecture plan by detecting current feature, 
     - **Template execution**: The copied Tech.md handles architecture decisions, Context/Guidelines compliance, and complexity assessment
     - **Progress tracking**: User can see architectural planning checkboxes being completed in the copied file
 
-11. **Clean Up Technical Architecture Template**
+10. **Clean Up Technical Architecture Template**
     - Use `Read` tool to check if Tech.md still contains system instructions: `Read [numbered-feature-directory]/Tech.md`
     - Search for "🤖 EXECUTION FLOW" or "VALIDATION & EXECUTION STATUS" sections
     - If system instructions remain: Use `Edit` tool to remove all boxed instruction sections
     - Ensure final Tech.md contains only clean technical architecture content
 
-12. **Display Success Message** (see Success Messages section)
+11. **Display Success Message** (see Success Messages section)
 
 ## Error Conditions
 
 - **"Context.md not found"** → User must run `/ctxk:proj:init` to initialize ContextKit
-- **"ContextKit not installed globally"** → Run installation: `curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | sh`
 - **"Feature specification not found"** → Must run `/ctxk:plan:1-spec` first
-- **"Technical template not found"** → Check global ContextKit installation integrity
+- **"Technical template not found"** → Ensure template files are available
 - **"Specification has unresolved clarifications"** → Resolve [NEEDS CLARIFICATION] markers in Spec.md first
 - **"Template execution failed"** → Verify Research.md and Tech.md templates contain system instructions sections
 - **"Research.md not populated"** → Research agents completed but findings not documented in Research.md - must execute template's Phase 3 consolidation steps
@@ -154,7 +148,6 @@ Generate technical research and architecture plan by detecting current feature, 
 
 ## Validation Gates
 
-- ContextKit globally installed and accessible?
 - Project Context.md exists (ContextKit project setup complete)?
 - Feature specification exists and is complete?
 - No unresolved [NEEDS CLARIFICATION] markers in specification?
