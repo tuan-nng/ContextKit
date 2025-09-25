@@ -1,5 +1,5 @@
 # Create Feature Specification
-<!-- Template Version: 5 | ContextKit: 0.1.0 | Updated: 2025-09-17 -->
+<!-- Template Version: 9 | ContextKit: 0.1.0 | Updated: 2025-09-25 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -71,13 +71,45 @@ Initialize feature specification by validating setup, confirming feature naming,
    - **CRITICAL**: Store description exactly verbatim for specification Input field - do NOT summarize or paraphrase
    - Continue with description-based processing
 
-5. **Generate Names**
+5. **Discover Available Components and Ask User Which Are Affected**
+   - Use `Bash` tool to check for multi-component structure:
+     ```bash
+     find . -maxdepth 3 -name ".git" -type d
+     ```
+   - Use `Bash` tool to check for submodules:
+     ```bash
+     ls -la .gitmodules 2>/dev/null || echo "No .gitmodules file found"
+     ```
+   - **If multiple components found**: List all discovered repositories/components and ask user:
+     ```
+     ═══════════════════════════════════════════════════
+     ║ ❓ AFFECTED COMPONENTS SELECTION
+     ═══════════════════════════════════════════════════
+     ║
+     ║ Which components will be affected by this feature?
+     ║
+     ║ Available components:
+     ║ • Root workspace: [current directory name]
+     ║ • [List discovered submodules/components]
+     ║
+     ║ Options:
+     ║ • "root" - Root workspace repository only
+     ║ • "all" - All discovered components
+     ║ • Specific names - Space-separated (e.g., "root MyApp-iOS")
+     ║
+     ║ Response: Enter your selection
+     ```
+     - **WAIT for user response before proceeding**
+     - Parse user response and store affected components list for later use
+   - **If single repository**: Automatically set affected components to "root" only
+
+6. **Generate Names**
    - Parse user description for key concepts
    - Create PascalCase name (e.g., "user authentication" → "UserAuthentication", "recipe app" → "RecipeApp")
    - Create kebab-case name for branch suffix (e.g., "user-authentication", "recipe-app")
    - Focus on user value, not implementation details
 
-6. **Interactive Name Confirmation**
+7. **Interactive Name Confirmation**
    - Display generated names to user for confirmation:
      ```
      ═══════════════════════════════════════════════════
@@ -97,7 +129,7 @@ Initialize feature specification by validating setup, confirming feature naming,
 
 ### Phase 3: Template Setup & Execution
 
-7. **Generate Sequential Feature Number & Create Workspace**
+8. **Generate Sequential Feature Number & Create Workspace**
    ```bash
    # Find next sequential number by counting existing feature directories
    NEXT_NUM=$(printf "%03d" $(($(ls -1d Context/Features/???-* 2>/dev/null | wc -l) + 1)))
@@ -107,19 +139,29 @@ Initialize feature specification by validating setup, confirming feature naming,
    ```
    - Store the numbered directory name for use in subsequent steps and success message
 
-8. **Copy Feature Template**
+9. **Copy Feature Template**
    ```bash
    cp ~/.ContextKit/Templates/Features/Spec.md Context/Features/[numbered-feature-directory]/Spec.md
    echo "✅ Copied specification template"
    ```
 
-9. **Create Git Branch**
-   ```bash
-   git checkout -b feature/${NEXT_NUM}-[confirmed-kebab-case-name] || echo "⚠️ Git branch creation failed - continuing without branch"
-   echo "✅ Created git branch: feature/${NEXT_NUM}-[confirmed-kebab-case-name]"
-   ```
+10. **Create Git Branch in Current Directory**
+    ```bash
+    git checkout -b feature/${NEXT_NUM}-[confirmed-kebab-case-name] || echo "⚠️ Git branch creation failed - continuing without branch"
+    echo "✅ Created git branch: feature/${NEXT_NUM}-[confirmed-kebab-case-name]"
+    ```
 
-10. **Execute Specification Template**
+11. **Create Branches in Additional Components (AI Manual Step)**
+    - **For each additional component selected by user in Step 5** (if any beyond "root"):
+      - Use `Bash` tool to change to component directory and create branch:
+        ```bash
+        cd [component-directory] && git checkout -b feature/${NEXT_NUM}-[confirmed-kebab-case-name] && echo "✅ Created branch in [component-directory]" && cd - || echo "⚠️ Branch creation failed in [component-directory]"
+        ```
+      - Repeat for each selected component
+    - **If user selected "all" in Step 5**: Execute above for every discovered component
+    - **If user selected "root" only in Step 5**: Skip this step entirely
+
+12. **Execute Specification Template**
     - Use `Read` tool to read the copied Spec.md: `Read Context/Features/[numbered-feature-directory]/Spec.md`
     - Follow the **system instructions** section (boxed area) step by step
     - The template contains specification generation logic and progress tracking
@@ -127,7 +169,7 @@ Initialize feature specification by validating setup, confirming feature naming,
     - **Template execution**: The copied Spec.md handles all context reading, guidelines loading, constitutional validation, and content generation
     - **Progress tracking**: User can see checkboxes being completed in the copied file
 
-11. **Display Success Message** (see Success Messages section)
+13. **Display Success Message** (see Success Messages section)
 
 ## Error Conditions
 
@@ -168,6 +210,7 @@ Initialize feature specification by validating setup, confirming feature naming,
 📁 Feature: [numbered-feature-directory-name]
 ✅ Created: [numbered-feature-directory]/Spec.md
 ✅ Git branch: feature/[XXX]-[confirmed-kebab-case-name]
+✅ Branch created in selected affected components
 ✅ Applied constitutional principles from project guidelines
 ✅ All mandatory sections completed with project-specific content
 
