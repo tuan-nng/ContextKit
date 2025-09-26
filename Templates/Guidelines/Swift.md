@@ -1,5 +1,5 @@
 # Swift Development Guidelines
-<!-- Template Version: 2 | ContextKit: 0.1.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 3 | ContextKit: 0.1.0 | Updated: 2025-09-16 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -20,6 +20,7 @@ These guidelines provide strategic direction for Swift development in ContextKit
 - ✅ **Prefer**: `Date.now` over `Date()`
 - ✅ **Prefer**: `Duration` over `TimeInterval`
 - ✅ **Prefer**: `ContinuousClock.now` for timing measurements
+- ✅ **Prefer**: `Logger().debug/info/warnings/error` over `print` for logging/debugging messages
 
 ### Language Features
 - ✅ **Prefer**: Switch expressions over switch statements
