@@ -1,5 +1,5 @@
 # Swift Development Guidelines
-<!-- Template Version: 3 | ContextKit: 0.1.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 4 | ContextKit: 0.1.0 | Updated: 2025-09-26 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -28,6 +28,12 @@ These guidelines provide strategic direction for Swift development in ContextKit
 - ✅ **Prefer**: `replacing()` over `replacingOccurrences(of:with:)`
 - ✅ **Prefer**: Modern collection algorithms over imperative loops
 - ✅ **Prefer**: Modern shorthand: `[if/guard] let value else {}` over `[if/guard] let value = self.value else {}`
+
+### String/Data Conversion
+- ✅ **Prefer**: `Data(string.utf8)` for String to Data conversion (non-optional)
+- ✅ **Prefer**: `String(decoding: data, as: UTF8.self)` for Data to String conversion (non-optional, replaces invalid bytes with �)
+- ❌ **Avoid**: `string.data(using: .utf8)` (returns optional)
+- ❌ **Avoid**: `String(data: data, encoding: .utf8)` (returns optional)
 
 ### Concurrency
 - ✅ **Prefer**: `async/await` over completion handlers
