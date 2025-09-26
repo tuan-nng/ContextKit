@@ -22,7 +22,7 @@ These guidelines provide strategic direction for SwiftUI development in ContextK
 - ✅ **Plain SwiftUI**: Avoid complex architecture patterns, keep apps simple
 - ✅ **Native Components**: Use system components over custom implementations
 - ❌ **Avoid**: UIKit except for specific platform requirements
-- ❌ **Avoid**: Complex MVVM or architectural patterns
+- ❌ **Avoid**: Complex MVVM or architectural patterns (use Models + @Environment services instead)
 
 ### State Management Strategy
 - ✅ **`@Observable`**: For view state management (iOS 17+)

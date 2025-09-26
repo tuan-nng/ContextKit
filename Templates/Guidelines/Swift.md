@@ -26,6 +26,7 @@ These guidelines provide strategic direction for Swift development in ContextKit
 - ✅ **Prefer**: `if` expressions for conditional assignment
 - ✅ **Prefer**: `replacing()` over `replacingOccurrences(of:with:)`
 - ✅ **Prefer**: Modern collection algorithms over imperative loops
+- ✅ **Prefer**: Modern shorthand: `[if/guard] let value else {}` over `[if/guard] let value = self.value else {}`
 
 ### Concurrency
 - ✅ **Prefer**: `async/await` over completion handlers
@@ -39,7 +40,7 @@ These guidelines provide strategic direction for Swift development in ContextKit
 
 ### UI Framework Choice
 - ✅ **SwiftUI first**: For new development and modern UI patterns
-- ✅ **MVVM patterns**: With `@Observable` view models
+- ✅ **MVVM patterns**: With `@Observable` view models or services
 - ❌ **Avoid**: UIKit except for specific platform requirements
 - ❌ **Avoid**: UIViewRepresentable unless absolutely necessary
 
