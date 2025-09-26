@@ -1,5 +1,5 @@
 # Create Task List
-<!-- Template Version: 3 | ContextKit: 0.1.0 | Updated: 2025-09-17 -->
+<!-- Template Version: 5 | ContextKit: 0.1.0 | Updated: 2025-09-26 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -81,7 +81,27 @@ Generate implementation task breakdown by detecting current feature, validating 
    - **Template execution**: The copied Steps.md handles all task breakdown, dependency analysis, and parallel execution planning
    - **Progress tracking**: User can see checkboxes being completed in the copied file
 
-6. **Display Success Message** (see Success Messages section)
+6. **Extract and Resolve Clarification Points Interactively**
+   - Use `Grep` tool to find clarification markers in Steps.md: `Grep "🚨 \\[NEEDS CLARIFICATION:" [numbered-feature-directory]/Steps.md`
+   - If clarification points found:
+     - Parse each clarification point to extract the specific question and line context
+     - **FOR EACH CLARIFICATION (one at a time)**:
+       - Present the specific question to user using User Input Format:
+         ```
+         ═══════════════════════════════════════════════════
+         ║ ❓ IMPLEMENTATION CLARIFICATION NEEDED
+         ═══════════════════════════════════════════════════
+         ║
+         ║ [Specific extracted question from 🚨 [NEEDS CLARIFICATION: ...]]
+         ║
+         ║ Please provide your answer to resolve this implementation detail:
+         ```
+       - **WAIT for user response** (execution MUST stop until user answers)
+       - Use `Edit` tool to replace the 🚨 [NEEDS CLARIFICATION: ...] marker with the user's answer
+       - Continue to next clarification point only after current one is resolved
+     - After all clarifications resolved: confirm all markers removed from Steps.md
+
+7. **Display Success Message** (see Success Messages section)
 
 ## Error Conditions
 
@@ -100,6 +120,7 @@ Generate implementation task breakdown by detecting current feature, validating 
 - Steps template copied to feature directory successfully?
 - Template system instructions executed successfully?
 - System instructions section removed from final Steps.md?
+- Clarification points resolved interactively one at a time from Steps.md?
 - User informed to review and commit implementation plan before proceeding?
 
 ## Integration Points
@@ -122,9 +143,7 @@ Generate implementation task breakdown by detecting current feature, validating 
 ✅ Generated S### task enumeration with parallel execution markers
 ✅ All mandatory phases completed with dependency analysis
 
-[If 🚨 [NEEDS CLARIFICATION] items exist in steps:]
-⚠️  Implementation clarifications needed for:
-• [Template will list specific implementation questions that need answers]
+✅ All implementation clarifications resolved interactively during generation
 
 🔗 Next Steps:
 1. Review [numbered-feature-directory]/Steps.md to ensure task breakdown is comprehensive

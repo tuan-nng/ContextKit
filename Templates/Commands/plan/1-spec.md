@@ -1,5 +1,5 @@
 # Create Feature Specification
-<!-- Template Version: 9 | ContextKit: 0.1.0 | Updated: 2025-09-25 -->
+<!-- Template Version: 11 | ContextKit: 0.1.0 | Updated: 2025-09-26 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -164,7 +164,27 @@ Initialize feature specification by validating setup, confirming feature naming,
     - **Template execution**: The copied Spec.md handles all context reading, guidelines loading, constitutional validation, and content generation
     - **Progress tracking**: User can see checkboxes being completed in the copied file
 
-12. **Display Success Message** (see Success Messages section)
+12. **Extract and Resolve Clarification Points Interactively**
+    - Use `Grep` tool to find clarification markers in final Spec.md: `Grep "🚨 \\[NEEDS CLARIFICATION:" [numbered-feature-directory]/Spec.md`
+    - If clarification points found:
+      - Parse each clarification point to extract the specific question and line context
+      - **FOR EACH CLARIFICATION (one at a time)**:
+        - Present the specific question to user using User Input Format:
+          ```
+          ═══════════════════════════════════════════════════
+          ║ ❓ SPECIFICATION CLARIFICATION NEEDED
+          ═══════════════════════════════════════════════════
+          ║
+          ║ [Specific extracted question from 🚨 [NEEDS CLARIFICATION: ...]]
+          ║
+          ║ Please provide your answer to resolve this specification requirement:
+          ```
+        - **WAIT for user response** (execution MUST stop until user answers)
+        - Use `Edit` tool to replace the 🚨 [NEEDS CLARIFICATION: ...] marker with the user's answer
+        - Continue to next clarification point only after current one is resolved
+      - After all clarifications resolved: confirm all markers removed from Spec.md
+
+13. **Display Success Message** (see Success Messages section)
 
 ## Error Conditions
 
@@ -182,6 +202,7 @@ Initialize feature specification by validating setup, confirming feature naming,
 - Specification template copied to feature directory?
 - Template system instructions executed successfully?
 - System instructions section removed from final Spec.md?
+- Clarification points resolved interactively one at a time?
 - User informed to review and commit specification before proceeding?
 
 ## Integration Points
@@ -207,9 +228,7 @@ Initialize feature specification by validating setup, confirming feature naming,
 ✅ Applied constitutional principles from project guidelines
 ✅ All mandatory sections completed with project-specific content
 
-[If 🚨 [NEEDS CLARIFICATION] items exist in spec:]
-⚠️  Clarification needed for:
-• [Template will list specific questions that need user answers]
+✅ All specification clarifications resolved interactively during generation
 
 🔗 Next Steps:
 1. Review [numbered-feature-directory]/Spec.md to ensure it matches your intent

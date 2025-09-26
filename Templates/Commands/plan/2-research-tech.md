@@ -1,5 +1,5 @@
 # Research and Design Architecture
-<!-- Template Version: 7 | ContextKit: 0.1.0 | Updated: 2025-09-24 -->
+<!-- Template Version: 9 | ContextKit: 0.1.0 | Updated: 2025-09-26 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -134,7 +134,28 @@ Generate technical research and architecture plan by detecting current feature, 
     - If system instructions remain: Use `Edit` tool to remove all boxed instruction sections
     - Ensure final Tech.md contains only clean technical architecture content
 
-11. **Display Success Message** (see Success Messages section)
+11. **Extract and Resolve Clarification Points Interactively**
+    - Use `Grep` tool to find clarification markers in Research.md: `Grep "🚨 \\[NEEDS CLARIFICATION:" [numbered-feature-directory]/Research.md`
+    - Use `Grep` tool to find clarification markers in Tech.md: `Grep "🚨 \\[NEEDS CLARIFICATION:" [numbered-feature-directory]/Tech.md`
+    - If clarification points found in either file:
+      - Parse each clarification point to extract the specific question, file location, and line context
+      - **FOR EACH CLARIFICATION (one at a time, from both files)**:
+        - Present the specific question to user using User Input Format:
+          ```
+          ═══════════════════════════════════════════════════
+          ║ ❓ TECHNICAL CLARIFICATION NEEDED - [Research.md | Tech.md]
+          ═══════════════════════════════════════════════════
+          ║
+          ║ [Specific extracted question from 🚨 [NEEDS CLARIFICATION: ...]]
+          ║
+          ║ Please provide your answer to resolve this technical requirement:
+          ```
+        - **WAIT for user response** (execution MUST stop until user answers)
+        - Use `Edit` tool to replace the 🚨 [NEEDS CLARIFICATION: ...] marker with the user's answer in the appropriate file
+        - Continue to next clarification point only after current one is resolved
+      - After all clarifications resolved: confirm all markers removed from both Research.md and Tech.md
+
+12. **Display Success Message** (see Success Messages section)
 
 ## Error Conditions
 
@@ -155,6 +176,7 @@ Generate technical research and architecture plan by detecting current feature, 
 - Research.md system instructions cleaned up immediately after completion?
 - Technical template copied and executed successfully?
 - Tech.md system instructions cleaned up immediately after completion?
+- Clarification points resolved interactively one at a time from Research.md and Tech.md?
 - User informed to review and commit technical plan before proceeding?
 
 ## Integration Points
@@ -181,9 +203,7 @@ Generate technical research and architecture plan by detecting current feature, 
 ✅ Research template system instructions cleaned up immediately after completion
 ✅ Technical template system instructions cleaned up immediately after completion
 
-[If 🚨 [NEEDS CLARIFICATION] items exist in plans:]
-⚠️  Technical clarifications needed for:
-• [Templates will list specific questions that need answers]
+✅ All technical clarifications resolved interactively during generation
 
 🔗 Next Steps:
 1. Review Context/Features/[Name]/Research.md to verify research findings
