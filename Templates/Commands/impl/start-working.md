@@ -1,5 +1,5 @@
 # Begin Development with Context
-<!-- Template Version: 9 | ContextKit: 0.1.0 | Updated: 2025-09-24 -->
+<!-- Template Version: 10 | ContextKit: 0.1.0 | Updated: 2025-09-26 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -101,12 +101,13 @@ Begin systematic development with context-aware setup, task analysis, and guided
 
 4. **Load Development Context**
    - Use `Read` tool to read project Context.md: `Read Context.md`
-   - Extract project type, architecture patterns, and coding standards
+   - **DEEP ANALYSIS REQUIRED**: Understand project type, architecture patterns, coding standards, and constitutional principles
    - Use `Bash` tool to check for workspace context:
      ```bash
      cd .. && find . -name "Context.md" -path "*/Context.md" | head -1 || echo "No workspace context found"
      ```
    - If workspace Context.md found: Use `Read` tool to load workspace-specific overrides
+   - **CRITICAL**: This context forms the foundation for understanding how to execute all Steps.md tasks
 
 5. **Verify Development Environment**
    ```bash
@@ -126,138 +127,151 @@ Begin systematic development with context-aware setup, task analysis, and guided
      - If "y": Continue with warning
 
 
-### Phase 3: Task Analysis & Sequential Execution
+### Phase 3: Steps.md-Driven Development Execution
 
-6. **Load Complete Feature Context**
-   - Use `Read` tool to read all planning files for full context:
+6. **Load Complete Feature Context - DEEP UNDERSTANDING REQUIRED**
+   - Use `Read` tool to read all planning files for complete understanding:
      ```
      Read [numbered-feature-directory]/Spec.md       # Business requirements and user stories
      Read [numbered-feature-directory]/Research.md   # Technical research findings and decisions
      Read [numbered-feature-directory]/Tech.md       # Technical architecture and decisions
-     Read [numbered-feature-directory]/Steps.md      # Implementation task breakdown
+     Read [numbered-feature-directory]/Steps.md      # PRIMARY TASK LIST - Implementation breakdown
      ```
-   - Extract key information:
-     - **From Spec.md**: Feature purpose, user stories, acceptance criteria
-     - **From Research.md**: Technology research findings, API constraints, integration patterns
-     - **From Tech.md**: Architecture decisions, technology choices, constraints
-     - **From Steps.md**: Task list, dependencies, S001-S999 numbered tasks with [P] parallel markers
-   - Parse task completion status (checked/unchecked boxes)
+   - **CRITICAL - DEEP ANALYSIS REQUIRED**:
+     - **From Spec.md**: Fully understand feature purpose, ALL user stories, ALL acceptance criteria, user experience requirements
+     - **From Research.md**: Completely understand technology research findings, API constraints, integration patterns, external dependencies
+     - **From Tech.md**: Thoroughly understand architecture decisions, technology choices, ALL constraints, design patterns
+     - **From Steps.md**: **THIS IS THE PRIMARY TASK LIST** - Parse ALL S001-S999 numbered tasks, [P] parallel markers, dependencies, file paths, acceptance criteria
+   - **Parse Steps.md as Primary Task List**:
+     - Identify ALL tasks with their exact S### numbers
+     - Parse completion status (checked/unchecked boxes) for each task
+     - Extract dependencies for each task
+     - Note which tasks have [P] parallel markers
+     - Extract file paths and specific requirements for each task
 
-7. **Determine Next Sequential Task**
-   - Find the **first uncompleted task** in S001, S002, S003... sequence
-   - Do NOT skip tasks based on complexity or manual requirements
+7. **Execute Steps.md Tasks Sequentially - NO SHORTCUTS ALLOWED**
+   - **PRIMARY OBJECTIVE**: Follow Steps.md step-by-step as the definitive task list
+   - Find the **first uncompleted task** in S001, S002, S003... sequence from Steps.md
+   - **ABSOLUTE REQUIREMENT**: Do NOT skip tasks, do NOT choose "easier" tasks, do NOT take shortcuts
+   - **ABSOLUTE REQUIREMENT**: Do NOT assume tasks are complete - follow the plan exactly
    - Check dependencies are satisfied:
-     - Extract "Dependencies: S001, S002" from task description
-     - Verify all dependency tasks are completed (checked boxes)
-     - If dependencies not met: Display which tasks need completion first
-   - **CRITICAL**: Follow the planned sequence, don't auto-select "easier" tasks
-   - If no valid next task: Display completion status and next steps
+     - Extract "Dependencies: S001, S002" from task description in Steps.md
+     - Verify all dependency tasks are completed (checked boxes in Steps.md)
+     - If dependencies not met: Display which specific tasks need completion first
+   - **CRITICAL RULE**: Steps.md is the master plan - follow it religiously, never deviate
+   - **NEVER SPEED UP**: Do NOT execute multiple steps at once - handle ONE task at a time
+   - **NEVER ASSUME**: Do NOT assume tasks are simple or can be batched - follow each step individually
+   - **NEVER AUTOMATE THE PROCESS**: Each step requires individual attention and execution
+   - If no valid next task available: Display completion status and guide user to next phase
+   - **Steps.md drives everything** - it's not just a reference, it's the execution plan
 
-8. **Handle Task Execution Based on Type**
+8. **Execute Current Task from Steps.md - Follow the Plan Exactly**
 
-   **For MANUAL REQUIRED Tasks** (marked with ⚠️ MANUAL REQUIRED):
+   **CRITICAL**: The current task comes directly from Steps.md - execute exactly as specified, no shortcuts
 
-   **CRITICAL**: Always use the standardized user input box format below - never use custom formatting for manual tasks:
+   **For MANUAL REQUIRED Tasks** (marked with ⚠️ MANUAL REQUIRED in Steps.md):
+
+   **CRITICAL**: Always use the standardized user input box format below - never use custom formatting:
 
    ```
    ═══════════════════════════════════════════════════
-   ║ 👤 MANUAL TASK REQUIRED - [TaskNumber]
+   ║ 👤 MANUAL TASK REQUIRED - [TaskNumber from Steps.md]
    ═══════════════════════════════════════════════════
    ║
-   ║ 📋 TASK: [TaskDescription]
-   ║ 📂 Files: [file_paths or "Xcode project settings" for Xcode tasks]
+   ║ 📋 TASK FROM STEPS.md: [Exact task description from Steps.md]
+   ║ 📂 Files: [Exact file paths from Steps.md]
    ║ 🛠️ Manual steps required:
-   ║ [Extract detailed manual instructions from task notes]
+   ║ [Extract detailed manual instructions from Steps.md task notes]
    ║
-   ║ 📝 CONTEXT:
-   ║ • Feature: [brief_spec_summary]
-   ║ • Why needed: [brief_reason_from_tech_context]
-   ║ • Current progress: [completed_tasks]/[total_tasks] tasks done
+   ║ 📝 FULL CONTEXT (from planning files):
+   ║ • Feature purpose: [Complete understanding from Spec.md]
+   ║ • Technical approach: [Complete understanding from Tech.md]
+   ║ • Why this task: [Reason from Steps.md context]
+   ║ • Current progress: [completed_tasks]/[total_tasks] tasks done in Steps.md
    ║
-   ║ Please complete this manual task, then return here.
+   ║ Please complete this manual task exactly as specified, then return here.
    ║
    ║ Options:
-   ║ ✅ 'done' - I completed the manual task
-   ║ ⏭️  'skip' - Skip this task for now (breaks sequence)
-   ║ ❓ 'help' - Show detailed instructions
+   ║ ✅ 'done' - I completed the manual task (will mark as ✅ in Steps.md)
+   ║ ⏭️  'skip' - Skip this task for now (breaks planned sequence)
+   ║ ❓ 'help' - Show more detailed instructions from Steps.md
    ║ 🔙 'back' - Return to task selection
    ║
    ║ Status:
    ```
 
-   **IMPORTANT**:
-   - Do NOT use custom formats like "⏺ Starting with..." or "⚠️ Manual Xcode Configuration Required"
-   - Always use the exact user input box format above with ║ line prefixes
-   - All manual task communication must follow this standardized format
-   - If "back": Return to task analysis phase
+   **For AUTOMATED Tasks** (no manual markers in Steps.md):
 
-   **For AUTOMATED Tasks** (no manual markers):
-
-   **CRITICAL**: Always use the standardized user input box format below - never use custom formatting:
+   **CRITICAL**: Execute exactly as specified in Steps.md - no shortcuts or assumptions:
    ```
    ═══════════════════════════════════════════════════
-   ║ 🚀 AUTOMATED TASK - [TaskNumber]
+   ║ 🚀 AUTOMATED TASK - [TaskNumber from Steps.md]
    ═══════════════════════════════════════════════════
    ║
-   ║ 📋 TASK: [TaskDescription]
-   ║ 📂 Files to modify: [file_paths]
-   ║ 🎯 Acceptance criteria: [criteria_summary]
+   ║ 📋 TASK FROM STEPS.md: [Exact task description from Steps.md]
+   ║ 📂 Files to modify: [Exact file paths from Steps.md]
+   ║ 🎯 Acceptance criteria: [Criteria from Steps.md]
+   ║ 🔗 Dependencies: [Dependencies listed in Steps.md]
    ║
-   ║ 📝 CONTEXT SUMMARY:
-   ║ • Feature: [brief_spec_summary]
-   ║ • Architecture: [brief_tech_summary]
-   ║ • Current progress: [completed_tasks]/[total_tasks] tasks done
+   ║ 📝 FULL CONTEXT FOR IMPLEMENTATION:
+   ║ • Feature specification: [Complete understanding from Spec.md]
+   ║ • Technical architecture: [Complete understanding from Tech.md]
+   ║ • Research findings: [Complete understanding from Research.md]
+   ║ • Current progress: [completed_tasks]/[total_tasks] tasks done in Steps.md
    ║
    ║ 🔧 IMPLEMENTATION APPROACH:
-   ║ [Brief description of what will be implemented]
+   ║ [How this will be implemented based on complete context understanding]
    ║
-   ║ Ready to implement automatically? (Y/n):
+   ║ Ready to execute this Steps.md task? (Y/n):
    ```
 
    **IMPORTANT**:
-   - Do NOT use custom formats like "⏺ Starting with..."
-   - Always use the exact user input box format above with ║ line prefixes
-   - All automated task communication must follow this standardized format
-   - Wait for user confirmation
-   - If "n": Ask for alternative approach or skip
-   - If "Y": Continue to automated implementation
+   - Task details come DIRECTLY from Steps.md - never modify or interpret
+   - Use complete context from Spec.md, Tech.md, Research.md for implementation
+   - Do NOT skip steps or take shortcuts - follow Steps.md exactly
+   - Wait for user confirmation before proceeding
+   - If "n": Ask for clarification but emphasize Steps.md must be followed
 
-### Phase 4: Task Execution & Progress Tracking
+### Phase 4: Task Execution with Steps.md as Central Progress Tracker
 
-9. **Execute Task Implementation**
-   - **For Manual Tasks**: User delegation complete, mark as done
-   - **For Automated Tasks**: Proceed with implementation:
-     - Extract detailed task information: file paths, acceptance criteria, dependencies
+9. **Execute Task Implementation with Complete Context**
+   - **For Manual Tasks**: User delegation complete, immediately mark as done in Steps.md
+   - **For Automated Tasks**: Implement using complete context understanding:
+     - **Use ALL context from planning files**: Apply complete understanding from Spec.md, Tech.md, Research.md
+     - Extract detailed task information from Steps.md: file paths, acceptance criteria, dependencies
      - Use `Read` tool to examine target files if they exist
-     - Identify constitutional principles relevant to task type (UI, models, services, etc.)
-     - Show current task description and acceptance criteria
-     - Display relevant file paths and expected changes
      - Use `Glob` tool to discover available guidelines: `Glob Context/Guidelines *.md`
      - For each found guideline file, use `Read` tool to load and apply content
-     - Display constitutional reminders for current task type
-     - Provide starting guidance based on project patterns
-     - Begin implementation work
+     - Apply constitutional principles relevant to task type (UI, models, services, etc.)
+     - **Execute exactly as planned in Steps.md** - no shortcuts, no assumptions
+     - Ensure implementation meets all criteria specified in Steps.md
 
-10. **Update Progress Tracking**
-    - Mark completed task as checked in Steps.md: `- [x] **S001**...`
-    - Add completion timestamp in task notes if desired
-    - Save progress to maintain state
+10. **Update Steps.md Progress Tracking - CENTRAL TO WORKFLOW**
+    - **IMMEDIATELY after task completion**: Use `Edit` tool to mark completed task as checked in Steps.md:
+      ```
+      OLD: - [ ] **S001** [task description]
+      NEW: - [x] **S001** [task description]
+      ```
+    - **Add completion timestamp**: Update task notes with completion time
+    - **This is critical**: Steps.md serves as the definitive progress tracker
+    - Verify the checkbox update was successful before proceeding
 
-11. **Continue Sequential Execution**
-    - After task completion, automatically check for next sequential task
-    - **Do not exit** - continue with next task in sequence
-    - Display progress update:
+11. **Continue Sequential Execution - No Exit Until All Done**
+    - **IMMEDIATELY after updating Steps.md**: Check for next sequential task
+    - **Do NOT exit** - continue with next task in sequence according to Steps.md
+    - Display progress update based on Steps.md status:
     ```
-    ✅ Task [TaskNumber] completed successfully!
+    ✅ Task [TaskNumber] completed and marked in Steps.md!
 
-    📊 Progress: [completed_tasks+1]/[total_tasks] tasks done
-    🔄 Checking next sequential task...
+    📊 Progress: [completed_tasks+1]/[total_tasks] tasks done per Steps.md
+    🔄 Loading next task from Steps.md...
     ```
-    - Return to Phase 3, Step 7 to determine next task
+    - Return to Phase 3, Step 7 to determine next task from Steps.md
     - **Only exit when**:
-      - All tasks completed
-      - Dependency blocking (cannot proceed)
+      - ALL Steps.md tasks completed (all checkboxes checked)
+      - Dependency blocking prevents any task execution
       - User explicitly requests to stop
+    - **The goal**: Complete the entire Steps.md task list systematically
 
 12. **Quality Assurance Integration with Targeted Context**
     - **After completing any step or significant changes**: Run systematic quality validation with targeted file analysis
