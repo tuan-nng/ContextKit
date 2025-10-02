@@ -6,7 +6,7 @@
 >
 > For project-specific customizations, use the designated section at the bottom of this file.
 >
-> Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
+> Found a bug or improvement for everyone? Please report it: https://github.com/tuan-nng/ContextKit/issues
 
 ## Description
 Intelligent git analysis, commit message generation, and commit execution with comprehensive validation. Analyzes changed files and generates conventional commit messages following project standards.

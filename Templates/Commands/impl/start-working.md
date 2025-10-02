@@ -6,7 +6,7 @@
 >
 > For project-specific customizations, use the designated section at the bottom of this file.
 >
-> Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
+> Found a bug or improvement for everyone? Please report it: https://github.com/tuan-nng/ContextKit/issues
 
 ## Description
 Begin systematic development with context-aware setup, task analysis, and guided implementation initiation based on completed planning phases.

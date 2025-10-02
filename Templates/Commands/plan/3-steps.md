@@ -6,7 +6,7 @@
 >
 > For project-specific customizations, use the designated section at the bottom of this file.
 >
-> Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
+> Found a bug or improvement for everyone? Please report it: https://github.com/tuan-nng/ContextKit/issues
 
 ## Description
 Generate implementation task breakdown by detecting current feature, validating prerequisites, copying steps template, and executing template workflow with S### task enumeration and parallel execution planning.

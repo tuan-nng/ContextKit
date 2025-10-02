@@ -200,7 +200,7 @@ All modified files include:
 
 1. **Fresh Install**:
    ```bash
-   curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | bash
+   curl -fsSL https://raw.githubusercontent.com/tuan-nng/ContextKit/main/install.sh | bash
    ```
 
 2. **Initialize in Your Web Project**:

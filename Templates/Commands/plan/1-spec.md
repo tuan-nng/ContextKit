@@ -6,7 +6,7 @@
 >
 > For project-specific customizations, use the designated section at the bottom of this file.
 >
-> Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
+> Found a bug or improvement for everyone? Please report it: https://github.com/tuan-nng/ContextKit/issues
 
 ## Description
 Initialize feature specification by validating setup, confirming feature naming, copying specification template, and executing template workflow with progress tracking.

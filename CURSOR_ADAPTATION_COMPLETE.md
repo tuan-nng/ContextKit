@@ -90,7 +90,7 @@ Context/Scripts/          →  (Reference only - no hooks)
 ### Installation
 ```bash
 # Install ContextKit globally
-curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/tuan-nng/ContextKit/main/install.sh | bash
 
 # Open your project in Cursor
 cursor .
@@ -194,7 +194,7 @@ Before using ContextKit with Cursor, verify:
 1. **Test the Installation**
    ```bash
    # In a test project
-   curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | bash
+   curl -fsSL https://raw.githubusercontent.com/tuan-nng/ContextKit/main/install.sh | bash
    cd ~/test-project
    cursor .
    # In Cursor Composer: @ctxk:proj:init

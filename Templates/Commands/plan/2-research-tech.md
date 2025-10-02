@@ -6,7 +6,7 @@
 >
 > For project-specific customizations, use the designated section at the bottom of this file.
 >
-> Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
+> Found a bug or improvement for everyone? Please report it: https://github.com/tuan-nng/ContextKit/issues
 
 ## Description
 **Two-phase workflow with review checkpoint**: First run creates Research.md and halts for user review. Second run (after review) creates Tech.md architecture plan informed by approved research findings.

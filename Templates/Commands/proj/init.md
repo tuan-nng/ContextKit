@@ -6,7 +6,7 @@
 >
 > For project-specific customizations, use the designated section at the bottom of this file.
 >
-> Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
+> Found a bug or improvement for everyone? Please report it: https://github.com/tuan-nng/ContextKit/issues
 
 ## Description
 Initialize current project with ContextKit development workflow system. Sets up systematic development environment with template distribution and context generation.
@@ -71,7 +71,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 6. **Verify ContextKit Global Installation**
    ```bash
-   ls -la ~/.ContextKit/Templates/ || echo "❌ ContextKit not installed globally. Run: curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | sh"
+   ls -la ~/.ContextKit/Templates/ || echo "❌ ContextKit not installed globally. Run: curl -fsSL https://raw.githubusercontent.com/tuan-nng/ContextKit/main/install.sh | sh"
    ```
 
 ### Phase 2: User Configuration & Workspace Discovery
@@ -395,7 +395,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 ## Error Conditions
 
-- **"ContextKit not installed globally"** → Run global installation first: `curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | sh`
+- **"ContextKit not installed globally"** → Run global installation first: `curl -fsSL https://raw.githubusercontent.com/tuan-nng/ContextKit/main/install.sh | sh`
 - **"Project already initialized"** → Use `@ctxk:proj:migrate` for updates instead
 - **"Not in git repository"** → Warn user, ask for confirmation to continue
 - **"Uncommitted changes detected"** → Recommend committing first, allow override

@@ -1,4 +1,4 @@
-![ContextKit Logo](https://github.com/FlineDev/ContextKit/blob/main/Logo.png?raw=true)
+![ContextKit Logo](https://github.com/tuan-nng/ContextKit/blob/main/Logo.png?raw=true)
 
 <p align="center">
     <strong>Stop fighting context limits. Stop micro-managing Cursor. Start building features systematically and make AI produce closer to production-ready code on first try.</strong>
@@ -30,7 +30,7 @@
 ### 1. Install ContextKit globally
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/tuan-nng/ContextKit/main/install.sh | bash
 ```
 
 ### 2. Setup your project
