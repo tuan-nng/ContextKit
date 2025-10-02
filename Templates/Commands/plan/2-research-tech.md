@@ -1,5 +1,5 @@
 # Research and Design Architecture
-<!-- Template Version: 10 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+<!-- Template Version: 13 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -9,7 +9,7 @@
 > Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
 ## Description
-Generate technical research and architecture plan by detecting current feature, validating prerequisites, executing integrated research phase, and creating comprehensive research and architectural documentation.
+**Two-phase workflow with review checkpoint**: First run creates Research.md and halts for user review. Second run (after review) creates Tech.md architecture plan informed by approved research findings.
 
 ## User Input Format
 
@@ -24,6 +24,10 @@ Generate technical research and architecture plan by detecting current feature, 
 ```
 
 ## Execution Flow (main)
+
+**TWO-PHASE WORKFLOW**: This command operates in two stages with a review checkpoint:
+- **First run**: Creates Research.md → HALTS for user review
+- **Second run**: Creates Tech.md (after research approval)
 
 ### Phase 0: Check Customization
 
@@ -56,7 +60,7 @@ Generate technical research and architecture plan by detecting current feature, 
    - Use `Glob` tool to find numbered feature directory: `Glob Context/Features/???-[FeatureName]`
    - Store the found directory path for use in subsequent steps
 
-3. **Validate Prerequisites**
+3. **Validate Prerequisites & Determine Workflow Stage**
    - Use `Read` tool to check Spec.md exists in the found numbered directory: `Read [numbered-feature-directory]/Spec.md`
    - If Spec.md missing:
      ```
@@ -68,6 +72,16 @@ Generate technical research and architecture plan by detecting current feature, 
      → END (exit with error)
    - Check for 🚨 [NEEDS CLARIFICATION] markers in specification
    - If clarifications exist: WARN user to resolve them first
+
+   - **Determine Workflow Stage**: Use `Glob` tool to check if Research.md exists: `Glob [numbered-feature-directory]/Research.md`
+   - If Research.md NOT found:
+     - **WORKFLOW STAGE**: Research Phase (proceed to Phase 3)
+   - If Research.md found:
+     - Use `Read` tool to check if it contains system instructions: `Read [numbered-feature-directory]/Research.md`
+     - Search for "🤖 EXECUTION FLOW" or boxed instruction sections
+     - If system instructions found: ERROR "Research.md incomplete - contains template instructions"
+     - If no system instructions (clean research document):
+       - **WORKFLOW STAGE**: Tech Architecture Phase (skip Phase 3, proceed to Phase 4)
 
 ### Phase 3: Research Phase Execution
 
@@ -120,15 +134,22 @@ Generate technical research and architecture plan by detecting current feature, 
    - Verify research findings are documented with decisions and rationale
    - If research incomplete: WARN user to complete research before proceeding
 
-### Phase 4: Technical Architecture Planning
+8. **HALT for User Review** (see Research Phase Completed message)
+   - Display success message with review instructions
+   - **END EXECUTION** - DO NOT proceed to Phase 4
+   - User must review Research.md and run command again to continue
 
-8. **Copy Technical Architecture Template**
+### Phase 4: Technical Architecture Planning (Only Executes on Second Run)
+
+**SKIP THIS PHASE if Research.md doesn't exist** (handled by Phase 2 workflow stage detection)
+
+9. **Copy Technical Architecture Template**
    ```bash
    cp ~/.ContextKit/Templates/Features/Tech.md [numbered-feature-directory]/Tech.md
    echo "✅ Copied technical architecture template"
    ```
 
-9. **Execute Technical Architecture Template**
+10. **Execute Technical Architecture Template**
     - Use `Read` tool to read the copied Tech.md: `Read [numbered-feature-directory]/Tech.md`
     - Follow the **system instructions** section (boxed area) step by step
     - The template contains technical architecture generation logic informed by research results
@@ -136,13 +157,13 @@ Generate technical research and architecture plan by detecting current feature, 
     - **Template execution**: The copied Tech.md handles architecture decisions, Context/Guidelines compliance, and complexity assessment
     - **Progress tracking**: User can see architectural planning checkboxes being completed in the copied file
 
-10. **Clean Up Technical Architecture Template**
+11. **Clean Up Technical Architecture Template**
     - Use `Read` tool to check if Tech.md still contains system instructions: `Read [numbered-feature-directory]/Tech.md`
     - Search for "🤖 EXECUTION FLOW" or "VALIDATION & EXECUTION STATUS" sections
     - If system instructions remain: Use `Edit` tool to remove all boxed instruction sections
     - Ensure final Tech.md contains only clean technical architecture content
 
-11. **Extract and Resolve Clarification Points Interactively**
+12. **Extract and Resolve Clarification Points Interactively**
     - Use `Grep` tool to find clarification markers in Research.md: `Grep "🚨 \\[NEEDS CLARIFICATION:" [numbered-feature-directory]/Research.md`
     - Use `Grep` tool to find clarification markers in Tech.md: `Grep "🚨 \\[NEEDS CLARIFICATION:" [numbered-feature-directory]/Tech.md`
     - If clarification points found in either file:
@@ -163,12 +184,13 @@ Generate technical research and architecture plan by detecting current feature, 
         - Continue to next clarification point only after current one is resolved
       - After all clarifications resolved: confirm all markers removed from both Research.md and Tech.md
 
-12. **Display Success Message** (see Success Messages section)
+13. **Display Success Message** (see Tech Architecture Completed message)
 
 ## Error Conditions
 
 - **"Context.md not found"** → User must run `/ctxk:proj:init` to initialize ContextKit
 - **"Feature specification not found"** → Must run `/ctxk:plan:1-spec` first
+- **"Research.md incomplete - contains template instructions"** → Research phase was started but not completed - system instructions still present
 - **"Technical template not found"** → Ensure template files are available
 - **"Specification has unresolved clarifications"** → Resolve [NEEDS CLARIFICATION] markers in Spec.md first
 - **"Template execution failed"** → Verify Research.md and Tech.md templates contain system instructions sections
@@ -177,11 +199,18 @@ Generate technical research and architecture plan by detecting current feature, 
 
 ## Validation Gates
 
+### First Run (Research Phase)
 - Project Context.md exists (ContextKit project setup complete)?
 - Feature specification exists and is complete?
 - No unresolved [NEEDS CLARIFICATION] markers in specification?
+- Research.md doesn't exist yet (not second run)?
 - Research template copied and executed successfully?
 - Research.md system instructions cleaned up immediately after completion?
+- User informed to review Research.md before continuing?
+
+### Second Run (Tech Architecture Phase)
+- Research.md exists and is complete (no system instructions)?
+- Tech.md doesn't exist yet (avoiding duplicate creation)?
 - Technical template copied and executed successfully?
 - Tech.md system instructions cleaned up immediately after completion?
 - Clarification points resolved interactively one at a time from Research.md and Tech.md?
@@ -199,28 +228,46 @@ Generate technical research and architecture plan by detecting current feature, 
 
 ## Success Messages
 
-### Research & Technical Plan Created Successfully
+### Research Phase Completed (First Run - HALT)
 ```
-🎉 Technical research and architecture planning completed successfully!
+🎉 Technical research completed!
 
 ✅ Created: Context/Features/[Name]/Research.md
+
+📋 What to do next:
+
+1️⃣  **Review** the research findings in Context/Features/[Name]/Research.md
+    - Make any corrections or additions if needed
+
+2️⃣  **Continue** by running this command again:
+    /ctxk:plan:2-research-tech
+
+    This will create the Tech.md architecture plan based on your research.
+
+💡 Tips:
+   - You can review and edit Research.md first, or continue immediately if it looks good
+   - If context usage is above 60%, consider running /compact or starting a new chat before continuing
+```
+
+### Tech Architecture Completed (Second Run - Complete)
+```
+🎉 Technical architecture planning completed successfully!
+
+✅ Existing: Context/Features/[Name]/Research.md (from previous run)
 ✅ Created: Context/Features/[Name]/Tech.md
-✅ Researched all technologies mentioned in specification
 ✅ Applied Context/Guidelines/Swift.md and SwiftUI.md standards
 ✅ All mandatory sections completed with research-informed decisions
-✅ Research template system instructions cleaned up immediately after completion
-✅ Technical template system instructions cleaned up immediately after completion
+✅ Technical template system instructions cleaned up
 
 ✅ All technical clarifications resolved interactively during generation
 
 🔗 Next Steps:
-1. Review Context/Features/[Name]/Research.md to verify research findings
-2. Review Context/Features/[Name]/Tech.md to ensure technical decisions are sound
-3. [If clarifications needed:] Edit the files to resolve marked questions
-4. When satisfied with both research and technical plan: commit your changes with git
-5. Run /ctxk:plan:3-steps to proceed with implementation task breakdown
+1. Review Context/Features/[Name]/Tech.md to ensure technical decisions are sound
+2. [If clarifications needed:] Edit the file to resolve marked questions
+3. When satisfied with the technical plan: commit your changes with git
+4. Run /ctxk:plan:3-steps to proceed with implementation task breakdown
 
-💡 Research-informed technical architecture ready for your review and approval!
+💡 Research-informed technical architecture ready for implementation planning!
 ```
 
 ════════════════════════════════════════════════════════════════════════════════
