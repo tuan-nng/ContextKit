@@ -1,5 +1,5 @@
 # Begin Development with Context
-<!-- Template Version: 13 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+<!-- Template Version: 15 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -173,6 +173,16 @@ Begin systematic development with context-aware setup, task analysis, and guided
    - If no valid next task available: Display completion status and guide user to next phase
    - **Steps.md drives everything** - it's not just a reference, it's the execution plan
 
+   **🚨 CRITICAL: TOKEN LIMITS ARE IRRELEVANT**
+   - **NEVER optimize for token limits** - quality and thoroughness are paramount
+   - **NEVER rush through steps** to fit within a session - take the time each step needs
+   - **Session boundaries don't matter** - progress is tracked in Steps.md
+   - **Just ignore token limit concerns** - continue working methodically
+   - If context usage exceeds 80%: Pause and suggest user runs `/compact` before continuing
+   - If session ends due to token limit: User can easily resume (Steps.md has all progress)
+   - The entire workflow is designed to be resumable across multiple sessions
+   - **Each step deserves proper attention** - never sacrifice quality for speed
+
 8. **Execute Current Task from Steps.md - Follow the Plan Exactly**
 
    **CRITICAL**: The current task comes directly from Steps.md - execute exactly as specified, no shortcuts
@@ -261,8 +271,11 @@ Begin systematic development with context-aware setup, task analysis, and guided
       NEW: - [x] **S001** [task description]
       ```
     - **Add completion timestamp**: Update task notes with completion time
-    - **This is critical**: Steps.md serves as the definitive progress tracker
+    - **🚨 CRITICAL**: Steps.md is THE authoritative progress tracker
+    - **Even if using TodoWrite**: Steps.md is the real source of truth, not the todo list
+    - TodoWrite is just for temporary session tracking - Steps.md persists across all sessions
     - Verify the checkbox update was successful before proceeding
+    - **This enables session continuity**: Any new session can resume by reading Steps.md
 
 11. **Continue Sequential Execution - No Exit Until All Done**
     - **IMMEDIATELY after updating Steps.md**: Check for next sequential task

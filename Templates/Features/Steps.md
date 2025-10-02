@@ -1,8 +1,28 @@
 # Implementation Steps: [Feature from Tech.md]
-<!-- Template Version: 9 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+<!-- Template Version: 11 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 ## Description
 Implementation task breakdown template providing systematic S001-S999 task enumeration with parallel execution markers and dependency analysis for iOS/macOS development workflows.
+
+## 🚨 CRITICAL: This File is Your Progress Tracker
+
+**This Steps.md file serves as the authoritative source of truth for implementation progress across all development sessions.**
+
+### Key Principles
+- **Token limits are irrelevant** - Progress is tracked here, sessions are resumable
+- **Never rush or take shortcuts** - Each step deserves proper attention and time
+- **Session boundaries don't matter** - User can resume where this file shows progress
+- **Steps.md is the real todo list** - Even if AI uses TodoWrite during a session, THIS file is what persists
+- **Quality over speed** - Thoroughness is mandatory, optimization for token limits is forbidden
+- **Check off progress here** - Mark tasks as complete in this file as they're finished
+
+### How This Works
+1. Each task has a checkbox: `- [ ] **S001** Task description`
+2. As tasks complete, they're marked: `- [x] **S001** Task description`
+3. AI ignores token limit concerns and works methodically through steps
+4. If context usage gets high (>80%), AI suggests user runs `/compact` before continuing
+5. If session ends: User starts new session and resumes (this file has all progress)
+6. Take the time needed for each step - there's no rush to finish in one session
 
 ════════════════════════════════════════════════════════════════════════════════
 ║ 🤖 EXECUTION FLOW - IMPLEMENTATION STEPS GENERATION
@@ -430,6 +450,14 @@ Implementation task breakdown template providing systematic S001-S999 task enume
 - **Parallel Markers**: `[P]` for tasks that can run concurrently
 - **Dependencies**: Clear prerequisite task references
 - **File Paths**: Specific target files for each implementation task
+
+### Progress Tracking & Session Continuity
+- **This file is the progress tracker** - Check off tasks as `[x]` when complete
+- **Sessions are resumable** - New sessions read this file to see what's done
+- **Token limits don't matter** - Work can span multiple sessions seamlessly
+- **Never rush to completion** - Take the time each step needs for quality
+- **TodoWrite is temporary** - Only this file persists across sessions
+- **Quality is paramount** - Shortcuts and speed optimizations are forbidden
 
 ### Parallel Execution Rules
 - **Different files** = `[P]` parallel safe
