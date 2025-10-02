@@ -1,5 +1,5 @@
 # Begin Development with Context
-<!-- Template Version: 11 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+<!-- Template Version: 13 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -281,58 +281,59 @@ Begin systematic development with context-aware setup, task analysis, and guided
       - User explicitly requests to stop
     - **The goal**: Complete the entire Steps.md task list systematically
 
-12. **Quality Assurance Integration with Targeted Context**
-    - **After completing any step or significant changes**: Run systematic quality validation with targeted file analysis
-    - **Context Passing**: Provide recently modified files and line ranges to focus agent analysis
+12. **Quality Assurance Integration with Primary Agents**
+    - **PRIMARY AGENTS FOR IMPLEMENTATION**: Use these agents throughout development as specified in Steps.md
+      - `build-project` - **Use whenever Steps.md mentions "build" or "compile"**
+      - `commit-changes` - **Use at ALL milestone markers in Steps.md** (🏁 MILESTONE)
+      - `run-test-suite` / `run-specific-test` - **Use when Steps.md specifies test execution**
 
-    **Example Agent Calls**:
+    **Primary Agent Usage Examples**:
     ```
+    # When Steps.md task says "build" or at Phase 5 validation tasks:
     Use Task tool with build-project:
     "Execute project build and report status."
 
-    <!-- TODO: check-* agents currently disabled (untested, need rework to read-only)
-    Use Task tool with check-modern-code:
-    "Check for outdated patterns in recent code.
+    # At every 🏁 MILESTONE marker in Steps.md:
+    Use Task tool with commit-changes:
+    "Analyze changes and create commit for [milestone description]."
+    (Agent handles all git analysis and commit message generation)
 
-    FILES:
-    - Sources/Services/AuthService.swift:23-89,145-201
-    - Sources/Models/User.swift:45-78
-    - Sources/Views/LoginView.swift
+    # When Steps.md specifies test execution:
+    Use Task tool with run-test-suite:
+    "Execute complete test suite and report results."
 
-    Focus analysis on these specific areas only."
-
-    Use Task tool with check-accessibility:
-    "Check accessibility issues in recent UI changes.
-
-    FILES:
-    - Sources/Views/ProfileView.swift:34-156
-    - Sources/Components/CustomButton.swift
-
-    Focus analysis on these specific areas only."
-    -->
+    Use Task tool with run-specific-test:
+    "Run tests for LoginViewModel and report failures."
     ```
 
-    - **Execution Order** (run sequentially, stop and fix if any fail):
-      1. `build-project` - Verify compilation (project-wide)
-      <!-- TODO: check-* agents incomplete - need rework to read-only reporting
-      2. `check-modern-code` - Modernize APIs (recent files only) [INCOMPLETE]
-      3. `check-error-handling` - Validate error patterns (recent files only) [INCOMPLETE]
-      4. `check-accessibility` - Check UI accessibility (recent UI files only) [INCOMPLETE]
-      5. `check-localization` - Verify localization (recent UI files only) [INCOMPLETE]
-      6. `check-code-debt` - Clean up artifacts (recent files only) [INCOMPLETE]
+    - **When to use build-project**:
+      - After implementing significant functionality (service layer, UI components)
+      - Before milestone commits to ensure code compiles
+      - When Steps.md tasks explicitly mention "build validation"
+      - After resolving dependency or integration issues
+
+    - **When to use commit-changes agent**:
+      - At EVERY 🏁 MILESTONE marker in Steps.md (use Task tool)
+      - After completing a logical phase of work (data layer, UI layer, etc.)
+      - When directed by Steps.md milestone instructions
+      - The agent handles git analysis, formatting, and commit message generation
+      - Users can also manually run /ctxk:impl:commit-changes command
+
+    - **When to use run-test-* agents**:
+      - When Steps.md Phase 5 tasks specify test execution
+      - After implementing new test files
+      - Before milestone commits when tests exist
+      - When debugging failing tests
+
+    - **Additional Quality Agents** (currently incomplete - pending rework):
+      <!-- TODO: check-* agents disabled (need rework to read-only reporting)
+      - `check-modern-code` - Modernize APIs (recent files only) [INCOMPLETE]
+      - `check-error-handling` - Validate error patterns (recent files only) [INCOMPLETE]
+      - `check-accessibility` - Check UI accessibility (recent UI files only) [INCOMPLETE]
+      - `check-localization` - Verify localization (recent UI files only) [INCOMPLETE]
+      - `check-code-debt` - Clean up artifacts (recent files only) [INCOMPLETE]
       -->
 
-    - **Optional Testing Agents** (use when working on tests or before releases):
-      - `run-specific-test` - When debugging a failing test or validating new test code
-      - `run-test-suite` - Before package releases or after significant changes to verify full test coverage
-
-    - **File Context Rules**:
-      - Include entire function ranges for significant modifications (60%+ changed)
-      - Provide full file paths for new or completely rewritten files
-      - Merge nearby line ranges (e.g., 23-25,27-29 → 23-29)
-      - Focus agents only on recently modified code, not entire codebase
-
-    - **When to run**: After completing views, features, models with user-facing content, or any substantial code changes
     - **If agents fail**: Focus on fixing the specific issue before continuing, then re-run the failed agent to verify the fix
 
 ## Error Conditions
@@ -389,10 +390,12 @@ Begin systematic development with context-aware setup, task analysis, and guided
 📂 Files to modify: [file_paths]
 📖 Guidelines: [List of available guidelines from Context/Guidelines/]
 
-⚡ Quality validation runs automatically after substantial changes:
-   build-project → [check-* agents incomplete pending rework]
+🤖 Primary Agents for Implementation:
+   • build-project - Use when Steps.md mentions "build" or at validation tasks
+   • commit-changes - Use at ALL 🏁 MILESTONE markers (via Task tool)
+   • run-test-* - Use when Steps.md specifies test execution
 
-💡 Ready to implement!
+💡 Ready to implement! Follow Steps.md and use agents as specified.
 ```
 
 ### All Tasks Complete

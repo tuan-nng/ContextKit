@@ -1,5 +1,5 @@
 # Implementation Steps: [Feature from Tech.md]
-<!-- Template Version: 7 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+<!-- Template Version: 9 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 ## Description
 Implementation task breakdown template providing systematic S001-S999 task enumeration with parallel execution markers and dependency analysis for iOS/macOS development workflows.
@@ -118,7 +118,10 @@ Implementation task breakdown template providing systematic S001-S999 task enume
 ║     - Service Layer with dependency tracking
 ║     - UI Layer with SwiftUI implementation tasks
 ║     - **Automated Integration phase**: Only tasks AI can execute (builds, tests, agents)
+║       - **CRITICAL**: Build tasks MUST explicitly specify "Use Task tool with build-project agent"
+║       - **CRITICAL**: Test tasks MUST explicitly specify "Use Task tool with run-test-* agent"
 ║     - **Manual User Testing phase**: Tasks requiring human app interaction with standardized box format
+║     - **Milestone Commits**: ALL milestones MUST specify "Use Task tool with commit-changes agent to commit"
 ║     - Polish & Release Preparation with compliance tasks and external process guidance
 ║
 ║ 12. **Generate Dependency Analysis with External Constraints**
@@ -199,7 +202,7 @@ Implementation task breakdown template providing systematic S001-S999 task enume
 - [ ] **S003** [P] [AI Generated: Additional setup tasks that can run in parallel]
 
 **🏁 MILESTONE: Foundation Setup**
-*Consider commit: "Setup [feature] foundation - project structure and dependencies"*
+*Use Task tool with commit-changes agent to commit: "Setup [feature] foundation - project structure and dependencies"*
 
 ### Phase 2: Data Layer (TDD Approach)
 *Models, data structures, and business logic foundation*
@@ -215,7 +218,7 @@ Implementation task breakdown template providing systematic S001-S999 task enume
 - [ ] **S009** [AI Generated: Data persistence configuration if needed]
 
 **🏁 MILESTONE: Data Foundation**
-*Consider commit: "Implement [feature] data models and validation"*
+*Use Task tool with commit-changes agent to commit: "Implement [feature] data models and validation"*
 
 ### Phase 3: Service Layer
 *Business logic, API integration, data management*
@@ -233,7 +236,7 @@ Implementation task breakdown template providing systematic S001-S999 task enume
 - [ ] **S013** [AI Generated: Additional service tasks if needed]
 
 **🏁 MILESTONE: Business Logic Complete**
-*Consider commit: "Implement [feature] services and business logic"*
+*Use Task tool with commit-changes agent to commit: "Implement [feature] services and business logic"*
 
 ### Phase 4: User Interface
 *SwiftUI views, navigation, user interaction*
@@ -251,15 +254,15 @@ Implementation task breakdown template providing systematic S001-S999 task enume
 - [ ] **S018** [AI Generated: Navigation and flow coordination]
 
 **🏁 MILESTONE: User Interface Complete**
-*Consider commit: "Implement [feature] user interface and navigation"*
+*Use Task tool with commit-changes agent to commit: "Implement [feature] user interface and navigation"*
 
 ### Phase 5: Automated Integration & Build Validation
 *Automated testing, builds, and code quality checks that AI can execute*
 
 - [ ] **S019** [P] [AI Generated: Unit/integration test execution for feature]
-  - **Path**: Run test suite with build validation
+  - **Path**: Run test suite with build validation using run-test-suite or run-specific-test agent
   - **Dependencies**: [Previous implementation tasks]
-  - **Notes**: Execute automated tests, validate build success, check code compilation
+  - **Notes**: Use Task tool with run-test-* agent to execute automated tests and validate build success
 
 - [ ] **S020** [P] [AI Generated: Code quality agent validation]
   - **Path**: Use ContextKit agents (check-modern-code, check-accessibility, etc.)
@@ -272,12 +275,12 @@ Implementation task breakdown template providing systematic S001-S999 task enume
   - **Notes**: Validate error types, user-friendly messages, typed throws patterns
 
 - [ ] **S022** [AI Generated: Build performance and warnings audit]
-  - **Path**: Build system validation and compiler warning analysis
+  - **Path**: Build system validation using build-project agent
   - **Dependencies**: [All implementation tasks]
-  - **Notes**: Check build times, resolve compiler warnings, validate dependencies
+  - **Notes**: Use Task tool with build-project agent to validate compilation, check warnings, and ensure dependencies resolve correctly
 
 **🏁 MILESTONE: Automated Validation Complete**
-*Consider commit: "Complete [feature] automated testing and quality validation"*
+*Use Task tool with commit-changes agent to commit: "Complete [feature] automated testing and quality validation"*
 
 ### Phase 6: Manual User Testing & Validation
 *Tasks requiring human interaction with running application*
@@ -376,7 +379,7 @@ Implementation task breakdown template providing systematic S001-S999 task enume
   ```
 
 **🏁 MILESTONE: Release Ready**
-*Consider commit: "Finalize [feature] - ready for App Store submission"*
+*Use Task tool with commit-changes agent to commit: "Finalize [feature] - ready for App Store submission"*
 
 ## AI-Assisted Development Time Estimation *(Claude Code + Human Review)*
 
