@@ -83,7 +83,7 @@ Workspace-level Context.md template providing workspace-specific configuration, 
 ║    - Look for consistent patterns across multiple files, don't assume defaults
 ║
 ║ 4. **ContextKit Setup Status Analysis**
-║    - For each repository: Use `Glob` to check for Context.md, .claude/commands/ctxk, .claude/agents/ctxk
+║    - For each repository: Use `Glob` to check for Context.md, .cursor/commands/ctxk-*, .cursor/rules/project-context.md
 ║    - Count enabled vs not-setup repositories
 ║    - Note which repositories are ready for ContextKit vs need initialization
 ║

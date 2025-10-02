@@ -1,12 +1,12 @@
 # Initialize Project with ContextKit
-<!-- Template Version: 11 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+<!-- Template Version: 13 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
 >
 > For project-specific customizations, use the designated section at the bottom of this file.
 >
-> Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
+> Found a bug or improvement for everyone? Please report it: https://github.com/tuan-nng/ContextKit/issues
 
 ## Description
 Initialize current project with ContextKit development workflow system. Sets up systematic development environment with template distribution and context generation.
@@ -116,19 +116,40 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 7. **Create Directory Structure**
    ```bash
-   mkdir -p .cursor/rules/ctxk Context/Features Context/Backlog Context/Guidelines
+   mkdir -p .cursor/commands .cursor/rules Context/Features Context/Backlog Context/Guidelines
+   echo "✅ Created .cursor/commands/ and .cursor/rules/ directory structures"
    ```
 
-8. **Copy Workflow Command Templates (For Reference)**
+8. **Create Slash Commands from Templates**
    ```bash
-   cp -r ~/.ContextKit/Templates/Commands/plan .cursor/rules/ctxk/
-   cp -r ~/.ContextKit/Templates/Commands/impl .cursor/rules/ctxk/
-   cp -r ~/.ContextKit/Templates/Commands/bckl .cursor/rules/ctxk/
-   echo "✅ Copied workflow command templates (plan/, impl/, bckl/)"
-   echo "ℹ️ Project commands (proj/) remain in global reference location"
-   echo "ℹ️ Use @ mentions in Cursor to reference these commands (e.g., @ctxk:plan:1-spec)"
+   # Convert command templates to slash command format
+   # Planning commands
+   cp ~/.ContextKit/Templates/Commands/plan/1-spec.md .cursor/commands/ctxk-plan-spec.md
+   cp ~/.ContextKit/Templates/Commands/plan/2-research-tech.md .cursor/commands/ctxk-plan-research.md
+   cp ~/.ContextKit/Templates/Commands/plan/3-steps.md .cursor/commands/ctxk-plan-steps.md
+   
+   # Implementation commands
+   cp ~/.ContextKit/Templates/Commands/impl/start-working.md .cursor/commands/ctxk-impl-start.md
+   cp ~/.ContextKit/Templates/Commands/impl/commit-changes.md .cursor/commands/ctxk-impl-commit.md
+   cp ~/.ContextKit/Templates/Commands/impl/release-package.md .cursor/commands/ctxk-impl-release.md
+   
+   # Backlog commands
+   cp ~/.ContextKit/Templates/Commands/bckl/add-idea.md .cursor/commands/ctxk-bckl-add-idea.md
+   cp ~/.ContextKit/Templates/Commands/bckl/add-bug.md .cursor/commands/ctxk-bckl-add-bug.md
+   cp ~/.ContextKit/Templates/Commands/bckl/prioritize-ideas.md .cursor/commands/ctxk-bckl-prioritize-ideas.md
+   cp ~/.ContextKit/Templates/Commands/bckl/prioritize-bugs.md .cursor/commands/ctxk-bckl-prioritize-bugs.md
+   cp ~/.ContextKit/Templates/Commands/bckl/remove-idea.md .cursor/commands/ctxk-bckl-remove-idea.md
+   cp ~/.ContextKit/Templates/Commands/bckl/remove-bug.md .cursor/commands/ctxk-bckl-remove-bug.md
+   
+   # Project commands (for reference in .cursor/rules/)
+   mkdir -p .cursor/rules/ctxk/proj
+   cp ~/.ContextKit/Templates/Commands/proj/migrate.md .cursor/rules/ctxk/proj/
+   cp ~/.ContextKit/Templates/Commands/proj/init-workspace.md .cursor/rules/ctxk/proj/
+   
+   echo "✅ Created slash commands in .cursor/commands/"
+   echo "ℹ️ Use slash commands in Cursor: /ctxk-plan-spec, /ctxk-impl-start, etc."
    ```
-   > **Note**: Commands are copied for reference and can be invoked via @ mentions in Cursor's Composer.
+   > **Note**: Commands are now available as slash commands (`/ctxk-*`) in Cursor's Composer.
 
 9. **Detect Relevant Guidelines**
    ```bash
@@ -296,17 +317,18 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 ### Phase 5: Context Integration & Final Setup
 
-13. **Create/Update .cursorrules with Context References**
-    - Check if `.cursorrules` exists using `Read` tool
-    - If `.cursorrules` exists:
-      - Use `Read` to check current content
-      - Use `Edit` to ensure `@Context.md` reference is present
-      - If workspace Context.md discovered in Phase 2: ensure workspace reference is present using calculated relative path
-    - If no `.cursorrules`: Use `Write` tool to create new one using template from `~/.ContextKit/Templates/Contexts/.cursorrules`
-      - Populate with basic project info
-      - Add `@Context.md` reference
-      - If workspace discovered: add `@[calculated-relative-path]/Context.md` reference
+13. **Create Project Context Rule in .cursor/rules/**
+    - Use `Write` tool to create `.cursor/rules/project-context.md` with content based on template from `~/.ContextKit/Templates/Contexts/project-context.md`
+    - Populate with:
+      - Basic project info (name, description from investigation)
+      - Detected tech stack (from Phase 4 investigation)
+      - Reference to `Context.md`: Add `@Context.md` mention
+      - If workspace Context.md discovered in Phase 2: Add `@[calculated-relative-path]/Context.md` reference
+      - Available ContextKit commands list
+      - Constitutional principles
+      - Build and test commands (from Phase 4 investigation)
     - **CRITICAL**: Ensure both project Context.md AND workspace Context.md (if found in Phase 2) are referenced
+    - **NOTE**: Cursor automatically loads all `.md` files in `.cursor/rules/` - no additional configuration needed
 
 14. **Copy Project-Specific Formatters** (for Swift projects only)
     - For Swift projects detected during investigation:
@@ -334,9 +356,9 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 16. **Verify Installation**
     - Use `Read` tool to confirm `Context.md` exists and contains project-specific content
-    - Use `Read` tool to confirm `.cursorrules` exists and references Context.md
-    - Use `Glob` tool to verify workflow commands exist: `.cursor/rules/ctxk/plan/1-spec.md`, `.cursor/rules/ctxk/impl/start-working.md`, `.cursor/rules/ctxk/bckl/add-idea.md`
-    - Use `Bash` tool to verify global reference accessible: `ls ~/.cursor/contextkit/Commands/`
+    - Use `Read` tool to confirm `.cursor/rules/project-context.md` exists and references Context.md
+    - Use `Glob` tool to verify slash commands exist: `.cursor/commands/ctxk-plan-spec.md`, `.cursor/commands/ctxk-impl-start.md`, `.cursor/commands/ctxk-bckl-add-idea.md`
+    - Use `Bash` tool to count created commands: `ls -1 .cursor/commands/ctxk-*.md | wc -l` (should show 12 commands)
     - Use `Glob` tool to validate guidelines copied: `Glob Context/Guidelines *`
     - Use `Glob` tool to verify backlog templates: `Glob Context/Backlog *`
 
@@ -367,30 +389,30 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 📁 Project configured with:
    ✓ Context.md - Comprehensive project analysis with validated build/test commands
-   ✓ .cursorrules - Cursor context configuration referencing project docs
+   ✓ .cursor/rules/project-context.md - Cursor rules with project context
+   ✓ .cursor/commands/ - 12 slash commands ready to use (/ctxk-plan-spec, /ctxk-impl-start, etc.)
    ✓ Context/Features/ - Systematic feature development
    ✓ Context/Backlog/ - Ideas and bugs with evaluation frameworks
    ✓ Context/Guidelines/ - Development standards relevant to project type
-   ✓ .cursor/rules/ctxk/ - Workflow command references (plan/, impl/, bckl/)
    [For Swift projects: ✓ Formatter configurations (.swift-format, .swiftformat)]
 
 🚀 Ready to start systematic development in Cursor:
 
-💡 **Tip**: Use Cursor's @ mention system to reference commands and files!
-   - Reference commands: @ctxk:plan:1-spec, @ctxk:impl:start-working
-   - Reference files: @Context.md, @Context/Guidelines/Swift.md
+💡 **Tip**: Use Cursor's slash commands and @ mentions!
+   - Slash commands: /ctxk-plan-spec, /ctxk-impl-start (type / to see all)
+   - Reference files: @Context.md, @Context/Guidelines/TypeScript.md
    - Search codebase: @Codebase for broad searches
    
 🎯 **Next Steps**:
    • All build/test commands are documented and validated in Context.md
-   • Begin your first feature with: @ctxk:plan:1-spec in Cursor's Composer
+   • Begin your first feature with: /ctxk-plan-spec in Cursor's Composer
    • The systematic workflow: plan → implement → iterate
 
-💡 **Available Commands** (use @ mentions in Cursor):
-   • Feature Planning: @ctxk:plan:1-spec → @ctxk:plan:2-research-tech → @ctxk:plan:3-steps
-   • Development: @ctxk:impl:start-working (after completing planning phases on feature branch)
-   • Backlog: @ctxk:bckl:add-idea, @ctxk:bckl:add-bug
-   • Migration: @ctxk:proj:migrate (for updates)
+💡 **Available Slash Commands** (type / in Cursor Composer):
+   • Feature Planning: /ctxk-plan-spec → /ctxk-plan-research → /ctxk-plan-steps
+   • Development: /ctxk-impl-start (after completing planning phases on feature branch)
+   • Backlog: /ctxk-bckl-add-idea, /ctxk-bckl-add-bug, /ctxk-bckl-prioritize-ideas
+   • Commit: /ctxk-impl-commit (smart commit workflow)
 ```
 
 ## Error Conditions
@@ -417,7 +439,8 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 **Template Installation Validation:**
 - All template directories created successfully?
-- Command references copied to .cursor/rules/ctxk/?
+- Slash commands created in .cursor/commands/ (12 total)?
+- Project reference commands copied to .cursor/rules/ctxk/proj/?
 - Backlog templates copied to Context/Backlog/?
 - Relevant development guidelines copied to Context/Guidelines/?
 
@@ -433,7 +456,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 **Context Integration Validation:**
 - Workspace context discovered and integrated?
-- .cursorrules exists and references both project Context.md AND workspace Context.md (if found)?
+- .cursor/rules/project-context.md exists and references both project Context.md AND workspace Context.md (if found)?
 - Project Context.md generated with comprehensive component analysis?
 - All findings based on actual investigation, not assumptions?
 - Validated build/test commands documented for each component?
@@ -441,15 +464,18 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 **Final Verification:**
 - All critical files exist and contain expected content?
-- .cursorrules properly configured for Cursor workflow?
+- .cursor/rules/project-context.md properly configured with all references?
+- All workflow commands accessible as slash commands (/) in Cursor?
+- Command count correct: 12 slash commands in .cursor/commands/?
 
 ## Integration Points
 
 - **Global ContextKit**: Reads from ~/.ContextKit/ template infrastructure
 - **Workspace Inheritance**: Discovers and loads configuration from parent directory Context.md files
 - **Team Collaboration**: Creates committable .cursor/ directory for team sharing
-- **Development Workflow**: Commands accessible via @ mentions: `@ctxk:plan:*`, `@ctxk:impl:*`, `@ctxk:bckl:*`
+- **Development Workflow**: Commands accessible via slash commands: `/ctxk-plan-*`, `/ctxk-impl-*`, `/ctxk-bckl-*`
 - **Quality Guidelines**: Reference-based quality checks via Context/Guidelines/
+- **Cursor Integration**: Uses official .cursor/commands/ directory for native slash command support
 
 
 ════════════════════════════════════════════════════════════════════════════════

@@ -1,4 +1,23 @@
-# ContextKit Repository Development Guide
+# ARCHIVED: ContextKit for Claude Code IDE
+
+> **⚠️ DEPRECATION NOTICE**
+> 
+> This file contains documentation for the **Claude Code IDE** version of ContextKit.
+> ContextKit has migrated to **Cursor IDE** with slash commands.
+> 
+> **This documentation is OUTDATED and kept only for historical reference.**
+> 
+> For current documentation, see:
+> - **README.md** - User guide for Cursor
+> - **SLASH_COMMANDS.md** - Command reference
+> - **CURSOR_MIGRATION.md** - Migration guide from Claude Code
+> - **install.sh** - Current installation script
+> 
+> **Date Archived**: October 2, 2025
+
+---
+
+# ContextKit Repository Development Guide (Claude Code)
 
 ## 🚨 CRITICAL: Meta-Development Context
 

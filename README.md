@@ -1,4 +1,4 @@
-![ContextKit Logo](https://github.com/FlineDev/ContextKit/blob/main/Logo.png?raw=true)
+![ContextKit Logo](https://github.com/tuan-nng/ContextKit/blob/main/Logo.png?raw=true)
 
 <p align="center">
     <strong>Stop fighting context limits. Stop micro-managing Cursor. Start building features systematically and make AI produce closer to production-ready code on first try.</strong>
@@ -30,45 +30,47 @@
 ### 1. Install ContextKit globally
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/tuan-nng/ContextKit/main/install.sh | bash
 ```
 
 ### 2. Setup your project
 
-Navigate to your project directory and run:
+Navigate to your project directory and open in Cursor:
 
 ```bash
-# Open in Cursor
 cursor .
-
-# Initialize ContextKit (auto-detects your project type)
-# Use Cursor's command palette (Cmd/Ctrl+Shift+P) and type: ContextKit: Initialize Project
-# Or use the Composer and type: @ctxk:proj:init
 ```
+
+In Cursor's Composer (`Cmd/Ctrl+I`), reference the initialization template:
+
+```
+@~/.ContextKit/Templates/Commands/proj/init.md
+```
+
+The AI will follow the initialization workflow to:
+- Auto-detect your project type and tech stack
+- Create `.cursor/rules/` directory with ContextKit commands
+- Set up systematic development structure
+- Generate comprehensive project context
 
 ### 3. Build your first feature systematically
 
-```bash
-# Step 1: Define what you're building (business requirements)
-@ctxk:plan:1-spec
+After initialization, use slash commands in Cursor's Composer:
 
-# Step 2: Plan the technical architecture
-@ctxk:plan:2-research-tech
-
-# Step 3: Break down into executable tasks
-@ctxk:plan:3-steps
-
-# Step 4: Start development with full context
-@ctxk:impl:start-working
+```
+/ctxk-plan-spec         # Step 1: Define what you're building (business requirements)
+/ctxk-plan-research     # Step 2: Plan the technical architecture
+/ctxk-plan-steps        # Step 3: Break down into executable tasks
+/ctxk-impl-start        # Step 4: Start development with full context
 ```
 
 ContextKit creates structured feature directories, maintains context between sessions, and guides you through quality checkpoints that prevent common AI development pitfalls.
 
 > [!NOTE]
-> In Cursor, use these commands by typing `@` followed by the command name in the Composer or Chat interface. ContextKit commands are available as .cursorrules that guide the AI systematically.
+> **After initialization**, ContextKit commands are available as **slash commands** (e.g., `/ctxk-plan-spec`). Type `/` in Cursor's Composer to see all available commands with autocomplete.
 
 > [!NOTE]
-> **Early Development**: ContextKit is actively evolving with iterative improvements. While production-ready (I use it daily for all my projects), expect some rough edges as commands are refined. ContextKit updates itself globally when you start new sessions, and the `@ctxk:proj:migrate` command makes updating your project files easy - keep sending feedback to help iron out issues faster.
+> **Early Development**: ContextKit is actively evolving with iterative improvements. While production-ready (I use it daily for all my projects), expect some rough edges as commands are refined. ContextKit updates itself globally when you start new sessions, and the migrate command makes updating your project files easy - keep sending feedback to help iron out issues faster.
 
 
 ## ⚙️ Optimized Configuration
@@ -84,7 +86,7 @@ ContextKit provides systematic development guidance for Cursor:
 >
 > ContextKit's structured approach works naturally with Cursor's composer:
 > - Reference planning documents with `@` mentions (e.g., `@Context/Features/UserAuth/Spec.md`)
-> - Start fresh composers when needed and resume with `@ctxk:impl:start-working`
+> - Start fresh composers when needed and resume with `/ctxk-impl-start`
 > - Use `@Codebase` for broad searches and `@Files` for specific references
 > - ContextKit's systematic progress tracking makes context recovery seamless
 
@@ -93,28 +95,28 @@ ContextKit provides systematic development guidance for Cursor:
 
 ContextKit implements a proven 4-phase methodology that prevents the chaos of unstructured AI development:
 
-### Phase 1: Business Case (`@ctxk:plan:1-spec`)
+### Phase 1: Business Case (`/ctxk-plan-spec`)
 Define **what** you're building and **why**, without technical details:
 - User stories and acceptance criteria
 - Success metrics and validation points
 - Explicit uncertainty marking (no AI guessing)
 - Scope boundaries (what's included, what's not)
 
-### Phase 2: Technical Architecture (`@ctxk:plan:2-research-tech`)
+### Phase 2: Technical Architecture (`/ctxk-plan-research`)
 Plan **how** you'll build it, with constitutional compliance:
 - Technology choices with rationale
 - Frontend/backend patterns and architectural decisions
 - Accessibility, security, and performance considerations
 - Integration with existing project patterns
 
-### Phase 3: Implementation Tasks (`@ctxk:plan:3-steps`)
+### Phase 3: Implementation Tasks (`/ctxk-plan-steps`)
 Break down **execution** into trackable work:
 - File-by-file implementation tasks with S001-S999 numbering
 - Parallel execution markers ([P]) for concurrent development
 - Dependency chains and validation checkpoints
 - Test-driven development task ordering
 
-### Phase 4: Development (`@ctxk:impl:start-working`)
+### Phase 4: Development (`/ctxk-impl-start`)
 Execute with supervised autonomy and specialized quality agents (requires feature branch + completed planning phases):
 - AI implements within your approved technical framework
 - Specialized agents handle quality checks (accessibility, localization, modern code)
@@ -125,48 +127,49 @@ Execute with supervised autonomy and specialized quality agents (requires featur
 ## 📋 Commands overview
 
 ### Project Management
-- **`@ctxk:proj:init`** - One-command project initialization with auto-detection
+- **Initialization** - Reference `@~/.ContextKit/Templates/Commands/proj/init.md` to set up project
 
 ### Systematic Feature Development
-- **Planning workflow**: `@ctxk:plan:1-spec` → `@ctxk:plan:2-research-tech` → `@ctxk:plan:3-steps`
-- **Development**: `@ctxk:impl:start-working` with quality checks
-- **Release**: `@ctxk:impl:release-package` for npm packages
+- **Planning workflow**: `/ctxk-plan-spec` → `/ctxk-plan-research` → `/ctxk-plan-steps`
+- **Development**: `/ctxk-impl-start` with quality checks
+- **Commit**: `/ctxk-impl-commit` with smart formatting
+- **Release**: `/ctxk-impl-release` for npm packages
 
 ### Backlog & Team Management
 
-**Note**: `@ctxk/bckl:*` commands are relatively new and might get major refinements very soon
+**Note**: Backlog commands are relatively new and might get major refinements soon
 
-- **Idea capture**: `@ctxk:bckl:add-idea` with evaluation framework
-- **Bug reporting**: `@ctxk:bckl:add-bug` with impact assessment
-- **Prioritization**: `@ctxk:bckl:prioritize-ideas` and `@ctxk:bckl:prioritize-bugs` with binary search evaluation
-- **Completion**: `@ctxk:bckl:remove-idea` and `@ctxk:bckl:remove-bug` for cleaning backlog
-- **Workspace setup**: `@ctxk:proj:init-workspace` for client/team standards (to run in parent folder containing multiple projects)
+- **Idea capture**: `/ctxk-bckl-add-idea` with evaluation framework
+- **Bug reporting**: `/ctxk-bckl-add-bug` with impact assessment
+- **Prioritization**: `/ctxk-bckl-prioritize-ideas` and `/ctxk-bckl-prioritize-bugs` with strategic organization
+- **Completion**: `/ctxk-bckl-remove-idea` and `/ctxk-bckl-remove-bug` for cleaning backlog
+- **Workspace setup**: Reference workspace init command for client/team standards
 
 <details>
 <summary><strong>📋 Complete Command Reference</strong></summary>
 
 ### Project Management
-- `@ctxk:proj:init` - Setup project context by auto-detecting type and configuring ContextKit
-- `@ctxk:proj:init-workspace` - Configure team standards for different clients/companies
-- `@ctxk:proj:migrate` - Upgrade to latest ContextKit versions
+- **Initialize** - `@~/.ContextKit/Templates/Commands/proj/init.md` - Setup project context by auto-detecting type
+- **Workspace** - `@~/.ContextKit/Templates/Commands/proj/init-workspace.md` - Configure team standards
+- **Migrate** - `@~/.ContextKit/Templates/Commands/proj/migrate.md` - Upgrade to latest ContextKit
 
-### Systematic Feature Planning
-- `@ctxk:plan:1-spec` - Define requirements with business specifications and user stories (prompts interactively)
-- `@ctxk:plan:2-research-tech` - Design architecture with technical planning and constitutional compliance
-- `@ctxk:plan:3-steps` - Create numbered, trackable implementation tasks
+### Systematic Feature Planning (Slash Commands)
+- `/ctxk-plan-spec` - Define requirements with business specifications and user stories
+- `/ctxk-plan-research` - Design architecture with technical planning and constitutional compliance
+- `/ctxk-plan-steps` - Create numbered, trackable implementation tasks
 
-### Quality-Driven Implementation
-- `@ctxk:impl:start-working` - Begin development with context-aware guidance
-- `@ctxk:impl:commit-changes` - Commit changes with smart formatting and message generation
-- `@ctxk:impl:release-package` - Publish npm packages with release workflow
+### Quality-Driven Implementation (Slash Commands)
+- `/ctxk-impl-start` - Begin development with context-aware guidance
+- `/ctxk-impl-commit` - Commit changes with smart formatting and message generation
+- `/ctxk-impl-release` - Publish npm packages with release workflow
 
-### Backlog & Issue Management
-- `@ctxk:bckl:add-idea` - Add feature ideas with structured evaluation framework
-- `@ctxk:bckl:add-bug` - Report bugs with impact assessment and reproduction steps
-- `@ctxk:bckl:prioritize-ideas` - Prioritize ideas through strategic organization
-- `@ctxk:bckl:prioritize-bugs` - Triage bugs with severity-based prioritization
-- `@ctxk:bckl:remove-idea` - Remove completed or cancelled ideas from backlog
-- `@ctxk:bckl:remove-bug` - Remove fixed or resolved bugs from backlog
+### Backlog & Issue Management (Slash Commands)
+- `/ctxk-bckl-add-idea` - Add feature ideas with structured evaluation framework
+- `/ctxk-bckl-add-bug` - Report bugs with impact assessment and reproduction steps
+- `/ctxk-bckl-prioritize-ideas` - Prioritize ideas through strategic organization
+- `/ctxk-bckl-prioritize-bugs` - Triage bugs with severity-based prioritization
+- `/ctxk-bckl-remove-idea` - Remove completed or cancelled ideas from backlog
+- `/ctxk-bckl-remove-bug` - Remove fixed or resolved bugs from backlog
 
 </details>
 
@@ -193,7 +196,7 @@ These guidelines are available as documentation in `Context/Guidelines/` and can
 
 ContextKit automatically checks for newer versions when you initialize and displays update notifications if available – but **never interrupts your workflow**. When you're ready to update:
 
-- Simply use `@ctxk:proj:migrate` in Cursor and ContextKit handles everything
+- Reference the migrate command: `@.cursor/rules/ctxk/proj/migrate.md` and ContextKit handles everything
 - Your project customizations are preserved automatically
 - Core templates update to the latest improvements
 - New commands and guidelines are automatically added to your project
@@ -203,7 +206,7 @@ ContextKit automatically checks for newer versions when you initialize and displ
 
 ## 🔒 Files Safe to Customize
 
-**These files are NEVER updated by `@ctxk:proj:migrate` once created:**
+**These files are NEVER updated by the migrate command once created:**
 
 ### ✅ Complete User Control (modify freely)
 - **Formatter Config Files** (`.prettierrc`, `.eslintrc`, etc.) - Your coding style preferences, never overwritten
@@ -216,7 +219,7 @@ ContextKit automatically checks for newer versions when you initialize and displ
 
 ### 📝 Backlog File Management
 - **Inbox Files** (`Ideas-Inbox.md`, `Bugs-Inbox.md`) - **✅ COMPLETELY USER-EDITABLE**: Edit manually, copy/paste between projects, add entries freely
-- **Backlog Files** (`Ideas-Backlog.md`, `Bugs-Backlog.md`) - **❌ AI-MANAGED DATABASES**: Never edit directly! Use `@ctxk:bckl:prioritize-*` and `@ctxk:bckl:remove-*` commands
+- **Backlog Files** (`Ideas-Backlog.md`, `Bugs-Backlog.md`) - **❌ AI-MANAGED DATABASES**: Never edit directly! Use `/ctxk-bckl-prioritize-*` and `/ctxk-bckl-remove-*` commands
 
 **Bottom Line**: Your formatter configs, project context, features, and backlog content are completely yours. ContextKit only updates core frameworks and logic while preserving all your customizations.
 
@@ -238,7 +241,7 @@ ContextKit leverages Cursor's composer and context system to provide structured 
 ContextKit is **genuinely platform-agnostic** through intelligent project detection and adaptive workflows:
 
 ### 🔍 **Automatic Platform Detection**
-When you run `@ctxk:proj:init`, ContextKit analyzes your project and documents everything in `Context.md`:
+When you run the initialization workflow, ContextKit analyzes your project and documents everything in `Context.md`:
 - **Technology stack**: React/TypeScript, Vue/TypeScript, Node.js/Express, Next.js, etc.
 - **Build system**: npm/pnpm/yarn scripts, Vite, webpack, etc.
 - **Dependencies**: package.json, package-lock.json, pnpm-lock.yaml

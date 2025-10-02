@@ -14,7 +14,7 @@ readonly NC='\033[0m' # No Color
 
 # Global variables
 readonly CONTEXTKIT_DIR="$HOME/.ContextKit"
-readonly GITHUB_REPO="https://github.com/FlineDev/ContextKit.git"
+readonly GITHUB_REPO="https://github.com/tuan-nng/ContextKit.git"
 INSTALL_TYPE="install"
 
 ###########################################
@@ -106,40 +106,17 @@ clone_or_update_repository() {
 install_global_commands() {
    print_step "Step 2: Setting up ContextKit for Cursor..."
    
-   # Create Cursor docs directory for reference materials
-   local cursor_docs_dir="$HOME/.cursor/contextkit"
-   
-   if [[ ! -d "$HOME/.cursor" ]]; then
-      print_info "Creating Cursor configuration directory..."
-      if ! mkdir -p "$HOME/.cursor" 2>/dev/null; then
-         print_warning "Cannot create $HOME/.cursor"
-         print_info "Cursor configuration directory will be created when you first run Cursor"
-         return 0
-      fi
-   fi
-   
-   # Create contextkit directory for reference materials
+   # Verify templates directory exists
    local commands_dir="$CONTEXTKIT_DIR/Templates/Commands"
 
    if [[ ! -d "$commands_dir/proj" ]]; then
-      print_error "Proj commands directory not found: $commands_dir/proj"
-      exit 1
-   fi
-
-   # Create contextkit directory structure
-   if ! mkdir -p "$cursor_docs_dir"; then
-      print_error "Failed to create ContextKit directory"
-      exit 1
-   fi
-
-   # Copy command documentation for reference
-   if ! cp -R "$commands_dir" "$cursor_docs_dir"/; then
-      print_error "Failed to copy command documentation"
+      print_error "Command templates not found: $commands_dir/proj"
       exit 1
    fi
    
-   print_success "ContextKit reference materials installed for Cursor"
-   print_info "ContextKit commands will be available via @ mentions after running @ctxk:proj:init in your project"
+   print_success "ContextKit templates ready at: $CONTEXTKIT_DIR/Templates/"
+   print_info "ContextKit commands will be available as slash commands after running initialization in your project"
+   print_info "Commands are copied to .cursor/commands/ in each project during initialization"
 }
 
 ## Step 3: Display success message and next steps
@@ -157,7 +134,9 @@ display_completion() {
    print_status "$WHITE" "Next steps:"
    print_info "1. Navigate to your project directory"
    print_info "2. Run 'cursor .' to open Cursor in your project"
-   print_info "3. In Cursor's Composer, type '@ctxk:proj:init' to initialize ContextKit workflow commands"
+   print_info "3. In Cursor's Composer, reference the init template:"
+   print_info "   @~/.ContextKit/Templates/Commands/proj/init.md"
+   print_info "4. After initialization, use slash commands: /ctxk-plan-spec, /ctxk-impl-start"
    echo
    print_status "$GREEN" "🚀 Ready for systematic development workflows with Cursor!"
    echo
@@ -179,7 +158,7 @@ cleanup_on_error() {
    fi
    
    print_error "Please check the error messages above and try again"
-   print_info "For support: https://github.com/FlineDev/ContextKit/issues"
+   print_info "For support: https://github.com/tuan-nng/ContextKit/issues"
    exit 1
 }
 
@@ -195,7 +174,7 @@ main() {
    print_header "🧠 ContextKit Global Installation for Cursor"
    echo
    print_info "Installing ContextKit - Systematic Development Workflows for Cursor"
-   print_info "Repository: https://github.com/FlineDev/ContextKit"
+   print_info "Repository: https://github.com/tuan-nng/ContextKit"
    echo
    
    # Mark if we're creating ContextKit directory (for cleanup)
