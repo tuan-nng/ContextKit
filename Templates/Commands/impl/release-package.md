@@ -1,5 +1,5 @@
-# Release Swift Package
-<!-- Template Version: 2 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+# Release NPM Package
+<!-- Template Version: 4 | ContextKit: 0.2.0 | Updated: 2025-10-02 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -9,10 +9,10 @@
 > Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
 ## Description
-Execute Swift Package release workflow with version management, release notes generation, and GitHub integration.
+Execute NPM package release workflow with version management, release notes generation, and GitHub integration.
 
 ## Parameters
-**Usage**: `/ctxk:impl:release-package [version]`
+**Usage**: `@ctxk:impl:release-package [version]`
 - `version` (optional): Specific version like "1.2.0" or "major"/"minor"/"patch" for semantic bumping
 
 ## Execution Flow (main)
@@ -27,11 +27,11 @@ Execute Swift Package release workflow with version management, release notes ge
 
 ### Phase 1: Prerequisites Validation
 
-1. **Verify Swift Package Project**
+1. **Verify NPM Package Project**
    ```bash
-   ls Package.swift || echo "❌ Not a Swift package project"
+   ls package.json || echo "❌ Not an NPM package project"
    ```
-   - If Package.swift not found: ERROR "This command is for Swift packages. Use /ctxk:impl:release-app for iOS/macOS apps."
+   - If package.json not found: ERROR "This command is for NPM packages. package.json is required."
 
 2. **Check Git Repository Status**
    ```bash
@@ -41,30 +41,36 @@ Execute Swift Package release workflow with version management, release notes ge
    - If not in git repository: ERROR "Git repository required for package releases."
 
 3. **Validate Package Builds and Tests**
-   - Use `Task` tool to launch `build-project` agent: "Execute release build validation"
-   - Use `Task` tool to launch `run-test-suite` agent: "Execute complete test suite for release validation"
+   - Check if build script exists in package.json
+   - Run build command from Context.md if available
+   - Run test command: `npm test` or equivalent from Context.md
    - If build fails: ERROR "Package must build successfully before release."
    - If tests fail: ERROR "All tests must pass before release."
 
-4. **Check GitHub CLI Access**
+4. **Check NPM Authentication**
    ```bash
-   gh auth status || echo "❌ GitHub CLI not authenticated"
+   npm whoami || echo "❌ Not logged in to NPM"
    ```
-   - If not authenticated: ERROR "Run 'gh auth login' to authenticate with GitHub."
+   - If not authenticated: ERROR "Run 'npm login' to authenticate with NPM registry."
+
+5. **Check GitHub CLI Access (Optional)**
+   ```bash
+   gh auth status || echo "⚠️  GitHub CLI not authenticated (optional for release notes)"
+   ```
+   - If not authenticated: WARN "GitHub CLI authentication recommended for automated release notes."
 
 ### Phase 2: Version Management
 
 5. **Extract Package Information**
-   - Use `Read` tool to read Package.swift: `Read Package.swift`
-   - Parse package name from manifest (extract from `name:` field)
+   - Use `Read` tool to read package.json: `Read package.json`
+   - Parse package name from `name` field
+   - Parse current version from `version` field
    - Determine repository URL from git remote: `git remote get-url origin`
 
 6. **Determine Current Version and Get User Input**
-   ```bash
-   git tag --list --sort=-version:refname | head -1
-   ```
-   - Extract current version from latest git tag (e.g., "v1.4.2" → "1.4.2")
-   - If no tags exist: current version is "none" (first release)
+   - Current version from package.json
+   - Latest git tag: `git tag --list --sort=-version:refname | head -1`
+   - If versions don't match: WARN "package.json version differs from latest git tag"
 
 7. **Comprehensive Change Analysis Since Last Release**
    **Step 7a: Commit Message Analysis**
@@ -79,7 +85,7 @@ Execute Swift Package release workflow with version management, release notes ge
    git diff --name-status [LAST_TAG]..HEAD
    ```
    - Identify added (A), modified (M), deleted (D), renamed (R) files
-   - Categorize files by type: Sources/, Tests/, Package.swift, README.md, etc.
+   - Categorize files by type: Sources/, Tests/, package.json, README.md, etc.
 
    **Step 7c: Code Diff Analysis**
    ```bash
@@ -87,7 +93,7 @@ Execute Swift Package release workflow with version management, release notes ge
    ```
    - Analyze actual code changes line by line
    - Focus on public API changes in Sources/ directory
-   - Examine Package.swift for dependency changes
+   - Examine package.json for dependency changes
    - Check README.md and documentation updates
 
 8. **User Input for Version Number**
@@ -158,41 +164,59 @@ Execute Swift Package release workflow with version management, release notes ge
     - Take user feedback and regenerate improved version
     - Repeat Y/n/r cycle until user approves or skips
 
-### Phase 4: Build Verification
+### Phase 4: Build Verification and Version Update
 
-11. **Verify Package Builds Successfully**
-    - Use `Task` tool to launch `build-project` agent
+11. **Update Version in package.json**
+    ```bash
+    npm version [NEW_VERSION] --no-git-tag-version
+    ```
+    - Updates version field in package.json
+    - Commit this change: `git commit -am "Bump version to [NEW_VERSION]"`
+
+12. **Build Package for Distribution**
+    ```bash
+    npm run build
+    ```
+    - Run build script from package.json
+    - Verify dist/ or build/ directory created
     - If build fails: ERROR "Fix build errors before release" → EXIT
 
-### Phase 5: GitHub Release Creation
+### Phase 5: Publish and GitHub Release
 
-12. **Create Git Tag**
+13. **Create Git Tag and Push**
     ```bash
     git tag -a "v[NEW_VERSION]" -m "Release [NEW_VERSION]"
-    git push origin "v[NEW_VERSION]"
+    git push origin main --tags
     ```
+    - Push both commits and new tag
 
-14. **Create GitHub Release**
-    - Use the confirmed release notes from step 10
-    - Format as simple markdown list for GitHub release body
+14. **Publish to NPM**
+    ```bash
+    npm publish
+    ```
+    - For scoped packages: `npm publish --access public`
+    - If publish fails: ERROR "NPM publish failed. Check authentication and permissions."
+
+15. **Create GitHub Release (if gh available)**
     ```bash
     gh release create "v[NEW_VERSION]" --title "[PACKAGE_NAME] [NEW_VERSION]" --notes "[FORMATTED_RELEASE_NOTES]"
     ```
+    - If gh not available: SKIP and note to create manually
 
-15. **Verify Release Creation**
+16. **Verify Release**
     ```bash
-    gh release view "v[NEW_VERSION]" --web
+    npm view [PACKAGE_NAME] version
     ```
-    - Provide direct GitHub release URL for user verification
-    - Confirm release appears on GitHub with correct notes
+    - Confirm new version appears on NPM
+    - Provide NPM package URL: `https://www.npmjs.com/package/[PACKAGE_NAME]`
 
 ### Phase 6: Success Confirmation
 
-16. **Display Success Message** (see Success Message section below)
+17. **Display Success Message** (see Success Message section below)
 
 ## Error Conditions
 
-- **"Package.swift not found"** → This command is for Swift packages. Use `/ctxk:impl:release-app` for iOS/macOS apps
+- **"package.json not found"** → This command is for NPM packages. Use `@ctxk:impl:release-app` for iOS/macOS apps
 - **"Uncommitted changes"** → Commit all changes with `git add . && git commit -m "message"` before release
 - **"Build failed"** → Fix compilation errors before attempting release
 - **"Tests failed"** → All tests must pass before release. Fix failing tests first
@@ -202,7 +226,7 @@ Execute Swift Package release workflow with version management, release notes ge
 
 ## Validation Gates
 
-- [ ] Swift package project confirmed (Package.swift exists)?
+- [ ] NPM package project confirmed (package.json exists)?
 - [ ] Git repository is clean (no uncommitted changes)?
 - [ ] Package builds successfully in release configuration?
 - [ ] All tests pass?
@@ -215,7 +239,7 @@ Execute Swift Package release workflow with version management, release notes ge
 ## Success Message
 
 ```
-🎉 Swift Package [PACKAGE_NAME] [NEW_VERSION] released successfully!
+🎉 NPM Package [PACKAGE_NAME] [NEW_VERSION] released successfully!
 
 📦 Release Details:
    ✓ Version: [CURRENT_VERSION] → [NEW_VERSION]

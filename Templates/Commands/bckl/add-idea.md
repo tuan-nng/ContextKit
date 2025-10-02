@@ -1,5 +1,5 @@
 # Capture New Ideas with Quick Dump
-<!-- Template Version: 2 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+<!-- Template Version: 3 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -31,7 +31,7 @@ Quick idea capture with minimal overhead. Takes description as parameter and dum
    - If Ideas-Inbox.md missing:
      ```
      ❌ Ideas infrastructure not found!
-     Run /ctxk:proj:init to setup ContextKit backlog system.
+     Run @ctxk:proj:init to setup ContextKit backlog system.
      ```
      → END (exit with error)
 
@@ -39,7 +39,7 @@ Quick idea capture with minimal overhead. Takes description as parameter and dum
 
 2. **Parse Description and Extract Source**
    - Take description from command parameter
-   - If no description provided: ERROR "Description required: /ctxk:bckl:add-idea 'Your idea here'"
+   - If no description provided: ERROR "Description required: @ctxk:bckl:add-idea 'Your idea here'"
    - **Extract source if mentioned**: Look for patterns like:
      - "Jack said...", "Customer suggested...", "Sarah mentioned..."
      - "User reported...", "Support ticket mentioned..."
@@ -65,13 +65,13 @@ Quick idea capture with minimal overhead. Takes description as parameter and dum
    ```
    💡 Idea captured: [IDEA-###] [Title]
    📁 Added to Context/Backlog/Ideas-Inbox.md
-   🔄 Run /ctxk:bckl:prioritize-ideas to evaluate and prioritize
+   🔄 Run @ctxk:bckl:prioritize-ideas to evaluate and prioritize
    ```
 
 ## Error Conditions
 
-- **"No description provided"** → Show usage: `/ctxk:bckl:add-idea "Your idea description"`
-- **"Ideas-Inbox.md missing"** → Run `/ctxk:proj:init` to setup infrastructure
+- **"No description provided"** → Show usage: `@ctxk:bckl:add-idea "Your idea description"`
+- **"Ideas-Inbox.md missing"** → Run `@ctxk:proj:init` to setup infrastructure
 - **"File write failed"** → Check permissions and disk space
 
 ## Source Extraction Patterns
@@ -85,7 +85,7 @@ Look for these patterns in description and extract as source:
 ## Integration Points
 
 - **Quick capture**: Minimal questions, fast entry
-- **Evaluation later**: `/ctxk:bckl:prioritize-ideas` handles all assessment
+- **Evaluation later**: `@ctxk:bckl:prioritize-ideas` handles all assessment
 - **Source tracking**: Basic attribution for follow-up
 
 ════════════════════════════════════════════════════════════════════════════════

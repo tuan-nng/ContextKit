@@ -1,5 +1,5 @@
 # Initialize Project with ContextKit
-<!-- Template Version: 10 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+<!-- Template Version: 11 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -39,7 +39,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
    ```bash
    echo "Working in project: $(pwd)"
    ```
-   - **CRITICAL**: Working directory persists between bash calls in Claude Code
+   - **CRITICAL**: Working directory persists between bash calls in Cursor
    - Use `$(pwd)` when absolute paths are needed, avoid relying on stored variables
 
 2. **Check Git Repository Status**
@@ -64,90 +64,19 @@ Initialize current project with ContextKit development workflow system. Sets up 
    - Use `Glob . **/*.md` to find all markdown files in subdirectories
 
 5. **Detect Existing ContextKit Installation**
-   - Look for `Context.md` in project root
+   - Look for `.cursorrules` in project root
    - Check for `Context/` directory with subdirectories using `Glob Context *`
-   - Check for `.claude/commands/ctxk/` directory using `Glob .claude/commands/ctxk *`
-   - Check for `.claude/agents/ctxk/` directory using `Glob .claude/agents/ctxk *`
-   - **If MOST exist**: ERROR "Project already initialized with ContextKit. Use `/ctxk:proj:migrate` for updates instead."
+   - Check for `.cursor/rules/ctxk/` directory using `Glob .cursor/rules/ctxk *`
+   - **If MOST exist**: ERROR "Project already initialized with ContextKit. Use `@ctxk:proj:migrate` for updates instead."
 
 6. **Verify ContextKit Global Installation**
    ```bash
    ls -la ~/.ContextKit/Templates/ || echo "❌ ContextKit not installed globally. Run: curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | sh"
    ```
 
-7. **CRITICAL: Configure Settings for Permissions (HIGHEST PRIORITY)**
-   - Use `Read` tool to check if `.claude/settings.json` exists
-   - If doesn't exist: Copy complete template to get immediate permissions
-   ```bash
-   mkdir -p .claude
-   cp ~/.ContextKit/Templates/settings.json .claude/settings.json
-   echo "✅ Installed complete ContextKit settings for permissions"
-   ```
-   - If exists: Use `Edit` tool to merge permissions arrays intelligently:
-     - **Allow list**: Remove existing entries that are subsets of ContextKit permissions, add ContextKit entries, remove exact duplicates, sort alphabetically
-     - **Deny list**: Add ContextKit entries, remove only exact duplicates, sort alphabetically
-   - **Result**: Now have full permissions for remaining steps
+### Phase 2: User Configuration & Workspace Discovery
 
-### Phase 2: User Configuration (Sequential Questions)
-
-6. **Model Setting Configuration**
-   - Use `Read` tool to examine current model setting in `.claude/settings.json`
-   - If missing or different from "sonnet":
-     ```
-     ═══════════════════════════════════════════════════
-     ║ ❓ MODEL CONFIGURATION
-     ═══════════════════════════════════════════════════
-     ║
-     ║ Current model: [current/none detected]
-     ║ 
-     ║ Set to 'sonnet'? Default Claude Code uses Opus which burns
-     ║ through the 5-hour limit quickly. ContextKit uses Sonnet to avoid
-     ║ hitting limits during complex planning phases while maintaining
-     ║ sufficient quality with proper guidance.
-     ║
-     ║ Response: Y (recommended) or N
-     ```
-   - **WAIT for user response before proceeding**
-   - If user agrees: Use `Edit` tool to update model setting immediately
-
-7. **Status Line Configuration**
-   - Check current statusLine configuration in `.claude/settings.json`
-   - If missing or different from "./Context/Scripts/CustomStatusline.sh":
-     ```
-     ═══════════════════════════════════════════════════
-     ║ ❓ STATUS LINE SETUP
-     ═══════════════════════════════════════════════════
-     ║
-     ║ Current statusline: [current/none detected]
-     ║
-     ║ Set to ContextKit statusline? Provides real-time monitoring:
-     ║ '5h-Usage: 73% (1.4h left) | Chat: ▓▓▓▓▓▓░░░░ 64% (128k/200k)'
-     ║ with colored progress bars (Light Gray <50%, Yellow 50-80%, Red >80%)
-     ║ for context awareness.
-     ║
-     ║ Response: Y (recommended) or N
-     ```
-   - **WAIT for user response before proceeding**
-
-8. **Claude Plan Selection** (only if user agreed to status line)
-   - If user agreed to status line setup:
-     ```
-     ═══════════════════════════════════════════════════
-     ║ ❓ CLAUDE PLAN SELECTION
-     ═══════════════════════════════════════════════════
-     ║
-     ║ What Claude plan do you have? (for usage tracking)
-     ║
-     ║ 1. Pro ($20/month)
-     ║ 2. Max 5x ($100/month) 
-     ║ 3. Max 20x ($200/month)
-     ║
-     ║ Response: Enter number (1, 2, or 3)
-     ```
-   - **WAIT for user response before proceeding**
-   - Store plan selection for status line configuration
-
-9. **Workspace Discovery**
+6. **Workspace Discovery**
    - Start from current directory and traverse parent directories
    - Use absolute paths for checking: `ls "$(pwd)/../Context.md" 2>/dev/null`
    - Continue checking parent directories until reaching root `/` or finding workspace Context.md
@@ -183,49 +112,25 @@ Initialize current project with ContextKit development workflow system. Sets up 
    - **WAIT for user response before proceeding**
    - If multiple workspace contexts found: ask user which to inherit from
 
-10. **Apply User Configurations**
-    - Apply model setting (if user agreed)
-    - Configure status line with plan parameter (if user agreed):
-      - Pro: `"command": "./Context/Scripts/CustomStatusline.sh --plan Pro"`
-      - Max 5x: `"command": "./Context/Scripts/CustomStatusline.sh --plan Max5"`
-      - Max 20x: `"command": "./Context/Scripts/CustomStatusline.sh --plan Max20"`
-    - Add ContextKit hooks:
-      - PostToolUse hook: `./Context/Scripts/AutoFormat.sh`
-      - SessionStart hook: `./Context/Scripts/VersionStatus.sh`
-
 ### Phase 3: Automated Template Installation
 
-11. **Create Directory Structure**
+7. **Create Directory Structure**
    ```bash
-   mkdir -p .claude/commands/ctxk .claude/agents/ctxk Context/Features Context/Backlog Context/Scripts
+   mkdir -p .cursor/rules/ctxk Context/Features Context/Backlog Context/Guidelines
    ```
 
-12. **Copy Workflow Command Templates (Local Only)**
+8. **Copy Workflow Command Templates (For Reference)**
    ```bash
-   cp -r ~/.ContextKit/Templates/Commands/plan .claude/commands/ctxk/
-   cp -r ~/.ContextKit/Templates/Commands/impl .claude/commands/ctxk/
-   cp -r ~/.ContextKit/Templates/Commands/bckl .claude/commands/ctxk/
+   cp -r ~/.ContextKit/Templates/Commands/plan .cursor/rules/ctxk/
+   cp -r ~/.ContextKit/Templates/Commands/impl .cursor/rules/ctxk/
+   cp -r ~/.ContextKit/Templates/Commands/bckl .cursor/rules/ctxk/
    echo "✅ Copied workflow command templates (plan/, impl/, bckl/)"
-   echo "ℹ️ Project commands (proj/) remain global and auto-update"
+   echo "ℹ️ Project commands (proj/) remain in global reference location"
+   echo "ℹ️ Use @ mentions in Cursor to reference these commands (e.g., @ctxk:plan:1-spec)"
    ```
-   > **Note**: Only workflow commands are copied locally. Project management commands (proj/) stay global for auto-updates.
+   > **Note**: Commands are copied for reference and can be invoked via @ mentions in Cursor's Composer.
 
-13. **Copy Agent Templates**
-   ```bash
-   cp ~/.ContextKit/Templates/Agents/* .claude/agents/ctxk/
-   echo "✅ Copied agent templates (build-project, check-accessibility, etc.)"
-   ```
-   > **Note**: `/*` means copy ALL .md files from Agents/ directory individually
-
-14. **Copy Script Templates**
-   ```bash
-   cp -p ~/.ContextKit/Templates/Scripts/* Context/Scripts/
-   chmod +x Context/Scripts/*.sh
-   echo "✅ Copied script templates (AutoFormat.sh, VersionStatus.sh, etc.)"
-   ```
-   > **Note**: `-p` preserves permissions during copy, `chmod +x` ensures all .sh files are executable
-
-15. **Detect Relevant Guidelines**
+9. **Detect Relevant Guidelines**
    ```bash
    # Ensure we're in project root before detection
    echo "Detecting guidelines from project root: $(pwd)"
@@ -243,7 +148,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
      - Multi-language projects → combine relevant guidelines
    - Store selected guidelines array for copying phase
 
-16. **Copy Relevant Guidelines Only**
+10. **Copy Relevant Guidelines Only**
    ```bash
    # CRITICAL: Verify we're in project root before copying
    echo "Copying guidelines from project root: $(pwd)"
@@ -266,7 +171,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
    fi
    ```
 
-17. **Copy Backlog Templates**
+11. **Copy Backlog Templates**
    ```bash
    # CRITICAL: Verify we're in project root before copying
    echo "Copying backlog from project root: $(pwd)"
@@ -275,7 +180,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
    echo "✅ Copied backlog templates (Ideas-Inbox.md, Bugs-Backlog.md, etc.)"
    ```
 
-18. **Copy Project Context Template**
+12. **Copy Project Context Template**
     ```bash
     # CRITICAL: Verify we're in project root before copying
     echo "Copying Context.md to project root: $(pwd)"
@@ -391,22 +296,19 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 ### Phase 5: Context Integration & Final Setup
 
-21. **Create/Update CLAUDE.md with Context References**
-    - Check if `CLAUDE.md` exists using `Read` tool
-    - If `CLAUDE.md` exists:
+13. **Create/Update .cursorrules with Context References**
+    - Check if `.cursorrules` exists using `Read` tool
+    - If `.cursorrules` exists:
       - Use `Read` to check current content
       - Use `Edit` to ensure `@Context.md` reference is present
-      - If workspace Context.md discovered in Phase 1: ensure workspace reference is present using calculated relative path
-    - If no `CLAUDE.md`: Use `Write` tool to create new one with:
-      ```markdown
-      # Project Development Context
+      - If workspace Context.md discovered in Phase 2: ensure workspace reference is present using calculated relative path
+    - If no `.cursorrules`: Use `Write` tool to create new one using template from `~/.ContextKit/Templates/Contexts/.cursorrules`
+      - Populate with basic project info
+      - Add `@Context.md` reference
+      - If workspace discovered: add `@[calculated-relative-path]/Context.md` reference
+    - **CRITICAL**: Ensure both project Context.md AND workspace Context.md (if found in Phase 2) are referenced
 
-      @Context.md
-      [If workspace discovered in Phase 1: @[calculated-relative-path]/Context.md]
-      ```
-    - **CRITICAL**: Ensure both project Context.md AND workspace Context.md (if found in Phase 1) are referenced
-
-22. **Copy Project-Specific Formatters** (for Swift projects only)
+14. **Copy Project-Specific Formatters** (for Swift projects only)
     - For Swift projects detected during investigation:
       ```bash
       cp ~/.ContextKit/Templates/Formatters/.swift-format .
@@ -414,7 +316,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
       echo "✅ Copied Swift formatter configurations"
       ```
 
-23. **Execute Context.md Template Instructions**
+15. **Execute Context.md Template Instructions**
     - Use `Read` tool to read the copied `Context.md` file from `$(pwd)/Context.md`
     - Follow the **system instructions** section (boxed area) step by step
     - **CRITICAL**: Always work from project root when executing template instructions
@@ -430,17 +332,16 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 ### Phase 6: Verification & Completion
 
-24. **Verify Installation**
+16. **Verify Installation**
     - Use `Read` tool to confirm `Context.md` exists and contains project-specific content
-    - Use `Glob` tool to verify workflow commands exist: `.claude/commands/ctxk/plan/1-spec.md`, `.claude/commands/ctxk/impl/start-working.md`, `.claude/commands/ctxk/bckl/add-idea.md`
-    - Use `Bash` tool to verify global proj commands accessible: `ls ~/.claude/commands/ctxk/proj/init.md`
-    - Use `Bash` tool to check `Context/Scripts/AutoFormat.sh` is executable: `ls -la Context/Scripts/AutoFormat.sh`
-    - Use `Glob` tool to validate at least 3 agent files exist in `.claude/agents/ctxk/`: `Glob .claude/agents/ctxk *`
-    - Use `Bash` tool to verify status line configured with plan: `grep "CustomStatusline.sh --plan" .claude/settings.json`
-    - Use `Read` tool to confirm `.claude/settings.json` contains ContextKit configuration
+    - Use `Read` tool to confirm `.cursorrules` exists and references Context.md
+    - Use `Glob` tool to verify workflow commands exist: `.cursor/rules/ctxk/plan/1-spec.md`, `.cursor/rules/ctxk/impl/start-working.md`, `.cursor/rules/ctxk/bckl/add-idea.md`
+    - Use `Bash` tool to verify global reference accessible: `ls ~/.cursor/contextkit/Commands/`
+    - Use `Glob` tool to validate guidelines copied: `Glob Context/Guidelines *`
+    - Use `Glob` tool to verify backlog templates: `Glob Context/Backlog *`
 
-25. **Update Workspace Context (if applicable)**
-    - If workspace Context.md was discovered in Phase 1:
+17. **Update Workspace Context (if applicable)**
+    - If workspace Context.md was discovered in Phase 2:
       - Use `Read` tool to read the workspace Context.md file
       - Look for current project name in the "Repository Structure" or "Project Inventory" section
       - If project is listed with status "not setup yet":
@@ -448,7 +349,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
         - Update the setup status count (e.g., "2 of 21 projects have ContextKit enabled" → "3 of 21 projects have ContextKit enabled")
       - If project not listed in workspace: Use `Edit` tool to add project to the repository structure with "ContextKit-enabled" status and detected component details
 
-26. **Display Completion**
+18. **Display Completion**
     - Display success message using template below
     - Include summary of components discovered and validated
     - Suggest next steps based on project analysis findings
@@ -466,43 +367,36 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 📁 Project configured with:
    ✓ Context.md - Comprehensive project analysis with validated build/test commands
+   ✓ .cursorrules - Cursor context configuration referencing project docs
    ✓ Context/Features/ - Systematic feature development
    ✓ Context/Backlog/ - Ideas and bugs with evaluation frameworks
    ✓ Context/Guidelines/ - Development standards relevant to project type
-   ✓ Context/Scripts/ - Code formatting and status automation
-   ✓ .claude/commands/ctxk/ - Workflow commands (plan/, impl/, bckl/) - global proj/ commands remain global
-   ✓ .claude/agents/ctxk/ - Quality assurance specialists
-   ✓ .claude/settings.json - ContextKit permissions, hooks, and model configuration
-   ✓ Status line configured - 5h-usage tracking with colored progress bars
+   ✓ .cursor/rules/ctxk/ - Workflow command references (plan/, impl/, bckl/)
    [For Swift projects: ✓ Formatter configurations (.swift-format, .swiftformat)]
 
-🚀 Ready to start systematic development:
+🚀 Ready to start systematic development in Cursor:
 
-💡 **Tip**: Disable Auto-Compact for better control! Type `/config` and set "Auto-compact" to **false**.
-   Auto-compact triggers at ~85% context, often interrupting when you're nearly finished.
-   Better workflow: Start fresh chats when needed and resume with /ctxk:impl:start-working (within feature branches).
-
+💡 **Tip**: Use Cursor's @ mention system to reference commands and files!
+   - Reference commands: @ctxk:plan:1-spec, @ctxk:impl:start-working
+   - Reference files: @Context.md, @Context/Guidelines/Swift.md
+   - Search codebase: @Codebase for broad searches
+   
 🎯 **Next Steps**:
    • All build/test commands are documented and validated in Context.md
-   • Begin your first feature with: /ctxk:plan:1-spec
+   • Begin your first feature with: @ctxk:plan:1-spec in Cursor's Composer
    • The systematic workflow: plan → implement → iterate
 
-> [!IMPORTANT]
-> **🔄 RESTART REQUIRED**: You must restart Claude Code for all commands to be available:
->
-> 1. Type `/exit` to close this session
-> 2. Type `claude` to start a new session
-
-💡 **Available Commands**:
-   • Feature Planning: /ctxk:plan:1-spec → /ctxk:plan:2-research-tech → /ctxk:plan:3-steps
-   • Development: /ctxk:impl:start-working (after completing planning phases on feature branch)
-   • Backlog: /ctxk:bckl:add-idea, /ctxk:bckl:add-bug
+💡 **Available Commands** (use @ mentions in Cursor):
+   • Feature Planning: @ctxk:plan:1-spec → @ctxk:plan:2-research-tech → @ctxk:plan:3-steps
+   • Development: @ctxk:impl:start-working (after completing planning phases on feature branch)
+   • Backlog: @ctxk:bckl:add-idea, @ctxk:bckl:add-bug
+   • Migration: @ctxk:proj:migrate (for updates)
 ```
 
 ## Error Conditions
 
 - **"ContextKit not installed globally"** → Run global installation first: `curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh | sh`
-- **"Project already initialized"** → Use `/ctxk:proj:migrate` for updates instead
+- **"Project already initialized"** → Use `@ctxk:proj:migrate` for updates instead
 - **"Not in git repository"** → Warn user, ask for confirmation to continue
 - **"Uncommitted changes detected"** → Recommend committing first, allow override
 - **"Permission denied"** → Check directory permissions and ownership
@@ -518,21 +412,12 @@ Initialize current project with ContextKit development workflow system. Sets up 
 - Project not already initialized with ContextKit?
 - Git repository status acceptable or user confirmed?
 
-**Critical Settings Configuration (HIGHEST PRIORITY):**
-- Claude Code settings.json installed/updated with ContextKit permissions immediately?
-- Full permissions obtained for remaining operations?
-
-**User Configuration Validation (Sequential Questions):**
-- Model setting configured based on user preference?
-- Status line setup completed with plan parameter if user agreed?
+**User Configuration Validation:**
 - Workspace inheritance discovered and configured if applicable?
-- All configuration applied successfully to settings.json?
 
 **Template Installation Validation:**
 - All template directories created successfully?
-- Command templates copied to .claude/commands/ctxk/?
-- Agent templates copied to .claude/agents/ctxk/?
-- Script templates copied to Context/Scripts/?
+- Command references copied to .cursor/rules/ctxk/?
 - Backlog templates copied to Context/Backlog/?
 - Relevant development guidelines copied to Context/Guidelines/?
 
@@ -548,7 +433,7 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 **Context Integration Validation:**
 - Workspace context discovered and integrated?
-- CLAUDE.md exists and references both project Context.md AND workspace Context.md (if found)?
+- .cursorrules exists and references both project Context.md AND workspace Context.md (if found)?
 - Project Context.md generated with comprehensive component analysis?
 - All findings based on actual investigation, not assumptions?
 - Validated build/test commands documented for each component?
@@ -556,15 +441,15 @@ Initialize current project with ContextKit development workflow system. Sets up 
 
 **Final Verification:**
 - All critical files exist and contain expected content?
-- Status line and settings properly configured for ContextKit workflow?
+- .cursorrules properly configured for Cursor workflow?
 
 ## Integration Points
 
 - **Global ContextKit**: Reads from ~/.ContextKit/ template infrastructure
 - **Workspace Inheritance**: Discovers and loads configuration from parent directory Context.md files
-- **Team Collaboration**: Creates committable .claude/ directory for team sharing
-- **Development Workflow**: Integrates with `/ctxk:plan:*`, `/ctxk:impl:*`, and `/ctxk:bckl:*` commands
-- **Quality Assurance**: Connects hooks and agents to development process
+- **Team Collaboration**: Creates committable .cursor/ directory for team sharing
+- **Development Workflow**: Commands accessible via @ mentions: `@ctxk:plan:*`, `@ctxk:impl:*`, `@ctxk:bckl:*`
+- **Quality Guidelines**: Reference-based quality checks via Context/Guidelines/
 
 
 ════════════════════════════════════════════════════════════════════════════════

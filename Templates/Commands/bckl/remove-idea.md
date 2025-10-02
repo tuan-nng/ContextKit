@@ -1,5 +1,5 @@
 # Remove Completed Ideas from Backlog
-<!-- Template Version: 2 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+<!-- Template Version: 3 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -33,7 +33,7 @@ Remove completed or cancelled ideas from the backlog database. Identifies target
      ❌ Ideas backlog not found!
 
      Expected: Context/Backlog/Ideas-Backlog.md
-     Run /ctxk:proj:init to setup ContextKit backlog system first.
+     Run @ctxk:proj:init to setup ContextKit backlog system first.
      ```
      → END (exit with error)
 
@@ -41,7 +41,7 @@ Remove completed or cancelled ideas from the backlog database. Identifies target
 
 2. **Parse User Input**
    - Extract search term from command parameter
-   - If no description provided: ERROR "Description required: /ctxk:bckl:remove-idea 'search term or IDEA-001'"
+   - If no description provided: ERROR "Description required: @ctxk:bckl:remove-idea 'search term or IDEA-001'"
 
 3. **Search Existing Backlog**
    - Use `Read` tool to read Ideas-Backlog.md: `Read Context/Backlog/Ideas-Backlog.md`
@@ -136,8 +136,8 @@ Remove completed or cancelled ideas from the backlog database. Identifies target
 
 ## Error Conditions
 
-- **"Ideas-Backlog.md missing"** → Run `/ctxk:proj:init` to setup infrastructure
-- **"No description provided"** → Show usage: `/ctxk:bckl:remove-idea "search term"`
+- **"Ideas-Backlog.md missing"** → Run `@ctxk:proj:init` to setup infrastructure
+- **"No description provided"** → Show usage: `@ctxk:bckl:remove-idea "search term"`
 - **"No matching ideas found"** → Suggest checking backlog file or using different keywords
 - **"User cancelled removal"** → Graceful exit without changes
 - **"Database operation failed"** → Check Ideas-Backlog.md structure and REMOVE_COMPLETED operation

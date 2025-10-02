@@ -1,5 +1,5 @@
 # Create Task List
-<!-- Template Version: 6 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+<!-- Template Version: 7 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -41,7 +41,7 @@ Generate implementation task breakdown by detecting current feature, validating 
      ```
      ❌ ContextKit not initialized in this project!
 
-     Run /ctxk:proj:init first to setup ContextKit in this project.
+     Run @ctxk:proj:init first to setup ContextKit in this project.
      This command requires project context to detect tech stack and apply
      appropriate development guidelines.
      ```
@@ -64,8 +64,8 @@ Generate implementation task breakdown by detecting current feature, validating 
      ❌ Prerequisites not complete!
 
      All planning phases are required for implementation:
-     - Run /ctxk:plan:1-spec if Spec.md is missing
-     - Run /ctxk:plan:2-research-tech if Tech.md is missing (includes Research.md creation)
+     - Run @ctxk:plan:1-spec if Spec.md is missing
+     - Run @ctxk:plan:2-research-tech if Tech.md is missing (includes Research.md creation)
 
      Implementation planning requires completed specification, research, and architecture.
      ```
@@ -113,8 +113,8 @@ Generate implementation task breakdown by detecting current feature, validating 
 
 ## Error Conditions
 
-- **"Context.md not found"** → User must run `/ctxk:proj:init` to initialize ContextKit
-- **"Prerequisites not complete"** → Must run `/ctxk:plan:1-spec` and `/ctxk:plan:2-research-tech` first
+- **"Context.md not found"** → User must run `@ctxk:proj:init` to initialize ContextKit
+- **"Prerequisites not complete"** → Must run `@ctxk:plan:1-spec` and `@ctxk:plan:2-research-tech` first
 - **"Steps template not found"** → Ensure template files are available
 - **"Unresolved clarifications exist"** → Resolve [NEEDS CLARIFICATION] markers in Spec.md and Tech.md first
 - **"Template execution failed"** → Verify Steps.md template contains system instructions section
@@ -134,9 +134,9 @@ Generate implementation task breakdown by detecting current feature, validating 
 ## Integration Points
 
 - **Global ContextKit**: Uses Templates/Features/Steps.md template for implementation task generation
-- **Project Setup**: Requires Context.md created by /ctxk:proj:init for project detection and context
+- **Project Setup**: Requires Context.md created by @ctxk:proj:init for project detection and context
 - **Template Execution**: Delegates all task logic to copied Steps.md template (follows init-workspace pattern)
-- **Development Workflow**: Creates foundation for /ctxk:impl:start-working development execution phase
+- **Development Workflow**: Creates foundation for @ctxk:impl:start-working development execution phase
 - **Team Collaboration**: Creates committed implementation plan for team review and development coordination
 - **Git Integration**: Works within existing feature branch for systematic development workflow
 - **Workspace Integration**: Template inherits coding standards and constitutional overrides from workspace Context.md
@@ -157,7 +157,7 @@ Generate implementation task breakdown by detecting current feature, validating 
 1. Review [numbered-feature-directory]/Steps.md to ensure task breakdown is comprehensive
 2. [If clarifications needed:] Edit the steps file to resolve marked implementation questions
 3. When satisfied with the implementation plan: commit your changes with git
-4. Run /ctxk:impl:start-working (in a new chat) to begin systematic development execution
+4. Run @ctxk:impl:start-working (in a new composer) to begin systematic development execution
 
 💡 Implementation roadmap ready for development execution!
 ```

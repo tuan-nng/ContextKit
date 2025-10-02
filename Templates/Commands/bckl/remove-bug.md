@@ -1,5 +1,5 @@
 # Remove Fixed Bugs from Backlog
-<!-- Template Version: 2 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+<!-- Template Version: 3 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -33,7 +33,7 @@ Remove fixed or resolved bugs from the backlog database. Identifies target bug t
      ❌ Bug backlog not found!
 
      Expected: Context/Backlog/Bugs-Backlog.md
-     Run /ctxk:proj:init to setup ContextKit backlog system first.
+     Run @ctxk:proj:init to setup ContextKit backlog system first.
      ```
      → END (exit with error)
 
@@ -41,7 +41,7 @@ Remove fixed or resolved bugs from the backlog database. Identifies target bug t
 
 2. **Parse User Input**
    - Extract search term from command parameter
-   - If no description provided: ERROR "Description required: /ctxk:bckl:remove-bug 'search term or BUG-001'"
+   - If no description provided: ERROR "Description required: @ctxk:bckl:remove-bug 'search term or BUG-001'"
 
 3. **Search Existing Backlog**
    - Use `Read` tool to read Bugs-Backlog.md: `Read Context/Backlog/Bugs-Backlog.md`
@@ -140,8 +140,8 @@ Remove fixed or resolved bugs from the backlog database. Identifies target bug t
 
 ## Error Conditions
 
-- **"Bugs-Backlog.md missing"** → Run `/ctxk:proj:init` to setup infrastructure
-- **"No description provided"** → Show usage: `/ctxk:bckl:remove-bug "search term"`
+- **"Bugs-Backlog.md missing"** → Run `@ctxk:proj:init` to setup infrastructure
+- **"No description provided"** → Show usage: `@ctxk:bckl:remove-bug "search term"`
 - **"No matching bugs found"** → Suggest checking backlog file or using different keywords
 - **"User cancelled removal"** → Graceful exit without changes
 - **"Database operation failed"** → Check Bugs-Backlog.md structure and REMOVE_FIXED operation

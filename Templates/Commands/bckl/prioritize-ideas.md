@@ -1,5 +1,5 @@
 # Prioritize Ideas with Binary Search Evaluation
-<!-- Template Version: 3 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+<!-- Template Version: 4 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -43,7 +43,7 @@ Process ideas from inbox through systematic 5-step evaluation with binary search
      ```
      ❌ Ideas infrastructure incomplete!
 
-     Missing files detected. Run /ctxk:proj:init to setup complete backlog system.
+     Missing files detected. Run @ctxk:proj:init to setup complete backlog system.
      Required: Context/Backlog/Ideas-Inbox.md and Ideas-Backlog.md
      ```
      → END (exit with error)
@@ -55,7 +55,7 @@ Process ideas from inbox through systematic 5-step evaluation with binary search
      ```
      💡 Ideas inbox is empty!
 
-     All ideas have been processed. Use /ctxk:bckl:add-idea to capture new ideas.
+     All ideas have been processed. Use @ctxk:bckl:add-idea to capture new ideas.
      Current state: Ready for development with existing backlog.
      ```
      → END (success - no work needed)
@@ -176,8 +176,8 @@ Process ideas from inbox through systematic 5-step evaluation with binary search
 
    🔗 Next Steps:
    • Review Context/Backlog/Ideas-Backlog.md for complete prioritized list
-   • Use /ctxk:plan:1-spec to begin work on highest priority ideas
-   • Continue capturing new ideas with /ctxk:bckl:add-idea
+   • Use @ctxk:plan:1-spec to begin work on highest priority ideas
+   • Continue capturing new ideas with @ctxk:bckl:add-idea
 
    💡 Ideas are now ready for development planning!
    ```
@@ -229,9 +229,9 @@ Process ideas from inbox through systematic 5-step evaluation with binary search
 
 ## Integration Points
 
-- **Idea Capture**: Processes ideas from `/ctxk:bckl:add-idea` command
+- **Idea Capture**: Processes ideas from `@ctxk:bckl:add-idea` command
 - **Database Operations**: Uses methods documented in Ideas-Backlog.md self-managing database
-- **Development Workflow**: Feeds prioritized ideas to `/ctxk:plan:1-spec` for specification
+- **Development Workflow**: Feeds prioritized ideas to `@ctxk:plan:1-spec` for specification
 - **Session Management**: Supports session-based priority reassessment and context changes
 - **Source Tracking**: Preserves source attribution throughout prioritization process
 

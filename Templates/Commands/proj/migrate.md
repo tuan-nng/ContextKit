@@ -1,5 +1,5 @@
 # Upgrade to Latest
-<!-- Template Version: 13 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+<!-- Template Version: 14 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -18,8 +18,8 @@ Update ContextKit templates to latest versions while preserving user customizati
 - **Comprehensive Preservation**: Maintains all user content below "👩‍💻 DEVELOPER CUSTOMIZATIONS" sections
 
 Updates both:
-- **Global project management commands** (proj/) in ~/.claude/commands/ctxk/proj/
-- **Local project templates** (plan/, impl/, bckl/, agents, scripts, etc.) in current project
+- **Global reference materials** in ~/.cursor/contextkit/
+- **Local project templates** (plan/, impl/, bckl/, guidelines, etc.) in current project
 
 All updates preserve user customizations in "👩‍💻 DEVELOPER CUSTOMIZATIONS" sections.
 
@@ -50,9 +50,9 @@ All updates preserve user customizations in "👩‍💻 DEVELOPER CUSTOMIZATION
 ### Phase 1: Automated Global Update & Version Scanning
 
 1. **Comprehensive ContextKit Update & Analysis**
-   - Use Bash tool: `Context/Scripts/VersionStatus.sh --verbose`
-   - Capture stderr output to see OUTDATED and NEW file listings
-   - Status messages go to stdout, file data goes to stderr
+   - Check for updates by comparing template versions
+   - Scan both global reference location (~/.cursor/contextkit/) and local project
+   - List files needing updates (OUTDATED) and new files (NEW)
 
 2. **Early Exit Check: Already Up to Date**
    - If stderr output contains no OUTDATED or NEW lines:
@@ -61,72 +61,45 @@ All updates preserve user customizations in "👩‍💻 DEVELOPER CUSTOMIZATION
      - This is a successful completion, not an error
 
 3. **Automated File Updates** (only if updates found)
-   - Parse captured stderr output from VersionStatus.sh
-   - For each line with format `OUTDATED:source_path:target_path` or `NEW:source_path:target_path`:
-   - Use Bash tool: `Context/Scripts/MergePreserve.sh source_path target_path`
-   - **Handles automatically**:
-     - ✅ Global repository update (git pull)
-     - ✅ Version comparison for ALL template categories
-     - ✅ Project compatibility validation
-     - ✅ Automated file updates with customization preservation
-   - **Handles both**: Global proj commands (~/.claude/commands/ctxk/proj/) AND local project templates
-   - **Performance**: All previous Phase 1-3 work in ~35 seconds total
-   - **Intelligence**: Script detects boilerplate vs real customizations automatically
+   - For each file needing updates:
+     - Compare template versions between source and target
+     - Preserve user customizations in "👩‍💻 DEVELOPER CUSTOMIZATIONS" sections
+     - Update core template content above customization sections
+   - **Updates both**: 
+     - Global reference materials in ~/.cursor/contextkit/
+     - Local project templates in .cursor/rules/ctxk/ and Context/
+   - **Intelligence**: Detects boilerplate vs real customizations automatically
 
-### Phase 2: Manual LLM Processing (Complex Cases Only) - SKIP IF NO UPDATES FOUND
+### Phase 2: Manual File Processing (Complex Cases Only) - SKIP IF NO UPDATES FOUND
 
-#### Phase 2.1: Intelligent Settings.json Merge
+#### Phase 2.1: File Merge Logic
 
-1. Use Read tool to examine current .claude/settings.json
-2. Use Read tool to read ~/.ContextKit/Templates/settings.json for latest template
+1. **Update Command Templates**
+   - For each file in .cursor/rules/ctxk/:
+     - If new file: Copy directly to project location
+     - If existing file:
+       - Use Read tool to examine project file
+       - Use Grep tool to find "👩‍💻 DEVELOPER CUSTOMIZATIONS" line number
+       - If separator found:
+         - Check if user has added actual content below separator
+         - If meaningful user content exists: Use Edit tool to merge (template above + user content below)
+         - If no meaningful user content: Replace entirely with new template
+       - If separator missing: Replace entirely
 
-3. StatusLine Configuration:
-   - If user has statusLine setting with path containing "CustomStatusline.sh":
-     - Check if path is correct (should be "./Context/Scripts/CustomStatusline.sh")
-     - Check if command includes plan parameter (should have "--plan Pro|Max5|Max20")
-     - If missing plan parameter: Ask user for their Claude plan and update command
-     - If path incorrect: Update path to correct location using Edit tool
-     - If both correct: No change needed
-   - If user has no statusLine setting or different script: Skip (user opted out)
+2. **Update Guidelines**
+   - For each file in Context/Guidelines/:
+     - Follow same merge logic as command templates
+     - Preserve user-added sections and customizations
 
-4. Model Setting:
-   - Skip entirely - never update user's model preference
+3. **Update Backlog Templates**
+   - Only update structure templates (Ideas-Inbox.md, Bugs-Inbox.md)
+   - Never touch backlog data files (Ideas-Backlog.md, Bugs-Backlog.md)
 
-5. Permissions Array Merge:
-   - Read current allow/deny arrays from user settings
-   - Read template allow/deny arrays from ContextKit template
-   - For allow list: Smart merge avoiding duplicates, keep alphabetically sorted
-   - For deny list: Smart merge avoiding duplicates, keep alphabetically sorted
-   - Use Edit tool to update only if arrays changed
+4. **Update .cursorrules** (if needed)
+   - Only update if template structure has changed
+   - Preserve all user-added project-specific content
 
-6. Hooks Configuration:
-   - Identify ContextKit hooks: PostToolUse="./Context/Scripts/AutoFormat.sh", SessionStart="./Context/Scripts/VersionStatus.sh"
-   - Keep all user-specific hooks unchanged
-   - Add missing ContextKit hooks
-   - Update existing ContextKit hooks if paths changed
-   - Remove only ContextKit hooks that no longer exist in template
-   - Use Edit tool to update only if hooks changed
-
-7. Track settings.json changes:
-   - Add to UPDATED_FILES if any changes made
-   - Add to WARNINGS if merge had issues
-
-#### Phase 2.2: Other Complex Merge Cases
-
-1. For each file needing update:
-   - If new file: Use Bash tool cp to copy directly to project location
-   - If existing file:
-     - Use Read tool to examine project file
-     - Use Grep tool to find "👩‍💻 DEVELOPER CUSTOMIZATIONS" line number
-     - If separator found:
-       - Check if user has added actual content below separator (beyond template boilerplate)
-       - Count non-empty lines after separator that aren't just comments or template text
-       - If meaningful user content exists: Use Edit tool to merge (template above + user content below)
-       - If no meaningful user content: Use Bash tool cp to replace entirely (faster)
-     - If separator missing: Use Bash tool cp to replace entirely
-   - If settings.json: Use intelligent merge logic (see Phase 2.1)
-
-2. Track results:
+5. **Track results:**
    - NEW_FILES: List of files copied
    - UPDATED_FILES: List of files merged with version info
    - WARNINGS: List of files skipped or issues encountered
@@ -134,13 +107,14 @@ All updates preserve user customizations in "👩‍💻 DEVELOPER CUSTOMIZATION
 ### Phase 3: Summary Report - SKIP IF EARLY EXIT IN PHASE 1
 
 Display results organized by:
-- Global proj commands updated (count and version changes)
-- Local project files updated (count and version changes)
+- Global reference materials updated (count and version changes)
+- Local command templates updated (count and version changes)
+- Guidelines updated (count and version changes)
 - New files added (count and list)
-- Settings.json merge results (if applicable)
 - Warnings (count and descriptions)
 - Overall status (complete with updates)
 - Git review reminder: "Migration complete. Review changes with 'git status' and commit when ready."
+- Cursor reminder: "Use @ mentions to reference updated commands in Cursor Composer"
 
 **Note**: If Phase 1 early exit occurred (no updates needed), this phase is skipped entirely.
 
@@ -153,11 +127,11 @@ Display results organized by:
 ## Success Criteria
 
 - [ ] Global ContextKit repository updated (or warning issued)
-- [ ] Global proj commands updated preserving customizations
+- [ ] Global reference materials updated in ~/.cursor/contextkit/
 - [ ] All local project template files scanned for version differences
 - [ ] Local workflow commands (plan/, impl/, bckl/) updated preserving customizations
-- [ ] Agents, scripts, guidelines, and backlog templates updated
-- [ ] Settings.json intelligently merged
+- [ ] Guidelines and backlog templates updated
+- [ ] .cursorrules updated if needed
 - [ ] Summary report shows both global and local updates with warnings
 
 ---

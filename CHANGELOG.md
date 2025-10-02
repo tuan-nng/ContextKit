@@ -1,5 +1,5 @@
 # ContextKit Changelog
-<!-- ContextKit: 0.1.0 | Updated: 2025-09-13 -->
+<!-- ContextKit: 0.2.0-cursor | Updated: 2025-10-02 -->
 
 Maintains accurate changelog following [Keep a Changelog](https://keepachangelog.com/) format. 
 Used by `/ctxk:proj:migrate` command to track file changes and preserve user customizations.
@@ -83,6 +83,46 @@ Used by `/ctxk:proj:migrate` command to track file changes and preserve user cus
 ║ - `[M] file.md` - Description (e4f5g6h)  
 ║ [Only sections with actual content]
 ════════════════════════════════════════════════════════════════════════════════
+
+## [0.2.0-cursor] - 2025-10-02
+
+### 🎉 Major: Cursor IDE & Web Development Focus
+
+Complete adaptation of ContextKit from Claude Code to Cursor IDE with focus on web frontend/backend development. **Breaking change** - not backward compatible with Claude Code or mobile development.
+
+### Added
+- `.cursorrules` template for Cursor project context
+- `@ mention` system - all commands now use `@ctxk:*`
+- **TypeScript.md** - Comprehensive TypeScript quality guidelines
+- **React.md** - React best practices and patterns  
+- Scripts/README.md documenting hook limitations
+- Comprehensive Cursor documentation (3 new docs)
+
+### Changed
+- [M] All 20 command templates: `/ctxk:*` → `@ctxk:*`
+- [M] Directory structure: `.claude/` → `.cursor/`
+- [M] impl/start-working.md (v15→v16): Agents → Guidelines
+- [M] impl/commit-changes.md (v10→v11): Rewritten for direct git workflow
+- [M] impl/release-package.md (v3→v4): Swift Package → NPM Package
+- [M] proj/init.md (v10→v11): Removed hooks/agents, added .cursorrules
+- [M] proj/migrate.md (v13→v14): Simplified without hooks/agents  
+- [M] README.md: Updated for web development (React/TypeScript/Node.js examples)
+- [M] All documentation updated to focus on web frontend/backend
+
+### Removed
+- **Mobile development support**: Swift.md, SwiftUI.md guidelines removed
+- **release-app.md**: iOS/macOS app release command removed
+- Hook system support (AutoFormat, VersionStatus, CustomStatusline)
+- Agent system (build-project, commit-changes, run-test-*, check-*)
+- Settings.json manipulation (Cursor uses built-in settings)
+- App showcase section from README
+
+### Migration
+- Requires re-initialization for Cursor users
+- Mobile developers: use original Claude Code version or fork for mobile
+- Agents → Context/Guidelines/ + Context.md commands  
+- Hooks → Cursor built-in features + manual workflows
+- Planning methodology unchanged
 
 ## [Unreleased]
 

@@ -1,5 +1,5 @@
 # Research and Design Architecture
-<!-- Template Version: 13 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+<!-- Template Version: 14 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -45,7 +45,7 @@
      ```
      ❌ ContextKit not initialized in this project!
 
-     Run /ctxk:proj:init first to setup ContextKit in this project.
+     Run @ctxk:proj:init first to setup ContextKit in this project.
      This command requires project context to detect tech stack and apply
      appropriate development guidelines.
      ```
@@ -66,7 +66,7 @@
      ```
      ❌ Feature specification not found!
 
-     Run /ctxk:plan:1-spec first to create the business requirements.
+     Run @ctxk:plan:1-spec first to create the business requirements.
      Technical planning requires completed specification as input.
      ```
      → END (exit with error)
@@ -188,8 +188,8 @@
 
 ## Error Conditions
 
-- **"Context.md not found"** → User must run `/ctxk:proj:init` to initialize ContextKit
-- **"Feature specification not found"** → Must run `/ctxk:plan:1-spec` first
+- **"Context.md not found"** → User must run `@ctxk:proj:init` to initialize ContextKit
+- **"Feature specification not found"** → Must run `@ctxk:plan:1-spec` first
 - **"Research.md incomplete - contains template instructions"** → Research phase was started but not completed - system instructions still present
 - **"Technical template not found"** → Ensure template files are available
 - **"Specification has unresolved clarifications"** → Resolve [NEEDS CLARIFICATION] markers in Spec.md first
@@ -219,9 +219,9 @@
 ## Integration Points
 
 - **Global ContextKit**: Uses Templates/Features/Tech.md template for technical architecture generation
-- **Project Setup**: Requires Context.md created by /ctxk:proj:init for project detection and context
+- **Project Setup**: Requires Context.md created by @ctxk:proj:init for project detection and context
 - **Template Execution**: Delegates all technical logic to copied Tech.md template (follows init-workspace pattern)
-- **Development Workflow**: Creates foundation for /ctxk:plan:3-steps implementation planning phase
+- **Development Workflow**: Creates foundation for @ctxk:plan:3-steps implementation planning phase
 - **Team Collaboration**: Creates committed technical plan for team review and development guidance
 - **Git Integration**: Works within existing feature branch for systematic development workflow
 - **Workspace Integration**: Template inherits coding standards and constitutional overrides from workspace Context.md
@@ -240,7 +240,7 @@
     - Make any corrections or additions if needed
 
 2️⃣  **Continue** by running this command again:
-    /ctxk:plan:2-research-tech
+    @ctxk:plan:2-research-tech
 
     This will create the Tech.md architecture plan based on your research.
 
@@ -265,7 +265,7 @@
 1. Review Context/Features/[Name]/Tech.md to ensure technical decisions are sound
 2. [If clarifications needed:] Edit the file to resolve marked questions
 3. When satisfied with the technical plan: commit your changes with git
-4. Run /ctxk:plan:3-steps to proceed with implementation task breakdown
+4. Run @ctxk:plan:3-steps to proceed with implementation task breakdown
 
 💡 Research-informed technical architecture ready for implementation planning!
 ```

@@ -1,7 +1,7 @@
 ![ContextKit Logo](https://github.com/FlineDev/ContextKit/blob/main/Logo.png?raw=true)
 
 <p align="center">
-    <strong>Stop fighting context limits. Stop micro-managing Claude Code. Start building features systematically and make AI produce closer to production-ready code on first try.</strong>
+    <strong>Stop fighting context limits. Stop micro-managing Cursor. Start building features systematically and make AI produce closer to production-ready code on first try.</strong>
 </p>
 
 ---
@@ -38,80 +38,83 @@ curl -fsSL https://raw.githubusercontent.com/FlineDev/ContextKit/main/install.sh
 Navigate to your project directory and run:
 
 ```bash
-# Start Claude Code
-claude
+# Open in Cursor
+cursor .
 
 # Initialize ContextKit (auto-detects your project type)
-/ctxk:proj:init
+# Use Cursor's command palette (Cmd/Ctrl+Shift+P) and type: ContextKit: Initialize Project
+# Or use the Composer and type: @ctxk:proj:init
 ```
 
 ### 3. Build your first feature systematically
 
 ```bash
 # Step 1: Define what you're building (business requirements)
-/ctxk:plan:1-spec
+@ctxk:plan:1-spec
 
 # Step 2: Plan the technical architecture
-/ctxk:plan:2-research-tech
+@ctxk:plan:2-research-tech
 
 # Step 3: Break down into executable tasks
-/ctxk:plan:3-steps
+@ctxk:plan:3-steps
 
 # Step 4: Start development with full context
-/ctxk:impl:start-working
+@ctxk:impl:start-working
 ```
 
 ContextKit creates structured feature directories, maintains context between sessions, and guides you through quality checkpoints that prevent common AI development pitfalls.
 
 > [!NOTE]
-> **Early Development**: ContextKit is actively evolving with iterative improvements. While production-ready (I use it daily for all my projects), expect some rough edges as commands and agents are refined. ContextKit updates itself globally when you start new chats, and the `/ctxk:proj:migrate` command makes updating your project files easy - keep sending feedback to help iron out issues faster.
+> In Cursor, use these commands by typing `@` followed by the command name in the Composer or Chat interface. ContextKit commands are available as .cursorrules that guide the AI systematically.
+
+> [!NOTE]
+> **Early Development**: ContextKit is actively evolving with iterative improvements. While production-ready (I use it daily for all my projects), expect some rough edges as commands are refined. ContextKit updates itself globally when you start new sessions, and the `@ctxk:proj:migrate` command makes updating your project files easy - keep sending feedback to help iron out issues faster.
 
 
 ## ⚙️ Optimized Configuration
 
-ContextKit configures Claude Code with optimized settings for systematic development:
+ContextKit provides systematic development guidance for Cursor:
 
-- **Sonnet Model Default**: Sufficient quality with proper guidance while reducing 5h-limit risk during complex planning phases
-- **Custom Statusline**: Real-time monitoring so you have full transparency about the limits:
-  ```
-  5h-Usage: 73% (1.4h left) | Chat: ▓▓▓▓▓▓░░░░ 64% (128k/200k)
-  ```
-  Progress bar colors: Light Gray (<50%), Yellow (50-80%), Red (>80%) for visual context awareness
+- **Context Management**: Structured feature documentation ensures context preservation across sessions
+- **Progressive Planning**: Breaking down work into manageable phases helps manage Cursor's context limits
+- **Documentation-First**: All planning phases create markdown files that can be referenced using `@` mentions in Cursor
 
 > [!TIP]
-> **Disable Auto-Compact for Better Control**
+> **Managing Context in Cursor**
 >
-> Type `/config` in Claude and set "Auto-compact" to **false**. Auto-compact triggers at ~85% context usage, often interrupting you when nearly finished with a task and plenty of relevant context available.
->
-> **Better workflow**: Start fresh chats when needed and resume with `/ctxk:impl:start-working` (within feature branches after planning) – ContextKit's structured approach makes this seamless. Manual `/compact` loses unpredictable amounts of context, while fresh starts preserve your systematic progress.
+> ContextKit's structured approach works naturally with Cursor's composer:
+> - Reference planning documents with `@` mentions (e.g., `@Context/Features/UserAuth/Spec.md`)
+> - Start fresh composers when needed and resume with `@ctxk:impl:start-working`
+> - Use `@Codebase` for broad searches and `@Files` for specific references
+> - ContextKit's systematic progress tracking makes context recovery seamless
 
 
 ## 🏗️ How it works
 
 ContextKit implements a proven 4-phase methodology that prevents the chaos of unstructured AI development:
 
-### Phase 1: Business Case (`/ctxk:plan:1-spec`)
+### Phase 1: Business Case (`@ctxk:plan:1-spec`)
 Define **what** you're building and **why**, without technical details:
 - User stories and acceptance criteria
 - Success metrics and validation points
 - Explicit uncertainty marking (no AI guessing)
 - Scope boundaries (what's included, what's not)
 
-### Phase 2: Technical Architecture (`/ctxk:plan:2-research-tech`)
+### Phase 2: Technical Architecture (`@ctxk:plan:2-research-tech`)
 Plan **how** you'll build it, with constitutional compliance:
 - Technology choices with rationale
-- Swift/SwiftUI patterns and architectural decisions
-- Accessibility, localization, and privacy considerations
+- Frontend/backend patterns and architectural decisions
+- Accessibility, security, and performance considerations
 - Integration with existing project patterns
 
-### Phase 3: Implementation Tasks (`/ctxk:plan:3-steps`)
+### Phase 3: Implementation Tasks (`@ctxk:plan:3-steps`)
 Break down **execution** into trackable work:
 - File-by-file implementation tasks with S001-S999 numbering
 - Parallel execution markers ([P]) for concurrent development
 - Dependency chains and validation checkpoints
 - Test-driven development task ordering
 
-### Phase 4: Development (`/ctxk:impl:start-working`)
+### Phase 4: Development (`@ctxk:impl:start-working`)
 Execute with supervised autonomy and specialized quality agents (requires feature branch + completed planning phases):
 - AI implements within your approved technical framework
 - Specialized agents handle quality checks (accessibility, localization, modern code)
@@ -122,113 +125,112 @@ Execute with supervised autonomy and specialized quality agents (requires featur
 ## 📋 Commands overview
 
 ### Project Management
-- **`/ctxk:proj:init`** - One-command project initialization with auto-detection
+- **`@ctxk:proj:init`** - One-command project initialization with auto-detection
 
 ### Systematic Feature Development
-- **Planning workflow**: `/ctxk:plan:1-spec` → `/ctxk:plan:2-research-tech` → `/ctxk:plan:3-steps`
-- **Development**: `/ctxk:impl:start-working` with autonomous quality checks
-- **Release**: `/ctxk:impl:release-app` for iOS/macOS, `/ctxk:impl:release-package` for Swift packages
+- **Planning workflow**: `@ctxk:plan:1-spec` → `@ctxk:plan:2-research-tech` → `@ctxk:plan:3-steps`
+- **Development**: `@ctxk:impl:start-working` with quality checks
+- **Release**: `@ctxk:impl:release-package` for npm packages
 
 ### Backlog & Team Management
 
-**Note**: `/ctxk/bckl:*` commands are relatively new and might get major refinements very soon
+**Note**: `@ctxk/bckl:*` commands are relatively new and might get major refinements very soon
 
-- **Idea capture**: `/ctxk:bckl:add-idea` with evaluation framework
-- **Bug reporting**: `/ctxk:bckl:add-bug` with impact assessment
-- **Prioritization**: `/ctxk:bckl:prioritize-ideas` and `/ctxk:bckl:prioritize-bugs` with binary search evaluation
-- **Completion**: `/ctxk:bckl:remove-idea` and `/ctxk:bckl:remove-bug` for cleaning backlog
-- **Workspace setup**: `/ctxk:proj:init-workspace` for client/team standards (to run in parent folder containing multiple projects)
+- **Idea capture**: `@ctxk:bckl:add-idea` with evaluation framework
+- **Bug reporting**: `@ctxk:bckl:add-bug` with impact assessment
+- **Prioritization**: `@ctxk:bckl:prioritize-ideas` and `@ctxk:bckl:prioritize-bugs` with binary search evaluation
+- **Completion**: `@ctxk:bckl:remove-idea` and `@ctxk:bckl:remove-bug` for cleaning backlog
+- **Workspace setup**: `@ctxk:proj:init-workspace` for client/team standards (to run in parent folder containing multiple projects)
 
 <details>
 <summary><strong>📋 Complete Command Reference</strong></summary>
 
 ### Project Management
-- `/ctxk:proj:init` - Setup project context by auto-detecting type and configuring ContextKit
-- `/ctxk:proj:init-workspace` - Configure team standards for different clients/companies
-- `/ctxk:proj:migrate` - Upgrade to latest ContextKit versions
+- `@ctxk:proj:init` - Setup project context by auto-detecting type and configuring ContextKit
+- `@ctxk:proj:init-workspace` - Configure team standards for different clients/companies
+- `@ctxk:proj:migrate` - Upgrade to latest ContextKit versions
 
 ### Systematic Feature Planning
-- `/ctxk:plan:1-spec` - Define requirements with business specifications and user stories (prompts interactively)
-- `/ctxk:plan:2-research-tech` - Design architecture with technical planning and constitutional compliance
-- `/ctxk:plan:3-steps` - Create numbered, trackable implementation tasks
+- `@ctxk:plan:1-spec` - Define requirements with business specifications and user stories (prompts interactively)
+- `@ctxk:plan:2-research-tech` - Design architecture with technical planning and constitutional compliance
+- `@ctxk:plan:3-steps` - Create numbered, trackable implementation tasks
 
 ### Quality-Driven Implementation
-- `/ctxk:impl:start-working` - Begin development with context-aware guidance
-- `/ctxk:impl:commit-changes` - Commit changes with smart formatting and message generation
-- `/ctxk:impl:release-app` - Release to AppStore with iOS/macOS workflow automation
-- `/ctxk:impl:release-package` - Publish Swift packages with release workflow
+- `@ctxk:impl:start-working` - Begin development with context-aware guidance
+- `@ctxk:impl:commit-changes` - Commit changes with smart formatting and message generation
+- `@ctxk:impl:release-package` - Publish npm packages with release workflow
 
 ### Backlog & Issue Management
-- `/ctxk:bckl:add-idea` - Add feature ideas with structured evaluation framework
-- `/ctxk:bckl:add-bug` - Report bugs with impact assessment and reproduction steps
-- `/ctxk:bckl:prioritize-ideas` - Prioritize ideas through strategic organization
-- `/ctxk:bckl:prioritize-bugs` - Triage bugs with severity-based prioritization
-- `/ctxk:bckl:remove-idea` - Remove completed or cancelled ideas from backlog
-- `/ctxk:bckl:remove-bug` - Remove fixed or resolved bugs from backlog
+- `@ctxk:bckl:add-idea` - Add feature ideas with structured evaluation framework
+- `@ctxk:bckl:add-bug` - Report bugs with impact assessment and reproduction steps
+- `@ctxk:bckl:prioritize-ideas` - Prioritize ideas through strategic organization
+- `@ctxk:bckl:prioritize-bugs` - Triage bugs with severity-based prioritization
+- `@ctxk:bckl:remove-idea` - Remove completed or cancelled ideas from backlog
+- `@ctxk:bckl:remove-bug` - Remove fixed or resolved bugs from backlog
 
 </details>
 
 
-## 🤖 Built-in Quality Agents
+## 🤖 Built-in Quality Guidelines
 
-ContextKit includes specialized sub-agents that automatically ensure code quality at the right moments while preventing your context from getting overloaded:
+ContextKit includes specialized quality check guidelines that help ensure code quality at the right moments:
 
 - **`build-project`** - Execute builds and report results without filling context with verbose output
 - **`run-test-suite`** - Execute complete test suite with build validation and structured failure reporting
 - **`run-specific-test`** - Execute specific test with build validation and focused failure analysis
-- [NEEDS REWORK] **`check-accessibility`** - VoiceOver labels, color contrast, keyboard navigation, inclusive design patterns
-- [NEEDS REWORK] **`check-localization`** - String Catalog validation, cultural adaptation, region formatters, pluralization
-- [NEEDS REWORK] **`check-error-handling`** - ErrorKit patterns, typed throws, user-friendly error messages
-- [NEEDS REWORK] **`check-modern-code`** - Replace outdated APIs (Date() → Date.now, TimeInterval → Duration, async/await patterns)
-- [NEEDS REWORK] **`check-code-debt`** - Remove AI artifacts, consolidate patterns, extract reusable components
+- [IN PROGRESS] **`check-accessibility`** - VoiceOver labels, color contrast, keyboard navigation, inclusive design patterns
+- [IN PROGRESS] **`check-localization`** - String Catalog validation, cultural adaptation, region formatters, pluralization
+- [IN PROGRESS] **`check-error-handling`** - ErrorKit patterns, typed throws, user-friendly error messages
+- [IN PROGRESS] **`check-modern-code`** - Replace outdated APIs (Date() → Date.now, TimeInterval → Duration, async/await patterns)
+- [IN PROGRESS] **`check-code-debt`** - Remove AI artifacts, consolidate patterns, extract reusable components
 
 - ... more to be added over time with updates!
 
-These agents activate automatically during development phases, **adapting to your detected tech stack** for consistent quality without manual oversight.
+These guidelines are available as documentation in `Context/Guidelines/` and can be referenced in Cursor using `@` mentions, **adapting to your detected tech stack** for consistent quality.
 
 
 ## 🔄 Seamless Updates
 
-ContextKit automatically checks for newer versions when you start a new Claude session and displays update notifications if available – but **never interrupts your workflow**. When you're ready to update:
+ContextKit automatically checks for newer versions when you initialize and displays update notifications if available – but **never interrupts your workflow**. When you're ready to update:
 
-- Simply type `/ctxk:proj:migrate` and ContextKit handles everything
+- Simply use `@ctxk:proj:migrate` in Cursor and ContextKit handles everything
 - Your project customizations are preserved automatically
 - Core templates update to the latest improvements
-- New commands and agents are automatically added to your project
+- New commands and guidelines are automatically added to your project
 - Review all changes in Git before committing – full transparency
 - You stay in full control of when updates happen
 
 
 ## 🔒 Files Safe to Customize
 
-**These files are NEVER updated by `/ctxk:proj:migrate` once created:**
+**These files are NEVER updated by `@ctxk:proj:migrate` once created:**
 
 ### ✅ Complete User Control (modify freely)
-- **Formatter Config Files** (`.swift-format`, `.swiftformat`) - Your coding style preferences, never overwritten
+- **Formatter Config Files** (`.prettierrc`, `.eslintrc`, etc.) - Your coding style preferences, never overwritten
 - **Project Context** (`Context.md`) - Your project configuration, completely customizable
 - **Feature Specifications** (`Context/Features/*/`) - Feature specs, research, tech plans, and steps are yours to edit
 
 ### ⚙️ Partial Control (customization sections preserved)
-- **Commands & Agents** - Core logic updates, but your additions in "👩‍💻 DEVELOPER CUSTOMIZATIONS" sections are preserved
-- **Guidelines** - Reference content updates, but your project-specific customizations are preserved
+- **Commands & Guidelines** - Core logic updates, but your additions in "👩‍💻 DEVELOPER CUSTOMIZATIONS" sections are preserved
+- **Reference Documentation** - Reference content updates, but your project-specific customizations are preserved
 
 ### 📝 Backlog File Management
 - **Inbox Files** (`Ideas-Inbox.md`, `Bugs-Inbox.md`) - **✅ COMPLETELY USER-EDITABLE**: Edit manually, copy/paste between projects, add entries freely
-- **Backlog Files** (`Ideas-Backlog.md`, `Bugs-Backlog.md`) - **❌ AI-MANAGED DATABASES**: Never edit directly! Use `/ctxk:bckl:prioritize-*` and `/ctxk:bckl:remove-*` commands
+- **Backlog Files** (`Ideas-Backlog.md`, `Bugs-Backlog.md`) - **❌ AI-MANAGED DATABASES**: Never edit directly! Use `@ctxk:bckl:prioritize-*` and `@ctxk:bckl:remove-*` commands
 
 **Bottom Line**: Your formatter configs, project context, features, and backlog content are completely yours. ContextKit only updates core frameworks and logic while preserving all your customizations.
 
 
-## 🎯 Why Claude Code
+## 🎯 Why Cursor
 
-ContextKit is built exclusively for Claude Code because it's currently the most advanced and mature agentic development system available. While other tools exist (Gemini CLI, OpenAI Codex), Claude Code pioneered this space and offers unique features that make ContextKit possible:
+ContextKit is adapted for Cursor to bring systematic development workflows to one of the most popular AI-powered code editors:
 
-- **Commands**: Custom `/ctxk:*` commands for structured workflows
-- **Hooks**: Automatic code formatting and session management  
-- **Agents**: Specialized quality agents that work autonomously
-- **Mature ecosystem**: Proven, stable platform for serious development work
+- **Composer Integration**: Natural `@` mention system for referencing commands and documentation
+- **Context Management**: Smart context handling with file references and codebase search
+- **Quality Tools**: Extensive built-in tools for code analysis and modification
+- **Active Development**: Rapidly evolving platform with strong community support
 
-Rather than abstracting across multiple tools, ContextKit leverages Claude Code's full feature set to deliver maximum productivity and reliability. But ContextKit could easily be forked and adjusted to the needs of other systems, given they also support commands, hooks, and agents.
+ContextKit leverages Cursor's composer and context system to provide structured workflows without requiring custom hooks or agents. The systematic planning and documentation approach works naturally with Cursor's `@` mention system for referencing files and commands.
 
 
 ## 🌍 Universal but opinionated
@@ -236,24 +238,24 @@ Rather than abstracting across multiple tools, ContextKit leverages Claude Code'
 ContextKit is **genuinely platform-agnostic** through intelligent project detection and adaptive workflows:
 
 ### 🔍 **Automatic Platform Detection**
-When you run `/ctxk:proj:init`, ContextKit analyzes your project and documents everything in `Context.md`:
-- **Technology stack**: React/TypeScript, Swift/SwiftUI, Kotlin/Android, Python/Django, etc.
-- **Build system**: npm scripts, Xcode, Gradle, Maven, etc.
-- **Dependencies**: package.json, Podfile, build.gradle, requirements.txt
+When you run `@ctxk:proj:init`, ContextKit analyzes your project and documents everything in `Context.md`:
+- **Technology stack**: React/TypeScript, Vue/TypeScript, Node.js/Express, Next.js, etc.
+- **Build system**: npm/pnpm/yarn scripts, Vite, webpack, etc.
+- **Dependencies**: package.json, package-lock.json, pnpm-lock.yaml
 - **Project structure**: Monorepo, multi-module, single-app architecture
 
-This `Context.md` becomes the source of truth that **every ContextKit command reads** to understand your specific setup. It's also automatically included in your `CLAUDE.md` file (or creates one if missing) to ensure every new chat starts with full project context.
+This `Context.md` becomes the source of truth that **every ContextKit command reads** to understand your specific setup. It's also automatically included in your `.cursorrules` file (or creates one if missing) to ensure every new session starts with full project context.
 
 ### 📋 **Platform-Specific Guidelines & Configs**
-- **Currently available**: `Swift.md`, `SwiftUI.md` guidelines + Swift formatting configs (battle-tested from production apps)
-- **Community contributions welcome**: `React.md`, `Kotlin.md`, `Python.md` guidelines + your platform's formatter configs
-- **Project customization**: All commands/agents/templates include a "👩‍💻 DEVELOPER CUSTOMIZATIONS" section for project-specific overrides (preserved during updates)
+- **Currently available**: `TypeScript.md`, `React.md` guidelines for web development
+- **Community contributions welcome**: `Vue.md`, `Node.md`, `Python.md` guidelines + your platform's formatter configs
+- **Project customization**: All commands/templates include a "👩‍💻 DEVELOPER CUSTOMIZATIONS" section for project-specific overrides (preserved during updates)
 
 **The result**: ContextKit feels native to YOUR tech stack while maintaining systematic development methodology across all platforms.
 
 ## 🧪 Built from real experience
 
-ContextKit isn't theoretical - it's built from hundreds of hours developing iOS apps with AI assistants, learning from failures, and systematically improving the process:
+ContextKit isn't theoretical - it's built from hundreds of hours developing web applications with AI assistants, learning from failures, and systematically improving the process:
 
 ### What I Learned
 - **Hand-holding kills productivity**: Constantly figuring out what to ask the AI next wastes more time than coding manually
@@ -276,7 +278,7 @@ The result: **You build features with fewer iterations, less manual cleanup, and
 
 [Spec Kit](https://github.com/github/spec-kit) was actually the inspiration for the planning part of ContextKit and focuses more on team-based workflows and the idea is to make specification files "executable" with constitutional compliance gates which can slow down rapid prototyping. It's optimized for larger companies to let server farms run various implementations in parallel to then choose the best one, rather than improving single-developer workflows, which ContextKit focuses on.
 
-[BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) is simulating a complete team coordination with specialized roles handling different aspects (PM creates PRDs, Architect designs systems, QA does comprehensive review), making it powerful for complex projects but overwhelming for solo work. ContextKit focuses on individual productivity with easy-to-learn and adjust planning commands, agents, and more.
+[BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) simulates complete team coordination with specialized roles handling different aspects (PM creates PRDs, Architect designs systems, QA does comprehensive review), making it powerful for complex projects but overwhelming for solo work. ContextKit focuses on individual productivity with easy-to-learn and adjust planning commands, guidelines, and more.
 
 [Serena](https://github.com/oraios/serena) enhances AI workflows with semantic understanding and excels at refactoring existing code but won't help with planning or architecture decisions. ContextKit has some semantic understanding, too, but is more like an "overall" system that doesn't focus only on this one aspect. Serena could probably be used to enhance refactoring capabilities if combined with ContextKit.
 

@@ -1,5 +1,5 @@
 # Initialize Workspace Context
-<!-- Template Version: 3 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+<!-- Template Version: 4 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -45,12 +45,12 @@ Initialize workspace-level context configuration. Copies workspace template and 
      ✅ All projects in this workspace inherit workspace standards
 
      💡 No action needed. To modify workspace settings, edit Context.md directly
-        or use /ctxk:proj:migrate to update to newer ContextKit version.
+        or use @ctxk:proj:migrate to update to newer ContextKit version.
 
      🔗 Next Steps:
      • Navigate to a project directory within this workspace
-     • Run /ctxk:proj:init to setup ContextKit in that project (inherits workspace config)
-     • Begin your first feature with /ctxk:plan:1-spec
+     • Run @ctxk:proj:init to setup ContextKit in that project (inherits workspace config)
+     • Begin your first feature with @ctxk:plan:1-spec
      ```
      → END (exit successfully)
 
@@ -113,9 +113,9 @@ Initialize workspace-level context configuration. Copies workspace template and 
    • [Z] common dependencies found across projects
 
    🔗 Next Steps:
-   • Navigate to individual project directories to run /ctxk:proj:init
+   • Navigate to individual project directories to run @ctxk:proj:init
    • Each project will inherit these workspace standards
-   • Begin your first feature with /ctxk:plan:1-spec
+   • Begin your first feature with @ctxk:plan:1-spec
 
    💡 Commit Context.md to version control for team collaboration.
 
@@ -145,7 +145,7 @@ Initialize workspace-level context configuration. Copies workspace template and 
 ## Integration Points
 
 - **Global ContextKit**: Uses Templates/Contexts/Workspace.md template
-- **Project Setup**: Provides workspace inheritance for /ctxk:proj:init command
+- **Project Setup**: Provides workspace inheritance for @ctxk:proj:init command
 - **Team Collaboration**: Creates committed Context.md for team consistency
 - **Development Workflow**: Establishes workspace standards for all ContextKit commands
 

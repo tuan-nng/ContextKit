@@ -104,42 +104,42 @@ clone_or_update_repository() {
 
 ## Step 2: Install global ContextKit commands
 install_global_commands() {
-   print_step "Step 2: Installing global ContextKit commands..."
+   print_step "Step 2: Setting up ContextKit for Cursor..."
    
-   # Create Claude Code commands directory if needed
-   local claude_commands_dir="$HOME/.claude/commands"
+   # Create Cursor docs directory for reference materials
+   local cursor_docs_dir="$HOME/.cursor/contextkit"
    
-   if [[ ! -d "$claude_commands_dir" ]]; then
-      print_info "Creating Claude Code commands directory..."
-      if ! mkdir -p "$claude_commands_dir" 2>/dev/null; then
-         print_warning "Cannot create $claude_commands_dir"
-         print_info "You may need to run Claude Code first, then re-run this installer"
+   if [[ ! -d "$HOME/.cursor" ]]; then
+      print_info "Creating Cursor configuration directory..."
+      if ! mkdir -p "$HOME/.cursor" 2>/dev/null; then
+         print_warning "Cannot create $HOME/.cursor"
+         print_info "Cursor configuration directory will be created when you first run Cursor"
          return 0
       fi
    fi
    
-   # Create ctxk commands directory and copy ONLY proj commands globally
+   # Create contextkit directory for reference materials
    local commands_dir="$CONTEXTKIT_DIR/Templates/Commands"
-   local ctxk_commands_dir="$claude_commands_dir/ctxk"
 
    if [[ ! -d "$commands_dir/proj" ]]; then
       print_error "Proj commands directory not found: $commands_dir/proj"
       exit 1
    fi
 
-   # Create ctxk directory structure
-   if ! mkdir -p "$ctxk_commands_dir"; then
-      print_error "Failed to create ctxk commands directory"
+   # Create contextkit directory structure
+   if ! mkdir -p "$cursor_docs_dir"; then
+      print_error "Failed to create ContextKit directory"
       exit 1
    fi
 
-   if ! cp -R "$commands_dir/proj" "$ctxk_commands_dir"/; then
-      print_error "Failed to copy proj commands"
+   # Copy command documentation for reference
+   if ! cp -R "$commands_dir" "$cursor_docs_dir"/; then
+      print_error "Failed to copy command documentation"
       exit 1
    fi
    
-   print_success "Global ContextKit project management commands installed"
-   print_info "Project commands (/ctxk:proj:*) available in Claude Code globally"
+   print_success "ContextKit reference materials installed for Cursor"
+   print_info "ContextKit commands will be available via @ mentions after running @ctxk:proj:init in your project"
 }
 
 ## Step 3: Display success message and next steps
@@ -156,10 +156,10 @@ display_completion() {
    echo
    print_status "$WHITE" "Next steps:"
    print_info "1. Navigate to your project directory"
-   print_info "2. Run 'claude' to start Claude Code "
-   print_info "3. Run '/ctxk:proj:init' to initialize ContextKit workflow commands in your project"
+   print_info "2. Run 'cursor .' to open Cursor in your project"
+   print_info "3. In Cursor's Composer, type '@ctxk:proj:init' to initialize ContextKit workflow commands"
    echo
-   print_status "$GREEN" "🚀 Ready for intelligent development workflows!"
+   print_status "$GREEN" "🚀 Ready for systematic development workflows with Cursor!"
    echo
 }
 
@@ -192,9 +192,9 @@ trap cleanup_on_error ERR
 ###########################################
 
 main() {
-   print_header "🧠 ContextKit Global Installation"
+   print_header "🧠 ContextKit Global Installation for Cursor"
    echo
-   print_info "Installing ContextKit - Context Engineering System"
+   print_info "Installing ContextKit - Systematic Development Workflows for Cursor"
    print_info "Repository: https://github.com/FlineDev/ContextKit"
    echo
    

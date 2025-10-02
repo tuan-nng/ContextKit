@@ -1,5 +1,5 @@
 # Capture Bug Reports with Quick Dump
-<!-- Template Version: 2 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+<!-- Template Version: 3 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -31,7 +31,7 @@ Quick bug capture with minimal overhead. Takes description as parameter and dump
    - If Bugs-Inbox.md missing:
      ```
      ❌ Bug infrastructure not found!
-     Run /ctxk:proj:init to setup ContextKit backlog system.
+     Run @ctxk:proj:init to setup ContextKit backlog system.
      ```
      → END (exit with error)
 
@@ -39,7 +39,7 @@ Quick bug capture with minimal overhead. Takes description as parameter and dump
 
 2. **Parse Description and Extract Source**
    - Take description from command parameter
-   - If no description provided: ERROR "Description required: /ctxk:bckl:add-bug 'Bug description here'"
+   - If no description provided: ERROR "Description required: @ctxk:bckl:add-bug 'Bug description here'"
    - **Extract source if mentioned**: Look for patterns like:
      - "Customer reported...", "User said...", "QA found..."
      - "Support ticket...", "Jack mentioned...", "Sarah noticed..."
@@ -65,13 +65,13 @@ Quick bug capture with minimal overhead. Takes description as parameter and dump
    ```
    🐛 Bug captured: [BUG-###] [Title]
    📁 Added to Context/Backlog/Bugs-Inbox.md
-   🔄 Run /ctxk:bckl:prioritize-bugs to triage and prioritize
+   🔄 Run @ctxk:bckl:prioritize-bugs to triage and prioritize
    ```
 
 ## Error Conditions
 
-- **"No description provided"** → Show usage: `/ctxk:bckl:add-bug "Bug description"`
-- **"Bugs-Inbox.md missing"** → Run `/ctxk:proj:init` to setup infrastructure
+- **"No description provided"** → Show usage: `@ctxk:bckl:add-bug "Bug description"`
+- **"Bugs-Inbox.md missing"** → Run `@ctxk:proj:init` to setup infrastructure
 - **"File write failed"** → Check permissions and disk space
 
 ## Source Extraction Patterns
@@ -85,7 +85,7 @@ Look for these patterns in description and extract as source:
 ## Integration Points
 
 - **Quick capture**: Minimal questions, fast entry
-- **Triage later**: `/ctxk:bckl:prioritize-bugs` handles all impact assessment
+- **Triage later**: `@ctxk:bckl:prioritize-bugs` handles all impact assessment
 - **Source tracking**: Basic attribution for follow-up
 
 ════════════════════════════════════════════════════════════════════════════════

@@ -1,5 +1,5 @@
 # Begin Development with Context
-<!-- Template Version: 15 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+<!-- Template Version: 16 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -41,7 +41,7 @@ Begin systematic development with context-aware setup, task analysis, and guided
      ```
      ❌ ContextKit not initialized in this project!
 
-     Run /ctxk:proj:init first to setup ContextKit in this project.
+     Run @ctxk:proj:init first to setup ContextKit in this project.
      This command requires project context for systematic development.
      ```
      → END (exit with error)
@@ -59,9 +59,9 @@ Begin systematic development with context-aware setup, task analysis, and guided
 
      Current branch: [current_branch_name]
 
-     Expected: feature/[prefix]-[feature-name] branch from /ctxk:plan:1-spec
+     Expected: feature/[prefix]-[feature-name] branch from @ctxk:plan:1-spec
 
-     Switch to feature branch or create one with /ctxk:plan:1-spec
+     Switch to feature branch or create one with @ctxk:plan:1-spec
      Continue anyway? (y/N):
      ```
      - Wait for user confirmation
@@ -97,9 +97,9 @@ Begin systematic development with context-aware setup, task analysis, and guided
      [List missing files]
 
      Complete the planning phases first:
-     1. /ctxk:plan:1-spec - Business requirements (creates Spec.md)
-     2. /ctxk:plan:2-research-tech - Technical research and architecture (creates Research.md and Tech.md)
-     3. /ctxk:plan:3-steps - Implementation tasks (creates Steps.md)
+     1. @ctxk:plan:1-spec - Business requirements (creates Spec.md)
+     2. @ctxk:plan:2-research-tech - Technical research and architecture (creates Research.md and Tech.md)
+     3. @ctxk:plan:3-steps - Implementation tasks (creates Steps.md)
 
      Cannot proceed with development until planning is complete.
      ```
@@ -294,70 +294,65 @@ Begin systematic development with context-aware setup, task analysis, and guided
       - User explicitly requests to stop
     - **The goal**: Complete the entire Steps.md task list systematically
 
-12. **Quality Assurance Integration with Primary Agents**
-    - **PRIMARY AGENTS FOR IMPLEMENTATION**: Use these agents throughout development as specified in Steps.md
-      - `build-project` - **Use whenever Steps.md mentions "build" or "compile"**
-      - `commit-changes` - **Use at ALL milestone markers in Steps.md** (🏁 MILESTONE)
-      - `run-test-suite` / `run-specific-test` - **Use when Steps.md specifies test execution**
+12. **Quality Guidelines Reference**
+    - **QUALITY GUIDELINES FOR IMPLEMENTATION**: Reference these throughout development as specified in Steps.md
+      - **Build validation** - Use Context.md documented build commands whenever Steps.md mentions "build" or "compile"
+      - **Commit workflow** - Use `@ctxk:impl:commit-changes` at ALL milestone markers in Steps.md (🏁 MILESTONE)
+      - **Test execution** - Use Context.md documented test commands when Steps.md specifies test execution
 
-    **Primary Agent Usage Examples**:
+    **Quality Guidelines Usage Examples**:
     ```
     # When Steps.md task says "build" or at Phase 5 validation tasks:
-    Use Task tool with build-project:
-    "Execute project build and report status."
+    # Execute build command from Context.md (e.g., "swift build" or "xcodebuild...")
+    [run documented build command]
 
     # At every 🏁 MILESTONE marker in Steps.md:
-    Use Task tool with commit-changes:
-    "Analyze changes and create commit for [milestone description]."
-    (Agent handles all git analysis and commit message generation)
+    @ctxk:impl:commit-changes
+    (Command analyzes changes and creates smart commit message)
 
     # When Steps.md specifies test execution:
-    Use Task tool with run-test-suite:
-    "Execute complete test suite and report results."
+    # Execute test command from Context.md (e.g., "swift test" or "npm test")
+    [run documented test command]
 
-    Use Task tool with run-specific-test:
-    "Run tests for LoginViewModel and report failures."
+    # For specific test targeting:
+    # Use grep to find test and run it specifically
+    [run documented test command with filter]
     ```
 
-    - **When to use build-project**:
+    - **When to build**:
       - After implementing significant functionality (service layer, UI components)
       - Before milestone commits to ensure code compiles
       - When Steps.md tasks explicitly mention "build validation"
       - After resolving dependency or integration issues
 
-    - **When to use commit-changes agent**:
-      - At EVERY 🏁 MILESTONE marker in Steps.md (use Task tool)
+    - **When to commit (use @ctxk:impl:commit-changes)**:
+      - At EVERY 🏁 MILESTONE marker in Steps.md
       - After completing a logical phase of work (data layer, UI layer, etc.)
       - When directed by Steps.md milestone instructions
-      - The agent handles git analysis, formatting, and commit message generation
-      - Users can also manually run /ctxk:impl:commit-changes command
+      - Command handles git analysis, formatting, and commit message generation
 
-    - **When to use run-test-* agents**:
+    - **When to run tests**:
       - When Steps.md Phase 5 tasks specify test execution
       - After implementing new test files
       - Before milestone commits when tests exist
       - When debugging failing tests
 
-    - **Additional Quality Agents** (currently incomplete - pending rework):
-      <!-- TODO: check-* agents disabled (need rework to read-only reporting)
-      - `check-modern-code` - Modernize APIs (recent files only) [INCOMPLETE]
-      - `check-error-handling` - Validate error patterns (recent files only) [INCOMPLETE]
-      - `check-accessibility` - Check UI accessibility (recent UI files only) [INCOMPLETE]
-      - `check-localization` - Verify localization (recent UI files only) [INCOMPLETE]
-      - `check-code-debt` - Clean up artifacts (recent files only) [INCOMPLETE]
-      -->
+    - **Code Quality Guidelines** (reference during implementation):
+      - Check Context/Guidelines/ for tech-stack-specific best practices
+      - For Swift: @Context/Guidelines/Swift.md, @Context/Guidelines/SwiftUI.md
+      - Review before finalizing features for consistent patterns
 
-    - **If agents fail**: Focus on fixing the specific issue before continuing, then re-run the failed agent to verify the fix
+    - **If build/test fails**: Focus on fixing the specific issue before continuing, then re-run to verify the fix
 
 ## Error Conditions
 
-- **"Context.md not found"** → User must run `/ctxk:proj:init` to initialize ContextKit
-- **"Not on feature branch"** → Create feature branch with `/ctxk:plan:1-spec` or switch to existing one
-- **"Planning phases incomplete"** → Complete `/ctxk:plan:1-spec` (creates Spec.md), `/ctxk:plan:2-research-tech` (creates Research.md + Tech.md), `/ctxk:plan:3-steps` (creates Steps.md) sequence
+- **"Context.md not found"** → User must run `@ctxk:proj:init` to initialize ContextKit
+- **"Not on feature branch"** → Create feature branch with `@ctxk:plan:1-spec` or switch to existing one
+- **"Planning phases incomplete"** → Complete `@ctxk:plan:1-spec` (creates Spec.md), `@ctxk:plan:2-research-tech` (creates Research.md + Tech.md), `@ctxk:plan:3-steps` (creates Steps.md) sequence
 - **"No feature directory found"** → Feature name detection failed, verify branch name format
-- **"Steps.md empty"** → Run `/ctxk:plan:3-steps` to create implementation breakdown
+- **"Steps.md empty"** → Run `@ctxk:plan:3-steps` to create implementation breakdown
 - **"Build environment broken"** → Resolve dependency issues before starting development
-- **"All tasks complete"** → No pending work, consider `/ctxk:impl:commit-changes` or new feature
+- **"All tasks complete"** → No pending work, consider `@ctxk:impl:commit-changes` or new feature
 
 ## Validation Gates
 
@@ -385,9 +380,9 @@ Begin systematic development with context-aware setup, task analysis, and guided
 
 ## Integration Points
 
-- **Planning Commands**: Requires completed `/ctxk:plan:1-spec` (Spec.md), `/ctxk:plan:2-research-tech` (Research.md + Tech.md), `/ctxk:plan:3-steps` (Steps.md) workflow
-- **Project Setup**: Uses Context.md from `/ctxk:proj:init` for project type detection and standards
-- **Quality Agents**: Integrates with `build-project`, `run-test-*` agents (ready). `/run check-*` agents incomplete - pending rework
+- **Planning Commands**: Requires completed `@ctxk:plan:1-spec` (Spec.md), `@ctxk:plan:2-research-tech` (Research.md + Tech.md), `@ctxk:plan:3-steps` (Steps.md) workflow
+- **Project Setup**: Uses Context.md from `@ctxk:proj:init` for project type detection and standards
+- **Quality Guidelines**: References Context/Guidelines/ for tech-stack-specific patterns and Context.md for build/test commands
 - **Workspace Context**: Inherits client-specific requirements from workspace-level Context.md files
 - **Git Workflow**: Works within feature branch structure established by planning commands
 - **Development Hooks**: Enables PostToolUse formatting and SessionStart version checking
@@ -403,12 +398,13 @@ Begin systematic development with context-aware setup, task analysis, and guided
 📂 Files to modify: [file_paths]
 📖 Guidelines: [List of available guidelines from Context/Guidelines/]
 
-🤖 Primary Agents for Implementation:
-   • build-project - Use when Steps.md mentions "build" or at validation tasks
-   • commit-changes - Use at ALL 🏁 MILESTONE markers (via Task tool)
-   • run-test-* - Use when Steps.md specifies test execution
+📋 Quality Guidelines for Implementation:
+   • Use Context.md build commands for validation
+   • Use @ctxk:impl:commit-changes for smart commits at milestones
+   • Use Context.md test commands for test execution
+   • Reference Context/Guidelines/ for code quality patterns
 
-💡 Ready to implement! Follow Steps.md and use agents as specified.
+💡 Ready to implement! Follow Steps.md systematically.
 ```
 
 ### All Tasks Complete
@@ -418,8 +414,8 @@ Begin systematic development with context-aware setup, task analysis, and guided
 🔗 Next steps:
    1. Quality validation will run automatically
    2. Test functionality manually
-   3. Commit: /ctxk:impl:commit-changes
-   4. Release: /ctxk:impl:release-app [version]
+   3. Commit: @ctxk:impl:commit-changes
+   4. Release: @ctxk:impl:release-app [version]
 ```
 
 ════════════════════════════════════════════════════════════════════════════════

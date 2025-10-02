@@ -1,0 +1,96 @@
+# Project Context - ContextKit Configuration
+
+## Project Overview
+
+[AI will populate this section during @ctxk:proj:init with auto-detected project information]
+
+## Tech Stack
+
+### Primary Technologies
+- **Language**: [Detected]
+- **Framework**: [Detected]
+- **Build System**: [Detected]
+
+### Dependencies
+[Auto-populated during initialization]
+
+## Project Structure
+
+[Auto-populated with directory structure and architecture]
+
+## ContextKit Configuration
+
+### Version
+- **ContextKit Version**: 0.0.0
+
+### Available Commands
+
+Use `@` to reference these commands in Cursor:
+- `@ctxk:proj:init` - Initialize ContextKit in project
+- `@ctxk:proj:migrate` - Update to latest ContextKit version
+- `@ctxk:plan:1-spec` - Create feature specification
+- `@ctxk:plan:2-research-tech` - Technical architecture planning
+- `@ctxk:plan:3-steps` - Break down implementation tasks
+- `@ctxk:impl:start-working` - Begin feature development
+- `@ctxk:impl:commit-changes` - Smart commit workflow
+- `@ctxk:bckl:add-idea` - Capture feature idea
+- `@ctxk:bckl:add-bug` - Report bug
+
+### Guidelines
+
+Reference quality guidelines using `@`:
+- `@Context/Guidelines/Swift.md` - Swift coding standards (if applicable)
+- `@Context/Guidelines/SwiftUI.md` - SwiftUI patterns (if applicable)
+
+## Constitutional Principles
+
+### Code Quality
+1. **Accessibility-first design**: VoiceOver, dynamic type, color contrast
+2. **Privacy by design**: Minimize data collection, clear permissions
+3. **Localization from day one**: String catalogs, cultural adaptation
+4. **Simple over complex**: Choose straightforward solutions
+5. **Maintainability**: Clear naming, consistent patterns, documentation
+
+### Development Workflow
+1. **Plan before implementing**: Complete 3-phase planning (spec → tech → steps)
+2. **Test-driven development**: Write tests alongside implementation
+3. **Incremental progress**: Small, focused commits
+4. **Quality checkpoints**: Run quality guidelines before finalizing
+5. **Documentation**: Keep Context.md and feature docs updated
+
+## Feature Development
+
+### Current Features
+[List of features in Context/Features/]
+
+### Active Feature Branch
+[Current feature branch if in development]
+
+## Build Instructions
+
+### Development Build
+```bash
+[Auto-populated with detected build command]
+```
+
+### Testing
+```bash
+[Auto-populated with detected test command]
+```
+
+### Formatting
+[Auto-populated with detected formatters]
+
+## Team Conventions
+
+[Inherited from workspace Context.md if present, otherwise project-specific]
+
+## Notes for AI Assistant
+
+- Always read Context.md first to understand project setup
+- Follow constitutional principles for all implementations
+- Reference feature planning docs (Context/Features/*/Spec.md, Tech.md, Steps.md)
+- Use @ mentions to reference specific files and commands
+- For systematic feature development, use the 3-phase planning workflow
+- Check Context/Guidelines/ for tech-stack-specific patterns
+

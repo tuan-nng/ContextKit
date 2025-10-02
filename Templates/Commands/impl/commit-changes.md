@@ -1,5 +1,5 @@
 # Commit Changes
-<!-- Template Version: 10 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
+<!-- Template Version: 11 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 > [!WARNING]
 > **👩‍💻 FOR DEVELOPERS**: Do not edit the content above the developer customization section - changes will be overwritten during ContextKit updates.
@@ -9,7 +9,7 @@
 > Found a bug or improvement for everyone? Please report it: https://github.com/FlineDev/ContextKit/issues
 
 ## Description
-Delegate to specialized commit-changes agent for intelligent git analysis, commit message generation, and commit execution with comprehensive validation.
+Intelligent git analysis, commit message generation, and commit execution with comprehensive validation. Analyzes changed files and generates conventional commit messages following project standards.
 
 ## Execution Flow (main)
 
@@ -19,37 +19,65 @@ Delegate to specialized commit-changes agent for intelligent git analysis, commi
    - Make sure to consider what was said there with high priority
    - If anything conflicts with the rest of the workflow, prioritize the "developer customizations"
 
-1. **Launch Commit Agent**
-   - Use `Task` tool to launch `commit-changes` agent with no additional parameters
-   - Agent handles all git analysis, formatting, message generation, and commit execution
-   - Agent provides structured summary of committed changes
+1. **Analyze Git Status**
+   ```bash
+   git status --porcelain
+   git diff --cached --stat
+   git diff --stat
+   ```
+   - Identify all changed files (staged and unstaged)
+   - Categorize changes by type (added, modified, deleted)
+   - Analyze change scope (which components/features affected)
 
-2. **Forward Agent Response Exactly - NO ADDITIONAL TEXT**
-   - **CRITICAL**: Display the agent's response exactly as received, without any modification or interpretation
-   - **FORBIDDEN**: Do NOT add your own summary, interpretation, preamble, or postamble
-   - **FORBIDDEN**: Do NOT add phrases like "Here's the commit result:" or "The agent completed successfully"
-   - **FORBIDDEN**: Do NOT reformat or restructure the agent's output in any way
-   - **OUTPUT ONLY**: The agent's raw response and nothing else
-   - The agent already provides the complete structured response in the correct format:
-     ```
-     ✅ Successfully committed changes
+2. **Determine Commit Type**
+   - Based on changed files and Context.md, determine conventional commit type:
+     - `feat:` - New features or capabilities
+     - `fix:` - Bug fixes
+     - `refactor:` - Code restructuring without behavior change
+     - `docs:` - Documentation updates
+     - `test:` - Test additions or modifications
+     - `chore:` - Build process, dependencies, tooling
+     - `style:` - Code formatting (no logic changes)
+     - `perf:` - Performance improvements
 
-     📝 Commit: [commit_hash]
-     💬 Message: "[commit_message]"
-     📂 Files: [number] files modified
-     📊 Changes: +[lines_added] -[lines_deleted]
-     ```
+3. **Generate Commit Message**
+   - Use conventional commit format: `type(scope): description`
+   - Example: `feat(auth): add OAuth2 login flow`
+   - Include relevant details from git diff
+   - Keep description concise but informative
+   - Follow project's commit message conventions from Context.md if specified
+
+4. **Execute Commit**
+   ```bash
+   git add -A
+   git commit -m "[generated message]"
+   ```
+   - Stage all changes
+   - Commit with generated message
+   - Display commit hash and summary
+
+5. **Display Commit Summary**
+   ```
+   ✅ Successfully committed changes
+
+   📝 Commit: [commit_hash]
+   💬 Message: "[commit_message]"
+   📂 Files: [number] files modified
+   📊 Changes: +[lines_added] -[lines_deleted]
+   ```
 
 ## Error Conditions
 
-- **Agent not available** → Ensure ContextKit agents are set up with `/ctxk:proj:init`
-- **Git repository issues** → Agent will handle and report git-related errors
-- **Permission problems** → Agent will diagnose and suggest solutions
+- **ContextKit not initialized** → Ensure project is set up with `@ctxk:proj:init`
+- **No changes to commit** → Working directory is clean
+- **Git repository issues** → Handle and report git-related errors
+- **Permission problems** → Check git configuration and file permissions
 
 ## Integration Points
 
-- **Quality Agents**: Works with other ContextKit agents for comprehensive development workflow
-- **Project Setup**: Requires `/ctxk:proj:init` to install the commit-changes agent
+- **Systematic Development**: Called at milestone markers in Steps.md via `@ctxk:impl:start-working`
+- **Project Setup**: Requires `@ctxk:proj:init` for project context
+- **Commit Standards**: Follows conventional commit format and project conventions
 - **Git Workflow**: Integrates with feature branch development and task completion
 
 ════════════════════════════════════════════════════════════════════════════════
@@ -59,8 +87,8 @@ Delegate to specialized commit-changes agent for intelligent git analysis, commi
 This section is preserved during ContextKit migrations and updates.
 Add project-specific instructions, examples, and overrides below.
 
-## Custom Agent Parameters
-<!-- Add project-specific parameters to pass to the commit-changes agent -->
+## Custom Commit Format
+<!-- Add project-specific commit message format requirements -->
 
 ## Pre-Commit Hooks
 <!-- Document any project-specific pre-commit requirements -->
