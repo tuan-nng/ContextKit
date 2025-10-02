@@ -1,5 +1,5 @@
 # Implementation Steps: [Feature from Tech.md]
-<!-- Template Version: 6 | ContextKit: 0.1.0 | Updated: 2025-09-16 -->
+<!-- Template Version: 7 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 ## Description
 Implementation task breakdown template providing systematic S001-S999 task enumeration with parallel execution markers and dependency analysis for iOS/macOS development workflows.
@@ -9,6 +9,14 @@ Implementation task breakdown template providing systematic S001-S999 task enume
 ════════════════════════════════════════════════════════════════════════════════
 ║
 ║ ## Execution Flow (main)
+║ 
+║ ### Phase 0: Check Customization
+║ 
+║ 0. **Read the "👩‍💻 DEVELOPER CUSTOMIZATIONS" section**
+║    - Use `Grep` tool to find the start of the section
+║    - Read everything below that line contained in this document til the end of the file
+║    - Make sure to consider what was said there with high priority
+║    - If anything conflicts with the rest of the workflow, prioritize the "developer customizations"
 ║
 ║ ### Phase 1: Prerequisites & Planning Analysis
 ║

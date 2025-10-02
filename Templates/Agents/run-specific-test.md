@@ -1,5 +1,5 @@
 ---
-meta: "Template Version: 3 | ContextKit: 0.1.0 | Updated: 2025-09-16"
+meta: "Template Version: 4 | ContextKit: 0.1.0 | Updated: 2025-10-02"
 name: run-specific-test
 description: Execute specific test with build validation and focused failure analysis
 tools: Bash, Read, Grep, Glob
@@ -24,6 +24,11 @@ color: yellow
 - Build environment validation
 
 ## Execution Flow (agent)
+0. **Read the "👩‍💻 DEVELOPER CUSTOMIZATIONS" section**
+   - Use `Grep` tool to find the start of the section
+   - Read everything below that line contained in this document til the end of the file
+   - Make sure to consider what was said there with high priority
+   - If anything conflicts with the rest of the workflow, prioritize the "developer customizations"
 
 1. **Read Project Context First**
    → Use `Read` tool to examine `Context.md` file in project root

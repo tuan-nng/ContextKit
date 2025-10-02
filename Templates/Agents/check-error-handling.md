@@ -1,5 +1,5 @@
 ---
-meta: "Template Version: 5 | ContextKit: 0.1.0 | Updated: 2025-09-17"
+meta: "Template Version: 6 | ContextKit: 0.1.0 | Updated: 2025-10-02"
 name: check-error-handling
 description: [INCOMPLETE] Validate and fix error handling compliance - needs rework for read-only reporting
 tools: Read, Edit, MultiEdit, Grep, Glob, Task
@@ -66,6 +66,12 @@ FILES:
 ```
 
 ## Execution Flow (agent)
+0. **Read the "👩‍💻 DEVELOPER CUSTOMIZATIONS" section**
+   - Use `Grep` tool to find the start of the section
+   - Read everything below that line contained in this document til the end of the file
+   - Make sure to consider what was said there with high priority
+   - If anything conflicts with the rest of the workflow, prioritize the "developer customizations"
+
 1. **Read Project Context**
    → Use `Read` tool to examine `Context.md` file in project root
    → Extract error handling framework preferences (ErrorKit, Result types, etc.)

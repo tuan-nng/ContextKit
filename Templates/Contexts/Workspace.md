@@ -1,5 +1,5 @@
 # Workspace Context Template
-<!-- Template Version: 1 | ContextKit: 0.1.0 | Updated: 2025-09-15 -->
+<!-- Template Version: 2 | ContextKit: 0.1.0 | Updated: 2025-10-02 -->
 
 ## Description
 Workspace-level Context.md template providing workspace-specific configuration, client/company requirements, technology standards, and team workflow overrides for multi-project environments.
@@ -9,6 +9,14 @@ Workspace-level Context.md template providing workspace-specific configuration, 
 ════════════════════════════════════════════════════════════════════════════════
 ║
 ║ ## Execution Flow (main)
+║ 
+║ ### Phase 0: Check Customization
+║ 
+║ 0. **Read the "👩‍💻 DEVELOPER CUSTOMIZATIONS" section**
+║    - Use `Grep` tool to find the start of the section
+║    - Read everything below that line contained in this document til the end of the file
+║    - Make sure to consider what was said there with high priority
+║    - If anything conflicts with the rest of the workflow, prioritize the "developer customizations"
 ║
 ║ ### Phase 1: User Configuration Collection
 ║
